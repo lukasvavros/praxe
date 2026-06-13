@@ -1,85 +1,137 @@
-
+```html
 <style>
   .arduino-page {
-    width: 96%;
-    max-width: 1200px;
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f5f5f5;
+    --text: #373841;
+    --white: #ffffff;
+
+    width: min(96%, 1200px);
     margin: 0 auto;
     font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
     box-sizing: border-box;
   }
 
-  .arduino-page * {
+  .arduino-page *,
+  .arduino-page *::before,
+  .arduino-page *::after {
     box-sizing: border-box;
+  }
+
+  .arduino-hero {
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--white);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
   }
 
   .arduino-image-block {
+    position: relative;
+    background: linear-gradient(135deg, #f0f0f0, #ffffff);
     text-align: center;
-    margin-bottom: 20px;
+    padding: clamp(20px, 4vw, 45px);
   }
 
   .arduino-main-image {
-    width: clamp(260px, 45vw, 600px);
+    width: clamp(260px, 46vw, 560px);
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    display: inline-block;
+    border-radius: 14px;
+  }
+
+  .arduino-content {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .arduino-title {
-    background-color: #e9e9e9;
+    background: var(--dark);
     text-align: center;
-    padding: clamp(14px, 2vw, 22px) 10px;
-    border-radius: 8px 8px 0 0;
+    padding: clamp(18px, 3vw, 32px) 18px;
   }
 
   .arduino-title h2 {
     margin: 0;
-    color: #ee7203;
-    font-size: clamp(22px, 2.4vw, 32px);
-    font-weight: normal;
+    color: var(--white);
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .arduino-title span {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--orange);
+    font-size: clamp(14px, 1.5vw, 18px);
   }
 
   .arduino-info {
-    background-color: #ffffff;
-    color: #373841;
+    background: var(--white);
+    padding: clamp(22px, 4vw, 46px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    line-height: 1.75;
     text-align: center;
-    padding: clamp(16px, 2.5vw, 28px) clamp(16px, 4vw, 45px);
-    border-left: 4px solid #ee7203;
-    border-right: 4px solid #ee7203;
-    line-height: 1.6;
   }
 
   .arduino-info p {
-    margin: 0;
-    font-size: clamp(14px, 1.3vw, 17px);
-    font-weight: normal;
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: clamp(15px, 1.35vw, 18px);
+    font-weight: 400;
+  }
+
+  .arduino-highlight {
+    color: var(--orange);
+    font-weight: 600;
   }
 
   .arduino-author {
-    background-color: #373841;
-    color: #ffffff;
-    text-align: center;
-    padding: 14px 10px;
-    border-radius: 0 0 8px 8px;
+    background: var(--light);
+    padding: clamp(18px, 3vw, 28px);
   }
 
   .arduino-author-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 14px 28px;
+    gap: 14px;
     flex-wrap: wrap;
   }
 
   .arduino-author-item {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
     font-size: clamp(13px, 1.1vw, 15px);
-    font-weight: normal;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   }
 
   .arduino-author-item img {
-    vertical-align: middle;
-    margin-right: 6px;
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .arduino-footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+
+  @media (min-width: 900px) {
+    .arduino-content {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 600px) {
@@ -87,69 +139,91 @@
       width: 100%;
     }
 
+    .arduino-hero {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
     .arduino-info {
       border-left: none;
       border-right: none;
-      border-top: 4px solid #ee7203;
-      border-bottom: 4px solid #ee7203;
+      border-top: 5px solid var(--orange);
+      border-bottom: 5px solid var(--orange);
+      text-align: left;
     }
 
     .arduino-author-content {
       flex-direction: column;
-      gap: 10px;
+      align-items: stretch;
+    }
+
+    .arduino-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
     }
   }
 </style>
 
 <div class="arduino-page">
 
-  <!-- Úvodní obrázek -->
-  <div class="arduino-image-block">
-    <img class="img-responsive atto_image_button_middle img-fluid arduino-main-image"
-         role="presentation"
-         src="picture/3.png"
-         alt="">
-  </div>
+  <section class="arduino-hero">
 
-  <!-- Nadpis -->
-  <div class="arduino-title">
-    <h2>
-      Praxe – Arduino
-    </h2>
-  </div>
-
-  <!-- Informační blok -->
-  <div class="arduino-info">
-    <p>
-      Tato stránka slouží k předmětu Praxe, části Arduino,
-      vyučovaném ve 3. ročníku na
-      Gymnáziu a Střední průmyslové škole elektrotechniky a informatiky ve Frenštátě pod Radhoštěm.
-    </p>
-  </div>
-
-  <!-- Autor a kontakt -->
-  <div class="arduino-author">
-    <div class="arduino-author-content">
-
-      <span class="arduino-author-item">
-        <img class="image img-fluid"
-             role="presentation"
-             src="picture/1.png"
-             alt=""
-             style="width: 25px; height: 35px;">
-        Vytvořil:&nbsp;Lukáš Vavroš
-      </span>
-
-      <span class="arduino-author-item">
-        <img class="img-responsive atto_image_button_text-bottom img-fluid"
-             role="presentation"
-             src="picture/2.png"
-             alt=""
-             style="width: 35px; height: 20px;">
-        E-mail:&nbsp;lukasvavros519@gmail.com
-      </span>
-
+    <!-- Úvodní obrázek -->
+    <div class="arduino-image-block">
+      <img class="img-responsive atto_image_button_middle img-fluid arduino-main-image"
+           src="picture/3.png"
+           alt="Arduino – úvodní obrázek"
+           loading="lazy"
+           decoding="async">
     </div>
-  </div>
+
+    <!-- Nadpis -->
+    <header class="arduino-title">
+      <h2>Praxe – Arduino</h2>
+      <span>Výukové materiály pro 3. ročník</span>
+    </header>
+
+    <!-- Informační blok -->
+    <main class="arduino-info">
+      <p>
+        Tato stránka slouží k předmětu <span class="arduino-highlight">Praxe</span>,
+        části <span class="arduino-highlight">Arduino</span>, vyučovaném ve 3. ročníku
+        na Gymnáziu a Střední průmyslové škole elektrotechniky a informatiky
+        ve Frenštátě pod Radhoštěm.
+      </p>
+    </main>
+
+    <!-- Autor a kontakt -->
+    <footer class="arduino-author">
+      <div class="arduino-author-content">
+
+        <span class="arduino-author-item">
+          <img class="image img-fluid"
+               src="picture/1.png"
+               alt=""
+               role="presentation"
+               style="width: 25px; height: 35px;">
+          <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
+        </span>
+
+        <span class="arduino-author-item">
+          <img class="img-responsive atto_image_button_text-bottom img-fluid"
+               src="picture/2.png"
+               alt=""
+               role="presentation"
+               style="width: 35px; height: 20px;">
+          <span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span>
+        </span>
+
+      </div>
+    </footer>
+
+    <div class="arduino-footer">
+      Gymnázium a SPŠEI Frenštát pod Radhoštěm
+    </div>
+
+  </section>
 
 </div>
+```

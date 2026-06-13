@@ -1,46 +1,152 @@
+<style>
+  .arduino-page {
+    width: 96%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+  }
 
-<div style="width: 100%; max-width: 1200px; margin: 0 auto; font-family: Verdana, Arial, Helvetica, sans-serif;">
+  .arduino-page * {
+    box-sizing: border-box;
+  }
+
+  .arduino-image-block {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .arduino-main-image {
+    width: clamp(260px, 45vw, 600px);
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .arduino-title {
+    background-color: #e9e9e9;
+    text-align: center;
+    padding: clamp(14px, 2vw, 22px) 10px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .arduino-title h2 {
+    margin: 0;
+    color: #ee7203;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: bold;
+  }
+
+  .arduino-info {
+    background-color: #ffffff;
+    color: #373841;
+    text-align: center;
+    padding: clamp(16px, 2.5vw, 28px) clamp(16px, 4vw, 45px);
+    border-left: 4px solid #ee7203;
+    border-right: 4px solid #ee7203;
+    line-height: 1.6;
+  }
+
+  .arduino-info p {
+    margin: 0;
+    font-size: clamp(14px, 1.3vw, 17px);
+  }
+
+  .arduino-author {
+    background-color: #373841;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 10px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .arduino-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px 28px;
+    flex-wrap: wrap;
+  }
+
+  .arduino-author-item {
+    display: inline-flex;
+    align-items: center;
+    font-size: clamp(13px, 1.1vw, 15px);
+  }
+
+  .arduino-author-item img {
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .arduino-page {
+      width: 100%;
+    }
+
+    .arduino-info {
+      border-left: none;
+      border-right: none;
+      border-top: 4px solid #ee7203;
+      border-bottom: 4px solid #ee7203;
+    }
+
+    .arduino-author-content {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
+<div class="arduino-page">
+
   <!-- Úvodní obrázek -->
-  <div style="text-align: center; margin-bottom: 20px;">
-    <img class="img-responsive atto_image_button_middle img-fluid"
+  <div class="arduino-image-block">
+    <img class="img-responsive atto_image_button_middle img-fluid arduino-main-image"
          role="presentation"
          src="picture/3.png"
-         alt=""
-         style="width: 50%; height: auto; border-radius: 8px;">
+         alt="">
   </div>
+
   <!-- Nadpis -->
-  <div style="background-color: #e9e9e9; text-align: center; padding: 18px 10px; border-radius: 8px 8px 0 0;">
-    <h2 style="margin: 0; color: #ee7203; font-size: 28px; font-weight: bold;">
+  <div class="arduino-title">
+    <h2>
       Praxe – Arduino
     </h2>
   </div>
+
   <!-- Informační blok -->
-  <div style="background-color: #ffffff; color: #373841; text-align: center; padding: 20px 30px; border-left: 4px solid #ee7203; border-right: 4px solid #ee7203; line-height: 1.6;">
-    <p style="margin: 0; font-size: 16px;">
+  <div class="arduino-info">
+    <p>
       Tato stránka slouží k předmětu <strong>Praxe</strong>, části <strong>Arduino</strong>,
       vyučovaném ve <strong>3. ročníku</strong> na
       <strong>Gymnáziu a Střední průmyslové škole elektrotechniky a informatiky ve Frenštátě pod Radhoštěm</strong>.
     </p>
   </div>
-  <!-- Autor a kontakt -->
-  <div style="background-color: #373841; color: #ffffff; text-align: center; padding: 14px 10px; border-radius: 0 0 8px 8px;">
-    <span style="display: inline-block; margin: 5px 10px;">
-      <img class="image img-fluid"
-           role="presentation"
-           src="picture/1.png"
-           alt=""
-           style="width: 25px; height: 35px; vertical-align: middle; margin-right: 6px;">
-      <strong>Vytvořil:</strong> Lukáš Vavroš
-    </span>
 
-    <span style="display: inline-block; margin: 5px 10px;">
-      <img class="img-responsive atto_image_button_text-bottom img-fluid"
-           role="presentation"
-           src="picture/2.png"
-           alt=""
-           style="width: 35px; height: 20px; vertical-align: middle; margin-right: 6px;">
-      <strong>E-mail:</strong> lukasvavros519@gmail.com
-    </span>
+  <!-- Autor a kontakt -->
+  <div class="arduino-author">
+    <div class="arduino-author-content">
+
+      <span class="arduino-author-item">
+        <img class="image img-fluid"
+             role="presentation"
+             src="picture/1.png"
+             alt=""
+             style="width: 25px; height: 35px;">
+        <strong>Vytvořil:&nbsp;</strong> Lukáš Vavroš
+      </span>
+
+      <span class="arduino-author-item">
+        <img class="img-responsive atto_image_button_text-bottom img-fluid"
+             role="presentation"
+             src="picture/2.png"
+             alt=""
+             style="width: 35px; height: 20px;">
+        <strong>E-mail:&nbsp;</strong> lukasvavros519@gmail.com
+      </span>
+
+    </div>
   </div>
+
 </div>
-```

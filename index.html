@@ -1,4 +1,3 @@
-```html
 <style>
   .arduino-page {
     --orange: #ee7203;
@@ -91,7 +90,8 @@
     font-weight: 600;
   }
 
-  .arduino-general {
+  .arduino-general,
+  .arduino-project {
     background: #ffffff;
     padding: clamp(28px, 4vw, 56px) clamp(18px, 5vw, 70px);
     border-left: 6px solid var(--orange);
@@ -99,13 +99,19 @@
     border-top: 1px solid #eeeeee;
   }
 
-  .arduino-general-inner {
+  .arduino-project {
+    background: #fafafa;
+  }
+
+  .arduino-general-inner,
+  .arduino-project-inner {
     max-width: 950px;
     margin: 0 auto;
     text-align: center;
   }
 
-  .arduino-general h3 {
+  .arduino-general h3,
+  .arduino-project h3 {
     margin: 0 0 28px;
     color: var(--dark);
     font-size: clamp(22px, 2.4vw, 32px);
@@ -115,6 +121,12 @@
   .arduino-link-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .arduino-project-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
 
@@ -194,7 +206,8 @@
   }
 
   @media (max-width: 800px) {
-    .arduino-link-list {
+    .arduino-link-list,
+    .arduino-project-list {
       grid-template-columns: 1fr;
     }
   }
@@ -217,7 +230,8 @@
       text-align: left;
     }
 
-    .arduino-general {
+    .arduino-general,
+    .arduino-project {
       border-left: none;
       border-right: none;
       border-bottom: 5px solid var(--orange);
@@ -303,6 +317,35 @@
       </div>
     </section>
 
+    <!-- Projekt -->
+    <section class="arduino-project">
+      <div class="arduino-project-inner">
+
+        <h3>Projekt</h3>
+
+        <div class="arduino-project-list">
+
+          <a class="arduino-link-card"
+             href="projekt-obecne-informace.html"
+             target="_blank"
+             rel="noopener noreferrer">
+            <strong>Obecné informace</strong>
+            <span>Základní informace k samostatnému projektu, zadání, termínům a odevzdání.</span>
+          </a>
+
+          <a class="arduino-link-card"
+             href="projekty-tridy-3ab.html"
+             target="_blank"
+             rel="noopener noreferrer">
+            <strong>Projekty třídy 3A/B</strong>
+            <span>Přehled projektů, rozdělení témat a informace pro třídy 3A/B.</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
     <!-- Autor a kontakt -->
     <footer class="arduino-author">
       <div class="arduino-author-content">
@@ -335,4 +378,3 @@
   </section>
 
 </div>
-```

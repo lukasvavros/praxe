@@ -1,0 +1,695 @@
+```html
+<style>
+  .arduino-page {
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f5f5f5;
+    --text: #373841;
+    --white: #ffffff;
+
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    box-sizing: border-box;
+  }
+
+  .arduino-page *,
+  .arduino-page *::before,
+  .arduino-page *::after {
+    box-sizing: border-box;
+  }
+
+  .arduino-hero {
+    overflow: hidden;
+    border-radius: 0;
+    background: var(--white);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .arduino-title {
+    background: var(--dark);
+    text-align: center;
+    padding: clamp(24px, 4vw, 48px) 18px;
+  }
+
+  .arduino-title h2 {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .arduino-title span {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--orange);
+    font-size: clamp(14px, 1.5vw, 19px);
+  }
+
+  .arduino-intro {
+    background: var(--white);
+    padding: clamp(26px, 4vw, 52px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    line-height: 1.75;
+    text-align: center;
+  }
+
+  .arduino-intro p {
+    max-width: 950px;
+    margin: 0 auto;
+    font-size: clamp(15px, 1.35vw, 18px);
+    font-weight: 400;
+  }
+
+  .arduino-highlight {
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  .arduino-section {
+    background: #ffffff;
+    padding: clamp(30px, 4vw, 60px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    border-top: 1px solid #eeeeee;
+  }
+
+  .arduino-section:nth-of-type(even) {
+    background: #fafafa;
+  }
+
+  .arduino-section-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+  }
+
+  .arduino-section h3 {
+    margin: 0 0 28px;
+    color: var(--dark);
+    text-align: center;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 400;
+  }
+
+  .arduino-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .arduino-card-grid.two {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .arduino-card {
+    background: var(--light);
+    border-radius: 14px;
+    padding: 22px 20px;
+    border-top: 6px solid var(--orange);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    line-height: 1.55;
+  }
+
+  .arduino-card strong {
+    display: block;
+    color: var(--orange);
+    font-size: clamp(17px, 1.5vw, 22px);
+    margin-bottom: 8px;
+  }
+
+  .arduino-card span {
+    display: block;
+    font-size: clamp(14px, 1.15vw, 16px);
+  }
+
+  .arduino-list {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .arduino-list li {
+    background: var(--light);
+    border-left: 6px solid var(--orange);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.6;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  }
+
+  .arduino-list li strong {
+    color: var(--orange);
+  }
+
+  .arduino-table-wrap {
+    overflow-x: auto;
+  }
+
+  .arduino-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    background: var(--white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .arduino-table th {
+    background: var(--dark);
+    color: var(--white);
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .arduino-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 15px;
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  .arduino-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .arduino-table td:first-child {
+    color: var(--orange);
+    font-weight: 700;
+    width: 28%;
+  }
+
+  .arduino-project-list {
+    columns: 2;
+    column-gap: 34px;
+    margin: 0;
+    padding-left: 22px;
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.8;
+  }
+
+  .arduino-project-list li {
+    break-inside: avoid;
+    margin-bottom: 6px;
+  }
+
+  .arduino-back {
+    background: var(--light);
+    padding: clamp(20px, 3vw, 34px);
+    text-align: center;
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+  }
+
+  .arduino-back a {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: var(--white);
+    text-decoration: none;
+    font-size: clamp(14px, 1.1vw, 16px);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .arduino-back a:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .arduino-author {
+    background: var(--light);
+    padding: clamp(18px, 3vw, 28px);
+  }
+
+  .arduino-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .arduino-author-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .arduino-author-item img {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .arduino-footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+
+  @media (max-width: 900px) {
+    .arduino-card-grid,
+    .arduino-card-grid.two {
+      grid-template-columns: 1fr;
+    }
+
+    .arduino-project-list {
+      columns: 1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .arduino-page {
+      width: 100vw;
+    }
+
+    .arduino-hero {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .arduino-intro,
+    .arduino-section,
+    .arduino-back {
+      border-left: none;
+      border-right: none;
+    }
+
+    .arduino-intro {
+      border-top: 5px solid var(--orange);
+      border-bottom: 5px solid var(--orange);
+      text-align: left;
+    }
+
+    .arduino-author-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .arduino-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="arduino-page">
+
+  <section class="arduino-hero">
+
+    <!-- Nadpis -->
+    <header class="arduino-title">
+      <h2>Samostatný projekt</h2>
+      <span>Praxe – Arduino | Informace pro žáky</span>
+    </header>
+
+    <!-- Úvod -->
+    <main class="arduino-intro">
+      <p>
+        Samostatný projekt sestává z vytvoření fyzického zapojení s
+        <span class="arduino-highlight">Arduinem</span> a alespoň
+        <span class="arduino-highlight">dvěma periferiemi</span>
+        například motory, displeji, čidly nebo jinými moduly.
+        Součástí projektu je také vytvoření funkčního programu.
+        Projekt budete vypracovávat převážně doma, na hodinách bude vyhrazen prostor
+        pro dotazy, konzultace a řešení problémů.
+      </p>
+    </main>
+
+    <!-- Využití AI -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Využití AI nástrojů</h3>
+
+        <div class="arduino-card-grid">
+
+          <div class="arduino-card">
+            <strong>AI je konzultant, ne řešitel</strong>
+            <span>
+              AI můžete použít k vysvětlení nejasností, hledání chyb,
+              získání nápadů nebo pochopení principů. Není dovoleno pouze zadat celé zadání
+              a použít výsledek jako hotové řešení.
+            </span>
+          </div>
+
+          <div class="arduino-card">
+            <strong>Dokumentujte použití</strong>
+            <span>
+              Každé využití AI, které vám pomohlo, stručně popište v dokumentaci projektu.
+              Například: „AI jsem použil k vysvětlení funkce map().“
+            </span>
+          </div>
+
+          <div class="arduino-card">
+            <strong>Buďte schopni obhájit řešení</strong>
+            <span>
+              Pokud použijete nápad získaný pomocí AI, musíte umět vysvětlit,
+              proč je v projektu použitý a jak funguje.
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Program -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Obecná pravidla pro psaní programu</h3>
+
+        <ul class="arduino-list">
+          <li>Zarovnávejte kód. V Arduino IDE můžete použít funkci autoformat pomocí klávesové zkratky <strong>CTRL + T</strong>.</li>
+          <li>Pro kód, který se opakuje za sebou, používejte <strong>cyklus</strong>.</li>
+          <li>Kód, který se opakuje na různých místech programu, vytvořte jako <strong>samostatnou funkci</strong>.</li>
+          <li>Pro čísla pinů a různé výpočetní konstanty si nadefinujte <strong>konstantní proměnné</strong>. Nepoužívejte takzvaná „magic numbers“.</li>
+          <li>Používejte komentáře. Nemusí být na každém řádku, ale měly by vysvětlovat jednotlivé bloky programu.</li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- Hodnocení projektu -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Hodnocení projektu</h3>
+
+        <div class="arduino-card-grid two">
+
+          <div class="arduino-card">
+            <strong>Kontrola hardwaru</strong>
+            <span>
+              Jedna známka s váhou <strong>0,25</strong> za kontrolu hardwarové části
+              podle instrukcí.
+            </span>
+          </div>
+
+          <div class="arduino-card">
+            <strong>Projekt a prezentace</strong>
+            <span>
+              Jedna známka s váhou <strong>1,0</strong> za fyzické zapojení,
+              program a prezentaci projektu.
+            </span>
+          </div>
+
+        </div>
+
+        <br>
+
+        <div class="arduino-table-wrap">
+          <table class="arduino-table">
+            <thead>
+              <tr>
+                <th>Oblast hodnocení</th>
+                <th>Body</th>
+                <th>Popis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Funkčnost</td>
+                <td>7 bodů</td>
+                <td>Projekt splňuje všechny body zadání a je funkční.</td>
+              </tr>
+              <tr>
+                <td>Znalost programu</td>
+                <td>8 bodů</td>
+                <td>Žák prokáže, že programu rozumí a pouze jej bez pochopení nezkopíroval.</td>
+              </tr>
+              <tr>
+                <td>Včasné odevzdání</td>
+                <td>5 bodů</td>
+                <td>Projekt je odevzdán ve stanoveném termínu.</td>
+              </tr>
+              <tr>
+                <td>Prezentace</td>
+                <td>5 bodů</td>
+                <td>
+                  Prezentace před třídou včetně předvedení funkčnosti.
+                  Doporučená délka je přibližně 2 minuty plus čas na dotazy.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Dokumentace -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Dokumentace projektu</h3>
+
+        <p style="max-width: 900px; margin: 0 auto 24px; text-align: center; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.7;">
+          Druhá známka s váhou <strong>1,0</strong> je za dokumentaci projektu.
+          Dokumentace se odevzdává jako PDF soubor pojmenovaný
+          <strong>Jmeno_Prijmeni_trida.pdf</strong> podle šablony.
+        </p>
+
+        <div class="arduino-table-wrap">
+          <table class="arduino-table">
+            <thead>
+              <tr>
+                <th>Část dokumentace</th>
+                <th>Body</th>
+                <th>Co má obsahovat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Název PDF</td>
+                <td>1 bod</td>
+                <td>Soubor pojmenovaný ve tvaru Jmeno_Prijmeni_trida.pdf.</td>
+              </tr>
+              <tr>
+                <td>Zadání</td>
+                <td>1 bod</td>
+                <td>Kompletní zadání zkopírované z Githubu.</td>
+              </tr>
+              <tr>
+                <td>Popis řešení</td>
+                <td>2 body</td>
+                <td>Několik vět vlastními slovy o postupu řešení, použitých nástrojích, knihovnách a variantách řešení.</td>
+              </tr>
+              <tr>
+                <td>Schéma</td>
+                <td>5 bodů</td>
+                <td>Schéma zapojení vytvořené například ve Wokwi, KiCADu nebo jiném vhodném programu.</td>
+              </tr>
+              <tr>
+                <td>Včasné odevzdání</td>
+                <td>5 bodů</td>
+                <td>Dokumentace je odevzdána ve stanoveném termínu.</td>
+              </tr>
+              <tr>
+                <td>Fotografie zapojení</td>
+                <td>2 body</td>
+                <td>Fotografie skutečně sestaveného zapojení.</td>
+              </tr>
+              <tr>
+                <td>Kód</td>
+                <td>2 body</td>
+                <td>Přehledně naformátovaný kód s komentáři, vložený jako text, nikoli jako obrázek.</td>
+              </tr>
+              <tr>
+                <td>Zdroje</td>
+                <td>2 body</td>
+                <td>Seznam použitých zdrojů včetně odkazů na použité knihovny.</td>
+              </tr>
+              <tr>
+                <td>Závěr</td>
+                <td>2 body</td>
+                <td>Zhodnocení, zda byly splněny všechny body zadání a jaké problémy se řešily.</td>
+              </tr>
+              <tr>
+                <td>Celková úprava</td>
+                <td>3 body</td>
+                <td>Vhodné písmo, zarovnání, přehlednost a žádné osamocené nadpisy na konci stránky.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Převod bodů -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Orientační převod bodů na známku</h3>
+
+        <div class="arduino-table-wrap">
+          <table class="arduino-table">
+            <thead>
+              <tr>
+                <th>Body</th>
+                <th>Známka</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>25–22</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>21–16</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>15–10</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>9–5</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>5–0</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Náměty projektů -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Příklady možných projektů</h3>
+
+        <ul class="arduino-project-list">
+          <li>Hra na postřeh pro dva hráče</li>
+          <li>Hodinky s budíkem a stopkami</li>
+          <li>Automatické ovládání dvířek do kurníku s počítadlem slepic</li>
+          <li>Voltmetr se dvěma napěťovými rozsahy a měřením proudu</li>
+          <li>Ovládání výtahu s krokovým motorem, tlačítky a displejem</li>
+          <li>Kódový zámek s možností změny kódu</li>
+          <li>Hudební přehrávač s dálkovým ovládáním</li>
+          <li>Reklamní banner s maticovým displejem</li>
+          <li>Robot jako sledovač čáry s funkcí objetí překážky</li>
+          <li>Přidání počitadla ujeté vzdálenosti pro robota</li>
+          <li>Úprava školního robota pro ovládání joystickem</li>
+          <li>Stavba robota podle vlastního návrhu</li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- Součástky -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Moduly a součástky pro projekt</h3>
+
+        <div class="arduino-table-wrap">
+          <table class="arduino-table">
+            <thead>
+              <tr>
+                <th>Komponenta</th>
+                <th>Popis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Arduino Nano</td><td>Menší deska se stejným procesorem jako Arduino UNO, vhodná do nepájivého pole.</td></tr>
+              <tr><td>Arduino MEGA</td><td>Deska s ATmega 2560, 56 IO piny a 16 analogovými vstupy.</td></tr>
+              <tr><td>Arduino Nano 33 IoT</td><td>Arduino s výkonnějším procesorem, Bluetooth a WiFi modulem.</td></tr>
+              <tr><td>RTC modul</td><td>Modul reálného času s bateriovým zálohováním, komunikace přes I2C.</td></tr>
+              <tr><td>Datalogger shield</td><td>Shield s RTC modulem a SD kartou, vhodný pro ukládání naměřených dat.</td></tr>
+              <tr><td>Piezzo bzučák</td><td>Pro jednoduché zvukové efekty, pípání a tóny.</td></tr>
+              <tr><td>Fotorezistor</td><td>Součástka s odporem závislým na osvětlení.</td></tr>
+              <tr><td>Senzor DHT-10</td><td>Senzor pro měření teploty a vlhkosti.</td></tr>
+              <tr><td>Bluetooth modul HC-05</td><td>Bezdrátový modul pro sériovou komunikaci přes Bluetooth.</td></tr>
+              <tr><td>Senzor HC-SR04</td><td>Ultrazvukový senzor vzdálenosti s rozsahem přibližně 2 cm až 3 m.</td></tr>
+              <tr><td>Joystick shield</td><td>Rozšiřující deska s joystickem a několika tlačítky pro ovládání projektů.</td></tr>
+              <tr><td>RFID sada</td><td>Modul pro čtení RFID karet a čipů s frekvencí 13,56 MHz.</td></tr>
+              <tr><td>LCD displej</td><td>Znakový LCD displej 16×2 pro zobrazení textových informací.</td></tr>
+              <tr><td>OLED displej</td><td>Malý grafický displej s vysokým kontrastem, komunikace přes I2C.</td></tr>
+              <tr><td>Klávesnice</td><td>Membránová klávesnice 4×4.</td></tr>
+              <tr><td>Školní robot</td><td>Robot s Arduinem, motory, ultrazvukovým senzorem a senzory čáry.</td></tr>
+              <tr><td>DC motor s kolem</td><td>Stejnosměrný motor s převodovkou a kolem, vhodný pro stavbu vlastního robota.</td></tr>
+              <tr><td>Servo</td><td>Malý servomotor s přesným řízením polohy 0–180°.</td></tr>
+              <tr><td>Krokový motor s řadičem</td><td>Motor s přesným krokovým řízením, používaný například v CNC nebo 3D tisku.</td></tr>
+              <tr><td>Hmotnostní senzor</td><td>Hmotnostní senzor s modulem HX711 do 5 kg nebo do 20 kg.</td></tr>
+              <tr><td>Senzor srdečního tepu</td><td>Senzor srdečního tepu s modulem MAX30100.</td></tr>
+              <tr><td>Modul s MP3 přehrávačem</td><td>Modul s MP3 přehrávačem a integrovaným zesilovačem pro připojení reproduktoru.</td></tr>
+              <tr><td>Maticový displej</td><td>LED Matrix matice 8×8×4 s MAX7219.</td></tr>
+              <tr><td>GPS modul</td><td>Modul GPS NEO-6M s anténou.</td></tr>
+              <tr><td>Ventilátor</td><td>Ventilátor 50 mm, 5 V.</td></tr>
+              <tr><td>Senzor proudu</td><td>Senzor INA219 pro měření proudu, připojení přes I2C.</td></tr>
+              <tr><td>Akcelerometr</td><td>Tříosý akcelerometr GY-521.</td></tr>
+              <tr><td>Kruh z RGB LED</td><td>24× RGB LED WS2812B.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Návrat -->
+    <div class="arduino-back">
+      <a href="index.html">Zpět na hlavní stránku</a>
+    </div>
+
+    <!-- Autor a kontakt -->
+    <footer class="arduino-author">
+      <div class="arduino-author-content">
+
+        <span class="arduino-author-item">
+          <img class="image img-fluid"
+               src="picture/1.png"
+               alt=""
+               role="presentation"
+               style="width: 25px; height: 35px;">
+          <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
+        </span>
+
+        <span class="arduino-author-item">
+          <img class="img-responsive atto_image_button_text-bottom img-fluid"
+               src="picture/2.png"
+               alt=""
+               role="presentation"
+               style="width: 35px; height: 20px;">
+          <span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span>
+        </span>
+
+      </div>
+    </footer>
+
+    <div class="arduino-footer">
+      Gymnázium a SPŠEI Frenštát pod Radhoštěm
+    </div>
+
+  </section>
+
+</div>
+```

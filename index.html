@@ -1,3 +1,4 @@
+```html
 <style>
   .arduino-page {
     --orange: #ee7203;
@@ -76,51 +77,11 @@
     text-align: center;
   }
 
-  .arduino-info-box {
+  .arduino-info p {
     max-width: 850px;
     margin: 0 auto;
-  }
-
-  .arduino-info-box h3 {
-    margin: 0 0 28px;
-    color: var(--dark);
-    font-size: clamp(22px, 2.4vw, 32px);
+    font-size: clamp(15px, 1.35vw, 18px);
     font-weight: 400;
-  }
-
-  .arduino-link-list {
-    display: grid;
-    gap: 18px;
-  }
-
-  .arduino-link-card {
-    display: block;
-    padding: 20px 24px;
-    border-radius: 14px;
-    background: var(--light);
-    color: var(--dark);
-    text-decoration: none;
-    border-left: 6px solid var(--orange);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .arduino-link-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-  }
-
-  .arduino-link-card strong {
-    display: block;
-    color: var(--orange);
-    font-size: clamp(17px, 1.6vw, 22px);
-    margin-bottom: 4px;
-  }
-
-  .arduino-link-card span {
-    display: block;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.5;
   }
 
   .arduino-highlight {
@@ -191,14 +152,6 @@
       text-align: left;
     }
 
-    .arduino-info-box h3 {
-      text-align: center;
-    }
-
-    .arduino-link-card {
-      padding: 18px 18px;
-    }
-
     .arduino-author-content {
       flex-direction: column;
       align-items: stretch;
@@ -231,41 +184,14 @@
       <span>Výukové materiály pro 3. ročník</span>
     </header>
 
-    <!-- Obecné informace -->
+    <!-- Informační blok -->
     <main class="arduino-info">
-      <div class="arduino-info-box">
-
-        <h3>Obecné informace</h3>
-
-        <div class="arduino-link-list">
-
-          <a class="arduino-link-card"
-             href="dokumenty/hodnoceni-predmetu.pdf"
-             target="_blank"
-             rel="noopener noreferrer">
-            <strong>Hodnocení předmětu</strong>
-            <span>Pravidla hodnocení, požadavky a podmínky splnění předmětu.</span>
-          </a>
-
-          <a class="arduino-link-card"
-             href="dokumenty/tahak-arduino.pdf"
-             target="_blank"
-             rel="noopener noreferrer">
-            <strong>Tahák Arduino</strong>
-            <span>Přehled základních příkazů, zapojení a často používaných funkcí.</span>
-          </a>
-
-          <a class="arduino-link-card"
-             href="https://docs.arduino.cc/"
-             target="_blank"
-             rel="noopener noreferrer">
-            <strong>Dokumentace Arduino</strong>
-            <span>Oficiální dokumentace k deskám, programování a knihovnám Arduino.</span>
-          </a>
-
-        </div>
-
-      </div>
+      <p>
+        Tato stránka slouží k předmětu <span class="arduino-highlight">Praxe</span>,
+        části <span class="arduino-highlight">Arduino</span>, vyučovaném ve 3. ročníku
+        na Gymnáziu a Střední průmyslové škole elektrotechniky a informatiky
+        ve Frenštátě pod Radhoštěm.
+      </p>
     </main>
 
     <!-- Autor a kontakt -->

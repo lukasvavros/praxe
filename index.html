@@ -7,8 +7,10 @@
     --text: #373841;
     --white: #ffffff;
 
-    width: min(96%, 1200px);
-    margin: 0 auto;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: var(--text);
     box-sizing: border-box;
@@ -22,7 +24,7 @@
 
   .arduino-hero {
     overflow: hidden;
-    border-radius: 18px;
+    border-radius: 0;
     background: var(--white);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
   }
@@ -89,6 +91,63 @@
     font-weight: 600;
   }
 
+  .arduino-general {
+    background: #ffffff;
+    padding: clamp(28px, 4vw, 56px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    border-top: 1px solid #eeeeee;
+  }
+
+  .arduino-general-inner {
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .arduino-general h3 {
+    margin: 0 0 28px;
+    color: var(--dark);
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 400;
+  }
+
+  .arduino-link-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .arduino-link-card {
+    display: block;
+    padding: 22px 18px;
+    border-radius: 14px;
+    background: var(--light);
+    color: var(--dark);
+    text-decoration: none;
+    border-top: 6px solid var(--orange);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .arduino-link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  }
+
+  .arduino-link-card strong {
+    display: block;
+    color: var(--orange);
+    font-size: clamp(16px, 1.5vw, 21px);
+    margin-bottom: 8px;
+  }
+
+  .arduino-link-card span {
+    display: block;
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.5;
+  }
+
   .arduino-author {
     background: var(--light);
     padding: clamp(18px, 3vw, 28px);
@@ -134,9 +193,15 @@
     }
   }
 
+  @media (max-width: 800px) {
+    .arduino-link-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 600px) {
     .arduino-page {
-      width: 100%;
+      width: 100vw;
     }
 
     .arduino-hero {
@@ -150,6 +215,12 @@
       border-top: 5px solid var(--orange);
       border-bottom: 5px solid var(--orange);
       text-align: left;
+    }
+
+    .arduino-general {
+      border-left: none;
+      border-right: none;
+      border-bottom: 5px solid var(--orange);
     }
 
     .arduino-author-content {
@@ -193,6 +264,43 @@
         ve Frenštátě pod Radhoštěm.
       </p>
     </main>
+
+    <!-- Obecné informace -->
+    <section class="arduino-general">
+      <div class="arduino-general-inner">
+
+        <h3>Obecné informace</h3>
+
+        <div class="arduino-link-list">
+
+          <a class="arduino-link-card"
+             href="dokumenty/hodnoceni-predmetu.pdf"
+             target="_blank"
+             rel="noopener noreferrer">
+            <strong>Hodnocení předmětu</strong>
+            <span>Pravidla hodnocení, požadavky a podmínky splnění předmětu.</span>
+          </a>
+
+          <a class="arduino-link-card"
+             href="dokumenty/tahak-arduino.pdf"
+             target="_blank"
+             rel="noopener noreferrer">
+            <strong>Tahák Arduino</strong>
+            <span>Přehled základních příkazů, zapojení a často používaných funkcí.</span>
+          </a>
+
+          <a class="arduino-link-card"
+             href="https://docs.arduino.cc/"
+             target="_blank"
+             rel="noopener noreferrer">
+            <strong>Dokumentace Arduino</strong>
+            <span>Oficiální dokumentace k deskám, programování a knihovnám Arduino.</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
 
     <!-- Autor a kontakt -->
     <footer class="arduino-author">

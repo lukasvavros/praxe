@@ -1,0 +1,495 @@
+```html
+<style>
+  .arduino-page {
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f5f5f5;
+    --text: #373841;
+    --white: #ffffff;
+
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    box-sizing: border-box;
+  }
+
+  .arduino-page *,
+  .arduino-page *::before,
+  .arduino-page *::after {
+    box-sizing: border-box;
+  }
+
+  .arduino-hero {
+    overflow: hidden;
+    border-radius: 0;
+    background: var(--white);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .arduino-title {
+    background: var(--dark);
+    text-align: center;
+    padding: clamp(24px, 4vw, 48px) 18px;
+  }
+
+  .arduino-title h2 {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .arduino-title span {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--orange);
+    font-size: clamp(14px, 1.5vw, 19px);
+  }
+
+  .arduino-info {
+    background: var(--white);
+    padding: clamp(26px, 4vw, 52px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    line-height: 1.75;
+    text-align: center;
+  }
+
+  .arduino-info p {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: clamp(15px, 1.35vw, 18px);
+    font-weight: 400;
+  }
+
+  .arduino-highlight {
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  .arduino-section {
+    background: #ffffff;
+    padding: clamp(28px, 4vw, 56px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    border-top: 1px solid #eeeeee;
+  }
+
+  .arduino-section-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+  }
+
+  .arduino-section h3 {
+    margin: 0 0 28px;
+    color: var(--dark);
+    text-align: center;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 400;
+  }
+
+  .arduino-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .arduino-card {
+    background: var(--light);
+    border-radius: 14px;
+    padding: 24px 20px;
+    border-top: 6px solid var(--orange);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  .arduino-card strong {
+    display: block;
+    color: var(--orange);
+    font-size: clamp(18px, 1.7vw, 24px);
+    margin-bottom: 8px;
+  }
+
+  .arduino-card span {
+    display: block;
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.5;
+  }
+
+  .arduino-rules {
+    display: grid;
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .arduino-rule {
+    background: var(--light);
+    border-left: 6px solid var(--orange);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.6;
+  }
+
+  .arduino-table-wrap {
+    overflow-x: auto;
+  }
+
+  .arduino-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    background: var(--white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .arduino-table th {
+    background: var(--dark);
+    color: var(--white);
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .arduino-table td {
+    padding: 15px 16px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .arduino-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .arduino-table td:first-child {
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  .arduino-back {
+    background: var(--light);
+    padding: clamp(20px, 3vw, 34px);
+    text-align: center;
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+  }
+
+  .arduino-back a {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: var(--white);
+    text-decoration: none;
+    font-size: clamp(14px, 1.1vw, 16px);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .arduino-back a:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .arduino-author {
+    background: var(--light);
+    padding: clamp(18px, 3vw, 28px);
+  }
+
+  .arduino-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .arduino-author-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .arduino-author-item img {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .arduino-footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+
+  @media (max-width: 950px) {
+    .arduino-card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .arduino-page {
+      width: 100vw;
+    }
+
+    .arduino-hero {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .arduino-info,
+    .arduino-section,
+    .arduino-back {
+      border-left: none;
+      border-right: none;
+    }
+
+    .arduino-info {
+      border-top: 5px solid var(--orange);
+      border-bottom: 5px solid var(--orange);
+      text-align: left;
+    }
+
+    .arduino-card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .arduino-author-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .arduino-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="arduino-page">
+
+  <section class="arduino-hero">
+
+    <!-- Nadpis -->
+    <header class="arduino-title">
+      <h2>Hodnocení předmětu</h2>
+      <span>Praxe – Arduino | 3. ročník</span>
+    </header>
+
+    <!-- Úvodní informace -->
+    <main class="arduino-info">
+      <p>
+        Tato stránka obsahuje základní pravidla hodnocení v části
+        <span class="arduino-highlight">Arduino</span>.
+        Hodnocení je zaměřeno především na praktickou práci, správnost zapojení,
+        funkčnost programu, samostatnost, dodržování bezpečnosti práce
+        a schopnost odevzdat úlohu v požadované kvalitě.
+      </p>
+    </main>
+
+    <!-- Hodnocené oblasti -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Hodnocené oblasti</h3>
+
+        <div class="arduino-card-grid">
+
+          <div class="arduino-card">
+            <strong>50&nbsp;%</strong>
+            <span>Praktické úlohy, funkčnost zapojení a správné splnění zadání.</span>
+          </div>
+
+          <div class="arduino-card">
+            <strong>20&nbsp;%</strong>
+            <span>Samostatnost práce, hledání chyb a schopnost úlohu dokončit.</span>
+          </div>
+
+          <div class="arduino-card">
+            <strong>15&nbsp;%</strong>
+            <span>Dokumentace, popis zapojení, komentáře v programu a odevzdání práce.</span>
+          </div>
+
+          <div class="arduino-card">
+            <strong>15&nbsp;%</strong>
+            <span>Aktivita, pracovní kázeň, příprava na výuku a dodržování BOZP.</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pravidla hodnocení -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Pravidla hodnocení</h3>
+
+        <div class="arduino-rules">
+
+          <div class="arduino-rule">
+            Žák pracuje podle zadání, dodržuje pracovní postup a dbá na bezpečnost práce při zapojování obvodů.
+          </div>
+
+          <div class="arduino-rule">
+            Hodnotí se nejen výsledná funkčnost zapojení, ale také postup práce, přehlednost programu a schopnost najít a opravit chybu.
+          </div>
+
+          <div class="arduino-rule">
+            Každá úloha musí být odevzdána v požadovaném termínu a v dohodnuté podobě, například jako program, fotografie zapojení nebo krátký popis řešení.
+          </div>
+
+          <div class="arduino-rule">
+            Při práci ve dvojici nebo skupině musí žák prokázat vlastní aktivní zapojení do řešení úlohy.
+          </div>
+
+          <div class="arduino-rule">
+            Nedodržení bezpečnosti práce, poškozování pomůcek nebo nevhodné zacházení s vybavením může být důvodem ke snížení hodnocení.
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Orientační klasifikace -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Orientační převod na známku</h3>
+
+        <div class="arduino-table-wrap">
+          <table class="arduino-table">
+            <thead>
+              <tr>
+                <th>Známka</th>
+                <th>Hodnocení</th>
+                <th>Rozmezí</th>
+                <th>Popis výkonu</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>výborný</td>
+                <td>90–100&nbsp;%</td>
+                <td>Úloha je splněna správně, funkčně a samostatně.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>chvalitebný</td>
+                <td>75–89&nbsp;%</td>
+                <td>Úloha je funkční, obsahuje pouze menší nedostatky.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>dobrý</td>
+                <td>55–74&nbsp;%</td>
+                <td>Úloha je splněna částečně nebo s výraznější pomocí.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>dostatečný</td>
+                <td>35–54&nbsp;%</td>
+                <td>Řešení je neúplné, má závažnější chyby nebo nízkou samostatnost.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>nedostatečný</td>
+                <td>0–34&nbsp;%</td>
+                <td>Úloha není splněna, není odevzdána nebo je řešení nefunkční.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Podmínky splnění -->
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Podmínky splnění předmětu</h3>
+
+        <div class="arduino-rules">
+
+          <div class="arduino-rule">
+            Žák musí absolvovat zadané praktické úlohy a odevzdat požadované výstupy.
+          </div>
+
+          <div class="arduino-rule">
+            Žák musí dodržovat pravidla bezpečnosti práce a pokyny vyučujícího.
+          </div>
+
+          <div class="arduino-rule">
+            Žák si vede přiměřený přehled o řešených úlohách, použitých součástkách a programech.
+          </div>
+
+          <div class="arduino-rule">
+            V případě absence je žák povinen si po domluvě s vyučujícím doplnit zameškané úlohy.
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Návrat -->
+    <div class="arduino-back">
+      <a href="../index.html">Zpět na hlavní stránku</a>
+    </div>
+
+    <!-- Autor a kontakt -->
+    <footer class="arduino-author">
+      <div class="arduino-author-content">
+
+        <span class="arduino-author-item">
+          <img class="image img-fluid"
+               src="../picture/1.png"
+               alt=""
+               role="presentation"
+               style="width: 25px; height: 35px;">
+          <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
+        </span>
+
+        <span class="arduino-author-item">
+          <img class="img-responsive atto_image_button_text-bottom img-fluid"
+               src="../picture/2.png"
+               alt=""
+               role="presentation"
+               style="width: 35px; height: 20px;">
+          <span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span>
+        </span>
+
+      </div>
+    </footer>
+
+    <div class="arduino-footer">
+      Gymnázium a SPŠEI Frenštát pod Radhoštěm
+    </div>
+
+  </section>
+
+</div>
+```

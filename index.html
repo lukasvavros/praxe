@@ -1,3 +1,4 @@
+```html
 <style>
   .arduino-page {
     --orange: #ee7203;
@@ -13,6 +14,7 @@
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: var(--text);
     box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .arduino-page *,
@@ -36,16 +38,11 @@
   }
 
   .arduino-main-image {
-    width: clamp(130px, 46vw, 260px);
+    width: clamp(130px, 23vw, 260px);
     max-width: 50%;
     height: auto;
     display: inline-block;
     border-radius: 14px;
-  }
-
-  .arduino-content {
-    display: grid;
-    grid-template-columns: 1fr;
   }
 
   .arduino-title {
@@ -82,7 +79,6 @@
     max-width: 850px;
     margin: 0 auto;
     font-size: clamp(15px, 1.35vw, 18px);
-    font-weight: 400;
   }
 
   .arduino-highlight {
@@ -91,12 +87,17 @@
   }
 
   .arduino-general,
-  .arduino-project {
-    background: #ffffff;
+  .arduino-project,
+  .arduino-chapters {
     padding: clamp(28px, 4vw, 56px) clamp(18px, 5vw, 70px);
     border-left: 6px solid var(--orange);
     border-right: 6px solid var(--orange);
     border-top: 1px solid #eeeeee;
+  }
+
+  .arduino-general,
+  .arduino-chapters {
+    background: var(--white);
   }
 
   .arduino-project {
@@ -104,14 +105,16 @@
   }
 
   .arduino-general-inner,
-  .arduino-project-inner {
-    max-width: 950px;
+  .arduino-project-inner,
+  .arduino-chapters-inner {
+    max-width: 1100px;
     margin: 0 auto;
     text-align: center;
   }
 
   .arduino-general h3,
-  .arduino-project h3 {
+  .arduino-project h3,
+  .arduino-chapters h3 {
     margin: 0 0 28px;
     color: var(--dark);
     font-size: clamp(22px, 2.4vw, 32px);
@@ -158,116 +161,6 @@
     display: block;
     font-size: clamp(13px, 1.1vw, 15px);
     line-height: 1.5;
-  }
-
-  .arduino-author {
-    background: var(--light);
-    padding: clamp(18px, 3vw, 28px);
-  }
-
-  .arduino-author-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .arduino-author-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 48px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: var(--white);
-    color: var(--dark);
-    font-size: clamp(13px, 1.1vw, 15px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .arduino-author-item img {
-    display: inline-block;
-    flex: 0 0 auto;
-  }
-
-  .arduino-footer {
-    background: var(--dark);
-    color: var(--white);
-    text-align: center;
-    padding: 12px 16px;
-    font-size: clamp(12px, 1vw, 14px);
-  }
-
-  @media (min-width: 900px) {
-    .arduino-content {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 800px) {
-    .arduino-link-list,
-    .arduino-project-list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .arduino-page {
-      width: 100vw;
-    }
-
-    .arduino-hero {
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .arduino-info {
-      border-left: none;
-      border-right: none;
-      border-top: 5px solid var(--orange);
-      border-bottom: 5px solid var(--orange);
-      text-align: left;
-    }
-
-    .arduino-general,
-    .arduino-project {
-      border-left: none;
-      border-right: none;
-      border-bottom: 5px solid var(--orange);
-    }
-
-    .arduino-author-content {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .arduino-author-item {
-      justify-content: center;
-      border-radius: 12px;
-      text-align: center;
-    }
-  }
-<style>
-  .arduino-chapters {
-    background: #ffffff;
-    padding: clamp(28px, 4vw, 56px) clamp(18px, 5vw, 70px);
-    border-left: 6px solid var(--orange);
-    border-right: 6px solid var(--orange);
-    border-top: 1px solid #eeeeee;
-  }
-
-  .arduino-chapters-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .arduino-chapters h3 {
-    margin: 0 0 28px;
-    color: var(--dark);
-    font-size: clamp(22px, 2.4vw, 32px);
-    font-weight: 400;
   }
 
   .arduino-chapter-grid {
@@ -317,13 +210,73 @@
     font-weight: 600;
   }
 
+  .arduino-author {
+    background: var(--light);
+    padding: clamp(18px, 3vw, 28px);
+  }
+
+  .arduino-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .arduino-author-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .arduino-author-item img {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .arduino-footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+
   @media (max-width: 1100px) {
     .arduino-chapter-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
 
+  @media (max-width: 800px) {
+    .arduino-link-list,
+    .arduino-project-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 600px) {
+    .arduino-hero {
+      box-shadow: none;
+    }
+
+    .arduino-info {
+      border-left: none;
+      border-right: none;
+      border-top: 5px solid var(--orange);
+      border-bottom: 5px solid var(--orange);
+      text-align: left;
+    }
+
+    .arduino-general,
+    .arduino-project,
     .arduino-chapters {
       border-left: none;
       border-right: none;
@@ -333,8 +286,18 @@
     .arduino-chapter-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .arduino-author-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .arduino-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
+    }
   }
-</style>
 </style>
 
 <div class="arduino-page">
@@ -359,8 +322,9 @@
     <!-- Informační blok -->
     <main class="arduino-info">
       <p>
-        Tato stránka slouží k předmětu <span class="arduino-highlight">Praxe</span>,
-        části <span class="arduino-highlight">Arduino</span>, vyučovaném ve 3. ročníku
+        Tato stránka slouží k předmětu
+        <span class="arduino-highlight">Praxe</span>, části
+        <span class="arduino-highlight">Arduino</span>, vyučovaném ve 3. ročníku
         na Gymnáziu a Střední průmyslové škole elektrotechniky a informatiky
         ve Frenštátě pod Radhoštěm.
       </p>
@@ -432,103 +396,91 @@
 
       </div>
     </section>
-```html
-<!-- Kapitoly -->
-<section class="arduino-chapters">
-  <div class="arduino-chapters-inner">
 
-    <h3>Kapitoly</h3>
+    <!-- Kapitoly -->
+    <section class="arduino-chapters">
+      <div class="arduino-chapters-inner">
 
-    <div class="arduino-chapter-grid">
+        <h3>Kapitoly</h3>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-01-uvod-do-arduina.html">
-        <span class="arduino-chapter-number">1</span>
-        <span class="arduino-chapter-name">Úvod do Arduina</span>
-      </a>
+        <div class="arduino-chapter-grid">
 
-      <a class="arduino-chapter-card"
-         href="kapitola-02.html">
-        <span class="arduino-chapter-number">2</span>
-        <span class="arduino-chapter-name">Kapitola 2</span>
-      </a>
+          <a class="arduino-chapter-card"
+             href="kapitola-01-uvod-do-arduina.html">
+            <span class="arduino-chapter-number">1</span>
+            <span class="arduino-chapter-name">Úvod do Arduina</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-03.html">
-        <span class="arduino-chapter-number">3</span>
-        <span class="arduino-chapter-name">Kapitola 3</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-02.html">
+            <span class="arduino-chapter-number">2</span>
+            <span class="arduino-chapter-name">Kapitola 2</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-04.html">
-        <span class="arduino-chapter-number">4</span>
-        <span class="arduino-chapter-name">Kapitola 4</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-03.html">
+            <span class="arduino-chapter-number">3</span>
+            <span class="arduino-chapter-name">Kapitola 3</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-05.html">
-        <span class="arduino-chapter-number">5</span>
-        <span class="arduino-chapter-name">Kapitola 5</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-04.html">
+            <span class="arduino-chapter-number">4</span>
+            <span class="arduino-chapter-name">Kapitola 4</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-06.html">
-        <span class="arduino-chapter-number">6</span>
-        <span class="arduino-chapter-name">Kapitola 6</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-05.html">
+            <span class="arduino-chapter-number">5</span>
+            <span class="arduino-chapter-name">Kapitola 5</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-07.html">
-        <span class="arduino-chapter-number">7</span>
-        <span class="arduino-chapter-name">Kapitola 7</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-06.html">
+            <span class="arduino-chapter-number">6</span>
+            <span class="arduino-chapter-name">Kapitola 6</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-08.html">
-        <span class="arduino-chapter-number">8</span>
-        <span class="arduino-chapter-name">Kapitola 8</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-07.html">
+            <span class="arduino-chapter-number">7</span>
+            <span class="arduino-chapter-name">Kapitola 7</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-09.html">
-        <span class="arduino-chapter-number">9</span>
-        <span class="arduino-chapter-name">Kapitola 9</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-08.html">
+            <span class="arduino-chapter-number">8</span>
+            <span class="arduino-chapter-name">Kapitola 8</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-10.html">
-        <span class="arduino-chapter-number">10</span>
-        <span class="arduino-chapter-name">Kapitola 10</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-09.html">
+            <span class="arduino-chapter-number">9</span>
+            <span class="arduino-chapter-name">Kapitola 9</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-11.html">
-        <span class="arduino-chapter-number">11</span>
-        <span class="arduino-chapter-name">Kapitola 11</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-10.html">
+            <span class="arduino-chapter-number">10</span>
+            <span class="arduino-chapter-name">Kapitola 10</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-12.html">
-        <span class="arduino-chapter-number">12</span>
-        <span class="arduino-chapter-name">Kapitola 12</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-11.html">
+            <span class="arduino-chapter-number">11</span>
+            <span class="arduino-chapter-name">Kapitola 11</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-13.html">
-        <span class="arduino-chapter-number">13</span>
-        <span class="arduino-chapter-name">Kapitola 13</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-12.html">
+            <span class="arduino-chapter-number">12</span>
+            <span class="arduino-chapter-name">Kapitola 12</span>
+          </a>
 
-      <a class="arduino-chapter-card"
-         href="kapitola-14.html">
-        <span class="arduino-chapter-number">14</span>
-        <span class="arduino-chapter-name">Kapitola 14</span>
-      </a>
+          <a class="arduino-chapter-card" href="kapitola-13.html">
+            <span class="arduino-chapter-number">13</span>
+            <span class="arduino-chapter-name">Kapitola 13</span>
+          </a>
 
-    </div>
+          <a class="arduino-chapter-card" href="kapitola-14.html">
+            <span class="arduino-chapter-number">14</span>
+            <span class="arduino-chapter-name">Kapitola 14</span>
+          </a>
 
-  </div>
-</section>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Autor a kontakt -->
     <footer class="arduino-author">
       <div class="arduino-author-content">
@@ -561,3 +513,4 @@
   </section>
 
 </div>
+```

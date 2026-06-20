@@ -1,0 +1,787 @@
+```html
+<style>
+  .pra-chapter {
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f4f4f4;
+    --lighter: #fafafa;
+    --text: #373841;
+    --white: #ffffff;
+    --blue: #00a8d6;
+
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    box-sizing: border-box;
+  }
+
+  .pra-chapter *,
+  .pra-chapter *::before,
+  .pra-chapter *::after {
+    box-sizing: border-box;
+  }
+
+  .pra-hero {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: clamp(30px, 5vw, 60px) 20px;
+  }
+
+  .pra-hero h1 {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 50px);
+    font-weight: 400;
+  }
+
+  .pra-hero p {
+    margin: 12px 0 0;
+    color: var(--orange);
+    font-size: clamp(15px, 1.7vw, 20px);
+  }
+
+  .pra-container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+  }
+
+  .pra-overview {
+    padding: clamp(30px, 5vw, 65px) 0;
+    display: grid;
+    gap: 24px;
+  }
+
+  .pra-overview-row {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .pra-icon {
+    width: 74px;
+    height: 74px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid var(--orange);
+    border-radius: 18px;
+    background: var(--white);
+    font-size: 36px;
+  }
+
+  .pra-overview-content h2 {
+    margin: 2px 0 14px;
+    color: var(--dark);
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 700;
+  }
+
+  .pra-overview-content p {
+    margin: 0;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.75;
+  }
+
+  .pra-objectives {
+    margin: 0;
+    padding-left: 24px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.75;
+  }
+
+  .pra-keywords {
+    font-style: italic;
+  }
+
+  .pra-resource {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--blue);
+    text-decoration: none;
+    font-size: clamp(16px, 1.45vw, 20px);
+    line-height: 1.5;
+  }
+
+  .pra-resource:hover {
+    color: var(--orange);
+    text-decoration: underline;
+  }
+
+  .pra-pdf-icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #d62828;
+    color: var(--white);
+    font-size: 18px;
+  }
+
+  .pra-guide {
+    padding: 20px 24px;
+    background: #e8e8e8;
+    border-left: 6px solid var(--orange);
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.75;
+  }
+
+  .pra-guide strong {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .pra-time {
+    font-size: clamp(16px, 1.4vw, 19px);
+  }
+
+  .pra-time strong {
+    color: var(--dark);
+  }
+
+  .pra-section {
+    padding: clamp(34px, 5vw, 70px) 0;
+    border-top: 1px solid #dddddd;
+  }
+
+  .pra-section.alt {
+    background: var(--lighter);
+  }
+
+  .pra-section .pra-container {
+    max-width: 1200px;
+  }
+
+  .pra-section h2 {
+    margin: 0 0 24px;
+    color: var(--dark);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 400;
+    border-bottom: 3px solid var(--orange);
+    padding-bottom: 12px;
+  }
+
+  .pra-section h3 {
+    margin: 34px 0 14px;
+    color: var(--dark);
+    font-size: clamp(21px, 2.2vw, 29px);
+  }
+
+  .pra-section p {
+    margin: 0 0 18px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.8;
+  }
+
+  .pra-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 26px;
+  }
+
+  .pra-spec-card {
+    padding: 18px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-spec-card strong {
+    display: block;
+    color: var(--orange);
+    margin-bottom: 7px;
+    font-size: clamp(16px, 1.45vw, 20px);
+  }
+
+  .pra-spec-card span {
+    display: block;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.55;
+  }
+
+  .pra-parts-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .pra-part {
+    padding: 16px 18px;
+    border-left: 6px solid var(--orange);
+    border-radius: 10px;
+    background: var(--light);
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.6;
+  }
+
+  .pra-part strong {
+    color: var(--orange);
+  }
+
+  .pra-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .pra-flow-box {
+    min-height: 145px;
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+    border: 3px solid var(--orange);
+    background: var(--white);
+  }
+
+  .pra-flow-box h4 {
+    margin: 0 0 10px;
+    color: var(--dark);
+    font-size: clamp(18px, 1.7vw, 23px);
+  }
+
+  .pra-flow-box p {
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.6;
+  }
+
+  .pra-flow-arrow {
+    color: var(--orange);
+    font-size: 38px;
+    font-weight: bold;
+  }
+
+  .pra-callout {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-left: 6px solid var(--orange);
+    border-radius: 10px;
+    background: var(--light);
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.7;
+  }
+
+  .pra-code {
+    margin: 20px 0;
+    padding: 20px;
+    overflow-x: auto;
+    border-radius: 12px;
+    background: #f1f2f4;
+    color: #25262d;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(13px, 1.15vw, 16px);
+    line-height: 1.65;
+    white-space: pre;
+  }
+
+  .pra-code code {
+    font-family: inherit;
+  }
+
+  .pra-command-list,
+  .pra-task-list {
+    margin: 0;
+    padding-left: 24px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.8;
+  }
+
+  .pra-command-list li,
+  .pra-task-list li {
+    margin-bottom: 9px;
+  }
+
+  .pra-command-list code {
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: #eeeeee;
+    font-family: Consolas, "Courier New", monospace;
+  }
+
+  .pra-task-box {
+    margin-top: 22px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-task-box h3 {
+    margin-top: 0;
+  }
+
+  .pra-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .pra-summary-card {
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--light);
+    border-top: 6px solid var(--orange);
+  }
+
+  .pra-summary-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--orange);
+    font-size: clamp(16px, 1.5vw, 20px);
+  }
+
+  .pra-summary-card span {
+    display: block;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.6;
+  }
+
+  .pra-back {
+    padding: 34px 20px;
+    text-align: center;
+    background: var(--light);
+  }
+
+  .pra-back a {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: var(--white);
+    text-decoration: none;
+    transition: 0.2s ease;
+  }
+
+  .pra-back a:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 850px) {
+    .pra-spec-grid,
+    .pra-summary {
+      grid-template-columns: 1fr;
+    }
+
+    .pra-flow {
+      grid-template-columns: 1fr;
+    }
+
+    .pra-flow-arrow {
+      transform: rotate(90deg);
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .pra-overview-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .pra-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      font-size: 29px;
+    }
+
+    .pra-parts-list {
+      grid-template-columns: 1fr;
+    }
+
+    .pra-section {
+      padding: 32px 0;
+    }
+
+    .pra-code {
+      padding: 15px;
+    }
+  }
+</style>
+
+<div class="pra-chapter">
+
+  <header class="pra-hero">
+    <h1>Kapitola 1: Úvod do Arduina</h1>
+    <p>Praxe – Arduino | 3. ročník</p>
+  </header>
+
+  <!-- Přehled kapitoly -->
+  <section class="pra-container">
+    <div class="pra-overview">
+
+      <div class="pra-overview-row">
+        <div class="pra-icon">🎯</div>
+        <div class="pra-overview-content">
+          <h2>Po nastudování této kapitoly budete schopni:</h2>
+          <ul class="pra-objectives">
+            <li>Vysvětlit, co je Arduino a k čemu se používá.</li>
+            <li>Popsat základní části desky Arduino UNO.</li>
+            <li>Objasnit princip embedded systémů.</li>
+            <li>Rozlišit funkce <strong>setup()</strong> a <strong>loop()</strong>.</li>
+            <li>Napsat program pro blikání vestavěnou i externí LED.</li>
+            <li>Používat nepájivé pole a sériovou linku.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pra-overview-row">
+        <div class="pra-icon">🔑</div>
+        <div class="pra-overview-content">
+          <h2>Klíčová slova kapitoly:</h2>
+          <p class="pra-keywords">
+            Arduino, mikrokontrolér, embedded systém, digitální pin, analogový pin,
+            setup(), loop(), LED, rezistor, nepájivé pole, sériová linka,
+            Serial.print(), Serial.println().
+          </p>
+        </div>
+      </div>
+
+      <div class="pra-overview-row">
+        <div class="pra-icon">📘</div>
+        <div class="pra-overview-content">
+          <h2>Studijní materiály:</h2>
+          <a class="pra-resource"
+             href="dokumenty/Uvod_do_Arduina.pdf"
+             target="_blank"
+             rel="noopener noreferrer"
+             type="application/pdf">
+            <span class="pra-pdf-icon">PDF</span>
+            Úvod do Arduina
+          </a>
+        </div>
+      </div>
+
+      <div class="pra-overview-row">
+        <div class="pra-icon">🧭</div>
+        <div class="pra-overview-content">
+          <div class="pra-guide">
+            <strong>Průvodce studiem:</strong>
+            V této kapitole se seznámíte s platformou Arduino, základními částmi
+            desky Arduino UNO a principem embedded systémů. Naučíte se vytvořit
+            první program, ovládat LED, pracovat s nepájivým polem a zobrazovat
+            informace v sériovém monitoru.
+          </div>
+        </div>
+      </div>
+
+      <div class="pra-overview-row">
+        <div class="pra-icon">⏱️</div>
+        <div class="pra-overview-content">
+          <p class="pra-time"><strong>Čas potřebný k prostudování kapitoly:</strong> přibližně 6 hodin</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Obsah kapitoly -->
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Co je to Arduino?</h2>
+
+      <p>
+        Arduino je platforma pro výuku a vývoj elektronických projektů.
+        Z hardwarového pohledu jde o desku s mikrokontrolérem, ke které lze připojit
+        senzory, motory, světla, displeje a další komponenty. Tyto komponenty potom
+        ovládáme pomocí programu vytvořeného v jazyce C++.
+      </p>
+
+      <p>
+        Arduino je vhodné pro začátečníky i pokročilé. Používá se například
+        v domácí automatizaci, měření, robotice nebo při tvorbě vlastních zařízení.
+      </p>
+
+      <div class="pra-callout">
+        <strong>Zapamatujte si:</strong> Arduino propojuje elektroniku a programování.
+        Program vyhodnocuje vstupy a podle nich ovládá výstupy.
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Hardware – Arduino UNO</h2>
+
+      <p>
+        Existuje mnoho typů Arduino desek. Liší se výkonem, počtem pinů,
+        pamětí a možnostmi komunikace, například přes WiFi nebo Bluetooth.
+        V hodinách budeme používat především Arduino UNO s mikrokontrolérem ATmega 328.
+      </p>
+
+      <div class="pra-spec-grid">
+        <div class="pra-spec-card">
+          <strong>Mikrokontrolér</strong>
+          <span>ATmega 328</span>
+        </div>
+
+        <div class="pra-spec-card">
+          <strong>Taktovací frekvence</strong>
+          <span>16 MHz</span>
+        </div>
+
+        <div class="pra-spec-card">
+          <strong>Flash paměť</strong>
+          <span>32 KB</span>
+        </div>
+
+        <div class="pra-spec-card">
+          <strong>SRAM</strong>
+          <span>2 KB</span>
+        </div>
+
+        <div class="pra-spec-card">
+          <strong>EEPROM</strong>
+          <span>1 KB</span>
+        </div>
+
+        <div class="pra-spec-card">
+          <strong>Vstupy a výstupy</strong>
+          <span>Digitální piny, analogové vstupy, napájecí piny a sériová komunikace.</span>
+        </div>
+      </div>
+
+      <h3>Základní části desky</h3>
+
+      <div class="pra-parts-list">
+        <div class="pra-part"><strong>Mikrokontrolér:</strong> vykonává program uložený v paměti desky.</div>
+        <div class="pra-part"><strong>USB port:</strong> slouží pro programování desky a napájení z počítače.</div>
+        <div class="pra-part"><strong>Digitální piny:</strong> používají se pro práci se stavem HIGH a LOW.</div>
+        <div class="pra-part"><strong>Analogové piny:</strong> slouží například pro čtení hodnot čidel.</div>
+        <div class="pra-part"><strong>GND:</strong> společný záporný bod zapojení.</div>
+        <div class="pra-part"><strong>5 V / 3,3 V / VIN:</strong> piny pro napájení připojených součástek.</div>
+      </div>
+
+      <!-- Sem můžeš případně vložit obrázek popsané desky Arduino UNO -->
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Princip fungování embedded systémů</h2>
+
+      <p>
+        Slovo <strong>embedded</strong> označuje systém, který je součástí určitého zařízení.
+        Mikrokontrolér v ledničce, automobilu nebo robotu vykonává konkrétní úkol podle
+        programu, který je v něm uložen.
+      </p>
+
+      <div class="pra-flow">
+        <div class="pra-flow-box">
+          <h4>Vstupy</h4>
+          <p>Senzory, tlačítka, komunikace, měření hodnot.</p>
+        </div>
+
+        <div class="pra-flow-arrow">→</div>
+
+        <div class="pra-flow-box">
+          <h4>Programová logika</h4>
+          <p>Arduino čte vstupy, vyhodnocuje podmínky a rozhoduje.</p>
+        </div>
+
+        <div class="pra-flow-arrow">→</div>
+
+        <div class="pra-flow-box">
+          <h4>Výstupy</h4>
+          <p>LED, displej, motor, relé, bzučák nebo jiné zařízení.</p>
+        </div>
+      </div>
+
+      <div class="pra-callout">
+        <strong>Otázka pro zamyšlení:</strong>
+        Podívejte se na libovolné zařízení kolem sebe. Jaké může mít vstupy,
+        co by mohl vyhodnocovat program a jaké výstupy zařízení ovládá?
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Psaní programu pro Arduino</h2>
+
+      <p>
+        Program pro Arduino obsahuje dvě základní funkce:
+        <strong>setup()</strong> a <strong>loop()</strong>.
+      </p>
+
+      <div class="pra-code"><code>// Sem patří knihovny, konstanty a proměnné.
+
+void setup() {
+  // Kód v této funkci se provede pouze jednou po spuštění Arduina.
+}
+
+void loop() {
+  // Hlavní kód programu se stále opakuje dokola.
+}</code></div>
+
+      <div class="pra-parts-list">
+        <div class="pra-part">
+          <strong>setup()</strong><br>
+          Slouží například pro nastavení pinů, spuštění sériové komunikace
+          nebo inicializaci knihoven.
+        </div>
+
+        <div class="pra-part">
+          <strong>loop()</strong><br>
+          Obsahuje hlavní část programu, která se neustále opakuje,
+          dokud je Arduino zapnuté.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Blikání LED na desce Arduino</h2>
+
+      <p>
+        Na desce Arduino UNO je vestavěná LED připojená na digitální pin 13.
+        Nejdříve nastavíme příslušný pin jako výstup.
+      </p>
+
+      <div class="pra-code"><code>pinMode(13, OUTPUT);</code></div>
+
+      <p>
+        Funkcí <strong>digitalWrite()</strong> nastavíme na pinu logickou úroveň
+        HIGH nebo LOW. Funkce <strong>delay()</strong> vytvoří časovou prodlevu
+        v milisekundách.
+      </p>
+
+      <div class="pra-code"><code>digitalWrite(13, HIGH);  // Rozsvícení LED
+delay(1000);                // Čekání jednu sekundu</code></div>
+
+      <h3>Celý program blikání LED</h3>
+
+      <div class="pra-code"><code>int led = 13;
+
+void setup() {
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(led, HIGH);  // Zapnutí LED
+  delay(1000);              // Čekání jednu sekundu
+
+  digitalWrite(led, LOW);   // Vypnutí LED
+  delay(1000);              // Čekání jednu sekundu
+}</code></div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Přidání další LED a nepájivé pole</h2>
+
+      <p>
+        Nepájivé pole neboli breadboard slouží k rychlému sestavení obvodu bez pájení.
+        Uvnitř pole jsou jednotlivé skupiny otvorů elektricky propojené, takže lze snadno
+        připojovat vodiče a elektronické součástky.
+      </p>
+
+      <p>
+        Při zapojování externí LED je nutné použít sériový rezistor. Ten omezuje proud,
+        který LED prochází, a chrání ji před poškozením.
+      </p>
+
+      <div class="pra-callout">
+        <strong>Poznámka:</strong> Anodu LED připojujeme přes rezistor k digitálnímu pinu.
+        Katodu LED připojujeme na GND.
+      </div>
+
+      <div class="pra-task-box">
+        <h3>Úkol 1</h3>
+        <ol class="pra-task-list">
+          <li>Zapojte do nepájivého pole LED s rezistorem.</li>
+          <li>Anodu LED připojte na jeden z digitálních pinů Arduino UNO v rozsahu 2 až 12.</li>
+          <li>Napište program, ve kterém se po jedné sekundě střídavě rozsvítí LED na pinu 13 a LED na nepájivém poli.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Sériová linka</h2>
+
+      <p>
+        Sériová linka umožňuje posílat data mezi Arduinem a počítačem.
+        V Arduino IDE se přijaté zprávy zobrazují v nástroji Sériový monitor.
+      </p>
+
+      <ul class="pra-command-list">
+        <li><code>Serial.print("text");</code> – vypíše text do sériového monitoru.</li>
+        <li><code>Serial.print(promenna);</code> – vypíše hodnotu proměnné.</li>
+        <li><code>Serial.println();</code> – vypíše text nebo hodnotu a přejde na nový řádek.</li>
+      </ul>
+
+      <h3>Příklad programu</h3>
+
+      <div class="pra-code"><code>int cislo = 5;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.print("Hodnota promenne cislo je: ");
+  Serial.println(cislo);
+}</code></div>
+
+      <div class="pra-task-box">
+        <h3>Úkoly k sériové lince</h3>
+
+        <ol class="pra-task-list">
+          <li>Do programu s blikáním LED přidejte výpis stavů „svítí“ a „nesvítí“ pomocí <strong>Serial.println()</strong>.</li>
+          <li>Napište program, který stále zvyšuje hodnotu proměnné a odesílá ji do sériového monitoru. Upravte datový typ nebo přírůstek tak, aby došlo k přetečení.</li>
+          <li>Pomocí cyklu vypište do sériového monitoru čísla od 0 do 15 včetně.</li>
+          <li>Pomocí cyklu vypište čísla od 10 do −5.</li>
+          <li>Pomocí cyklu vypište sudá čísla od 2 do 20 včetně.</li>
+          <li>Vytvořte program: po spuštění 2 s čeká, potom 1 s svítí LED, následně 25× blikne LED v intervalu 200 ms zapnuto a 200 ms vypnuto. Potom LED zhasne a zůstane zhasnutá.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Shrnutí kapitoly</h2>
+
+      <div class="pra-summary">
+        <div class="pra-summary-card">
+          <strong>Arduino</strong>
+          <span>Programovatelná platforma pro práci s elektronikou, senzory a výstupy.</span>
+        </div>
+
+        <div class="pra-summary-card">
+          <strong>Program</strong>
+          <span>Funkce setup() se provede jednou, funkce loop() se opakuje stále dokola.</span>
+        </div>
+
+        <div class="pra-summary-card">
+          <strong>Komunikace</strong>
+          <span>Sériový monitor pomáhá sledovat hodnoty proměnných a hledat chyby v programu.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pra-back">
+    <a href="index.html">Zpět na obsah</a>
+  </div>
+
+</div>
+```

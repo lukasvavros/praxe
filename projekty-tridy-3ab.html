@@ -1,0 +1,533 @@
+```html
+<style>
+  .arduino-page {
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f5f5f5;
+    --text: #373841;
+    --white: #ffffff;
+
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    box-sizing: border-box;
+  }
+
+  .arduino-page *,
+  .arduino-page *::before,
+  .arduino-page *::after {
+    box-sizing: border-box;
+  }
+
+  .arduino-hero {
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .arduino-title {
+    background: var(--dark);
+    text-align: center;
+    padding: clamp(24px, 4vw, 48px) 18px;
+  }
+
+  .arduino-title h2 {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .arduino-title span {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--orange);
+    font-size: clamp(14px, 1.5vw, 19px);
+  }
+
+  .arduino-intro {
+    background: var(--white);
+    padding: clamp(26px, 4vw, 52px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    text-align: center;
+    line-height: 1.75;
+  }
+
+  .arduino-intro p {
+    max-width: 960px;
+    margin: 0 auto;
+    font-size: clamp(15px, 1.35vw, 18px);
+  }
+
+  .arduino-highlight {
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  .arduino-section {
+    background: #fafafa;
+    padding: clamp(30px, 4vw, 60px) clamp(18px, 5vw, 70px);
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+    border-top: 1px solid #eeeeee;
+  }
+
+  .arduino-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .arduino-section h3 {
+    margin: 0 0 32px;
+    color: var(--dark);
+    text-align: center;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 400;
+  }
+
+  .arduino-project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .arduino-project-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    border-top: 7px solid var(--orange);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.09);
+  }
+
+  .arduino-project-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px;
+    background: var(--light);
+  }
+
+  .arduino-project-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .arduino-project-head h4 {
+    margin: 0;
+    color: var(--dark);
+    font-size: clamp(18px, 1.7vw, 23px);
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  .arduino-project-body {
+    padding: 20px 22px 24px;
+  }
+
+  .arduino-project-body p {
+    margin: 0 0 14px;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.6;
+  }
+
+  .arduino-project-body ul {
+    margin: 0;
+    padding-left: 22px;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.65;
+  }
+
+  .arduino-project-body li {
+    margin-bottom: 5px;
+  }
+
+  .arduino-hardware {
+    margin-top: 18px;
+    padding: 13px 15px;
+    border-left: 5px solid var(--orange);
+    background: var(--light);
+    border-radius: 8px;
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.55;
+  }
+
+  .arduino-hardware strong {
+    color: var(--orange);
+  }
+
+  .arduino-note {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    border-left: 6px solid var(--orange);
+    border-radius: 12px;
+    background: var(--light);
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.65;
+  }
+
+  .arduino-back {
+    background: var(--light);
+    padding: clamp(20px, 3vw, 34px);
+    text-align: center;
+    border-left: 6px solid var(--orange);
+    border-right: 6px solid var(--orange);
+  }
+
+  .arduino-back a {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: var(--white);
+    text-decoration: none;
+    font-size: clamp(14px, 1.1vw, 16px);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .arduino-back a:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .arduino-author {
+    background: var(--light);
+    padding: clamp(18px, 3vw, 28px);
+  }
+
+  .arduino-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .arduino-author-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .arduino-author-item img {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .arduino-footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+
+  @media (max-width: 900px) {
+    .arduino-project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .arduino-page {
+      width: 100vw;
+    }
+
+    .arduino-hero {
+      box-shadow: none;
+    }
+
+    .arduino-intro,
+    .arduino-section,
+    .arduino-back {
+      border-left: none;
+      border-right: none;
+    }
+
+    .arduino-intro {
+      border-top: 5px solid var(--orange);
+      border-bottom: 5px solid var(--orange);
+      text-align: left;
+    }
+
+    .arduino-author-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .arduino-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="arduino-page">
+
+  <section class="arduino-hero">
+
+    <header class="arduino-title">
+      <h2>Projekty třídy 3A/B</h2>
+      <span>Praxe – Arduino | Závěrečný projekt</span>
+    </header>
+
+    <main class="arduino-intro">
+      <p>
+        Třída pracuje jako vývojová firma, která vytváří jednotlivé části
+        <span class="arduino-highlight">IoT řešení pro hudební festival</span>.
+        Každý tým zpracuje jeden subsystém a jednotlivé části budou vzájemně komunikovat.
+      </p>
+    </main>
+
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Zadání jednotlivých projektů</h3>
+
+        <div class="arduino-project-grid">
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">1</span>
+              <h4>Turnikety</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Vstupní systém tvořený dvěma turnikety pro evidenci návštěvníků festivalu.</p>
+              <ul>
+                <li>Každý turniket využívá dvojici IR senzorů pro detekci směru průchodu.</li>
+                <li>Počítá příchody a odchody návštěvníků.</li>
+                <li>Při změně počtu odešle aktuální stav přes UART do centrální jednotky.</li>
+                <li>OLED displej při příchodu zobrazí bitmapu „Welcome“.</li>
+                <li>OLED displej při odchodu zobrazí bitmapu „Good bye“.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> Arduino Nano, 2× OLED displej, 4× IR senzor, velké nepájivé pole.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">2</span>
+              <h4>Výčep</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Automatizovaný výčep se třemi druhy nápojů.</p>
+              <ul>
+                <li>Ovládání pomocí šesti tlačítek: malý a velký nápoj pro pivo, Birell a Kofolu.</li>
+                <li>Servo simuluje otevření ventilu.</li>
+                <li>OLED displej zobrazuje průběh plnění v procentech.</li>
+                <li>Eviduje celkové množství vydaných nápojů.</li>
+                <li>Sleduje kapacitu sudů a při poklesu odešle varování přes UART.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> bude doplněno podle dostupného vybavení.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">3</span>
+              <h4>Robot pro rozvoz nápojů</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Robot, který samostatně doveze nápoj na určené místo a vrátí se zpět.</p>
+              <ul>
+                <li>Pohyb po čáře jako line follower.</li>
+                <li>Po příjezdu čeká na stisk tlačítka jako potvrzení převzetí.</li>
+                <li>Po potvrzení se vrátí na výchozí pozici.</li>
+                <li>Na displeji zobrazuje počet vykonaných jízd.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> školní robot, OLED displej, USB-C kabel.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">4</span>
+              <h4>Platební terminál k jukeboxu</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Terminál pro platbu za skladby přehrávané jukeboxem.</p>
+              <ul>
+                <li>Načítá data z RFID karty.</li>
+                <li>Přes Bluetooth přijímá požadavek na platbu včetně částky.</li>
+                <li>Kontroluje zůstatek a kredit odečítá přímo z karty.</li>
+                <li>Na displeji zobrazí potvrzení nebo chybu.</li>
+                <li>Odesílá potvrzovací zprávu, která musí být pokaždé odlišná.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> Arduino UNO, RFID modul, 2 RFID karty, OLED displej, AB kabel, velké nepájivé pole.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">5</span>
+              <h4>Jukebox</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Hudební přehrávač s výběrem skladeb a ověřením platby.</p>
+              <ul>
+                <li>Obsahuje minimálně 10 skladeb.</li>
+                <li>Uživatel vybírá skladbu pomocí displeje a joysticku.</li>
+                <li>Přijímá platby z platebního terminálu.</li>
+                <li>Po zaplacení přehraje vybranou skladbu.</li>
+                <li>Ověřuje proměnlivou potvrzovací zprávu z platebního terminálu.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> OLED displej, reproduktor, joystick, MP3 modul, SD karta, čtečka SD karet, nepájivé pole, mini kabel.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">6</span>
+              <h4>Automatické osvětlení areálu</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Systém osvětlení festivalového areálu reagující na okolní světlo.</p>
+              <ul>
+                <li>Využívá LDR světelný senzor.</li>
+                <li>Zapíná osvětlení při tmě a vypíná při dostatečném osvětlení.</li>
+                <li>Obsahuje hysterezi.</li>
+                <li>Provádí plynulé stmívání a rozsvěcení pomocí PWM.</li>
+                <li>Umožňuje měnit barvu RGB LED přes UART.</li>
+                <li>Každých 30 sekund odesílá teplotu do centrální jednotky.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> LDR, RGB LED, DHT11, Arduino Nano, malé nepájivé pole.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">7</span>
+              <h4>Centrální jednotka a webový dashboard</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Řídicí centrum festivalu pro sběr dat a ovládání jednotlivých subsystémů.</p>
+              <ul>
+                <li>Přijímá data z turniketů, výčepu a osvětlení.</li>
+                <li>Zobrazuje získaná data na webové stránce.</li>
+                <li>Umožňuje měnit barvy osvětlení areálu pomocí ovládacích prvků na webu.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> Arduino MEGA, Arduino Nano IoT.
+              </div>
+            </div>
+          </article>
+
+          <!-- Sem můžeš později doplnit tým / jména -->
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">8</span>
+              <h4>Zabezpečovací systém objektu</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Zabezpečení objektu v areálu festivalu s alarmem a evidencí událostí.</p>
+              <ul>
+                <li>Využívá 4× PIR senzor pro čtyři místnosti.</li>
+                <li>Ovládání pomocí klávesnice a PIN kódu.</li>
+                <li>Umožňuje změnu PINu po zadání platného původního PINu.</li>
+                <li>Zobrazuje stav systému na OLED displeji.</li>
+                <li>Alarm využívá bzučák a LED signalizaci.</li>
+                <li>Přes UART odesílá logy s časem do centrální jednotky.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> 4× PIR senzor, klávesnice, OLED displej, bzučák, LED a vhodné Arduino.
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="arduino-section">
+      <div class="arduino-section-inner">
+
+        <h3>Průběžné reporty</h3>
+
+        <div class="arduino-note">
+          Každý tým zveřejní jednou za 14 dní průběžný report v Teams skupině.
+          Report stručně uvede, co se podařilo vytvořit, na jaké problémy tým narazil
+          a jaké budou další kroky. Součástí musí být alespoň fotografie zapojení,
+          krátké video do jedné minuty nebo ukázka zdrojového kódu.
+        </div>
+
+      </div>
+    </section>
+
+    <div class="arduino-back">
+      <a href="index.html">Zpět na hlavní stránku</a>
+    </div>
+
+    <footer class="arduino-author">
+      <div class="arduino-author-content">
+
+        <span class="arduino-author-item">
+          <img class="image img-fluid"
+               src="picture/1.png"
+               alt=""
+               role="presentation"
+               style="width: 25px; height: 35px;">
+          <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
+        </span>
+
+        <span class="arduino-author-item">
+          <img class="img-responsive atto_image_button_text-bottom img-fluid"
+               src="picture/2.png"
+               alt=""
+               role="presentation"
+               style="width: 35px; height: 20px;">
+          <span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span>
+        </span>
+
+      </div>
+    </footer>
+
+    <div class="arduino-footer">
+      Gymnázium a SPŠEI Frenštát pod Radhoštěm
+    </div>
+
+  </section>
+
+</div>
+```

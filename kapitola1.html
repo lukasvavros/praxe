@@ -138,7 +138,8 @@
     margin-top: 34px;
   }
 
-  .pra-hardware-images img {
+  .pra-hardware-images img,
+  .pra-embedded-image img {
     width: 100%;
     height: auto;
     display: block;
@@ -147,6 +148,10 @@
     background: var(--white);
     border: 1px solid #e6e6e6;
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+  }
+
+  .pra-embedded-image {
+    margin-top: 34px;
   }
 
   .pra-flow {
@@ -471,7 +476,6 @@
         </div>
       </div>
 
-      <!-- Obrázky desky Arduino UNO -->
       <div class="pra-hardware-images">
         <img src="picture/4.png"
              alt="Popis základních částí desky Arduino UNO"
@@ -483,7 +487,6 @@
              loading="lazy"
              decoding="async">
       </div>
-
     </div>
   </section>
 
@@ -497,6 +500,13 @@
         Mikrokontrolér v ledničce, automobilu nebo robotu vykonává konkrétní úkol podle
         programu, který je v něm uložen.
       </p>
+
+      <div class="pra-embedded-image">
+        <img src="picture/6.png"
+             alt="Princip fungování embedded systému s Arduinem – vstupy, programová logika a výstupy"
+             loading="lazy"
+             decoding="async">
+      </div>
 
       <div class="pra-flow">
         <div class="pra-flow-box">
@@ -672,7 +682,7 @@ void loop() {
           <li>Do programu s blikáním LED přidejte výpis stavů „svítí“ a „nesvítí“ pomocí <strong>Serial.println()</strong>.</li>
           <li>Napište program, který stále zvyšuje hodnotu proměnné a odesílá ji do sériového monitoru. Upravte datový typ nebo přírůstek tak, aby došlo k přetečení.</li>
           <li>Pomocí cyklu vypište do sériového monitoru čísla od 0 do 15 včetně.</li>
-          <li>Pomocí cyklu vypište do sériového monitoru čísla od 10 do −5.</li>
+          <li>Pomocí cyklu vypište čísla od 10 do −5.</li>
           <li>Pomocí cyklu vypište sudá čísla od 2 do 20 včetně.</li>
           <li>Vytvořte program: po spuštění 2 s čeká, potom 1 s svítí LED, následně 25× blikne LED v intervalu 200 ms zapnuto a 200 ms vypnuto. Potom LED zhasne a zůstane zhasnutá.</li>
         </ol>
@@ -704,12 +714,10 @@ void loop() {
     </div>
   </section>
 
-  <!-- Návrat -->
   <div class="pra-back">
     <a href="index.html">Zpět na obsah</a>
   </div>
 
-  <!-- Autor a kontakt -->
   <footer class="pra-author">
     <div class="pra-author-content">
 

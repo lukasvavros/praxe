@@ -131,6 +131,24 @@
     color: var(--orange);
   }
 
+  .pra-hardware-images {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 34px;
+  }
+
+  .pra-hardware-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 12px;
+    border-radius: 14px;
+    background: var(--white);
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+  }
+
   .pra-flow {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -324,7 +342,8 @@
   }
 
   @media (max-width: 620px) {
-    .pra-parts-list {
+    .pra-parts-list,
+    .pra-hardware-images {
       grid-template-columns: 1fr;
     }
 
@@ -451,6 +470,20 @@
           <strong>5 V / 3,3 V / VIN:</strong> piny pro napájení připojených součástek.
         </div>
       </div>
+
+      <!-- Obrázky desky Arduino UNO -->
+      <div class="pra-hardware-images">
+        <img src="picture/4.png"
+             alt="Popis základních částí desky Arduino UNO"
+             loading="lazy"
+             decoding="async">
+
+        <img src="picture/5.png"
+             alt="Přehled pinů desky Arduino UNO"
+             loading="lazy"
+             decoding="async">
+      </div>
+
     </div>
   </section>
 
@@ -639,7 +672,7 @@ void loop() {
           <li>Do programu s blikáním LED přidejte výpis stavů „svítí“ a „nesvítí“ pomocí <strong>Serial.println()</strong>.</li>
           <li>Napište program, který stále zvyšuje hodnotu proměnné a odesílá ji do sériového monitoru. Upravte datový typ nebo přírůstek tak, aby došlo k přetečení.</li>
           <li>Pomocí cyklu vypište do sériového monitoru čísla od 0 do 15 včetně.</li>
-          <li>Pomocí cyklu vypište čísla od 10 do −5.</li>
+          <li>Pomocí cyklu vypište do sériového monitoru čísla od 10 do −5.</li>
           <li>Pomocí cyklu vypište sudá čísla od 2 do 20 včetně.</li>
           <li>Vytvořte program: po spuštění 2 s čeká, potom 1 s svítí LED, následně 25× blikne LED v intervalu 200 ms zapnuto a 200 ms vypnuto. Potom LED zhasne a zůstane zhasnutá.</li>
         </ol>

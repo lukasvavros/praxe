@@ -1,3 +1,4 @@
+```html
 <style>
   .pra-chapter {
     --orange: #ee7203;
@@ -131,10 +132,12 @@
     color: var(--orange);
   }
 
+  /* Obrázky Arduino UNO – zůstávají vedle sebe */
   .pra-hardware-images {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
     margin: 32px auto;
-    max-width: 1200px;
   }
 
   .pra-hardware-images img,
@@ -150,17 +153,14 @@
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
   }
 
-  .pra-hardware-images img + img {
-    margin-top: 28px;
+  /* Velké obrázky nepájivého pole */
+  .pra-breadboard-image {
+    margin: 32px auto;
+    max-width: 1200px;
   }
 
   .pra-embedded-image {
     margin-top: 34px;
-  }
-
-  .pra-breadboard-image {
-    margin: 32px auto;
-    max-width: 1200px;
   }
 
   .pra-flow {
@@ -356,7 +356,8 @@
   }
 
   @media (max-width: 620px) {
-    .pra-parts-list {
+    .pra-parts-list,
+    .pra-hardware-images {
       grid-template-columns: 1fr;
     }
 
@@ -668,7 +669,7 @@ void loop() {
         který LED prochází, a chrání ji před poškozením.
       </p>
 
-      <div class="pra-hardware-images">
+      <div class="pra-breadboard-image">
         <img src="picture/7.png"
              alt="Nepájivé pole – pracovní oblast a napájecí lišty"
              loading="lazy"
@@ -787,3 +788,4 @@ void loop() {
   </div>
 
 </div>
+```

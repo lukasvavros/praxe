@@ -1,3 +1,4 @@
+```html
 <style>
   .pra-chapter {
     --orange: #ee7203;
@@ -380,7 +381,6 @@
     <p>Praxe – Arduino | 3. ročník</p>
   </header>
 
-  <!-- Co je Arduino -->
   <section class="pra-section alt">
     <div class="pra-container">
       <h2>Co je to Arduino?</h2>
@@ -404,7 +404,6 @@
     </div>
   </section>
 
-  <!-- Hardware -->
   <section class="pra-section">
     <div class="pra-container">
       <h2>Hardware – Arduino UNO</h2>
@@ -490,7 +489,6 @@
     </div>
   </section>
 
-  <!-- Embedded systémy -->
   <section class="pra-section alt">
     <div class="pra-container">
       <h2>Princip fungování embedded systémů</h2>
@@ -537,7 +535,6 @@
     </div>
   </section>
 
-  <!-- setup a loop -->
   <section class="pra-section">
     <div class="pra-container">
       <h2>Psaní programu pro Arduino</h2>
@@ -574,41 +571,40 @@ void loop() {
     </div>
   </section>
 
-<!-- Blikání LED -->
-<section class="pra-section alt">
-  <div class="pra-container">
-    <h2>Blikání LEDkou na desce Arduina</h2>
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Blikání LEDkou na desce Arduina</h2>
 
-    <p>
-      Přímo na desce Arduina je jedna LED, kterou můžeme z programu ovládat.
-      Je připojena na pin 13. Co budeme potřebovat?
-    </p>
+      <p>
+        Přímo na desce Arduina je jedna LED, kterou můžeme z programu ovládat.
+        Je připojena na pin 13. Co budeme potřebovat?
+      </p>
 
-    <p>
-      Touto funkcí nastavíme pin 13, kde je připojena LEDka, jako výstup.
-    </p>
+      <p>
+        Touto funkcí nastavíme pin 13, kde je připojena LEDka, jako výstup.
+      </p>
 
-    <pre class="pra-code"><code>pinMode(13, OUTPUT);</code></pre>
+      <pre class="pra-code"><code>pinMode(13, OUTPUT);</code></pre>
 
-    <p>
-      Touto funkcí přivedeme na pin 13 logickou jedničku (HIGH).
-      Tím se na pin připojí 5 V a LEDka se rozsvítí.
-    </p>
+      <p>
+        Touto funkcí přivedeme na pin 13 logickou jedničku (HIGH).
+        Tím se na pin připojí 5 V a LEDka se rozsvítí.
+      </p>
 
-    <pre class="pra-code"><code>digitalWrite(13, HIGH); // zapnutí LED</code></pre>
+      <pre class="pra-code"><code>digitalWrite(13, HIGH); // zapnutí LED</code></pre>
 
-    <p>
-      Protože mikroprocesor v Arduinu pracuje s frekvencí 16 MHz,
-      tak pokud bychom jen neustále měnili stav na pinu, nebylo by blikání
-      pro lidské oko viditelné. Proto přidáme pauzu, aby oko stihlo vnímat,
-      že LEDka svítí.
-    </p>
+      <p>
+        Protože mikroprocesor v Arduinu pracuje s frekvencí 16 MHz,
+        tak pokud bychom jen neustále měnili stav na pinu, nebylo by blikání
+        pro lidské oko viditelné. Proto přidáme pauzu, aby oko stihlo vnímat,
+        že LEDka svítí.
+      </p>
 
-    <pre class="pra-code"><code>delay(1000); // čekání po dobu jedné sekundy</code></pre>
+      <pre class="pra-code"><code>delay(1000); // čekání po dobu jedné sekundy</code></pre>
 
-    <h3>Celý program blikání LEDkou</h3>
+      <h3>Celý program blikání LEDkou</h3>
 
-    <pre class="pra-code"><code>// sem přijde vložení knihoven, inicializace proměnných...
+      <pre class="pra-code"><code>// sem přijde vložení knihoven, inicializace proměnných...
 int led = 13;
 
 void setup() {
@@ -624,42 +620,69 @@ void loop() {
   digitalWrite(led, LOW); // vypnutí LED
   delay(1000); // čekání po dobu jedné sekundy
 }</code></pre>
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- Nepájivé pole -->
-<section class="pra-section">
-  <div class="pra-container">
-    <h2>Přidání další LED a nepájivé pole</h2>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Přidání další LED a nepájivé pole</h2>
 
-    <p>
-      Nepájivé pole je univerzální montážní deska určená k sestavování a testování
-      elektronických obvodů bez nutnosti pájení. Je tvořeno plastovým tělem s hustou
-      sítí otvorů, pod nimiž jsou vodivě propojené řady a sloupce. Ty umožňují
-      jednoduché elektrické spojení mezi vloženými vodiči a součástkami.
-    </p>
+      <p>
+        Nepájivé pole je univerzální montážní deska určená k sestavování a testování
+        elektronických obvodů bez nutnosti pájení. Je tvořeno plastovým tělem s hustou
+        sítí otvorů, pod nimiž jsou vodivě propojené řady a sloupce. Ty umožňují
+        jednoduché elektrické spojení mezi vloženými vodiči a součástkami.
+      </p>
 
-    <p>
-      Struktura pole je obvykle rozdělena na dvě hlavní části:
-    </p>
+      <p>
+        Struktura pole je obvykle rozdělena na dvě hlavní části:
+      </p>
 
-    <ul class="pra-command-list">
-      <li>
-        <strong>Střední pracovní oblast</strong> – slouží k osazování integrovaných
-        obvodů a dalších pasivních nebo aktivních prvků.
-      </li>
-      <li>
-        <strong>Boční napájecí lišty</strong> – jsou označené jako „+“ a „−“
-        a slouží k přivedení napájecího napětí.
-      </li>
-    </ul>
+      <ul class="pra-command-list">
+        <li>
+          <strong>Střední pracovní oblast</strong> – slouží k osazování integrovaných
+          obvodů a dalších pasivních nebo aktivních prvků.
+        </li>
+        <li>
+          <strong>Boční napájecí lišty</strong> – jsou označené jako „+“ a „−“
+          a slouží k přivedení napájecího napětí.
+        </li>
+      </ul>
 
-    <p style="margin-top: 24px;">
-      Při zapojování externí LED je nutné použít sériový rezistor. Ten omezuje proud,
-      který LED prochází, a chrání ji před poškozením.
-    </p>
+      <p style="margin-top: 24px;">
+        Při zapojování externí LED je nutné použít sériový rezistor. Ten omezuje proud,
+        který LED prochází, a chrání ji před poškozením.
+      </p>
 
-  <!-- Sériová linka -->
+      <div class="pra-hardware-images">
+        <img src="picture/7.png"
+             alt="Nepájivé pole – pracovní oblast a napájecí lišty"
+             loading="lazy"
+             decoding="async">
+
+        <img src="picture/8.png"
+             alt="Zapojení LED do nepájivého pole"
+             loading="lazy"
+             decoding="async">
+      </div>
+
+      <div class="pra-callout">
+        <strong>Poznámka:</strong> Anodu LED připojujeme přes rezistor k digitálnímu pinu.
+        Katodu LED připojujeme na GND.
+      </div>
+
+      <div class="pra-task-box">
+        <h3>Úkol 1</h3>
+
+        <ol class="pra-task-list">
+          <li>Zapojte do nepájivého pole LED s rezistorem.</li>
+          <li>Anodu LED připojte na digitální pin Arduino UNO v rozsahu 2 až 12.</li>
+          <li>Napište program, ve kterém se po jedné sekundě střídavě rozsvítí LED na pinu 13 a LED na nepájivém poli.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <section class="pra-section alt">
     <div class="pra-container">
       <h2>Sériová linka</h2>
@@ -703,7 +726,6 @@ void loop() {
     </div>
   </section>
 
-  <!-- Shrnutí -->
   <section class="pra-section">
     <div class="pra-container">
       <h2>Shrnutí kapitoly</h2>
@@ -733,7 +755,6 @@ void loop() {
 
   <footer class="pra-author">
     <div class="pra-author-content">
-
       <span class="pra-author-item">
         <img src="picture/1.png"
              alt=""
@@ -749,7 +770,6 @@ void loop() {
              style="width: 35px; height: 20px;">
         <span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span>
       </span>
-
     </div>
   </footer>
 
@@ -758,3 +778,4 @@ void loop() {
   </div>
 
 </div>
+```

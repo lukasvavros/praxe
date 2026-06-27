@@ -1,3 +1,4 @@
+```html
 <style>
   .pra-chapter {
     --orange: #ee7203;
@@ -132,10 +133,9 @@
   }
 
   .pra-hardware-images {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-    margin-top: 30px;
+    display: block;
+    margin: 32px auto;
+    max-width: 1200px;
   }
 
   .pra-hardware-images img,
@@ -149,6 +149,10 @@
     background: var(--white);
     border: 1px solid #e6e6e6;
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+  }
+
+  .pra-hardware-images img + img {
+    margin-top: 28px;
   }
 
   .pra-embedded-image {
@@ -353,8 +357,7 @@
   }
 
   @media (max-width: 620px) {
-    .pra-parts-list,
-    .pra-hardware-images {
+    .pra-parts-list {
       grid-template-columns: 1fr;
     }
 
@@ -725,7 +728,7 @@ void loop() {
           <li>Do programu s blikáním LED přidejte výpis stavů „svítí“ a „nesvítí“ pomocí <strong>Serial.println()</strong>.</li>
           <li>Napište program, který stále zvyšuje hodnotu proměnné a odesílá ji do sériového monitoru. Upravte datový typ nebo přírůstek tak, aby došlo k přetečení.</li>
           <li>Pomocí cyklu vypište do sériového monitoru čísla od 0 do 15 včetně.</li>
-          <li>Pomocí cyklu vypište čísla od 10 do −5.</li>
+          <li>Pomocí cyklu vypište do sériového monitoru čísla od 10 do −5.</li>
           <li>Pomocí cyklu vypište sudá čísla od 2 do 20 včetně.</li>
           <li>Vytvořte program: po spuštění 2 s čeká, potom 1 s svítí LED, následně 25× blikne LED v intervalu 200 ms zapnuto a 200 ms vypnuto. Potom LED zhasne a zůstane zhasnutá.</li>
         </ol>
@@ -785,3 +788,4 @@ void loop() {
   </div>
 
 </div>
+```

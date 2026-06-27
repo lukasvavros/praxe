@@ -1,4 +1,3 @@
-```html
 <style>
   .pra-chapter {
     --orange: #ee7203;
@@ -135,16 +134,17 @@
   .pra-hardware-images {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    margin-top: 34px;
+    gap: 28px;
+    margin-top: 30px;
   }
 
   .pra-hardware-images img,
-  .pra-embedded-image img {
+  .pra-embedded-image img,
+  .pra-breadboard-image img {
     width: 100%;
     height: auto;
     display: block;
-    padding: 12px;
+    padding: 14px;
     border-radius: 14px;
     background: var(--white);
     border: 1px solid #e6e6e6;
@@ -153,6 +153,11 @@
 
   .pra-embedded-image {
     margin-top: 34px;
+  }
+
+  .pra-breadboard-image {
+    margin: 32px auto;
+    max-width: 1200px;
   }
 
   .pra-flow {
@@ -634,6 +639,13 @@ void loop() {
         jednoduché elektrické spojení mezi vloženými vodiči a součástkami.
       </p>
 
+      <div class="pra-breadboard-image">
+        <img src="picture/8.png"
+             alt="Vnitřní kovové propojení nepájivého pole"
+             loading="lazy"
+             decoding="async">
+      </div>
+
       <p>
         Struktura pole je obvykle rozdělena na dvě hlavní části:
       </p>
@@ -657,11 +669,6 @@ void loop() {
       <div class="pra-hardware-images">
         <img src="picture/7.png"
              alt="Nepájivé pole – pracovní oblast a napájecí lišty"
-             loading="lazy"
-             decoding="async">
-
-        <img src="picture/8.png"
-             alt="Zapojení LED do nepájivého pole"
              loading="lazy"
              decoding="async">
       </div>

@@ -574,44 +574,58 @@ void loop() {
     </div>
   </section>
 
-  <!-- Blikání LED -->
-  <section class="pra-section alt">
-    <div class="pra-container">
-      <h2>Blikání LED na desce Arduino</h2>
+<!-- Blikání LED -->
+<section class="pra-section alt">
+  <div class="pra-container">
+    <h2>Blikání LEDkou na desce Arduina</h2>
 
-      <p>
-        Na desce Arduino UNO je vestavěná LED připojená na digitální pin 13.
-        Nejprve nastavíme příslušný pin jako výstup.
-      </p>
+    <p>
+      Přímo na desce Arduina je jedna LED, kterou můžeme z programu ovládat.
+      Je připojena na pin 13. Co budeme potřebovat?
+    </p>
 
-      <pre class="pra-code"><code>pinMode(13, OUTPUT);</code></pre>
+    <p>
+      Touto funkcí nastavíme pin 13, kde je připojena LEDka, jako výstup.
+    </p>
 
-      <p>
-        Funkcí <strong>digitalWrite()</strong> nastavíme na pinu logickou úroveň
-        HIGH nebo LOW. Funkce <strong>delay()</strong> vytvoří časovou prodlevu
-        v milisekundách.
-      </p>
+    <pre class="pra-code"><code>pinMode(13, OUTPUT);</code></pre>
 
-      <pre class="pra-code"><code>digitalWrite(13, HIGH);  // Rozsvícení LED
-delay(1000);                // Čekání jednu sekundu</code></pre>
+    <p>
+      Touto funkcí přivedeme na pin 13 logickou jedničku (HIGH).
+      Tím se na pin připojí 5 V a LEDka se rozsvítí.
+    </p>
 
-      <h3>Celý program blikání LED</h3>
+    <pre class="pra-code"><code>digitalWrite(13, HIGH); // zapnutí LED</code></pre>
 
-      <pre class="pra-code"><code>int led = 13;
+    <p>
+      Protože mikroprocesor v Arduinu pracuje s frekvencí 16 MHz,
+      tak pokud bychom jen neustále měnili stav na pinu, nebylo by blikání
+      pro lidské oko viditelné. Proto přidáme pauzu, aby oko stihlo vnímat,
+      že LEDka svítí.
+    </p>
+
+    <pre class="pra-code"><code>delay(1000); // čekání po dobu jedné sekundy</code></pre>
+
+    <h3>Celý program blikání LEDkou</h3>
+
+    <pre class="pra-code"><code>// sem přijde vložení knihoven, inicializace proměnných...
+int led = 13;
 
 void setup() {
+  // zde vložte kód, který má běžet pouze jednou
   pinMode(led, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(led, HIGH);  // Zapnutí LED
-  delay(1000);              // Čekání jednu sekundu
+  // zde vložte hlavní kód, který se bude opakovat donekonečna
+  digitalWrite(led, HIGH); // zapnutí LED
+  delay(1000); // čekání po dobu jedné sekundy
 
-  digitalWrite(led, LOW);   // Vypnutí LED
-  delay(1000);              // Čekání jednu sekundu
+  digitalWrite(led, LOW); // vypnutí LED
+  delay(1000); // čekání po dobu jedné sekundy
 }</code></pre>
-    </div>
-  </section>
+  </div>
+</section>
 
   <!-- Nepájivé pole -->
   <section class="pra-section">

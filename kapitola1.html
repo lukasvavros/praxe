@@ -329,6 +329,22 @@
     color: var(--orange);
   }
 
+  .pra-led-image {
+    max-width: 850px;
+    margin: 24px auto 0;
+  }
+
+  .pra-led-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+  }
+
   .pra-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -753,6 +769,13 @@ void loop() {
           <strong>Důležité:</strong> LED propouští proud pouze jedním směrem.
           Při zapojení je nutné použít sériový rezistor, který omezuje proud
           a chrání LED před poškozením.
+        </div>
+
+        <div class="pra-led-image">
+          <img src="picture/11.png"
+               alt="Barevné LED diody s označením anody a katody"
+               loading="lazy"
+               decoding="async">
         </div>
       </div>
 

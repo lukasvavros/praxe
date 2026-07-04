@@ -280,6 +280,22 @@
     color: var(--orange);
   }
 
+  .pra-button-image {
+    max-width: 1100px;
+    margin: 32px auto;
+  }
+
+  .pra-button-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--white);
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+  }
+
   /* Analogové signály */
   .pra-signal-grid {
     display: grid;
@@ -602,6 +618,13 @@
         </p>
       </div>
 
+      <div class="pra-button-image">
+        <img src="picture/tlacitko_s_input_pullup_pro_arduino.png"
+             alt="Zapojení tlačítka k Arduinu pomocí INPUT_PULLUP a popis kontaktů tlačítka"
+             loading="lazy"
+             decoding="async">
+      </div>
+
       <div class="pra-task-box">
         <h3>Úkol 1 – tlačítko a LED</h3>
 
@@ -798,4 +821,5 @@ float napeti = hodnota * 5.0 / 1023.0;</code></pre>
   <div class="pra-footer">
     Gymnázium a SPŠEI Frenštát pod Radhoštěm
   </div>
+
 </div>

@@ -149,11 +149,13 @@
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
   }
 
-  .arduino-link-card strong {
+  .arduino-link-card strong,
+  .arduino-card-title {
     display: block;
     color: var(--orange);
     font-size: clamp(16px, 1.5vw, 21px);
     margin-bottom: 8px;
+    font-weight: 700;
   }
 
   .arduino-link-card span {
@@ -339,8 +341,8 @@
 
           <a class="arduino-link-card"
              href="hodnoceni-predmetu.html"
-             target="_top"
-            <strong>Hodnocení předmětu</strong>
+             target="_top">
+            <span class="arduino-card-title">Hodnocení předmětu</span>
             <span>Pravidla hodnocení, požadavky a podmínky splnění předmětu.</span>
           </a>
 
@@ -349,7 +351,7 @@
              target="_blank"
              rel="noopener noreferrer"
              type="application/pdf">
-            <strong>Tahák Arduino</strong>
+            <span class="arduino-card-title">Tahák Arduino</span>
             <span>Arduino tahák vytvořený Tomášem Chovancem.</span>
           </a>
 
@@ -357,7 +359,7 @@
              href="https://docs.arduino.cc/language-reference/"
              target="_blank"
              rel="noopener noreferrer">
-            <strong>Dokumentace Arduino</strong>
+            <span class="arduino-card-title">Dokumentace Arduino</span>
             <span>Oficiální dokumentace k deskám, programování a knihovnám Arduino.</span>
           </a>
 
@@ -376,15 +378,15 @@
 
           <a class="arduino-link-card"
              href="projekt-obecne-informace.html"
-             target="_top"
-            <strong>Obecné informace</strong>
+             target="_top">
+            <span class="arduino-card-title">Obecné informace</span>
             <span>Základní informace k samostatnému projektu, zadání, termínům a odevzdání.</span>
           </a>
 
           <a class="arduino-link-card"
              href="projekty-tridy-3ab.html"
-             target="_top"
-            <strong>Projekty třídy 3A/B</strong>
+             target="_top">
+            <span class="arduino-card-title">Projekty třídy 3A/B</span>
             <span>Přehled projektů, rozdělení témat a informace pro třídy 3A/B.</span>
           </a>
 

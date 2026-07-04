@@ -138,14 +138,8 @@
     margin-bottom: 9px;
   }
 
-  .pra-command-list code {
-    padding: 3px 7px;
-    border-radius: 5px;
-    background: #eeeeee;
-    font-family: Consolas, "Courier New", monospace;
-  }
-
   /* Semafor */
+
   .pra-traffic-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -204,6 +198,7 @@
   }
 
   /* Tlačítko */
+
   .pra-input-grid,
   .pra-value-grid,
   .pra-summary {
@@ -296,7 +291,8 @@
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
   }
 
-  /* Analogové signály */
+  /* Analogový vstup */
+
   .pra-signal-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -347,6 +343,7 @@
   }
 
   /* Potenciometr */
+
   .pra-pot-connection {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -619,7 +616,7 @@
       </div>
 
       <div class="pra-button-image">
-        <img src="picture/tlacitko_s_input_pullup_pro_arduino.png"
+        <img src="picture/12.png"
              alt="Zapojení tlačítka k Arduinu pomocí INPUT_PULLUP a popis kontaktů tlačítka"
              loading="lazy"
              decoding="async">
@@ -660,10 +657,15 @@
           <p>Má přesně určené úrovně, například 0 V a 5 V.</p>
 
           <svg class="pra-signal-svg" viewBox="0 0 480 170" role="img" aria-label="Ukázka digitálního signálu">
-            <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"/>
-            <line x1="45" y1="25" x2="45" y2="135" stroke="#373841" stroke-width="3"/>
-            <polyline points="45,50 95,50 95,120 160,120 160,50 225,50 225,120 290,120 290,50 355,50 355,120 430,120"
-                      fill="none" stroke="#ee7203" stroke-width="7" stroke-linejoin="round"/>
+            <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"></line>
+            <line x1="45" y1="25" x2="45" y2="135" stroke="#373841" stroke-width="3"></line>
+            <polyline
+              points="45,50 95,50 95,120 160,120 160,50 225,50 225,120 290,120 290,50 355,50 355,120 430,120"
+              fill="none"
+              stroke="#ee7203"
+              stroke-width="7"
+              stroke-linejoin="round">
+            </polyline>
             <text x="10" y="55" font-size="18" fill="#373841">5 V</text>
             <text x="10" y="125" font-size="18" fill="#373841">0 V</text>
           </svg>
@@ -674,10 +676,16 @@
           <p>Je plynulý a může se měnit mezi minimální a maximální hodnotou.</p>
 
           <svg class="pra-signal-svg" viewBox="0 0 480 170" role="img" aria-label="Ukázka analogového signálu">
-            <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"/>
-            <line x1="45" y1="25" x2="45" y2="135" stroke="#373841" stroke-width="3"/>
-            <polyline points="45,115 85,105 125,75 165,40 205,65 245,105 285,120 325,100 365,62 405,38 450,65"
-                      fill="none" stroke="#ee7203" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"></line>
+            <line x1="45" y1="25" x2="45" y2="135" stroke="#373841" stroke-width="3"></line>
+            <polyline
+              points="45,115 85,105 125,75 165,40 205,65 245,105 285,120 325,100 365,62 405,38 450,65"
+              fill="none"
+              stroke="#ee7203"
+              stroke-width="7"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+            </polyline>
             <text x="10" y="55" font-size="18" fill="#373841">5 V</text>
             <text x="10" y="125" font-size="18" fill="#373841">0 V</text>
           </svg>

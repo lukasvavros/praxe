@@ -131,7 +131,6 @@
     color: var(--orange);
   }
 
-  /* Obrázky Arduino UNO – zůstávají vedle sebe */
   .pra-hardware-images {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -152,7 +151,6 @@
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
   }
 
-  /* Velké obrázky nepájivého pole */
   .pra-breadboard-image {
     margin: 32px auto;
     max-width: 1200px;
@@ -256,6 +254,81 @@
     margin-top: 0;
   }
 
+  .pra-task-box .pra-breadboard-image {
+    margin-bottom: 0;
+  }
+
+  .pra-led-theory {
+    margin: 32px 0;
+    padding: clamp(22px, 3vw, 32px);
+    border-radius: 16px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-led-theory h3 {
+    margin: 0 0 12px;
+    color: var(--dark);
+    font-size: clamp(22px, 2.4vw, 30px);
+  }
+
+  .pra-led-intro {
+    margin-bottom: 24px !important;
+  }
+
+  .pra-led-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr;
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .pra-led-card {
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--white);
+    border-left: 6px solid var(--orange);
+  }
+
+  .pra-led-card h4 {
+    margin: 0 0 10px;
+    color: var(--orange);
+    font-size: clamp(17px, 1.6vw, 21px);
+  }
+
+  .pra-led-card p {
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.7;
+  }
+
+  .pra-led-pins {
+    display: grid;
+    gap: 12px;
+  }
+
+  .pra-led-pin {
+    padding: 15px 16px;
+    border-radius: 10px;
+    background: var(--white);
+    border-left: 6px solid var(--orange);
+    line-height: 1.6;
+  }
+
+  .pra-led-note {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: var(--dark);
+    color: var(--white);
+    line-height: 1.7;
+  }
+
+  .pra-led-note strong {
+    color: var(--orange);
+  }
+
   .pra-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -340,7 +413,8 @@
 
   @media (max-width: 850px) {
     .pra-spec-grid,
-    .pra-summary {
+    .pra-summary,
+    .pra-led-grid {
       grid-template-columns: 1fr;
     }
 
@@ -648,6 +722,55 @@ void loop() {
              decoding="async">
       </div>
 
+      <div class="pra-led-theory">
+        <h3>LED dioda – základní informace</h3>
+
+        <p class="pra-led-intro">
+          <span class="pra-highlight">LED</span> je zkratka pro
+          <strong>Light Emitting Diode</strong>, tedy diodu emitující světlo.
+          Jde o polovodičovou součástku, která při průchodu elektrického proudu
+          přeměňuje elektrickou energii na světlo.
+        </p>
+
+        <div class="pra-led-grid">
+          <div class="pra-led-card">
+            <h4>Princip fungování</h4>
+
+            <p>
+              LED dioda obsahuje PN přechod. Pokud jí prochází proud v propustném
+              směru, elektrony přecházejí z vrstvy typu N do vrstvy typu P.
+              Při jejich rekombinaci s dírami se uvolňuje energie ve formě fotonů,
+              tedy světla.
+            </p>
+
+            <p style="margin-top: 14px;">
+              Barva vyzařovaného světla závisí na použitém polovodičovém materiálu.
+              Intenzita svitu se mění podle velikosti proudu, který diodou prochází.
+            </p>
+          </div>
+
+          <div class="pra-led-pins">
+            <div class="pra-led-pin">
+              <strong class="pra-highlight">Anoda (+)</strong><br>
+              Delší vývod LED. Připojuje se přes rezistor ke kladnému napětí
+              nebo k digitálnímu pinu Arduina.
+            </div>
+
+            <div class="pra-led-pin">
+              <strong class="pra-highlight">Katoda (−)</strong><br>
+              Kratší vývod LED. Připojuje se k zápornému pólu zdroje nebo na GND.
+              U běžné LED bývá označena také zploštělou stranou pouzdra.
+            </div>
+          </div>
+        </div>
+
+        <div class="pra-led-note">
+          <strong>Důležité:</strong> LED propouští proud pouze jedním směrem.
+          Při zapojení je nutné použít sériový rezistor, který omezuje proud
+          a chrání LED před poškozením.
+        </div>
+      </div>
+
       <p>
         Nepájivé pole je univerzální montážní deska určená k sestavování a testování
         elektronických obvodů bez nutnosti pájení. Je tvořeno plastovým tělem s hustou
@@ -693,32 +816,27 @@ void loop() {
         <strong>Poznámka:</strong> Anodu LED připojujeme přes rezistor k digitálnímu pinu.
         Katodu LED připojujeme na GND.
       </div>
-      
-<div class="pra-task-box">
-  <h3>Úkol 1</h3>
 
-  <ol class="pra-task-list">
-    <li>Zapojte do nepájivého pole LED s rezistorem.</li>
-    <li>Anodu LED připojte na digitální pin Arduino UNO v rozsahu 2 až 12.</li>
-    <li>Napište program, ve kterém se po jedné sekundě střídavě rozsvítí LED na pinu 13 a LED na nepájivém poli.</li>
-  </ol>
+      <div class="pra-task-box">
+        <h3>Úkol 1</h3>
 
-  <div class="pra-task-box">
-  <h3>Úkol 1</h3>
+        <ol class="pra-task-list">
+          <li>Zapojte do nepájivého pole LED s rezistorem.</li>
+          <li>Anodu LED připojte na digitální pin Arduino UNO v rozsahu 2 až 12.</li>
+          <li>
+            Napište program, ve kterém se po jedné sekundě střídavě rozsvítí
+            LED na pinu 13 a LED na nepájivém poli.
+          </li>
+        </ol>
 
-  <ol class="pra-task-list">
-    <li>Zapojte do nepájivého pole LED s rezistorem.</li>
-    <li>Anodu LED připojte na digitální pin Arduino UNO v rozsahu 2 až 12.</li>
-    <li>Napište program, ve kterém se po jedné sekundě střídavě rozsvítí LED na pinu 13 a LED na nepájivém poli.</li>
-  </ol>
-
-  <div class="pra-breadboard-image">
-    <img src="picture/10.svg"
-         alt="Ukázkové zapojení LED na nepájivém poli pro úkol 1"
-         loading="lazy"
-         decoding="async">
-  </div>
-</div>
+        <div class="pra-breadboard-image">
+          <img src="picture/10.svg"
+               alt="Ukázkové zapojení LED na nepájivém poli pro úkol 1"
+               loading="lazy"
+               decoding="async">
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="pra-section alt">
@@ -814,5 +932,4 @@ void loop() {
   <div class="pra-footer">
     Gymnázium a SPŠEI Frenštát pod Radhoštěm
   </div>
-
 </div>

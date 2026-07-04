@@ -203,7 +203,7 @@
     box-shadow: 0 0 15px rgba(56, 169, 91, 0.65);
   }
 
-  /* Digitální vstup */
+  /* Tlačítko */
   .pra-input-grid,
   .pra-value-grid,
   .pra-summary {
@@ -531,9 +531,10 @@
       <h2>Tlačítko jako digitální vstup</h2>
 
       <p>
-        Tlačítko je jednoduché vstupní zařízení. Mechanicky jde o kontakt,
-        který po stisknutí spojí dva vývody. Arduino potom může zjistit,
-        zda je tlačítko stisknuté, pomocí funkce <strong>digitalRead()</strong>.
+        Tlačítko může sloužit jako jednoduché vstupní zařízení pro Arduino.
+        Mechanicky je to pružný kontakt, který při stisku propojí dva kontakty.
+        Způsobů zapojení tlačítka je více, ukážeme si ale nejjednodušší variantu,
+        která nevyžaduje žádné další externí součástky.
       </p>
 
       <div class="pra-connection">
@@ -545,18 +546,36 @@
       </div>
 
       <p>
-        Nejjednodušší zapojení využívá vnitřní pull-up rezistor Arduina.
-        Tlačítko připojíme mezi digitální pin a zem GND.
+        Jeden pól tlačítka zapojíme na digitální vstup Arduina, například
+        <span class="pra-highlight">D2</span>. Druhý pól tlačítka zapojíme
+        na <span class="pra-highlight">GND</span>.
+      </p>
+
+      <p>
+        V programu nastavíme vstup pomocí režimu
+        <span class="pra-highlight">INPUT_PULLUP</span>:
       </p>
 
       <pre class="pra-code"><code>pinMode(2, INPUT_PULLUP);</code></pre>
+
+      <p>
+        Arduino má uvnitř takzvaný <strong>pull-up rezistor</strong>
+        s přibližnou hodnotou 20 až 50 kΩ. Tento rezistor je zapojený mezi
+        digitální pin a napájecí napětí +5 V.
+      </p>
+
+      <p>
+        Pokud je pull-up rezistor aktivní a tlačítko není stisknuté,
+        pin je v logické úrovni <span class="pra-highlight">HIGH</span>.
+        Po stisknutí tlačítka se pin spojí s GND a Arduino přečte
+        logickou úroveň <span class="pra-highlight">LOW</span>.
+      </p>
 
       <div class="pra-input-grid">
         <div class="pra-info-card">
           <strong>INPUT_PULLUP</strong>
           <span>
-            Arduino aktivuje vnitřní rezistor, který drží vstupní pin
-            v logické úrovni HIGH.
+            Aktivuje vnitřní rezistor Arduina mezi digitálním pinem a +5 V.
           </span>
         </div>
 
@@ -577,9 +596,9 @@
 
       <div class="pra-state-box">
         <p>
-          <strong>Pozor na obrácenou logiku:</strong>
-          stisknuté tlačítko = <strong>LOW</strong>,
-          nestisknuté tlačítko = <strong>HIGH</strong>.
+          <strong>Pozor na obrácenou logiku:</strong><br>
+          Stisknuté tlačítko = <strong>LOW</strong><br>
+          Nestisknuté tlačítko = <strong>HIGH</strong>
         </p>
       </div>
 
@@ -602,9 +621,14 @@
       <h2>Analogový vstup</h2>
 
       <p>
-        Digitální signál má pouze omezený počet stavů, například logickou nulu
-        a jedničku. Analogový signál je naopak spojitý a může nabývat mnoha hodnot.
-        Příkladem může být napětí z potenciometru, teplotního čidla nebo mikrofonu.
+        Digitální signál je nespojitý a má pouze omezený počet stavů,
+        například logickou nulu a jedničku. Analogový signál je naopak
+        spojitý a může v čase nabývat mnoha různých hodnot.
+      </p>
+
+      <p>
+        Příkladem analogového signálu může být napětí z potenciometru,
+        teplotního čidla nebo mikrofonu.
       </p>
 
       <div class="pra-signal-grid">
@@ -624,7 +648,7 @@
 
         <div class="pra-signal-card">
           <h4>Analogový signál</h4>
-          <p>Je plynulý a může se v čase měnit mezi minimální a maximální hodnotou.</p>
+          <p>Je plynulý a může se měnit mezi minimální a maximální hodnotou.</p>
 
           <svg class="pra-signal-svg" viewBox="0 0 480 170" role="img" aria-label="Ukázka analogového signálu">
             <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"/>
@@ -638,9 +662,9 @@
       </div>
 
       <p>
-        Na Arduino UNO používáme pro měření analogového napětí piny
-        <span class="pra-highlight">A0 až A5</span>. Tyto piny jsou připojené
-        k A/D převodníku mikrokontroléru.
+        Pro měření digitálního stavu můžeme použít běžné digitální piny.
+        Pro měření analogového napětí ale používáme pouze analogové piny
+        <span class="pra-highlight">A0 až A5</span>.
       </p>
 
       <h3>Funkce analogRead()</h3>
@@ -660,12 +684,12 @@
 
         <div class="pra-value-card">
           <strong>Hodnota 1023</strong>
-          <span>Odpovídá přibližně napětí 5 V při výchozím referenčním napětí.</span>
+          <span>Odpovídá přibližně napětí 5 V.</span>
         </div>
 
         <div class="pra-value-card">
           <strong>Rozlišení</strong>
-          <span>Arduino UNO používá 10bitový A/D převodník, tedy 1024 úrovní.</span>
+          <span>Arduino UNO používá 10bitový A/D převodník se 1024 úrovněmi.</span>
         </div>
       </div>
 
@@ -707,8 +731,8 @@ float napeti = hodnota * 5.0 / 1023.0;</code></pre>
 
       <p>
         Otáčením potenciometru měníme napětí na středním vývodu. Arduino toto
-        napětí přečte funkcí <strong>analogRead()</strong> a můžeme jej využít
-        například pro řízení jasu LED, rychlosti motoru nebo frekvence blikání.
+        napětí přečte funkcí <strong>analogRead()</strong> a hodnotu můžeme
+        využít například pro řízení jasu LED nebo rychlosti blikání.
       </p>
 
       <div class="pra-task-box">
@@ -736,7 +760,7 @@ float napeti = hodnota * 5.0 / 1023.0;</code></pre>
 
         <div class="pra-summary-card">
           <strong>INPUT_PULLUP</strong>
-          <span>Usnadňuje zapojení tlačítka bez externího rezistoru, ale používá obrácenou logiku.</span>
+          <span>Umožňuje zapojit tlačítko bez externího rezistoru, ale používá obrácenou logiku.</span>
         </div>
 
         <div class="pra-summary-card">

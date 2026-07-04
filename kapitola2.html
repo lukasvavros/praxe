@@ -1,0 +1,778 @@
+<style>
+  .pra-chapter {
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f4f4f4;
+    --lighter: #fafafa;
+    --text: #373841;
+    --white: #ffffff;
+    --red: #e63c46;
+    --yellow: #f4c400;
+    --green: #38a95b;
+
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow-x: hidden;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    box-sizing: border-box;
+  }
+
+  .pra-chapter *,
+  .pra-chapter *::before,
+  .pra-chapter *::after {
+    box-sizing: border-box;
+  }
+
+  .pra-hero {
+    padding: clamp(30px, 5vw, 60px) 20px;
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+  }
+
+  .pra-hero h1 {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 50px);
+    font-weight: 400;
+  }
+
+  .pra-hero p {
+    margin: 12px 0 0;
+    color: var(--orange);
+    font-size: clamp(15px, 1.7vw, 20px);
+  }
+
+  .pra-container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+  }
+
+  .pra-section {
+    padding: clamp(34px, 5vw, 70px) 0;
+    border-top: 1px solid #dddddd;
+  }
+
+  .pra-section.alt {
+    background: var(--lighter);
+  }
+
+  .pra-section h2 {
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--orange);
+    color: var(--dark);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 400;
+  }
+
+  .pra-section h3 {
+    margin: 34px 0 14px;
+    color: var(--dark);
+    font-size: clamp(21px, 2.2vw, 29px);
+  }
+
+  .pra-section p {
+    margin: 0 0 18px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.8;
+  }
+
+  .pra-highlight {
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  .pra-callout {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-left: 6px solid var(--orange);
+    border-radius: 10px;
+    background: var(--light);
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.7;
+  }
+
+  .pra-code {
+    margin: 20px 0;
+    padding: 20px;
+    overflow-x: auto;
+    border-radius: 12px;
+    background: #f1f2f4;
+    color: #25262d;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(13px, 1.15vw, 16px);
+    line-height: 1.65;
+  }
+
+  .pra-code code {
+    font-family: inherit;
+  }
+
+  .pra-task-box {
+    margin-top: 26px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-task-box h3 {
+    margin-top: 0;
+  }
+
+  .pra-task-list,
+  .pra-command-list {
+    margin: 0;
+    padding-left: 24px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.8;
+  }
+
+  .pra-task-list li,
+  .pra-command-list li {
+    margin-bottom: 9px;
+  }
+
+  .pra-command-list code {
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: #eeeeee;
+    font-family: Consolas, "Courier New", monospace;
+  }
+
+  /* Semafor */
+  .pra-traffic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .pra-traffic-card {
+    padding: 18px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    text-align: center;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-traffic-card strong {
+    display: block;
+    margin-top: 12px;
+    color: var(--orange);
+    font-size: 17px;
+  }
+
+  .pra-traffic-light {
+    display: grid;
+    justify-content: center;
+    gap: 8px;
+    width: 72px;
+    margin: 0 auto;
+    padding: 12px;
+    border-radius: 14px;
+    background: #17181e;
+  }
+
+  .pra-bulb {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #777983;
+    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.08);
+  }
+
+  .pra-bulb.red.on {
+    background: var(--red);
+    box-shadow: 0 0 15px rgba(230, 60, 70, 0.65);
+  }
+
+  .pra-bulb.yellow.on {
+    background: var(--yellow);
+    box-shadow: 0 0 15px rgba(244, 196, 0, 0.65);
+  }
+
+  .pra-bulb.green.on {
+    background: var(--green);
+    box-shadow: 0 0 15px rgba(56, 169, 91, 0.65);
+  }
+
+  /* Digitální vstup */
+  .pra-input-grid,
+  .pra-value-grid,
+  .pra-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .pra-info-card,
+  .pra-value-card,
+  .pra-summary-card {
+    padding: 20px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-info-card strong,
+  .pra-value-card strong,
+  .pra-summary-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--orange);
+    font-size: clamp(16px, 1.5vw, 20px);
+  }
+
+  .pra-info-card span,
+  .pra-value-card span,
+  .pra-summary-card span {
+    display: block;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.6;
+  }
+
+  .pra-connection {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0;
+  }
+
+  .pra-connection-box {
+    padding: 18px;
+    border-radius: 12px;
+    border: 3px solid var(--orange);
+    background: var(--white);
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .pra-connection-arrow {
+    color: var(--orange);
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  .pra-state-box {
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--dark);
+    color: var(--white);
+  }
+
+  .pra-state-box p {
+    margin: 0;
+    color: var(--white);
+  }
+
+  .pra-state-box strong {
+    color: var(--orange);
+  }
+
+  /* Analogové signály */
+  .pra-signal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin: 28px 0;
+  }
+
+  .pra-signal-card {
+    padding: 20px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-signal-card h4 {
+    margin: 0 0 12px;
+    color: var(--orange);
+    font-size: 19px;
+  }
+
+  .pra-signal-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .pra-signal-svg {
+    width: 100%;
+    height: auto;
+    margin-top: 16px;
+    border-radius: 10px;
+    background: var(--white);
+  }
+
+  .pra-formula {
+    max-width: 620px;
+    margin: 24px auto;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #e4e4e4;
+    background: var(--white);
+    color: var(--dark);
+    text-align: center;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(16px, 1.8vw, 23px);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  /* Potenciometr */
+  .pra-pot-connection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .pra-pot-pin {
+    padding: 20px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    text-align: center;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+
+  .pra-pot-pin strong {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--orange);
+    font-size: 20px;
+  }
+
+  .pra-pot-pin span {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .pra-back {
+    padding: 34px 20px;
+    background: var(--light);
+    text-align: center;
+  }
+
+  .pra-back a {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 16px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .pra-back a:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .pra-author {
+    padding: clamp(18px, 3vw, 28px);
+    background: var(--light);
+  }
+
+  .pra-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .pra-author-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .pra-footer {
+    padding: 12px 16px;
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+
+  @media (max-width: 850px) {
+    .pra-traffic-grid,
+    .pra-input-grid,
+    .pra-value-grid,
+    .pra-summary,
+    .pra-pot-connection,
+    .pra-signal-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pra-connection {
+      grid-template-columns: 1fr;
+    }
+
+    .pra-connection-arrow {
+      transform: rotate(90deg);
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .pra-section {
+      padding: 32px 0;
+    }
+
+    .pra-code {
+      padding: 15px;
+    }
+
+    .pra-author-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .pra-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
+    }
+  }
+</style>
+
+<div class="pra-chapter">
+
+  <header class="pra-hero">
+    <h1>Kapitola 2: Digitální a analogový vstup</h1>
+    <p>Praxe – Arduino | 3. ročník</p>
+  </header>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Opakování z první lekce – digitální výstup</h2>
+
+      <p>
+        V předchozí kapitole jsme ovládali LED diodu pomocí digitálního výstupu.
+        Nyní si vytvoříme jednoduchý semafor se třemi LED:
+        <span class="pra-highlight">červenou, žlutou a zelenou</span>.
+      </p>
+
+      <p>
+        Vyberte tři digitální piny Arduina. Ke každému pinu připojte jednu LED
+        se sériovým rezistorem a pomocí funkcí <strong>digitalWrite()</strong>
+        a <strong>delay()</strong> vytvořte jednotlivé fáze semaforu.
+      </p>
+
+      <div class="pra-traffic-grid">
+        <div class="pra-traffic-card">
+          <div class="pra-traffic-light">
+            <span class="pra-bulb red on"></span>
+            <span class="pra-bulb yellow"></span>
+            <span class="pra-bulb green"></span>
+          </div>
+          <strong>1. Červená</strong>
+        </div>
+
+        <div class="pra-traffic-card">
+          <div class="pra-traffic-light">
+            <span class="pra-bulb red on"></span>
+            <span class="pra-bulb yellow on"></span>
+            <span class="pra-bulb green"></span>
+          </div>
+          <strong>2. Červená + žlutá</strong>
+        </div>
+
+        <div class="pra-traffic-card">
+          <div class="pra-traffic-light">
+            <span class="pra-bulb red"></span>
+            <span class="pra-bulb yellow"></span>
+            <span class="pra-bulb green on"></span>
+          </div>
+          <strong>3. Zelená</strong>
+        </div>
+
+        <div class="pra-traffic-card">
+          <div class="pra-traffic-light">
+            <span class="pra-bulb red"></span>
+            <span class="pra-bulb yellow on"></span>
+            <span class="pra-bulb green"></span>
+          </div>
+          <strong>4. Žlutá</strong>
+        </div>
+      </div>
+
+      <div class="pra-callout">
+        <strong>Bonus:</strong> Připojte k semaforu tlačítko pro chodce.
+        Pro auta bude svítit stále zelená. Po stisknutí tlačítka se provede
+        jeden kompletní cyklus semaforu a poté se znovu rozsvítí zelená.
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Tlačítko jako digitální vstup</h2>
+
+      <p>
+        Tlačítko je jednoduché vstupní zařízení. Mechanicky jde o kontakt,
+        který po stisknutí spojí dva vývody. Arduino potom může zjistit,
+        zda je tlačítko stisknuté, pomocí funkce <strong>digitalRead()</strong>.
+      </p>
+
+      <div class="pra-connection">
+        <div class="pra-connection-box">Digitální pin D2</div>
+        <div class="pra-connection-arrow">→</div>
+        <div class="pra-connection-box">Tlačítko</div>
+        <div class="pra-connection-arrow">→</div>
+        <div class="pra-connection-box">GND</div>
+      </div>
+
+      <p>
+        Nejjednodušší zapojení využívá vnitřní pull-up rezistor Arduina.
+        Tlačítko připojíme mezi digitální pin a zem GND.
+      </p>
+
+      <pre class="pra-code"><code>pinMode(2, INPUT_PULLUP);</code></pre>
+
+      <div class="pra-input-grid">
+        <div class="pra-info-card">
+          <strong>INPUT_PULLUP</strong>
+          <span>
+            Arduino aktivuje vnitřní rezistor, který drží vstupní pin
+            v logické úrovni HIGH.
+          </span>
+        </div>
+
+        <div class="pra-info-card">
+          <strong>Nestisknuté tlačítko</strong>
+          <span>
+            Pin není spojený s GND, proto Arduino přečte hodnotu HIGH.
+          </span>
+        </div>
+
+        <div class="pra-info-card">
+          <strong>Stisknuté tlačítko</strong>
+          <span>
+            Pin se spojí s GND, proto Arduino přečte hodnotu LOW.
+          </span>
+        </div>
+      </div>
+
+      <div class="pra-state-box">
+        <p>
+          <strong>Pozor na obrácenou logiku:</strong>
+          stisknuté tlačítko = <strong>LOW</strong>,
+          nestisknuté tlačítko = <strong>HIGH</strong>.
+        </p>
+      </div>
+
+      <div class="pra-task-box">
+        <h3>Úkol 1 – tlačítko a LED</h3>
+
+        <ol class="pra-task-list">
+          <li>Vytvořte nový sketch.</li>
+          <li>Připojte tlačítko na jeden digitální pin Arduina a LED s rezistorem na jiný digitální pin.</li>
+          <li>Pin tlačítka nastavte pomocí <strong>INPUT_PULLUP</strong>.</li>
+          <li>Funkcí <strong>digitalRead()</strong> načtěte stav tlačítka.</li>
+          <li>Je-li tlačítko stisknuté, LED rozsvítíte. Jinak LED zhasne.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Analogový vstup</h2>
+
+      <p>
+        Digitální signál má pouze omezený počet stavů, například logickou nulu
+        a jedničku. Analogový signál je naopak spojitý a může nabývat mnoha hodnot.
+        Příkladem může být napětí z potenciometru, teplotního čidla nebo mikrofonu.
+      </p>
+
+      <div class="pra-signal-grid">
+        <div class="pra-signal-card">
+          <h4>Digitální signál</h4>
+          <p>Má přesně určené úrovně, například 0 V a 5 V.</p>
+
+          <svg class="pra-signal-svg" viewBox="0 0 480 170" role="img" aria-label="Ukázka digitálního signálu">
+            <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"/>
+            <line x1="45" y1="25" x2="45" y2="135" stroke="#373841" stroke-width="3"/>
+            <polyline points="45,50 95,50 95,120 160,120 160,50 225,50 225,120 290,120 290,50 355,50 355,120 430,120"
+                      fill="none" stroke="#ee7203" stroke-width="7" stroke-linejoin="round"/>
+            <text x="10" y="55" font-size="18" fill="#373841">5 V</text>
+            <text x="10" y="125" font-size="18" fill="#373841">0 V</text>
+          </svg>
+        </div>
+
+        <div class="pra-signal-card">
+          <h4>Analogový signál</h4>
+          <p>Je plynulý a může se v čase měnit mezi minimální a maximální hodnotou.</p>
+
+          <svg class="pra-signal-svg" viewBox="0 0 480 170" role="img" aria-label="Ukázka analogového signálu">
+            <line x1="45" y1="135" x2="450" y2="135" stroke="#373841" stroke-width="3"/>
+            <line x1="45" y1="25" x2="45" y2="135" stroke="#373841" stroke-width="3"/>
+            <polyline points="45,115 85,105 125,75 165,40 205,65 245,105 285,120 325,100 365,62 405,38 450,65"
+                      fill="none" stroke="#ee7203" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="10" y="55" font-size="18" fill="#373841">5 V</text>
+            <text x="10" y="125" font-size="18" fill="#373841">0 V</text>
+          </svg>
+        </div>
+      </div>
+
+      <p>
+        Na Arduino UNO používáme pro měření analogového napětí piny
+        <span class="pra-highlight">A0 až A5</span>. Tyto piny jsou připojené
+        k A/D převodníku mikrokontroléru.
+      </p>
+
+      <h3>Funkce analogRead()</h3>
+
+      <p>
+        Funkce <strong>analogRead()</strong> přečte napětí na analogovém pinu
+        a vrátí číslo v rozsahu od 0 do 1023.
+      </p>
+
+      <pre class="pra-code"><code>int hodnota = analogRead(A0);</code></pre>
+
+      <div class="pra-value-grid">
+        <div class="pra-value-card">
+          <strong>Hodnota 0</strong>
+          <span>Odpovídá přibližně napětí 0 V.</span>
+        </div>
+
+        <div class="pra-value-card">
+          <strong>Hodnota 1023</strong>
+          <span>Odpovídá přibližně napětí 5 V při výchozím referenčním napětí.</span>
+        </div>
+
+        <div class="pra-value-card">
+          <strong>Rozlišení</strong>
+          <span>Arduino UNO používá 10bitový A/D převodník, tedy 1024 úrovní.</span>
+        </div>
+      </div>
+
+      <div class="pra-formula">
+        napeti = hodnota × 5.0 / 1023.0
+      </div>
+
+      <pre class="pra-code"><code>int hodnota = analogRead(A0);
+float napeti = hodnota * 5.0 / 1023.0;</code></pre>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Potenciometr</h2>
+
+      <p>
+        Potenciometr je nastavitelný rezistor se třemi vývody. Dva krajní vývody
+        připojujeme na napájení a zem. Střední vývod, označovaný jako jezdec,
+        poskytuje proměnné napětí pro analogový vstup Arduina.
+      </p>
+
+      <div class="pra-pot-connection">
+        <div class="pra-pot-pin">
+          <strong>GND</strong>
+          <span>Jeden krajní vývod potenciometru.</span>
+        </div>
+
+        <div class="pra-pot-pin">
+          <strong>A0</strong>
+          <span>Střední vývod – jezdec potenciometru.</span>
+        </div>
+
+        <div class="pra-pot-pin">
+          <strong>5 V</strong>
+          <span>Druhý krajní vývod potenciometru.</span>
+        </div>
+      </div>
+
+      <p>
+        Otáčením potenciometru měníme napětí na středním vývodu. Arduino toto
+        napětí přečte funkcí <strong>analogRead()</strong> a můžeme jej využít
+        například pro řízení jasu LED, rychlosti motoru nebo frekvence blikání.
+      </p>
+
+      <div class="pra-task-box">
+        <h3>Úkoly – potenciometr</h3>
+
+        <ol class="pra-task-list">
+          <li>Připojte potenciometr k Arduinu a čtěte jeho hodnotu funkcí <strong>analogRead()</strong>.</li>
+          <li>Hodnotu převeďte na napětí ve voltech a odešlete ji na sériovou linku.</li>
+          <li>Pokud bude napětí vyšší než 2,5 V, rozsviťte LED.</li>
+          <li>Pomocí potenciometru měňte frekvenci blikání LED.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Shrnutí kapitoly</h2>
+
+      <div class="pra-summary">
+        <div class="pra-summary-card">
+          <strong>Digitální vstup</strong>
+          <span>Tlačítko umožňuje Arduinu číst stav HIGH nebo LOW.</span>
+        </div>
+
+        <div class="pra-summary-card">
+          <strong>INPUT_PULLUP</strong>
+          <span>Usnadňuje zapojení tlačítka bez externího rezistoru, ale používá obrácenou logiku.</span>
+        </div>
+
+        <div class="pra-summary-card">
+          <strong>Analogový vstup</strong>
+          <span>Funkce analogRead() převádí napětí na hodnotu od 0 do 1023.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pra-back">
+    <a href="index.html">Zpět na obsah</a>
+  </div>
+
+  <footer class="pra-author">
+    <div class="pra-author-content">
+      <span class="pra-author-item">
+        <img src="picture/1.png"
+             alt=""
+             role="presentation"
+             style="width: 25px; height: 35px;">
+        <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
+      </span>
+
+      <span class="pra-author-item">
+        <img src="picture/2.png"
+             alt=""
+             role="presentation"
+             style="width: 35px; height: 20px;">
+        <span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span>
+      </span>
+    </div>
+  </footer>
+
+  <div class="pra-footer">
+    Gymnázium a SPŠEI Frenštát pod Radhoštěm
+  </div>
+
+</div>

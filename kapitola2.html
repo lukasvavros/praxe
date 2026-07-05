@@ -138,8 +138,6 @@
     margin-bottom: 9px;
   }
 
-  /* Semafor */
-
   .pra-traffic-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -196,8 +194,6 @@
     background: var(--green);
     box-shadow: 0 0 15px rgba(56, 169, 91, 0.65);
   }
-
-  /* Tlačítko */
 
   .pra-input-grid,
   .pra-value-grid,
@@ -291,8 +287,6 @@
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
   }
 
-  /* Analogový vstup */
-
   .pra-signal-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -342,7 +336,15 @@
     box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
   }
 
-  /* Potenciometr */
+  .pra-small-note {
+    margin: 18px 0;
+    padding: 16px 18px;
+    border-left: 6px solid var(--orange);
+    border-radius: 10px;
+    background: var(--light);
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.7;
+  }
 
   .pra-pot-connection {
     display: grid;
@@ -587,23 +589,17 @@
       <div class="pra-input-grid">
         <div class="pra-info-card">
           <strong>INPUT_PULLUP</strong>
-          <span>
-            Aktivuje vnitřní rezistor Arduina mezi digitálním pinem a +5 V.
-          </span>
+          <span>Aktivuje vnitřní rezistor Arduina mezi digitálním pinem a +5 V.</span>
         </div>
 
         <div class="pra-info-card">
           <strong>Nestisknuté tlačítko</strong>
-          <span>
-            Pin není spojený s GND, proto Arduino přečte hodnotu HIGH.
-          </span>
+          <span>Pin není spojený s GND, proto Arduino přečte hodnotu HIGH.</span>
         </div>
 
         <div class="pra-info-card">
           <strong>Stisknuté tlačítko</strong>
-          <span>
-            Pin se spojí s GND, proto Arduino přečte hodnotu LOW.
-          </span>
+          <span>Pin se spojí s GND, proto Arduino přečte hodnotu LOW.</span>
         </div>
       </div>
 
@@ -617,7 +613,7 @@
 
       <div class="pra-button-image">
         <img src="picture/12.png"
-             alt="Zapojení tlačítka k Arduinu pomocí INPUT_PULLUP a popis kontaktů tlačítka"
+             alt="Zapojení tlačítka k Arduinu pomocí INPUT_PULLUP"
              loading="lazy"
              decoding="async">
       </div>
@@ -701,35 +697,53 @@
       <h3>Funkce analogRead()</h3>
 
       <p>
-        Funkce <strong>analogRead()</strong> přečte napětí na analogovém pinu
-        a vrátí číslo v rozsahu od 0 do 1023.
+        Pro měření napětí použijeme funkci <strong>analogRead()</strong>.
+        Jako argument funkce zadáme číslo pinu, na kterém chceme měřit.
       </p>
 
-      <pre class="pra-code"><code>int hodnota = analogRead(A0);</code></pre>
+      <pre class="pra-code"><code>int napeti = analogRead(A4);</code></pre>
 
-      <div class="pra-value-grid">
-        <div class="pra-value-card">
-          <strong>Hodnota 0</strong>
-          <span>Odpovídá přibližně napětí 0 V.</span>
-        </div>
+      <p>
+        Arduino má <strong>10bitový A/D převodník</strong>, což znamená,
+        že dokáže rozlišit <span class="pra-highlight">2<sup>10</sup> = 1024</span>
+        úrovní napětí.
+      </p>
 
-        <div class="pra-value-card">
-          <strong>Hodnota 1023</strong>
-          <span>Odpovídá přibližně napětí 5 V.</span>
-        </div>
-
-        <div class="pra-value-card">
-          <strong>Rozlišení</strong>
-          <span>Arduino UNO používá 10bitový A/D převodník se 1024 úrovněmi.</span>
-        </div>
-      </div>
+      <ul class="pra-command-list">
+        <li>Hodnota <strong>0</strong> odpovídá přibližně <strong>0 V</strong>.</li>
+        <li>Hodnota <strong>1023</strong> odpovídá přibližně <strong>5 V</strong>.</li>
+        <li>Jeden „dílek“ tedy představuje:</li>
+      </ul>
 
       <div class="pra-formula">
-        napeti = hodnota × 5.0 / 1023.0
+        5 V / 1024 = 4,88 mV
+      </div>
+
+      <p>
+        Například pokud <strong>analogRead()</strong> vrátí hodnotu
+        <span class="pra-highlight">724</span>, vypočítáme napětí takto:
+      </p>
+
+      <div class="pra-formula">
+        724 × 4,88 mV = 3,53 V
+      </div>
+
+      <p>
+        Napětí na vstupu je tedy přibližně
+        <span class="pra-highlight">3,53 V</span>.
+      </p>
+
+      <div class="pra-small-note">
+        <strong>Poznámka:</strong> Ve zdrojovém kódu se často používá výpočet
+        <strong>hodnota × 5.0 / 1023.0</strong>, aby hodnota 1023 odpovídala přesně 5 V.
       </div>
 
       <pre class="pra-code"><code>int hodnota = analogRead(A0);
-float napeti = hodnota * 5.0 / 1023.0;</code></pre>
+float napeti = hodnota * 5.0 / 1023.0;
+
+Serial.print("Napeti: ");
+Serial.print(napeti);
+Serial.println(" V");</code></pre>
     </div>
   </section>
 

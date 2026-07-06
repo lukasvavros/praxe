@@ -438,6 +438,77 @@
 
   <section class="pra-section alt">
     <div class="pra-container">
+      <h2>Praktické poznámky k servu</h2>
+
+      <p>
+        Příkazy <strong>servo.write(0)</strong> až <strong>servo.write(180)</strong>
+        představují požadovaný úhel. Skutečný bezpečný rozsah se může u různých
+        serv mírně lišit, proto nikdy nenechávejte páku serva tlačit do
+        mechanického dorazu.
+      </p>
+
+      <div class="pra-grid-3">
+        <div class="pra-card">
+          <strong>Bezpečný rozsah</strong>
+          <span>
+            Pokud servo na krajní poloze bzučí nebo se zahřívá, zmenšete rozsah,
+            například na 10° až 170°.
+          </span>
+        </div>
+
+        <div class="pra-card">
+          <strong>Přesnější nastavení</strong>
+          <span>
+            Pro pokročilé použití lze nastavit šířku impulzu přímo v mikrosekundách
+            funkcí <strong>writeMicroseconds()</strong>.
+          </span>
+        </div>
+
+        <div class="pra-card">
+          <strong>Pozor na PWM</strong>
+          <span>
+            Knihovna Servo používá časovač mikrokontroléru. U Arduino Uno a Nano
+            proto nepoužívejte současně <strong>analogWrite()</strong> na pinech D9 a D10.
+          </span>
+        </div>
+      </div>
+
+      <h3>Přesnější řízení impulzu</h3>
+
+      <p>
+        Základní funkce <strong>write()</strong> je pro většinu úloh nejjednodušší.
+        Funkci <strong>writeMicroseconds()</strong> využijeme tehdy, když potřebujeme
+        doladit střední polohu nebo bezpečný rozsah konkrétního serva.
+      </p>
+
+      <pre class="pra-code"><code>// Přibližná střední poloha serva
+servo1.writeMicroseconds(1500);
+
+// Příklad omezení rozsahu pro konkrétní servo
+servo1.attach(9, 600, 2400);</code></pre>
+
+      <div class="pra-warning">
+        <p>
+          <strong>Nejdříve ověřte limity serva:</strong> Při nastavování hodnot
+          v mikrosekundách postupujte po malých krocích. Příliš dlouhý nebo krátký
+          impuls může servo tlačit proti mechanickému dorazu.
+        </p>
+      </div>
+
+      <div class="pra-task-box">
+        <h3>Nejčastější potíže</h3>
+
+        <ol class="pra-task-list">
+          <li>Servo se cuká nebo Arduino restartuje: zkontrolujte napájení a společnou zem GND.</li>
+          <li>Servo bzučí v krajní poloze: zmenšete rozsah úhlů v programu.</li>
+          <li>Servo se nepohybuje: ověřte vodič signálu, připojení GND a číslo pinu ve funkci <strong>attach()</strong>.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
       <h2>Ovládání pomocí knihovny Servo</h2>
       <p>
         Nejprve do programu vložíme knihovnu <strong>Servo</strong> a vytvoříme objekt, který bude představovat naše servo. Funkcí <span class="pra-highlight">attach()</span> nastavíme řídicí pin a funkcí <span class="pra-highlight">write()</span> požadovaný úhel.

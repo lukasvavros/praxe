@@ -470,6 +470,41 @@
       text-align: center;
     }
   }
+  .pra-pot-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin: 32px auto;
+}
+
+.pra-pot-images figure {
+  margin: 0;
+}
+
+.pra-pot-images img {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+}
+
+.pra-pot-images figcaption {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dark);
+}
+
+@media (max-width: 850px) {
+  .pra-pot-images {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 
 <div class="pra-chapter">
@@ -821,7 +856,27 @@ Serial.println(" V");</code></pre>
         napětí přečte funkcí <strong>analogRead()</strong> a hodnotu můžeme
         využít například pro řízení jasu LED nebo rychlosti blikání.
       </p>
+<div class="pra-pot-images">
+  <figure>
+    <img src="picture/13.png"
+         alt="Potenciometr a jeho funkce jako dělič napětí"
+         loading="lazy"
+         decoding="async">
+    <figcaption>
+      Potenciometr – zapojení vývodů a princip děliče napětí.
+    </figcaption>
+  </figure>
 
+  <figure>
+    <img src="picture/14.png"
+         alt="Zapojení potenciometru s Arduino UNO"
+         loading="lazy"
+         decoding="async">
+    <figcaption>
+      Zapojení potenciometru k analogovému vstupu Arduino UNO.
+    </figcaption>
+  </figure>
+</div>
       <div class="pra-task-box">
         <h3>Úkoly – potenciometr</h3>
 

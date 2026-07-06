@@ -382,6 +382,10 @@
   }
 
   .pra-pot-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(180px, 20vw, 260px);
     margin: 0;
     padding: 14px;
     border-radius: 14px;
@@ -394,16 +398,8 @@
     display: block;
     width: 100%;
     height: clamp(180px, 20vw, 260px);
+    max-width: 100%;
     object-fit: contain;
-    margin: 0 auto;
-  }
-
-  .pra-pot-image figcaption {
-    margin-top: 12px;
-    color: var(--dark);
-    font-size: clamp(13px, 1.1vw, 15px);
-    line-height: 1.55;
-    text-align: center;
   }
 
   .pra-back {
@@ -856,19 +852,19 @@ Serial.println(" V");</code></pre>
       </p>
 
       <div class="pra-pot-image-grid">
-        <figure class="pra-pot-image">
+        <div class="pra-pot-image">
           <img src="picture/13.png"
                alt="Princip potenciometru a děliče napětí"
                loading="lazy"
                decoding="async">
-        </figure>
+        </div>
 
-        <figure class="pra-pot-image">
+        <div class="pra-pot-image">
           <img src="picture/14.png"
                alt="Zapojení potenciometru k analogovému vstupu Arduino UNO"
                loading="lazy"
                decoding="async">
-        </figure>
+        </div>
       </div>
 
       <div class="pra-task-box">

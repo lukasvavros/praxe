@@ -912,14 +912,68 @@ Serial.println(" V");</code></pre>
       </div>
 
       <div class="pra-task-box">
-        <h3>Úkoly – potenciometr</h3>
+        <h3>Úloha – měření a řízení pomocí potenciometru</h3>
+
+        <p>
+          Zapojte potenciometr jako dělič napětí. Jeden krajní vývod připojte
+          na <strong>5 V</strong>, druhý krajní vývod na <strong>GND</strong>
+          a střední vývod – jezdec – na analogový vstup <strong>A0</strong>.
+          Pro práci s LED použijte vestavěnou LED označenou
+          <strong>LED_BUILTIN</strong>.
+        </p>
+
+        <div class="pra-small-note">
+          <strong>Pracujte postupně:</strong> Každý následující bod rozšiřuje
+          předchozí program. Není nutné pokaždé vytvářet nový sketch.
+        </div>
 
         <ol class="pra-task-list">
-          <li>Připojte potenciometr k Arduinu a čtěte jeho hodnotu funkcí <strong>analogRead()</strong>.</li>
-          <li>Hodnotu převeďte na napětí ve voltech a odešlete ji na sériovou linku.</li>
-          <li>Pokud bude napětí vyšší než 2,5 V, rozsviťte LED.</li>
-          <li>Pomocí potenciometru měňte frekvenci blikání LED.</li>
+          <li>
+            <strong>Čtení hodnoty potenciometru</strong><br>
+            Nastavte sériovou komunikaci na rychlost 9600 baudů. Funkcí
+            <strong>analogRead(A0)</strong> načítejte polohu potenciometru
+            a vypisujte ji do sériového monitoru. Ověřte, že se hodnota při
+            otáčení mění přibližně v rozsahu <strong>0 až 1023</strong>.
+          </li>
+
+          <li>
+            <strong>Převod hodnoty na napětí</strong><br>
+            Rozšiřte program tak, aby naměřenou hodnotu převedl na napětí
+            ve voltech. Výsledek vypisujte do sériového monitoru společně
+            s jednotkou <strong>V</strong>. Použijte vztah
+            <strong>napětí = hodnota × 5.0 / 1023.0</strong>.
+          </li>
+
+          <li>
+            <strong>Rozsvícení LED podle napětí</strong><br>
+            Nastavte vestavěnou LED jako výstup. Pokud bude vypočítané napětí
+            <strong>vyšší než 2,5 V</strong>, LED rozsviťte. Při napětí
+            2,5 V nebo nižším musí být LED zhasnutá. Použijte podmínku
+            <strong>if–else</strong> a funkci <strong>digitalWrite()</strong>.
+          </li>
+
+          <li>
+            <strong>Řízení rychlosti blikání</strong><br>
+            Upravte program tak, aby LED stále blikala a potenciometr určoval
+            délku prodlevy mezi rozsvícením a zhasnutím. Nastavte rozsah
+            prodlevy přibližně od <strong>100 ms do 1000 ms</strong>.
+            Na jednom konci potenciometru má LED blikat rychle, na druhém pomalu.
+            Pro převod hodnoty můžete použít funkci <strong>map()</strong>.
+          </li>
         </ol>
+
+        <div class="pra-callout">
+          <strong>Kontrola výsledku:</strong> V sériovém monitoru se musí měnit
+          naměřená hodnota i vypočítané napětí. Ve třetí části LED reaguje na
+          hranici 2,5 V a ve čtvrté části se při otáčení potenciometru plynule
+          mění rychlost jejího blikání.
+        </div>
+
+        <div class="pra-small-note">
+          <strong>Rozšiřující úkol:</strong> Obraťte směr řízení tak, aby LED
+          při vyšší hodnotě potenciometru blikala rychleji. Hodnotu použité
+          prodlevy zároveň vypisujte do sériového monitoru.
+        </div>
       </div>
     </div>
   </section>

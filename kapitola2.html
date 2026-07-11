@@ -161,6 +161,13 @@
     font-size: 17px;
   }
 
+  .pra-traffic-card > span {
+    display: block;
+    margin-top: 6px;
+    color: var(--dark);
+    font-size: 14px;
+  }
+
   .pra-traffic-light {
     display: grid;
     justify-content: center;
@@ -514,11 +521,43 @@
         <span class="pra-highlight">červenou, žlutou a zelenou</span>.
       </p>
 
-      <p>
-        Vyberte tři digitální piny Arduina. Ke každému pinu připojte jednu LED
-        se sériovým rezistorem a pomocí funkcí <strong>digitalWrite()</strong>
-        a <strong>delay()</strong> vytvořte jednotlivé fáze semaforu.
-      </p>
+      <div class="pra-task-box">
+        <h3>Úloha – semafor se třemi LED</h3>
+
+        <p>
+          <strong>Cíl:</strong> Zapojte tři LED diody a vytvořte program,
+          který bude napodobovat činnost běžného semaforu.
+        </p>
+
+        <h4>Zapojení</h4>
+        <ul class="pra-command-list">
+          <li><strong>Pin D2</strong> – červená LED.</li>
+          <li><strong>Pin D3</strong> – žlutá LED.</li>
+          <li><strong>Pin D4</strong> – zelená LED.</li>
+          <li>Ke každé LED použijte samostatný sériový rezistor o hodnotě přibližně <strong>220 až 330 Ω</strong>.</li>
+          <li>Delší vývod LED připojte přes rezistor k příslušnému digitálnímu pinu. Kratší vývod připojte ke společnému pinu <strong>GND</strong>.</li>
+        </ul>
+
+        <h4>Postup programu</h4>
+        <ol class="pra-task-list">
+          <li>Vytvořte nový sketch.</li>
+          <li>V části <strong>setup()</strong> nastavte piny D2, D3 a D4 jako výstupy pomocí funkce <strong>pinMode()</strong>.</li>
+          <li>V části <strong>loop()</strong> vytvořte jednotlivé fáze semaforu pomocí funkcí <strong>digitalWrite()</strong> a <strong>delay()</strong>.</li>
+          <li>Červená LED svítí 3 sekundy.</li>
+          <li>Červená a žlutá LED svítí současně 1 sekundu.</li>
+          <li>Zelená LED svítí 3 sekundy.</li>
+          <li>Žlutá LED svítí 1 sekundu.</li>
+          <li>Po poslední fázi se celý cyklus znovu opakuje.</li>
+        </ol>
+
+        <div class="pra-small-note">
+          <strong>Důležité:</strong> V každé fázi musí svítit pouze LED,
+          které mají být právě zapnuté. Ostatní LED vždy nastavte na hodnotu
+          <strong>LOW</strong>.
+        </div>
+      </div>
+
+      <h3>Jednotlivé fáze semaforu</h3>
 
       <div class="pra-traffic-grid">
         <div class="pra-traffic-card">
@@ -528,6 +567,7 @@
             <span class="pra-bulb green"></span>
           </div>
           <strong>1. Červená</strong>
+          <span>Doba: 3 sekundy</span>
         </div>
 
         <div class="pra-traffic-card">
@@ -537,6 +577,7 @@
             <span class="pra-bulb green"></span>
           </div>
           <strong>2. Červená + žlutá</strong>
+          <span>Doba: 1 sekunda</span>
         </div>
 
         <div class="pra-traffic-card">
@@ -546,6 +587,7 @@
             <span class="pra-bulb green on"></span>
           </div>
           <strong>3. Zelená</strong>
+          <span>Doba: 3 sekundy</span>
         </div>
 
         <div class="pra-traffic-card">
@@ -555,13 +597,24 @@
             <span class="pra-bulb green"></span>
           </div>
           <strong>4. Žlutá</strong>
+          <span>Doba: 1 sekunda</span>
         </div>
       </div>
 
       <div class="pra-callout">
-        <strong>Bonus:</strong> Připojte k semaforu tlačítko pro chodce.
-        Pro auta bude svítit stále zelená. Po stisknutí tlačítka se provede
-        jeden kompletní cyklus semaforu a poté se znovu rozsvítí zelená.
+        <strong>Rozšiřující úkoly:</strong>
+        <ol class="pra-task-list">
+          <li>
+            Upravte program tak, aby zelená LED před přechodem na žlutou
+            třikrát zablikala. Vždy 300 ms svítí a 300 ms je zhasnutá.
+          </li>
+          <li>
+            Připojte tlačítko pro chodce například na pin <strong>D5</strong>.
+            V základním stavu svítí pro auta zelená. Po stisknutí tlačítka
+            se provede jeden kompletní cyklus semaforu a poté se znovu
+            rozsvítí zelená.
+          </li>
+        </ol>
       </div>
     </div>
   </section>

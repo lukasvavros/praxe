@@ -697,15 +697,48 @@
       </div>
 
       <div class="pra-task-box">
-        <h3>Úkol 1 – tlačítko a LED</h3>
+        <h3>Úloha – ovládání LED tlačítkem</h3>
 
+        <p>
+          <strong>Cíl:</strong> Zapojte tlačítko jako digitální vstup a vytvořte
+          program, který rozsvítí LED pouze po dobu, kdy je tlačítko stisknuté.
+        </p>
+
+        <h4>Zapojení</h4>
+        <ul class="pra-command-list">
+          <li><strong>Tlačítko:</strong> jeden kontakt připojte k pinu <strong>D2</strong> a druhý kontakt k <strong>GND</strong>.</li>
+          <li><strong>LED:</strong> delší vývod připojte přes sériový rezistor <strong>220 až 330 Ω</strong> k pinu <strong>D8</strong>.</li>
+          <li>Kratší vývod LED připojte ke společnému pinu <strong>GND</strong>.</li>
+          <li>Pro tlačítko nepoužívejte externí rezistor – v programu aktivujete vnitřní rezistor pomocí <strong>INPUT_PULLUP</strong>.</li>
+        </ul>
+
+        <h4>Postup programu</h4>
         <ol class="pra-task-list">
           <li>Vytvořte nový sketch.</li>
-          <li>Připojte tlačítko na jeden digitální pin Arduina a LED s rezistorem na jiný digitální pin.</li>
-          <li>Pin tlačítka nastavte pomocí <strong>INPUT_PULLUP</strong>.</li>
-          <li>Funkcí <strong>digitalRead()</strong> načtěte stav tlačítka.</li>
-          <li>Je-li tlačítko stisknuté, LED rozsvítíte. Jinak LED zhasne.</li>
+          <li>V části <strong>setup()</strong> nastavte pin D2 jako vstup pomocí <strong>pinMode(2, INPUT_PULLUP)</strong>.</li>
+          <li>Pin D8 nastavte jako výstup pomocí funkce <strong>pinMode()</strong>.</li>
+          <li>V části <strong>loop()</strong> načítejte stav tlačítka funkcí <strong>digitalRead()</strong> a uložte jej do proměnné.</li>
+          <li>Pomocí podmínky <strong>if–else</strong> zkontrolujte stav tlačítka.</li>
+          <li>Pokud je tlačítko stisknuté, Arduino načte hodnotu <strong>LOW</strong> a LED se rozsvítí.</li>
+          <li>Pokud tlačítko není stisknuté, Arduino načte hodnotu <strong>HIGH</strong> a LED zhasne.</li>
         </ol>
+
+        <div class="pra-small-note">
+          <strong>Důležité:</strong> Režim INPUT_PULLUP používá obrácenou logiku.
+          Stisknuté tlačítko má hodnotu <strong>LOW</strong>, nestisknuté tlačítko
+          má hodnotu <strong>HIGH</strong>.
+        </div>
+
+        <div class="pra-callout">
+          <strong>Kontrola výsledku:</strong> LED musí svítit pouze po dobu,
+          kdy držíte tlačítko stisknuté. Po uvolnění tlačítka musí ihned zhasnout.
+        </div>
+
+        <div class="pra-small-note">
+          <strong>Rozšiřující úkol:</strong> Zapněte sériovou komunikaci a do
+          sériového monitoru vypisujte text <strong>„Tlačítko stisknuto“</strong>
+          nebo <strong>„Tlačítko uvolněno“</strong> podle aktuálního stavu.
+        </div>
       </div>
     </div>
   </section>

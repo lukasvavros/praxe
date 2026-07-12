@@ -655,6 +655,100 @@ void loop() {
 </div>
     </div>
   </section>
+<div class="pra-task-box">
+  <h3>Úkoly – servo, dvě tlačítka a dvě LED</h3>
+
+  <p>
+    V této úloze budete řídit polohu servomotoru pomocí dvou tlačítek.
+    Jedno tlačítko bude úhel zvětšovat a druhé zmenšovat.
+    Aktuální směr pohybu budou signalizovat dvě LED.
+  </p>
+
+  <p><strong>Zapojení:</strong></p>
+
+  <ul class="pra-task-list">
+    <li>servomotor – řídicí vodič na digitální pin <strong>D9</strong>,</li>
+    <li>tlačítko pro pohyb dopředu – digitální pin <strong>D2</strong>,</li>
+    <li>tlačítko pro pohyb dozadu – digitální pin <strong>D3</strong>,</li>
+    <li>zelená LED – digitální pin <strong>D6</strong> přes rezistor 220 až 330 Ω,</li>
+    <li>červená LED – digitální pin <strong>D7</strong> přes rezistor 220 až 330 Ω.</li>
+  </ul>
+
+  <p>
+    Obě tlačítka zapojte mezi příslušný digitální pin a GND.
+    V programu použijte režim <strong>INPUT_PULLUP</strong>.
+  </p>
+
+  <p>
+    <strong>Jednotlivé podúkoly na sebe navazují. Každý další bod rozšiřuje předchozí program.</strong>
+  </p>
+
+  <ol class="pra-task-list">
+    <li>
+      Vytvořte nový sketch, vložte knihovnu <strong>Servo</strong>
+      a připojte servomotor k pinu <strong>D9</strong>.
+      Po spuštění nastavte servo do polohy <strong>0°</strong>.
+    </li>
+
+<li>
+  Vytvořte proměnnou <strong>uhel</strong>, ve které budete uchovávat
+  aktuální polohu serva. Počáteční hodnota proměnné bude <strong>0</strong>.
+</li>
+
+<li>
+  Připojte tlačítko na pin <strong>D2</strong>.
+  Po každém stisknutí tlačítka zvětšete hodnotu proměnné
+  <strong>uhel</strong> o <strong>90°</strong>.
+</li>
+
+<li>
+  Připojte druhé tlačítko na pin <strong>D3</strong>.
+  Po každém stisknutí tohoto tlačítka zmenšete hodnotu proměnné
+  <strong>uhel</strong> o <strong>90°</strong>.
+</li>
+
+<li>
+  Zajistěte, aby se hodnota proměnné <strong>uhel</strong>
+  nikdy nedostala pod <strong>0°</strong> ani nad <strong>180°</strong>.
+  Servo tedy může být pouze v polohách
+  <strong>0°</strong>, <strong>90°</strong> a <strong>180°</strong>.
+</li>
+
+<li>
+  Po změně hodnoty proměnné nastavte novou polohu serva pomocí funkce
+  <strong>servo.write(uhel)</strong>.
+</li>
+
+<li>
+  Připojte zelenou LED na pin <strong>D6</strong>.
+  Zelená LED se krátce rozsvítí při pohybu serva dopředu,
+  tedy při zvětšení úhlu.
+</li>
+
+<li>
+  Připojte červenou LED na pin <strong>D7</strong>.
+  Červená LED se krátce rozsvítí při pohybu serva dozadu,
+  tedy při zmenšení úhlu.
+</li>
+
+<li>
+  Zajistěte, aby nikdy nesvítily obě LED současně.
+  Po dokončení pohybu obě LED zhasněte.
+</li>
+
+<li>
+  Ošetřete tlačítka tak, aby jedno stisknutí změnilo úhel pouze jednou.
+  Program nesmí při delším držení tlačítka rychle přeskočit přes více poloh.
+</li>
+
+  </ol>
+
+  <div class="pra-callout">
+    <strong>Rozšiřující úkol:</strong>
+    Po každé změně polohy vypište do sériového monitoru aktuální úhel serva.
+    Například: <strong>Servo: 90 stupnu</strong>.
+  </div>
+</div>
 
   <section class="pra-section alt">
     <div class="pra-container">

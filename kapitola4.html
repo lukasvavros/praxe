@@ -1,15 +1,453 @@
 <style>
-  .pra-chapter{--orange:#ee7203;--dark:#373841;--light:#f4f4f4;--lighter:#fafafa;--text:#373841;--white:#fff;--red:#e63c46;--green:#38a95b;--blue:#4285d4;width:100vw;max-width:none;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:hidden;font-family:Verdana,Arial,Helvetica,sans-serif;color:var(--text);background:var(--white);box-sizing:border-box}.pra-chapter*,.pra-chapter*::before,.pra-chapter*::after{box-sizing:border-box}.pra-hero{padding:clamp(30px,5vw,60px) 20px;background:var(--dark);color:var(--white);text-align:center}.pra-hero h1{margin:0;font-size:clamp(30px,4vw,50px);font-weight:400}.pra-hero p{margin:12px 0 0;color:var(--orange);font-size:clamp(15px,1.7vw,20px)}.pra-container{width:min(1200px,94%);margin:0 auto}.pra-section{padding:clamp(34px,5vw,70px) 0;border-top:1px solid #ddd}.pra-section.alt{background:var(--lighter)}.pra-section h2{margin:0 0 24px;padding-bottom:12px;border-bottom:3px solid var(--orange);color:var(--dark);font-size:clamp(26px,3vw,38px);font-weight:400}.pra-section h3{margin:34px 0 14px;color:var(--dark);font-size:clamp(21px,2.2vw,29px)}.pra-section p{margin:0 0 18px;font-size:clamp(15px,1.35vw,18px);line-height:1.8}.pra-highlight{color:var(--orange);font-weight:700}.pra-grid-3,.pra-summary,.pra-duty-grid,.pra-pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.pra-card,.pra-summary-card,.pra-duty-card,.pra-pin-card{padding:20px;border-radius:14px;border-top:6px solid var(--orange);background:var(--light);box-shadow:0 4px 13px rgba(0,0,0,.07)}.pra-card strong,.pra-summary-card strong,.pra-duty-card strong,.pra-pin-card strong{display:block;margin-bottom:8px;color:var(--orange);font-size:clamp(16px,1.5vw,20px)}.pra-card span,.pra-summary-card span,.pra-duty-card span,.pra-pin-card span{display:block;font-size:clamp(14px,1.2vw,16px);line-height:1.6}.pra-duty-card svg{display:block;width:100%;height:auto;margin-top:14px;border-radius:10px;background:#fff}.pra-code{margin:20px 0;padding:20px;overflow-x:auto;border-radius:12px;background:#f1f2f4;color:#25262d;font-family:Consolas,"Courier New",monospace;font-size:clamp(13px,1.15vw,16px);line-height:1.65}.pra-formula{max-width:780px;margin:24px auto;padding:18px;border-radius:12px;border:1px solid #e4e4e4;background:#fff;text-align:center;font-family:Consolas,"Courier New",monospace;font-size:clamp(15px,1.6vw,21px);box-shadow:0 4px 13px rgba(0,0,0,.07)}.pra-warning,.pra-callout,.pra-small-note{margin:24px 0;padding:18px 22px;border-left:6px solid var(--orange);border-radius:10px;background:var(--light);font-size:clamp(14px,1.2vw,17px);line-height:1.7}.pra-warning{border-left:0;background:var(--dark);color:#fff}.pra-warning p{margin:0;color:#fff}.pra-warning strong{color:var(--orange)}.pra-rgb-layout{display:grid;grid-template-columns:minmax(220px,.7fr) 1.3fr;gap:28px;align-items:center;margin:28px 0}.pra-rgb-image{max-width:300px;margin:0 auto;padding:18px;border-radius:14px;border:1px solid #e6e6e6;background:#fff;box-shadow:0 4px 13px rgba(0,0,0,.08)}.pra-rgb-image img{display:block;width:100%;height:auto}.pra-connection{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:12px;margin:28px 0}.pra-connection-box{padding:18px;border-radius:12px;border:3px solid var(--orange);background:#fff;text-align:center;font-weight:700}.pra-connection-arrow{color:var(--orange);font-size:30px;font-weight:700}.pra-pin-card.red{border-top-color:var(--red)}.pra-pin-card.red strong{color:var(--red)}.pra-pin-card.green{border-top-color:var(--green)}.pra-pin-card.green strong{color:var(--green)}.pra-pin-card.blue{border-top-color:var(--blue)}.pra-pin-card.blue strong{color:var(--blue)}.pra-task-box{margin-top:26px;padding:22px 24px;border-radius:14px;border-top:6px solid var(--orange);background:var(--light);box-shadow:0 4px 13px rgba(0,0,0,.07)}.pra-task-box h3{margin-top:0}.pra-task-list{margin:0;padding-left:24px;font-size:clamp(15px,1.35vw,18px);line-height:1.8}.pra-task-list li{margin-bottom:9px}.pra-color-table-wrap{overflow-x:auto;margin:24px 0}.pra-color-table{width:100%;min-width:620px;border-collapse:collapse;background:#fff;box-shadow:0 4px 13px rgba(0,0,0,.07)}.pra-color-table th,.pra-color-table td{padding:14px 16px;border:1px solid #ddd;text-align:center}.pra-color-table th{background:var(--dark);color:#fff}.pra-color-chip{display:inline-block;width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,0,0,.18);vertical-align:middle}.pra-back{padding:34px 20px;background:var(--light);text-align:center}.pra-back a{display:inline-block;padding:13px 24px;border-radius:999px;background:var(--dark);color:#fff;text-decoration:none;font-size:16px}.pra-author{padding:clamp(18px,3vw,28px);background:var(--light)}.pra-author-content{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}.pra-author-item{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:10px 16px;border-radius:999px;background:#fff;color:var(--dark);font-size:clamp(13px,1.1vw,15px);box-shadow:0 4px 14px rgba(0,0,0,.08)}.pra-footer{padding:12px 16px;background:var(--dark);color:#fff;text-align:center;font-size:clamp(12px,1vw,14px)}@media(max-width:850px){.pra-grid-3,.pra-summary,.pra-duty-grid,.pra-pin-grid,.pra-rgb-layout{grid-template-columns:1fr}.pra-connection{grid-template-columns:1fr}.pra-connection-arrow{transform:rotate(90deg);text-align:center}}@media(max-width:620px){.pra-section{padding:32px 0}.pra-code{padding:15px}.pra-author-content{flex-direction:column;align-items:stretch}.pra-author-item{justify-content:center;border-radius:12px;text-align:center}}
+  .pra-chapter {
+    --orange: #ee7203;
+    --dark: #373841;
+    --light: #f4f4f4;
+    --lighter: #fafafa;
+    --text: #373841;
+    --white: #fff;
+    --red: #e63c46;
+    --green: #38a95b;
+    --blue: #4285d4;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow-x: hidden;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    box-sizing: border-box;
+  }
+  .pra-chapter *,
+  .pra-chapter *::before,
+  .pra-chapter *::after {
+    box-sizing: border-box;
+  }
+  .pra-hero {
+    padding: clamp(30px, 5vw, 60px) 20px;
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+  }
+  .pra-hero h1 {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 50px);
+    font-weight: 400;
+  }
+  .pra-hero p {
+    margin: 12px 0 0;
+    color: var(--orange);
+    font-size: clamp(15px, 1.7vw, 20px);
+  }
+  .pra-container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+  }
+  .pra-section {
+    padding: clamp(34px, 5vw, 70px) 0;
+    border-top: 1px solid #ddd;
+  }
+  .pra-section.alt {
+    background: var(--lighter);
+  }
+  .pra-section h2 {
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--orange);
+    color: var(--dark);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 400;
+  }
+  .pra-section h3 {
+    margin: 34px 0 14px;
+    color: var(--dark);
+    font-size: clamp(21px, 2.2vw, 29px);
+  }
+  .pra-section p {
+    margin: 0 0 18px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.8;
+  }
+  .pra-highlight {
+    color: var(--orange);
+    font-weight: 700;
+  }
+  .pra-grid-3,
+  .pra-summary,
+  .pra-duty-grid,
+  .pra-pin-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .pra-card,
+  .pra-summary-card,
+  .pra-duty-card,
+  .pra-pin-card {
+    padding: 20px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+  .pra-card strong,
+  .pra-summary-card strong,
+  .pra-duty-card strong,
+  .pra-pin-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--orange);
+    font-size: clamp(16px, 1.5vw, 20px);
+  }
+  .pra-card span,
+  .pra-summary-card span,
+  .pra-duty-card span,
+  .pra-pin-card span {
+    display: block;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.6;
+  }
+  .pra-duty-card svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 14px;
+    border-radius: 10px;
+    background: #fff;
+  }
+  .pra-code {
+    margin: 20px 0;
+    padding: 20px;
+    overflow-x: auto;
+    border-radius: 12px;
+    background: #f1f2f4;
+    color: #25262d;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(13px, 1.15vw, 16px);
+    line-height: 1.65;
+  }
+  .pra-formula {
+    max-width: 780px;
+    margin: 24px auto;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #e4e4e4;
+    background: #fff;
+    text-align: center;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(15px, 1.6vw, 21px);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+  .pra-warning,
+  .pra-callout,
+  .pra-small-note {
+    margin: 24px 0;
+    padding: 18px 22px;
+    border-left: 6px solid var(--orange);
+    border-radius: 10px;
+    background: var(--light);
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.7;
+  }
+  .pra-warning {
+    border-left: 0;
+    background: var(--dark);
+    color: #fff;
+  }
+  .pra-warning p {
+    margin: 0;
+    color: #fff;
+  }
+  .pra-warning strong {
+    color: var(--orange);
+  }
+  .pra-rgb-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.7fr) 1.3fr;
+    gap: 28px;
+    align-items: center;
+    margin: 28px 0;
+  }
+  .pra-rgb-image {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+  }
+  .pra-rgb-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .pra-connection {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0;
+  }
+  .pra-connection-box {
+    padding: 18px;
+    border-radius: 12px;
+    border: 3px solid var(--orange);
+    background: #fff;
+    text-align: center;
+    font-weight: 700;
+  }
+  .pra-connection-arrow {
+    color: var(--orange);
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .pra-pin-card.red {
+    border-top-color: var(--red);
+  }
+  .pra-pin-card.red strong {
+    color: var(--red);
+  }
+  .pra-pin-card.green {
+    border-top-color: var(--green);
+  }
+  .pra-pin-card.green strong {
+    color: var(--green);
+  }
+  .pra-pin-card.blue {
+    border-top-color: var(--blue);
+  }
+  .pra-pin-card.blue strong {
+    color: var(--blue);
+  }
+  .pra-task-box {
+    margin-top: 26px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    border-top: 6px solid var(--orange);
+    background: var(--light);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+  .pra-task-box h3 {
+    margin-top: 0;
+  }
+  .pra-task-list {
+    margin: 0;
+    padding-left: 24px;
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.8;
+  }
+  .pra-task-list li {
+    margin-bottom: 9px;
+  }
+  .pra-color-table-wrap {
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+  .pra-color-table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+  }
+  .pra-color-table th,
+  .pra-color-table td {
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  .pra-color-table th {
+    background: var(--dark);
+    color: #fff;
+  }
+  .pra-color-chip {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    vertical-align: middle;
+  }
+  .pra-back {
+    padding: 34px 20px;
+    background: var(--light);
+    text-align: center;
+  }
+  .pra-back a {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .pra-author {
+    padding: clamp(18px, 3vw, 28px);
+    background: var(--light);
+  }
+  .pra-author-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .pra-author-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--dark);
+    font-size: clamp(13px, 1.1vw, 15px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+  .pra-footer {
+    padding: 12px 16px;
+    background: var(--dark);
+    color: #fff;
+    text-align: center;
+    font-size: clamp(12px, 1vw, 14px);
+  }
+  @media (max-width: 850px) {
+    .pra-grid-3,
+    .pra-summary,
+    .pra-duty-grid,
+    .pra-pin-grid,
+    .pra-rgb-layout {
+      grid-template-columns: 1fr;
+    }
+    .pra-connection {
+      grid-template-columns: 1fr;
+    }
+    .pra-connection-arrow {
+      transform: rotate(90deg);
+      text-align: center;
+    }
+  }
+  @media (max-width: 620px) {
+    .pra-section {
+      padding: 32px 0;
+    }
+    .pra-code {
+      padding: 15px;
+    }
+    .pra-author-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .pra-author-item {
+      justify-content: center;
+      border-radius: 12px;
+      text-align: center;
+    }
+  }
 </style>
 
 <div class="pra-chapter">
-<header class="pra-hero"><h1>Kapitola 4: PWM a RGB LED</h1><p>Praxe – Arduino | 3. ročník</p></header>
+  <header class="pra-hero">
+    <h1>Kapitola 4: PWM a RGB LED</h1>
+    <p>Praxe – Arduino | 3. ročník</p>
+  </header>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Cíle kapitoly</h2><p>V této kapitole se naučíme řídit jas LED pomocí pulzně šířkové modulace a následně samostatně nastavovat červenou, zelenou a modrou složku RGB LED.</p><div class="pra-grid-3"><div class="pra-card"><strong>PWM</strong><span>Pochopíme princip rychlého zapínání a vypínání digitálního výstupu.</span></div><div class="pra-card"><strong>analogWrite()</strong><span>Naučíme se nastavovat PWM hodnoty v rozsahu 0 až 255.</span></div><div class="pra-card"><strong>RGB LED</strong><span>Budeme vytvářet různé barvy kombinací tří barevných složek.</span></div></div></div></section>
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Cíle kapitoly</h2>
+      <p>
+        V této kapitole se naučíme řídit jas LED pomocí pulzně šířkové modulace a následně
+        samostatně nastavovat červenou, zelenou a modrou složku RGB LED.
+      </p>
+      <div class="pra-grid-3">
+        <div class="pra-card">
+          <strong>PWM</strong
+          ><span>Pochopíme princip rychlého zapínání a vypínání digitálního výstupu.</span>
+        </div>
+        <div class="pra-card">
+          <strong>analogWrite()</strong
+          ><span>Naučíme se nastavovat PWM hodnoty v rozsahu 0 až 255.</span>
+        </div>
+        <div class="pra-card">
+          <strong>RGB LED</strong
+          ><span>Budeme vytvářet různé barvy kombinací tří barevných složek.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section"><div class="pra-container"><h2>Pulzně šířková modulace – PWM</h2><p><strong>PWM</strong> je metoda, která mění průměrný výkon rychlým zapínáním a vypínáním digitálního signálu. Poměr doby zapnutí k délce celé periody nazýváme <span class="pra-highlight">střída</span> neboli duty cycle.</p><p>Čím déle je signál v logické jedničce, tím vyšší je průměrný výkon a tím více LED svítí.</p><div class="pra-duty-grid"><div class="pra-duty-card"><strong>0 %</strong><span>Signál je stále vypnutý.</span><svg viewBox="0 0 340 120"><line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3"/><polyline points="25,90 315,90" fill="none" stroke="#ee7203" stroke-width="7"/></svg></div><div class="pra-duty-card"><strong>50 %</strong><span>Signál je polovinu periody zapnutý.</span><svg viewBox="0 0 340 120"><line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3"/><polyline points="25,90 25,30 95,30 95,90 165,90 165,30 235,30 235,90 315,90" fill="none" stroke="#ee7203" stroke-width="7"/></svg></div><div class="pra-duty-card"><strong>100 %</strong><span>Signál je stále zapnutý.</span><svg viewBox="0 0 340 120"><line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3"/><polyline points="25,90 25,30 315,30" fill="none" stroke="#ee7203" stroke-width="7"/></svg></div></div><div class="pra-small-note"><strong>Důležité:</strong> PWM není skutečné analogové napětí. Arduino pouze velmi rychle přepíná pin mezi LOW a HIGH.</div></div></section>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Pulzně šířková modulace – PWM</h2>
+      <p>
+        <strong>PWM</strong> je metoda, která mění průměrný výkon rychlým zapínáním a vypínáním
+        digitálního signálu. Poměr doby zapnutí k délce celé periody nazýváme
+        <span class="pra-highlight">střída</span> neboli duty cycle.
+      </p>
+      <p>
+        Čím déle je signál v logické jedničce, tím vyšší je průměrný výkon a tím více LED svítí.
+      </p>
+      <div class="pra-duty-grid">
+        <div class="pra-duty-card">
+          <strong>0 %</strong><span>Signál je stále vypnutý.</span
+          ><svg viewBox="0 0 340 120">
+            <line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3" />
+            <polyline points="25,90 315,90" fill="none" stroke="#ee7203" stroke-width="7" />
+          </svg>
+        </div>
+        <div class="pra-duty-card">
+          <strong>50 %</strong><span>Signál je polovinu periody zapnutý.</span
+          ><svg viewBox="0 0 340 120">
+            <line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3" />
+            <polyline
+              points="25,90 25,30 95,30 95,90 165,90 165,30 235,30 235,90 315,90"
+              fill="none"
+              stroke="#ee7203"
+              stroke-width="7"
+            />
+          </svg>
+        </div>
+        <div class="pra-duty-card">
+          <strong>100 %</strong><span>Signál je stále zapnutý.</span
+          ><svg viewBox="0 0 340 120">
+            <line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3" />
+            <polyline points="25,90 25,30 315,30" fill="none" stroke="#ee7203" stroke-width="7" />
+          </svg>
+        </div>
+      </div>
+      <div class="pra-small-note">
+        <strong>Důležité:</strong> PWM není skutečné analogové napětí. Arduino pouze velmi rychle
+        přepíná pin mezi LOW a HIGH.
+      </div>
+      <div class="pra-rgb-image" style="max-width: 1000px">
+        <img
+          src="18.png"
+          alt="Přehled PWM se střídou 0, 25, 50, 75 a 100 procent a schéma míchání barev RGB."
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Funkce analogWrite()</h2><p>PWM nastavujeme pomocí funkce <strong>analogWrite()</strong>. Druhý parametr je hodnota od 0 do 255.</p><div class="pra-formula">analogWrite(pin, hodnota);</div><div class="pra-grid-3"><div class="pra-card"><strong>0</strong><span>LED nesvítí.</span></div><div class="pra-card"><strong>128</strong><span>LED svítí přibližně na 50 %.</span></div><div class="pra-card"><strong>255</strong><span>LED svítí maximálním jasem.</span></div></div><pre class="pra-code"><code>const byte pinLed = 9;
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Funkce analogWrite()</h2>
+      <p>
+        PWM nastavujeme pomocí funkce <strong>analogWrite()</strong>. Druhý parametr je hodnota od 0
+        do 255.
+      </p>
+      <div class="pra-formula">analogWrite(pin, hodnota);</div>
+      <div class="pra-grid-3">
+        <div class="pra-card"><strong>0</strong><span>LED nesvítí.</span></div>
+        <div class="pra-card"><strong>128</strong><span>LED svítí přibližně na 50 %.</span></div>
+        <div class="pra-card"><strong>255</strong><span>LED svítí maximálním jasem.</span></div>
+      </div>
+      <pre class="pra-code"><code>const byte pinLed = 9;
 
 void setup() {
   pinMode(pinLed, OUTPUT);
@@ -24,11 +462,94 @@ void loop() {
 
   analogWrite(pinLed, 255);
   delay(1000);
-}</code></pre><div class="pra-warning"><p><strong>Pozor:</strong> Na Arduino UNO podporují PWM piny označené symbolem <strong>~</strong>: 3, 5, 6, 9, 10 a 11.</p></div></div></section>
+}</code></pre>
+      <div class="pra-warning">
+        <p>
+          <strong>Pozor:</strong> Na Arduino UNO podporují PWM piny označené symbolem
+          <strong>~</strong>: 3, 5, 6, 9, 10 a 11.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section"><div class="pra-container"><h2>RGB LED</h2><div class="pra-rgb-layout"><div class="pra-rgb-image"><img src="picture/17.png" alt="Vývody RGB LED označené R, společný vývod, B a G" loading="lazy" decoding="async"></div><div><p>RGB LED kombinuje v jednom pouzdře tři LED diody: <span class="pra-highlight">červenou (R)</span>, <span class="pra-highlight">zelenou (G)</span> a <span class="pra-highlight">modrou (B)</span>.</p><p>Každou složku lze ovládat samostatně. Kombinací jejich jasů můžeme vytvořit mnoho různých barev.</p><p>RGB LED má čtyři vývody. Tři patří jednotlivým barvám a jeden je společný. Podle typu jde o společnou katodu nebo společnou anodu.</p></div></div><div class="pra-grid-3"><div class="pra-card"><strong>Společná katoda</strong><span>Společný vývod se připojí na GND. Vyšší PWM znamená vyšší jas.</span></div><div class="pra-card"><strong>Společná anoda</strong><span>Společný vývod se připojí na 5 V a používá se obrácená logika.</span></div><div class="pra-card"><strong>Polarita</strong><span>Před zapojením ověřte typ a pořadí vývodů konkrétní součástky.</span></div></div><div class="pra-warning"><p><strong>V této kapitole používáme RGB LED se společnou katodou.</strong> Každá barevná složka musí mít vlastní sériový rezistor.</p></div></div></section>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>RGB LED</h2>
+      <div class="pra-rgb-layout">
+        <div class="pra-rgb-image">
+          <img
+            src="picture/17.png"
+            alt="Vývody RGB LED označené R, společný vývod, B a G"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div>
+          <p>
+            RGB LED kombinuje v jednom pouzdře tři LED diody:
+            <span class="pra-highlight">červenou (R)</span>,
+            <span class="pra-highlight">zelenou (G)</span> a
+            <span class="pra-highlight">modrou (B)</span>.
+          </p>
+          <p>
+            Každou složku lze ovládat samostatně. Kombinací jejich jasů můžeme vytvořit mnoho
+            různých barev.
+          </p>
+          <p>
+            RGB LED má čtyři vývody. Tři patří jednotlivým barvám a jeden je společný. Podle typu
+            jde o společnou katodu nebo společnou anodu.
+          </p>
+        </div>
+      </div>
+      <div class="pra-grid-3">
+        <div class="pra-card">
+          <strong>Společná katoda</strong
+          ><span>Společný vývod se připojí na GND. Vyšší PWM znamená vyšší jas.</span>
+        </div>
+        <div class="pra-card">
+          <strong>Společná anoda</strong
+          ><span>Společný vývod se připojí na 5 V a používá se obrácená logika.</span>
+        </div>
+        <div class="pra-card">
+          <strong>Polarita</strong
+          ><span>Před zapojením ověřte typ a pořadí vývodů konkrétní součástky.</span>
+        </div>
+      </div>
+      <div class="pra-warning">
+        <p>
+          <strong>V této kapitole používáme RGB LED se společnou katodou.</strong> Každá barevná
+          složka musí mít vlastní sériový rezistor.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Zapojení RGB LED k Arduinu</h2><p>Použijeme PWM piny D9, D10 a D11. Každou barevnou složku připojíme přes samostatný rezistor 220 až 330 Ω.</p><div class="pra-pin-grid"><div class="pra-pin-card red"><strong>R → D9</strong><span>Červená složka přes rezistor.</span></div><div class="pra-pin-card green"><strong>G → D10</strong><span>Zelená složka přes rezistor.</span></div><div class="pra-pin-card blue"><strong>B → D11</strong><span>Modrá složka přes rezistor.</span></div></div><div class="pra-connection"><div class="pra-connection-box">D9, D10, D11</div><div class="pra-connection-arrow">→</div><div class="pra-connection-box">3× rezistor 220–330 Ω</div><div class="pra-connection-arrow">→</div><div class="pra-connection-box">RGB LED, společná katoda → GND</div></div><pre class="pra-code"><code>const byte pinCervena = 9;
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Zapojení RGB LED k Arduinu</h2>
+      <p>
+        Použijeme PWM piny D9, D10 a D11. Každou barevnou složku připojíme přes samostatný rezistor
+        220 až 330 Ω.
+      </p>
+      <div class="pra-pin-grid">
+        <div class="pra-pin-card red">
+          <strong>R → D9</strong><span>Červená složka přes rezistor.</span>
+        </div>
+        <div class="pra-pin-card green">
+          <strong>G → D10</strong><span>Zelená složka přes rezistor.</span>
+        </div>
+        <div class="pra-pin-card blue">
+          <strong>B → D11</strong><span>Modrá složka přes rezistor.</span>
+        </div>
+      </div>
+      <div class="pra-connection">
+        <div class="pra-connection-box">D9, D10, D11</div>
+        <div class="pra-connection-arrow">→</div>
+        <div class="pra-connection-box">3× rezistor 220–330 Ω</div>
+        <div class="pra-connection-arrow">→</div>
+        <div class="pra-connection-box">RGB LED, společná katoda → GND</div>
+      </div>
+      <pre class="pra-code"><code>const byte pinCervena = 9;
 const byte pinZelena = 10;
 const byte pinModra = 11;
 
@@ -42,27 +563,260 @@ void loop() {
   analogWrite(pinCervena, 255);
   analogWrite(pinZelena, 0);
   analogWrite(pinModra, 0);
-}</code></pre></div></section>
+}</code></pre>
+    </div>
+  </section>
 
-<section class="pra-section"><div class="pra-container"><h2>Míchání barev</h2><p>Výsledná barva vzniká kombinací hodnot R, G a B. Každá složka může mít hodnotu od 0 do 255.</p><div class="pra-color-table-wrap"><table class="pra-color-table"><thead><tr><th>Barva</th><th>Ukázka</th><th>R</th><th>G</th><th>B</th></tr></thead><tbody><tr><td>Červená</td><td><span class="pra-color-chip" style="background:rgb(255,0,0)"></span></td><td>255</td><td>0</td><td>0</td></tr><tr><td>Zelená</td><td><span class="pra-color-chip" style="background:rgb(0,255,0)"></span></td><td>0</td><td>255</td><td>0</td></tr><tr><td>Modrá</td><td><span class="pra-color-chip" style="background:rgb(0,0,255)"></span></td><td>0</td><td>0</td><td>255</td></tr><tr><td>Žlutá</td><td><span class="pra-color-chip" style="background:rgb(255,255,0)"></span></td><td>255</td><td>255</td><td>0</td></tr><tr><td>Azurová</td><td><span class="pra-color-chip" style="background:rgb(0,255,255)"></span></td><td>0</td><td>255</td><td>255</td></tr><tr><td>Purpurová</td><td><span class="pra-color-chip" style="background:rgb(255,0,255)"></span></td><td>255</td><td>0</td><td>255</td></tr><tr><td>Růžová</td><td><span class="pra-color-chip" style="background:rgb(255,40,120)"></span></td><td>255</td><td>40</td><td>120</td></tr><tr><td>Bílá</td><td><span class="pra-color-chip" style="background:rgb(255,255,255)"></span></td><td>255</td><td>255</td><td>255</td></tr></tbody></table></div><div class="pra-small-note">Skutečný odstín závisí na konkrétní LED, použitých rezistorech a citlivosti lidského oka.</div></div></section>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Míchání barev</h2>
+      <p>
+        Výsledná barva vzniká kombinací hodnot R, G a B. Každá složka může mít hodnotu od 0 do 255.
+      </p>
+      <div class="pra-color-table-wrap">
+        <table class="pra-color-table">
+          <thead>
+            <tr>
+              <th>Barva</th>
+              <th>Ukázka</th>
+              <th>R</th>
+              <th>G</th>
+              <th>B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Červená</td>
+              <td><span class="pra-color-chip" style="background: rgb(255, 0, 0)"></span></td>
+              <td>255</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Zelená</td>
+              <td><span class="pra-color-chip" style="background: rgb(0, 255, 0)"></span></td>
+              <td>0</td>
+              <td>255</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Modrá</td>
+              <td><span class="pra-color-chip" style="background: rgb(0, 0, 255)"></span></td>
+              <td>0</td>
+              <td>0</td>
+              <td>255</td>
+            </tr>
+            <tr>
+              <td>Žlutá</td>
+              <td><span class="pra-color-chip" style="background: rgb(255, 255, 0)"></span></td>
+              <td>255</td>
+              <td>255</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Azurová</td>
+              <td><span class="pra-color-chip" style="background: rgb(0, 255, 255)"></span></td>
+              <td>0</td>
+              <td>255</td>
+              <td>255</td>
+            </tr>
+            <tr>
+              <td>Purpurová</td>
+              <td><span class="pra-color-chip" style="background: rgb(255, 0, 255)"></span></td>
+              <td>255</td>
+              <td>0</td>
+              <td>255</td>
+            </tr>
+            <tr>
+              <td>Růžová</td>
+              <td><span class="pra-color-chip" style="background: rgb(255, 40, 120)"></span></td>
+              <td>255</td>
+              <td>40</td>
+              <td>120</td>
+            </tr>
+            <tr>
+              <td>Bílá</td>
+              <td><span class="pra-color-chip" style="background: rgb(255, 255, 255)"></span></td>
+              <td>255</td>
+              <td>255</td>
+              <td>255</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pra-small-note">
+        Skutečný odstín závisí na konkrétní LED, použitých rezistorech a citlivosti lidského oka.
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Úkol 1 – tři úrovně jasu</h2><div class="pra-task-box"><h3>Zhasnuto, 50 % a 100 %</h3><p>Vyberte jednu barevnou složku RGB LED. Jednotlivé podúkoly na sebe navazují.</p><ol class="pra-task-list"><li>Nastavte hodnotu 0.</li><li>Po jedné sekundě nastavte hodnotu 128.</li><li>Po další sekundě nastavte hodnotu 255.</li><li>Po další sekundě LED zhasněte.</li><li>Celý cyklus nechte stále opakovat.</li></ol><div class="pra-callout"><strong>Rozšiřující úkol:</strong> Vyzkoušejte program pro všechny tři barevné složky.</div></div></div></section>
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Úkol 1 – tři úrovně jasu</h2>
+      <div class="pra-task-box">
+        <h3>Zhasnuto, 50 % a 100 %</h3>
+        <p>Vyberte jednu barevnou složku RGB LED. Jednotlivé podúkoly na sebe navazují.</p>
+        <ol class="pra-task-list">
+          <li>Nastavte hodnotu 0.</li>
+          <li>Po jedné sekundě nastavte hodnotu 128.</li>
+          <li>Po další sekundě nastavte hodnotu 255.</li>
+          <li>Po další sekundě LED zhasněte.</li>
+          <li>Celý cyklus nechte stále opakovat.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Vyzkoušejte program pro všechny tři barevné složky.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section"><div class="pra-container"><h2>Úkol 2 – plynulá změna jasu</h2><div class="pra-task-box"><h3>Rozsvícení a zhasnutí pomocí cyklu</h3><ol class="pra-task-list"><li>Pomocí cyklu <strong>for</strong> měňte jas od 0 do 255.</li><li>V každém průchodu použijte <strong>analogWrite()</strong>.</li><li>Přidejte krátkou prodlevu.</li><li>Druhým cyklem snižte jas zpět na 0.</li><li>Program nechte stále opakovat.</li></ol><div class="pra-callout"><strong>Rozšiřující úkol:</strong> Změňte krok cyklu na 5 nebo 10 a porovnejte plynulost.</div></div></div></section>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Úkol 2 – plynulá změna jasu</h2>
+      <div class="pra-task-box">
+        <h3>Rozsvícení a zhasnutí pomocí cyklu</h3>
+        <ol class="pra-task-list">
+          <li>Pomocí cyklu <strong>for</strong> měňte jas od 0 do 255.</li>
+          <li>V každém průchodu použijte <strong>analogWrite()</strong>.</li>
+          <li>Přidejte krátkou prodlevu.</li>
+          <li>Druhým cyklem snižte jas zpět na 0.</li>
+          <li>Program nechte stále opakovat.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Změňte krok cyklu na 5 nebo 10 a porovnejte plynulost.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Potenciometr ovládá jas</h2><p><strong>analogRead()</strong> vrací 0 až 1023, zatímco <strong>analogWrite()</strong> očekává 0 až 255. Rozsah převedeme funkcí <strong>map()</strong>.</p><pre class="pra-code"><code>int hodnotaPotenciometru = analogRead(A0);
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Potenciometr ovládá jas</h2>
+      <p>
+        <strong>analogRead()</strong> vrací 0 až 1023, zatímco
+        <strong>analogWrite()</strong> očekává 0 až 255. Rozsah převedeme funkcí
+        <strong>map()</strong>.
+      </p>
+      <pre class="pra-code"><code>int hodnotaPotenciometru = analogRead(A0);
 int jas = map(hodnotaPotenciometru, 0, 1023, 0, 255);
-analogWrite(pinCervena, jas);</code></pre><div class="pra-task-box"><h3>Úkol 3 – řízení jasu potenciometrem</h3><ol class="pra-task-list"><li>Připojte potenciometr na A0.</li><li>Načtěte jeho hodnotu funkcí <strong>analogRead()</strong>.</li><li>Převeďte ji funkcí <strong>map()</strong> na 0 až 255.</li><li>Nastavujte jas jedné barevné složky.</li><li>Vypisujte původní i převedenou hodnotu do sériového monitoru.</li></ol><div class="pra-callout"><strong>Rozšiřující úkol:</strong> Jednu barvu zesilujte a druhou současně zeslabujte.</div></div></div></section>
+analogWrite(pinCervena, jas);</code></pre>
+      <div class="pra-task-box">
+        <h3>Úkol 3 – řízení jasu potenciometrem</h3>
+        <ol class="pra-task-list">
+          <li>Připojte potenciometr na A0.</li>
+          <li>Načtěte jeho hodnotu funkcí <strong>analogRead()</strong>.</li>
+          <li>Převeďte ji funkcí <strong>map()</strong> na 0 až 255.</li>
+          <li>Nastavujte jas jedné barevné složky.</li>
+          <li>Vypisujte původní i převedenou hodnotu do sériového monitoru.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Jednu barvu zesilujte a druhou současně zeslabujte.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section"><div class="pra-container"><h2>Úkol 4 – vlastní barvy</h2><div class="pra-task-box"><h3>Míchání barevných složek</h3><ol class="pra-task-list"><li>Nastavte růžovou barvu.</li><li>Nastavte žlutou barvu.</li><li>Nastavte azurovou barvu.</li><li>Nastavte bílou barvu.</li><li>Vytvořte vlastní odstín a zapište jeho hodnoty R, G a B.</li></ol><div class="pra-callout"><strong>Rozšiřující úkol:</strong> Vytvořte funkci <strong>nastavBarvu(r, g, b)</strong>.</div></div></div></section>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Úkol 4 – vlastní barvy</h2>
+      <div class="pra-task-box">
+        <h3>Míchání barevných složek</h3>
+        <ol class="pra-task-list">
+          <li>Nastavte růžovou barvu.</li>
+          <li>Nastavte žlutou barvu.</li>
+          <li>Nastavte azurovou barvu.</li>
+          <li>Nastavte bílou barvu.</li>
+          <li>Vytvořte vlastní odstín a zapište jeho hodnoty R, G a B.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Vytvořte funkci <strong>nastavBarvu(r, g, b)</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Úkol 5 – plynulý přechod barev</h2><div class="pra-task-box"><h3>Modrá → zelená → modrá</h3><ol class="pra-task-list"><li>Nastavte počáteční modrou barvu.</li><li>V cyklu zvyšujte zelenou složku.</li><li>Ve stejném cyklu snižujte modrou složku.</li><li>Po dosažení zelené vytvořte opačný přechod.</li><li>Rychlost upravte pomocí <strong>delay()</strong>.</li></ol><div class="pra-callout"><strong>Rozšiřující úkol:</strong> Přidejte přechody zelená → červená a červená → modrá.</div></div></div></section>
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Úkol 5 – plynulý přechod barev</h2>
+      <div class="pra-task-box">
+        <h3>Modrá → zelená → modrá</h3>
+        <ol class="pra-task-list">
+          <li>Nastavte počáteční modrou barvu.</li>
+          <li>V cyklu zvyšujte zelenou složku.</li>
+          <li>Ve stejném cyklu snižujte modrou složku.</li>
+          <li>Po dosažení zelené vytvořte opačný přechod.</li>
+          <li>Rychlost upravte pomocí <strong>delay()</strong>.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Přidejte přechody zelená → červená a červená → modrá.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section"><div class="pra-container"><h2>Úkol 6 – tři potenciometry</h2><div class="pra-task-box"><h3>Ruční mixáž RGB barev</h3><p>Každý potenciometr bude nastavovat jednu barevnou složku.</p><ul class="pra-task-list"><li>R → A0</li><li>G → A1</li><li>B → A2</li></ul><ol class="pra-task-list"><li>Načtěte hodnoty všech tří potenciometrů.</li><li>Každou převeďte na rozsah 0 až 255.</li><li>Výsledky odešlete na příslušné RGB výstupy.</li><li>Vypisujte R, G a B do sériového monitoru.</li><li>Namíchejte růžovou, oranžovou, fialovou a bílou.</li></ol><div class="pra-callout"><strong>Rozšiřující úkol:</strong> Přidejte tlačítko, které vypíše aktuální hodnoty jako uloženou barvu.</div></div></div></section>
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Úkol 6 – tři potenciometry</h2>
+      <div class="pra-task-box">
+        <h3>Ruční mixáž RGB barev</h3>
+        <p>Každý potenciometr bude nastavovat jednu barevnou složku.</p>
+        <ul class="pra-task-list">
+          <li>R → A0</li>
+          <li>G → A1</li>
+          <li>B → A2</li>
+        </ul>
+        <ol class="pra-task-list">
+          <li>Načtěte hodnoty všech tří potenciometrů.</li>
+          <li>Každou převeďte na rozsah 0 až 255.</li>
+          <li>Výsledky odešlete na příslušné RGB výstupy.</li>
+          <li>Vypisujte R, G a B do sériového monitoru.</li>
+          <li>Namíchejte růžovou, oranžovou, fialovou a bílou.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Přidejte tlačítko, které vypíše aktuální hodnoty jako
+          uloženou barvu.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="pra-section alt"><div class="pra-container"><h2>Shrnutí kapitoly</h2><div class="pra-summary"><div class="pra-summary-card"><strong>PWM</strong><span>Mění průměrný výkon rychlým přepínáním digitálního výstupu.</span></div><div class="pra-summary-card"><strong>analogWrite()</strong><span>Nastavuje PWM hodnotu od 0 do 255.</span></div><div class="pra-summary-card"><strong>RGB LED</strong><span>Kombinuje červenou, zelenou a modrou složku.</span></div></div></div></section>
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Shrnutí kapitoly</h2>
+      <div class="pra-summary">
+        <div class="pra-summary-card">
+          <strong>PWM</strong
+          ><span>Mění průměrný výkon rychlým přepínáním digitálního výstupu.</span>
+        </div>
+        <div class="pra-summary-card">
+          <strong>analogWrite()</strong><span>Nastavuje PWM hodnotu od 0 do 255.</span>
+        </div>
+        <div class="pra-summary-card">
+          <strong>RGB LED</strong><span>Kombinuje červenou, zelenou a modrou složku.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="pra-back"><a href="index.html">Zpět na obsah</a></div>
-<footer class="pra-author"><div class="pra-author-content"><span class="pra-author-item"><img src="picture/1.png" alt="" role="presentation" style="width:25px;height:35px"><span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span></span><span class="pra-author-item"><img src="picture/2.png" alt="" role="presentation" style="width:35px;height:20px"><span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span></span></div></footer>
-<div class="pra-footer">Gymnázium a SPŠEI Frenštát pod Radhoštěm</div>
+  <div class="pra-back"><a href="index.html">Zpět na obsah</a></div>
+  <footer class="pra-author">
+    <div class="pra-author-content">
+      <span class="pra-author-item"
+        ><img
+          src="picture/1.png"
+          alt=""
+          role="presentation"
+          style="width: 25px; height: 35px"
+        /><span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span></span
+      ><span class="pra-author-item"
+        ><img
+          src="picture/2.png"
+          alt=""
+          role="presentation"
+          style="width: 35px; height: 20px"
+        /><span>E-mail:&nbsp;<strong>lukasvavros519@gmail.com</strong></span></span
+      >
+    </div>
+  </footer>
+  <div class="pra-footer">Gymnázium a SPŠEI Frenštát pod Radhoštěm</div>
 </div>

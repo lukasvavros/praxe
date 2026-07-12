@@ -535,16 +535,42 @@ void loop() {
   delay(800);
 }</code></pre>
 
-      <div class="pra-task-box">
-        <h3>Úkol 1 – základní pohyb serva</h3>
-        <ol class="pra-task-list">
-          <li>Připojte servo podle zapojení v kapitole.</li>
-          <li>Nahrajte program a sledujte pohyb osy mezi úhly 0°, 90° a 180°.</li>
-          <li>Vyzkoušejte změnit úhly i hodnoty funkce <strong>delay()</strong>.</li>
-          <li>Upravte program tak, aby se servo vracelo zpět do polohy 0°.</li>
-        </ol>
-      </div>
-    </div>
+     <div class="pra-task-box">
+  <h3>Úkol 1 – základní pohyb serva</h3>
+
+  <p>
+    Připojte servomotor k Arduinu podle schématu v této kapitole.
+    Použijte digitální pin <strong>D9</strong> jako řídicí signál.
+  </p>
+
+  <p><strong>Zapojení:</strong></p>
+
+  <ul class="pra-task-list">
+    <li>hnědý (nebo černý) vodič → <strong>GND</strong>,</li>
+    <li>červený vodič → <strong>5 V</strong>,</li>
+    <li>oranžový (nebo žlutý) vodič → <strong>D9</strong>.</li>
+  </ul>
+
+  <p><strong>Úkol:</strong></p>
+
+  <ol class="pra-task-list">
+    <li>Vytvořte nový sketch a přidejte knihovnu <strong>Servo</strong>.</li>
+    <li>Vytvořte objekt serva a připojte jej k pinu <strong>D9</strong> pomocí funkce <strong>attach()</strong>.</li>
+    <li>Postupně nastavte polohu serva na <strong>0°</strong>, <strong>90°</strong> a <strong>180°</strong>.</li>
+    <li>Mezi jednotlivými polohami použijte funkci <strong>delay()</strong>, aby byl pohyb dobře viditelný.</li>
+    <li>Po dosažení 180° vraťte servo zpět do polohy <strong>0°</strong>.</li>
+  </ol>
+
+  <p>
+    Servo se bude neustále pohybovat mezi krajními polohami.
+  </p>
+
+  <div class="pra-callout">
+    <strong>Rozšiřující úkol:</strong>
+    Upravte program tak, aby se servo zastavilo také v poloze
+    <strong>45°</strong> a <strong>135°</strong>.
+  </div>
+</div>
   </section>
 
   <section class="pra-section">
@@ -582,14 +608,51 @@ void loop() {
 }</code></pre>
 
       <div class="pra-task-box">
-        <h3>Úkoly – servo a potenciometr</h3>
-        <ol class="pra-task-list">
-          <li>Vytvořte program, který pohybuje servem plynule od 0° do 180° po jednom stupni.</li>
-          <li>Po dosažení 180° nechte servo plynule vrátit zpět do polohy 0°.</li>
-          <li>Připojte potenciometr na analogový vstup A0.</li>
-          <li>Pomocí funkce <strong>map()</strong> nastavujte polohu serva podle natočení potenciometru.</li>
-        </ol>
-      </div>
+  <h3>Úkoly – servo a potenciometr</h3>
+
+  <p>
+    Připojte potenciometr k analogovému vstupu <strong>A0</strong> a
+    servomotor na digitální pin <strong>D9</strong>.
+  </p>
+
+  <p><strong>Jednotlivé body na sebe navazují. Každý další úkol rozšiřuje předchozí program.</strong></p>
+
+  <ol class="pra-task-list">
+    <li>
+      Vytvořte program, který bude plynule otáčet servomotorem od
+      <strong>0° do 180°</strong> po jednom stupni.
+    </li>
+
+    <li>
+      Po dosažení úhlu <strong>180°</strong> nechte servo stejným způsobem
+      vrátit zpět do polohy <strong>0°</strong>.
+    </li>
+
+    <li>
+      Připojte potenciometr na analogový vstup <strong>A0</strong> a
+      funkcí <strong>analogRead()</strong> načtěte jeho hodnotu.
+    </li>
+
+    <li>
+      Pomocí funkce <strong>map()</strong> převeďte hodnotu potenciometru
+      z rozsahu <strong>0–1023</strong> na úhel
+      <strong>0–180°</strong>.
+    </li>
+
+    <li>
+      Nastavujte polohu serva podle natočení potenciometru pomocí funkce
+      <strong>servo.write()</strong>.
+    </li>
+  </ol>
+
+  <div class="pra-callout">
+    <strong>Rozšiřující úkol:</strong>
+    Vypisujte aktuální hodnotu potenciometru i vypočítaný úhel do
+    sériového monitoru pomocí funkcí
+    <strong>Serial.print()</strong> a
+    <strong>Serial.println()</strong>.
+  </div>
+</div>
     </div>
   </section>
 

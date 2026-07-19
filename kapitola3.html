@@ -250,6 +250,65 @@
     <p>Praxe – Arduino | 3. ročník</p>
   </header>
 
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2>Opakování z druhé lekce – digitální a analogový vstup</h2>
+
+      <p>
+        V následujícím programu jsou tři chyby. Program má rozsvítit LED pouze
+        při stisknutí tlačítka a současně vypisovat hodnotu analogového vstupu
+        do sériového monitoru.
+      </p>
+
+      <div class="pra-task-box">
+        <h3>Úloha – najděte a opravte chyby v programu</h3>
+
+        <p>
+          <strong>Cíl:</strong> Prohlédněte si program, najděte tři chybné řádky
+          a opravte je tak, aby program pracoval podle zadání.
+        </p>
+
+        <pre class="pra-code"><code>int tlacitko = 2;
+int led = 8;
+
+void setup() {
+  pinMode(tlacitko, INPUT_PULLUP);
+  pinMode(led, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  int stavTlacitka = digitalRead(tlacitko);
+
+  if (stavTlacitka == HIGH) {
+    digitalWrite(led, HIGH);
+  } else {
+    digitalWrite(led, LOW);
+  }
+
+  int hodnota = analogRead(A0);
+  Serial.print(hodnota);
+
+  delay(200);
+}</code></pre>
+
+        <h4>Co má program dělat</h4>
+        <ol class="pra-task-list">
+          <li>LED na pinu <strong>D8</strong> se rozsvítí pouze při stisknutí tlačítka.</li>
+          <li>Tlačítko na pinu <strong>D2</strong> je zapojené mezi pin a <strong>GND</strong> a používá režim <strong>INPUT_PULLUP</strong>.</li>
+          <li>Hodnota z analogového vstupu <strong>A0</strong> se vypisuje do sériového monitoru.</li>
+          <li>Každá naměřená hodnota se zobrazí na samostatném řádku.</li>
+        </ol>
+
+        <div class="pra-small-note">
+          <strong>Nápověda:</strong> Zkontrolujte nastavení pinu LED, logickou hodnotu
+          stisknutého tlačítka a způsob výpisu do sériového monitoru.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pra-section alt">
     <div class="pra-container">
       <h2>Cíle kapitoly</h2>

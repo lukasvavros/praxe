@@ -89,6 +89,11 @@
     font-weight: 700;
   }
 
+  .arduino-warning {
+    background: #fff4e8;
+    border-left: 6px solid var(--orange);
+  }
+
   .arduino-back {
     background: var(--light);
     padding: clamp(20px, 3vw, 34px);
@@ -200,23 +205,39 @@
         <div class="arduino-rules">
 
           <div class="arduino-rule">
-            <strong>Dobrovolné známky za aktivitu na hodině</strong><br>
+            <strong>Krátké testy na probrané učivo</strong><br>
             Váha známky: <strong>0,25</strong>
           </div>
 
           <div class="arduino-rule">
-            <strong>Samostatná tvorba programu na hodině</strong><br>
-            Přibližně <strong>3× za pololetí</strong>.<br>
+            <strong>Dobrovolná známka za aktivitu v hodině</strong><br>
+            Váha známky: <strong>0,25</strong>
+          </div>
+
+          <div class="arduino-rule">
+            <strong>Jeden samostatný projekt</strong><br>
+            Projekt je ohodnocen <strong>dvěma známkami</strong>.
+          </div>
+
+          <div class="arduino-rule">
+            <strong>Realizace projektu</strong><br>
+            Zapojení, program a prezentace.<br>
             Váha známky: <strong>1,0</strong>
           </div>
 
           <div class="arduino-rule">
-            <strong>Samostatný projekt</strong><br>
-            Projekt je zpracováván zčásti ve škole a zčásti doma.<br>
-            Hodnocení se skládá ze dvou známek:
-            <br>
-            program – váha <strong>1,0</strong>,
-            dokumentace – váha <strong>1,0</strong>.
+            <strong>Dokumentace projektu</strong><br>
+            Váha známky: <strong>1,0</strong>
+          </div>
+
+          <div class="arduino-rule arduino-warning">
+            <strong>Podmínka úspěšného dokončení předmětu</strong><br>
+            Úspěšné odevzdání projektu je nezbytnou podmínkou pro
+            úspěšné dokončení předmětu.<br><br>
+
+            Neodevzdaný nebo neuznaný projekt či jeho dokumentace
+            znamená známku <strong>Nedostatečný</strong> za tuto část PRA,
+            a tím i na vysvědčení <strong>(viz školní řád)</strong>.
           </div>
 
         </div>
@@ -226,7 +247,9 @@
 
     <!-- Návrat -->
     <div class="arduino-back">
-      <a href="https://lukasvavros.github.io/praxe/">Zpět na hlavní stránku</a>
+      <a href="https://lukasvavros.github.io/praxe/">
+        Zpět na hlavní stránku
+      </a>
     </div>
 
     <!-- Autor a kontakt -->

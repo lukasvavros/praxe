@@ -469,6 +469,157 @@
       text-align: center;
     }
   }
+  /* Kontrolní otázky */
+.pra-quiz-intro {
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.pra-question-list {
+  display: grid;
+  gap: 16px;
+}
+
+.pra-question {
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid #e2e2e2;
+  border-left: 6px solid var(--orange);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.pra-question summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 60px 20px 22px;
+  color: var(--dark);
+  font-size: clamp(15px, 1.35vw, 18px);
+  font-weight: 700;
+  line-height: 1.6;
+  transition: background 0.2s ease;
+}
+
+.pra-question summary::-webkit-details-marker {
+  display: none;
+}
+
+.pra-question summary:hover {
+  background: #f7f7f7;
+}
+
+.pra-question summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.pra-question[open] summary::after {
+  content: "−";
+}
+
+.pra-question[open] summary {
+  background: var(--light);
+}
+
+.pra-question-number {
+  color: var(--orange);
+  margin-right: 6px;
+}
+
+.pra-answer {
+  padding: 20px 22px 24px;
+  border-top: 1px solid #e5e5e5;
+  background: var(--white);
+}
+
+.pra-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.pra-answer-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pra-question-image,
+.pra-answer-image {
+  max-width: 750px;
+  margin: 18px auto;
+}
+
+.pra-question-image img,
+.pra-answer-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.pra-answer-code {
+  margin: 14px 0 0;
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #f1f2f4;
+  color: #25262d;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.6;
+}
+
+.pra-quiz-note {
+  margin-top: 24px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: var(--dark);
+  color: var(--white);
+  line-height: 1.7;
+}
+
+.pra-quiz-note strong {
+  color: var(--orange);
+}
+
+@media (max-width: 620px) {
+  .pra-question summary {
+    padding: 17px 54px 17px 17px;
+  }
+
+  .pra-question summary::after {
+    right: 15px;
+  }
+
+  .pra-answer {
+    padding: 17px;
+  }
+}
 </style>
 
 <div class="pra-chapter">
@@ -902,7 +1053,321 @@ void loop() {
       </div>
     </div>
   </section>
+<section class="pra-section alt">
+  <div class="pra-container">
+    <h2>Kontrolní otázky</h2>
 
+    <p class="pra-quiz-intro">
+      Zkuste si nejprve na každou otázku odpovědět sami.
+      Poté klikněte na otázku a zobrazte si správnou odpověď.
+    </p>
+
+    <div class="pra-question-list">
+
+      <!-- OTÁZKA 1 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">1.</span>
+          Co je Arduino a k čemu se používá?
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Arduino je platforma určená pro výuku a tvorbu elektronických projektů.
+            Obsahuje mikrokontrolér, který vykonává nahraný program a může pomocí
+            vstupů získávat informace ze svého okolí a pomocí výstupů ovládat
+            například LED diody, motory, displeje nebo relé.
+          </p>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 2 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">2.</span>
+          Jaký mikrokontrolér používá Arduino UNO a jaká je jeho taktovací frekvence?
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Arduino UNO používá mikrokontrolér
+            <strong>ATmega328</strong>, který pracuje s taktovací frekvencí
+            <strong>16 MHz</strong>.
+          </p>
+
+          <div class="pra-answer-image">
+            <img src="picture/4.png"
+                 alt="Popis základních částí desky Arduino UNO"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 3 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">3.</span>
+          Jaký je rozdíl mezi funkcemi setup() a loop()?
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Funkce <strong>setup()</strong> se vykoná pouze jednou po spuštění
+            nebo restartování Arduina. Používá se například k nastavení pinů
+            nebo spuštění sériové komunikace.
+          </p>
+
+          <p>
+            Funkce <strong>loop()</strong> se potom vykonává stále dokola,
+            dokud je Arduino zapnuté.
+          </p>
+
+          <pre class="pra-answer-code"><code>void setup() {
+  // provede se jednou
+}
+
+void loop() {
+  // opakuje se stále dokola
+}</code></pre>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 4 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">4.</span>
+          Co provede následující příkaz?
+          <code>digitalWrite(13, HIGH);</code>
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Příkaz nastaví digitální pin 13 do logického stavu
+            <strong>HIGH</strong>. Pokud je pin nastaven jako výstup,
+            objeví se na něm vysoká logická úroveň a vestavěná LED na
+            Arduino UNO se rozsvítí.
+          </p>
+
+          <p>
+            Před použitím musí být pin nastaven jako výstup:
+          </p>
+
+          <pre class="pra-answer-code"><code>pinMode(13, OUTPUT);</code></pre>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 5 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">5.</span>
+          Podívejte se na obrázek. Jak poznáme anodu a katodu běžné LED diody?
+
+          <div class="pra-question-image">
+            <img src="picture/11.png"
+                 alt="LED diody s anodou a katodou"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            <strong>Anoda (+)</strong> bývá u nové LED diody delší vývod.
+            Připojuje se směrem ke kladnému napětí.
+          </p>
+
+          <p>
+            <strong>Katoda (−)</strong> bývá kratší vývod. Na pouzdru LED ji lze
+            často poznat také podle zploštělé strany. Katoda se obvykle připojuje
+            směrem k GND.
+          </p>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 6 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">6.</span>
+          Proč při zapojení externí LED k Arduinu používáme sériový rezistor?
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Rezistor omezuje elektrický proud procházející LED diodou.
+            Bez rezistoru by mohl protékat příliš velký proud, který by mohl
+            poškodit LED diodu nebo výstup mikrokontroléru.
+          </p>
+
+          <div class="pra-answer-image">
+            <img src="picture/9.png"
+                 alt="Zapojení externí LED s rezistorem a Arduinem"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 7 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">7.</span>
+          Podívejte se na obrázek nepájivého pole. Jsou všechny otvory
+          nepájivého pole elektricky propojené?
+
+          <div class="pra-question-image">
+            <img src="picture/8.png"
+                 alt="Vnitřní propojení nepájivého pole"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Ne. Otvory jsou propojené pouze v určitých skupinách.
+            Ve střední pracovní oblasti jsou obvykle propojené skupiny několika
+            otvorů vedle sebe.
+          </p>
+
+          <p>
+            Boční napájecí lišty označené <strong>+</strong> a
+            <strong>−</strong> bývají propojené podélně. U některých typů
+            nepájivých polí však mohou být uprostřed přerušené.
+          </p>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 8 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">8.</span>
+          Jaké tři základní části můžeme rozlišit při popisu embedded systému?
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Embedded systém můžeme zjednodušeně rozdělit na:
+          </p>
+
+          <p>
+            <strong>Vstupy → programovou logiku → výstupy.</strong>
+          </p>
+
+          <p>
+            Vstupem může být například tlačítko nebo senzor. Program získané
+            informace vyhodnotí a podle výsledku ovládá výstup, například LED,
+            motor, displej nebo bzučák.
+          </p>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 9 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">9.</span>
+          K čemu slouží Serial.begin(9600), Serial.print() a Serial.println()?
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            <strong>Serial.begin(9600)</strong> spustí sériovou komunikaci
+            rychlostí 9600 baudů.
+          </p>
+
+          <p>
+            <strong>Serial.print()</strong> vypíše text nebo hodnotu bez přechodu
+            na nový řádek. <strong>Serial.println()</strong> po vypsání hodnoty
+            přejde na nový řádek.
+          </p>
+
+          <pre class="pra-answer-code"><code>void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.println("Arduino bezi.");
+}</code></pre>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 10 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">10.</span>
+          Co bude dělat následující program?
+
+          <pre class="pra-answer-code"><code>int led = 13;
+
+void setup() {
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(led, HIGH);
+  delay(500);
+
+  digitalWrite(led, LOW);
+  delay(500);
+}</code></pre>
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            LED na pinu 13 bude pravidelně blikat.
+          </p>
+
+          <p>
+            Nejprve se na <strong>500 ms rozsvítí</strong>, potom se na
+            <strong>500 ms zhasne</strong>. Funkce <strong>loop()</strong>
+            se neustále opakuje, takže celý cyklus trvá jednu sekundu.
+          </p>
+
+          <p>
+            LED tedy provede jeden celý cyklus bliknutí přibližně
+            <strong>jednou za sekundu</strong>.
+          </p>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="pra-quiz-note">
+      <strong>Tip:</strong>
+      Pokud dokážete na většinu otázek odpovědět ještě před rozbalením odpovědi,
+      máte základní principy této kapitoly zvládnuté.
+    </div>
+  </div>
+</section>
   <section class="pra-section">
     <div class="pra-container">
       <h2>Shrnutí kapitoly</h2>

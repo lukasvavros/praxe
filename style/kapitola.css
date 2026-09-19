@@ -1,10 +1,3 @@
-/* ============================================================
-   Praxe – Arduino | styly kapitoly
-   Používá se společně se soubory kapitola1.html, kapitola2.html, ...
-   Všechny selektory jsou uvnitř .pra-chapter, aby neovlivnily
-   zbytek stránky.
-   ============================================================ */
-
 .pra-chapter {
   --orange: #ee7203;
   --dark: #373841;
@@ -665,4 +658,44 @@
   .pra-answer {
     padding: 17px;
   }
+}
+
+
+/* ---------- Blikající LED na desce (samostatná komponenta) ---------- */
+.pra-chapter .pra-blink {
+  margin: 28px 0;
+  padding: clamp(16px, 3vw, 30px);
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  background: var(--white);
+}
+.pra-chapter .pra-blink figcaption { line-height: 1.7; margin-bottom: 14px; }
+.pra-chapter .pra-blink-pause { width: 18px; height: 18px; vertical-align: middle; accent-color: var(--orange); }
+.pra-chapter .pra-blink label { cursor: pointer; font-size: 15px; }
+.pra-chapter .pra-blink-pause:focus-visible { outline: 3px solid #087f8c; outline-offset: 3px; }
+.pra-chapter .pra-blink-board { display: block; width: 100%; max-width: 620px; height: auto; margin: 18px auto 0; }
+.pra-chapter .pra-blink-state { display: grid; text-align: center; font-weight: bold; margin: 8px 0 16px; }
+.pra-chapter .pra-blink-state span { grid-area: 1 / 1; }
+.pra-chapter .pra-blink-high { color: #925000; }
+.pra-chapter .pra-blink-low { color: #46515a; }
+/* 2 s na celý cyklus = 1 s HIGH + 1 s LOW, bez pozvolného stmívání. */
+.pra-chapter .pra-blink-light,
+.pra-chapter .pra-blink-high { animation: pra-led-on 2s step-end infinite; }
+.pra-chapter .pra-blink-low { animation: pra-led-off 2s step-end infinite; }
+.pra-chapter .pra-blink-pause:checked ~ .pra-blink-scene .pra-blink-light,
+.pra-chapter .pra-blink-pause:checked ~ .pra-blink-scene .pra-blink-high,
+.pra-chapter .pra-blink-pause:checked ~ .pra-blink-scene .pra-blink-low { animation-play-state: paused; }
+.pra-chapter .pra-blink .pra-blink-note,
+.pra-chapter .pra-blink .pra-blink-reduced { font-size: 14px; text-align: center; margin: 0; }
+.pra-chapter .pra-blink-reduced { display: none; }
+@keyframes pra-led-on { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes pra-led-off { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .pra-chapter .pra-blink-light,
+  .pra-chapter .pra-blink-high,
+  .pra-chapter .pra-blink-low { animation: none; }
+  .pra-chapter .pra-blink-low { opacity: 0; }
+  .pra-chapter .pra-blink-pause,
+  .pra-chapter .pra-blink label { display: none; }
+  .pra-chapter .pra-blink .pra-blink-reduced { display: block; margin-top: 8px; }
 }

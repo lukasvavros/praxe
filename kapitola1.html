@@ -1,626 +1,14 @@
-<style>
-  .pra-chapter {
-    --orange: #ee7203;
-    --dark: #373841;
-    --light: #f4f4f4;
-    --lighter: #fafafa;
-    --text: #373841;
-    --white: #ffffff;
-
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    overflow-x: hidden;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: var(--text);
-    background: var(--white);
-    box-sizing: border-box;
-  }
-
-  .pra-chapter *,
-  .pra-chapter *::before,
-  .pra-chapter *::after {
-    box-sizing: border-box;
-  }
-
-  .pra-hero {
-    background: var(--dark);
-    color: var(--white);
-    text-align: center;
-    padding: clamp(30px, 5vw, 60px) 20px;
-  }
-
-  .pra-hero h1 {
-    margin: 0;
-    font-size: clamp(30px, 4vw, 50px);
-    font-weight: 400;
-  }
-
-  .pra-hero p {
-    margin: 12px 0 0;
-    color: var(--orange);
-    font-size: clamp(15px, 1.7vw, 20px);
-  }
-
-  .pra-container {
-    width: min(1200px, 94%);
-    margin: 0 auto;
-  }
-
-  .pra-section {
-    padding: clamp(34px, 5vw, 70px) 0;
-    border-top: 1px solid #dddddd;
-  }
-
-  .pra-section.alt {
-    background: var(--lighter);
-  }
-
-  .pra-section h2 {
-    margin: 0 0 24px;
-    color: var(--dark);
-    font-size: clamp(26px, 3vw, 38px);
-    font-weight: 400;
-    border-bottom: 3px solid var(--orange);
-    padding-bottom: 12px;
-  }
-
-  .pra-section h3 {
-    margin: 34px 0 14px;
-    color: var(--dark);
-    font-size: clamp(21px, 2.2vw, 29px);
-  }
-
-  .pra-section p {
-    margin: 0 0 18px;
-    font-size: clamp(15px, 1.35vw, 18px);
-    line-height: 1.8;
-  }
-
-  .pra-highlight {
-    color: var(--orange);
-    font-weight: 700;
-  }
-
-  .pra-spec-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 26px;
-  }
-
-  .pra-spec-card {
-    padding: 18px;
-    border-radius: 14px;
-    border-top: 6px solid var(--orange);
-    background: var(--light);
-    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
-  }
-
-  .pra-spec-card strong {
-    display: block;
-    color: var(--orange);
-    margin-bottom: 7px;
-    font-size: clamp(16px, 1.45vw, 20px);
-  }
-
-  .pra-spec-card span {
-    display: block;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.55;
-  }
-
-  .pra-parts-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-top: 24px;
-  }
-
-  .pra-part {
-    padding: 16px 18px;
-    border-left: 6px solid var(--orange);
-    border-radius: 10px;
-    background: var(--light);
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.6;
-  }
-
-  .pra-part strong {
-    color: var(--orange);
-  }
-
-  .pra-hardware-images {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-    margin: 32px auto;
-  }
-
-  .pra-hardware-images img,
-  .pra-embedded-image img,
-  .pra-breadboard-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    padding: 14px;
-    border-radius: 14px;
-    background: var(--white);
-    border: 1px solid #e6e6e6;
-    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
-  }
-
-  .pra-breadboard-image {
-    margin: 32px auto;
-    max-width: 1200px;
-  }
-
-  .pra-embedded-image {
-    margin-top: 34px;
-  }
-
-  .pra-flow {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    align-items: center;
-    gap: 14px;
-    margin: 28px 0;
-  }
-
-  .pra-flow-box {
-    min-height: 145px;
-    padding: 20px;
-    border-radius: 18px;
-    text-align: center;
-    border: 3px solid var(--orange);
-    background: var(--white);
-  }
-
-  .pra-flow-box h4 {
-    margin: 0 0 10px;
-    color: var(--dark);
-    font-size: clamp(18px, 1.7vw, 23px);
-  }
-
-  .pra-flow-box p {
-    margin: 0;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.6;
-  }
-
-  .pra-flow-arrow {
-    color: var(--orange);
-    font-size: 38px;
-    font-weight: 700;
-  }
-
-  .pra-callout {
-    margin-top: 24px;
-    padding: 20px 24px;
-    border-left: 6px solid var(--orange);
-    border-radius: 10px;
-    background: var(--light);
-    font-size: clamp(14px, 1.2vw, 17px);
-    line-height: 1.7;
-  }
-
-  .pra-code {
-    margin: 20px 0;
-    padding: 20px;
-    overflow-x: auto;
-    border-radius: 12px;
-    background: #f1f2f4;
-    color: #25262d;
-    font-family: Consolas, "Courier New", monospace;
-    font-size: clamp(13px, 1.15vw, 16px);
-    line-height: 1.65;
-  }
-
-  .pra-code code {
-    font-family: inherit;
-  }
-
-  .pra-command-list,
-  .pra-task-list {
-    margin: 0;
-    padding-left: 24px;
-    font-size: clamp(15px, 1.35vw, 18px);
-    line-height: 1.8;
-  }
-
-  .pra-command-list li,
-  .pra-task-list li {
-    margin-bottom: 9px;
-  }
-
-  .pra-command-list code {
-    padding: 3px 7px;
-    border-radius: 5px;
-    background: #eeeeee;
-    font-family: Consolas, "Courier New", monospace;
-  }
-
-  .pra-task-box {
-    margin-top: 22px;
-    padding: 22px 24px;
-    border-radius: 14px;
-    border-top: 6px solid var(--orange);
-    background: var(--light);
-    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
-  }
-
-  .pra-task-box h3 {
-    margin-top: 0;
-  }
-
-  .pra-task-box .pra-breadboard-image {
-    margin-bottom: 0;
-  }
-
-  .pra-led-theory {
-    margin: 0 0 42px;
-    padding: clamp(22px, 3vw, 32px);
-    border-radius: 16px;
-    border-top: 6px solid var(--orange);
-    background: var(--light);
-    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
-  }
-
-  .pra-led-theory h3 {
-    margin: 0 0 12px;
-    color: var(--dark);
-    font-size: clamp(22px, 2.4vw, 30px);
-  }
-
-  .pra-led-intro {
-    margin-bottom: 24px !important;
-  }
-
-  .pra-led-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 0.9fr;
-    gap: 18px;
-    margin-top: 22px;
-  }
-
-  .pra-led-card {
-    padding: 20px;
-    border-radius: 12px;
-    background: var(--white);
-    border-left: 6px solid var(--orange);
-  }
-
-  .pra-led-card h4 {
-    margin: 0 0 10px;
-    color: var(--orange);
-    font-size: clamp(17px, 1.6vw, 21px);
-  }
-
-  .pra-led-card p {
-    margin: 0;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.7;
-  }
-
-  .pra-led-pins {
-    display: grid;
-    gap: 12px;
-  }
-
-  .pra-led-pin {
-    padding: 15px 16px;
-    border-radius: 10px;
-    background: var(--white);
-    border-left: 6px solid var(--orange);
-    line-height: 1.6;
-  }
-
-  .pra-led-note {
-    margin-top: 18px;
-    padding: 16px 18px;
-    border-radius: 10px;
-    background: var(--dark);
-    color: var(--white);
-    line-height: 1.7;
-  }
-
-  .pra-led-note strong {
-    color: var(--orange);
-  }
-
-  .pra-led-image {
-    max-width: 850px;
-    margin: 24px auto 0;
-  }
-
-  .pra-led-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    padding: 14px;
-    border-radius: 12px;
-    background: var(--white);
-    border: 1px solid #e6e6e6;
-    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
-  }
-
-  .pra-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .pra-summary-card {
-    padding: 20px;
-    border-radius: 14px;
-    background: var(--light);
-    border-top: 6px solid var(--orange);
-  }
-
-  .pra-summary-card strong {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--orange);
-    font-size: clamp(16px, 1.5vw, 20px);
-  }
-
-  .pra-summary-card span {
-    display: block;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.6;
-  }
-
-  .pra-back {
-    padding: 34px 20px;
-    text-align: center;
-    background: var(--light);
-  }
-
-  .pra-back a {
-    display: inline-block;
-    padding: 13px 24px;
-    border-radius: 999px;
-    background: var(--dark);
-    color: var(--white);
-    text-decoration: none;
-    font-size: 16px;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-
-  .pra-back a:hover {
-    background: var(--orange);
-    transform: translateY(-2px);
-  }
-
-  .pra-author {
-    background: var(--light);
-    padding: clamp(18px, 3vw, 28px);
-  }
-
-  .pra-author-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .pra-author-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 48px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: var(--white);
-    color: var(--dark);
-    font-size: clamp(13px, 1.1vw, 15px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .pra-footer {
-    background: var(--dark);
-    color: var(--white);
-    text-align: center;
-    padding: 12px 16px;
-    font-size: clamp(12px, 1vw, 14px);
-  }
-
-  @media (max-width: 850px) {
-    .pra-spec-grid,
-    .pra-summary,
-    .pra-led-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .pra-flow {
-      grid-template-columns: 1fr;
-    }
-
-    .pra-flow-arrow {
-      transform: rotate(90deg);
-      text-align: center;
-    }
-  }
-
-  @media (max-width: 620px) {
-    .pra-parts-list,
-    .pra-hardware-images {
-      grid-template-columns: 1fr;
-    }
-
-    .pra-section {
-      padding: 32px 0;
-    }
-
-    .pra-code {
-      padding: 15px;
-    }
-
-    .pra-author-content {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .pra-author-item {
-      justify-content: center;
-      border-radius: 12px;
-      text-align: center;
-    }
-  }
-  /* Kontrolní otázky */
-.pra-quiz-intro {
-  max-width: 900px;
-  margin-bottom: 28px;
-}
-
-.pra-question-list {
-  display: grid;
-  gap: 16px;
-}
-
-.pra-question {
-  border-radius: 14px;
-  background: var(--white);
-  border: 1px solid #e2e2e2;
-  border-left: 6px solid var(--orange);
-  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-}
-
-.pra-question summary {
-  position: relative;
-  cursor: pointer;
-  list-style: none;
-  padding: 20px 60px 20px 22px;
-  color: var(--dark);
-  font-size: clamp(15px, 1.35vw, 18px);
-  font-weight: 700;
-  line-height: 1.6;
-  transition: background 0.2s ease;
-}
-
-.pra-question summary::-webkit-details-marker {
-  display: none;
-}
-
-.pra-question summary:hover {
-  background: #f7f7f7;
-}
-
-.pra-question summary::after {
-  content: "+";
-  position: absolute;
-  top: 50%;
-  right: 22px;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: var(--orange);
-  color: var(--white);
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.pra-question[open] summary::after {
-  content: "−";
-}
-
-.pra-question[open] summary {
-  background: var(--light);
-}
-
-.pra-question-number {
-  color: var(--orange);
-  margin-right: 6px;
-}
-
-.pra-answer {
-  padding: 20px 22px 24px;
-  border-top: 1px solid #e5e5e5;
-  background: var(--white);
-}
-
-.pra-answer p:last-child {
-  margin-bottom: 0;
-}
-
-.pra-answer-label {
-  display: inline-block;
-  margin-bottom: 12px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: var(--orange);
-  color: var(--white);
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.pra-question-image,
-.pra-answer-image {
-  max-width: 750px;
-  margin: 18px auto;
-}
-
-.pra-question-image img,
-.pra-answer-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  padding: 12px;
-  border-radius: 12px;
-  background: var(--white);
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
-}
-
-.pra-answer-code {
-  margin: 14px 0 0;
-  padding: 16px;
-  overflow-x: auto;
-  border-radius: 10px;
-  background: #f1f2f4;
-  color: #25262d;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: clamp(13px, 1.1vw, 15px);
-  line-height: 1.6;
-}
-
-.pra-quiz-note {
-  margin-top: 24px;
-  padding: 18px 22px;
-  border-radius: 12px;
-  background: var(--dark);
-  color: var(--white);
-  line-height: 1.7;
-}
-
-.pra-quiz-note strong {
-  color: var(--orange);
-}
-
-@media (max-width: 620px) {
-  .pra-question summary {
-    padding: 17px 54px 17px 17px;
-  }
-
-  .pra-question summary::after {
-    right: 15px;
-  }
-
-  .pra-answer {
-    padding: 17px;
-  }
-}
-</style>
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kapitola 1: Úvod do Arduina | Praxe – Arduino</title>
+  <link rel="stylesheet" href="style/kapitola.css">
+</head>
+
+<body>
 
 <div class="pra-chapter">
 
@@ -895,7 +283,7 @@ void loop() {
               tedy světla.
             </p>
 
-            <p style="margin-top: 14px;">
+            <p>
               Barva vyzařovaného světla závisí na použitém polovodičovém materiálu.
               Intenzita svitu se mění podle velikosti proudu, který diodou prochází.
             </p>
@@ -975,7 +363,7 @@ void loop() {
         </li>
       </ul>
 
-      <p style="margin-top: 24px;">
+      <p>
         Při zapojování externí LED je nutné použít sériový rezistor. Ten omezuje proud,
         který LED prochází, a chrání ji před poškozením.
       </p>
@@ -996,9 +384,9 @@ void loop() {
         <h3>Úkol 1</h3>
 
         <ol class="pra-task-list">
-          <li>Zapojte do nepájivého pole LEDku s rezistorem. Připojte anodu LEDky na některý digitální pin Arduina (vyberte jeden z pinů 2-12). 
+          <li>Zapojte do nepájivého pole LEDku s rezistorem. Připojte anodu LEDky na některý digitální pin Arduina (vyberte jeden z pinů 2-12).
             Napište program tak, aby se vždy po 1s střídavě rozsvěcovala LEDka na Arduino desce (na pinu 13) a LEDka na nepájivém poli.</li>
-          <li> V posledním kroku se budou střídávě rozsvěcovat všechny 3 LED diody.</li>
+          <li>V posledním kroku se budou střídávě rozsvěcovat všechny 3 LED diody.</li>
         </ol>
 
         <div class="pra-breadboard-image">
@@ -1053,429 +441,423 @@ void loop() {
       </div>
     </div>
   </section>
-<section class="pra-section alt">
-  <div class="pra-container">
-    <h2>Kontrolní otázky</h2>
 
-    <p class="pra-quiz-intro">
-      Odpovězte si nejprve sami. Kliknutím na otázku si potom můžete
-      zobrazit správnou odpověď.
-    </p>
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2>Kontrolní otázky</h2>
 
-    <div class="pra-question-list">
+      <p class="pra-quiz-intro">
+        Odpovězte si nejprve sami. Kliknutím na otázku si potom můžete
+        zobrazit správnou odpověď.
+      </p>
 
-      <!-- OTÁZKA 1 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">1.</span>
-          K čemu slouží funkce <code>void loop()</code> a jak často se její kód opakuje?
-        </summary>
+      <div class="pra-question-list">
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
+        <!-- OTÁZKA 1 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">1.</span>
+            K čemu slouží funkce <code>void loop()</code> a jak často se její kód opakuje?
+          </summary>
 
-          <p>
-            Funkce <strong>loop()</strong> obsahuje hlavní část programu.
-            Její kód se po spuštění funkce <strong>setup()</strong>
-            neustále opakuje tak dlouho, dokud je Arduino zapnuté
-            nebo dokud nedojde k jeho restartování.
-          </p>
-        </div>
-      </details>
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-
-      <!-- OTÁZKA 2 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">2.</span>
-          Anoda je kratší vývod LED. Připojuje se k zápornému pólu zdroje nebo na GND.
-          <br>
-          <strong>Pravda / Lež?</strong>
-        </summary>
-
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
-
-          <p>
-            <strong>Lež.</strong>
-          </p>
-
-          <p>
-            Anoda je obvykle <strong>delší vývod</strong> LED a připojuje se
-            směrem ke kladnému napětí. Kratší vývod je <strong>katoda</strong>
-            a připojuje se směrem k GND.
-          </p>
-
-          <div class="pra-answer-image">
-            <img src="picture/11.png"
-                 alt="LED dioda s označením anody a katody"
-                 loading="lazy"
-                 decoding="async">
+            <p>
+              Funkce <strong>loop()</strong> obsahuje hlavní část programu.
+              Její kód se po spuštění funkce <strong>setup()</strong>
+              neustále opakuje tak dlouho, dokud je Arduino zapnuté
+              nebo dokud nedojde k jeho restartování.
+            </p>
           </div>
-        </div>
-      </details>
+        </details>
 
 
-      <!-- OTÁZKA 3 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">3.</span>
-          Příkaz
-          <code>digitalWrite(led, LOW);</code>
-          zapne LED.
-          <br>
-          <strong>Pravda / Lež?</strong>
-        </summary>
+        <!-- OTÁZKA 2 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">2.</span>
+            Anoda je kratší vývod LED. Připojuje se k zápornému pólu zdroje nebo na GND.
+            <br>
+            <strong>Pravda / Lež?</strong>
+          </summary>
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-          <p>
-            <strong>Lež.</strong>
-          </p>
+            <p>
+              <strong>Lež.</strong>
+            </p>
 
-          <p>
-            V zapojení používaném v této kapitole příkaz
+            <p>
+              Anoda je obvykle <strong>delší vývod</strong> LED a připojuje se
+              směrem ke kladnému napětí. Kratší vývod je <strong>katoda</strong>
+              a připojuje se směrem k GND.
+            </p>
+
+            <div class="pra-answer-image">
+              <img src="picture/11.png"
+                   alt="LED dioda s označením anody a katody"
+                   loading="lazy"
+                   decoding="async">
+            </div>
+          </div>
+        </details>
+
+
+        <!-- OTÁZKA 3 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">3.</span>
+            Příkaz
             <code>digitalWrite(led, LOW);</code>
-            LED <strong>vypne</strong>.
-          </p>
+            zapne LED.
+            <br>
+            <strong>Pravda / Lež?</strong>
+          </summary>
 
-          <p>
-            Pro zapnutí používáme:
-          </p>
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-          <pre class="pra-answer-code"><code>digitalWrite(led, HIGH);</code></pre>
-        </div>
-      </details>
+            <p>
+              <strong>Lež.</strong>
+            </p>
 
+            <p>
+              V zapojení používaném v této kapitole příkaz
+              <code>digitalWrite(led, LOW);</code>
+              LED <strong>vypne</strong>.
+            </p>
 
-      <!-- OTÁZKA 4 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">4.</span>
-          K čemu slouží příkaz <code>Serial.println()</code>?
-        </summary>
+            <p>
+              Pro zapnutí používáme:
+            </p>
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
-
-          <p>
-            Příkaz <strong>Serial.println()</strong> slouží k odeslání textu
-            nebo hodnoty do sériového monitoru.
-          </p>
-
-          <p>
-            Po vypsání hodnoty zároveň přejde na
-            <strong>nový řádek</strong>.
-          </p>
-
-          <pre class="pra-answer-code"><code>Serial.println("LED sviti");
-Serial.println(cislo);</code></pre>
-        </div>
-      </details>
-
-
-      <!-- OTÁZKA 5 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">5.</span>
-          Prohlédněte si obrázek. K čemu slouží označené digitální piny
-          na desce Arduino UNO?
-
-          <div class="pra-question-image">
-            <img src="picture/5.png"
-                 alt="Přehled pinů Arduino UNO"
-                 loading="lazy"
-                 decoding="async">
+            <pre class="pra-answer-code"><code>digitalWrite(led, HIGH);</code></pre>
           </div>
-        </summary>
-
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
-
-          <p>
-            Digitální piny můžeme používat jako
-            <strong>vstupy nebo výstupy</strong>.
-          </p>
-
-          <p>
-            U výstupu můžeme například nastavit stav
-            <strong>HIGH</strong> nebo <strong>LOW</strong>
-            a tím ovládat LED diodu nebo jiné zařízení.
-          </p>
-        </div>
-      </details>
+        </details>
 
 
-      <!-- OTÁZKA 6 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">6.</span>
-          Proč musí být při připojení externí LED k Arduinu použit sériový rezistor?
-        </summary>
+        <!-- OTÁZKA 4 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">4.</span>
+            K čemu slouží příkaz <code>Serial.println()</code>?
+          </summary>
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-          <p>
-            Rezistor omezuje proud procházející LED diodou.
-            Bez něj by mohl LED diodou protékat příliš velký proud,
-            který by mohl LED poškodit.
-          </p>
+            <p>
+              Příkaz <strong>Serial.println()</strong> slouží k odeslání textu
+              nebo hodnoty do sériového monitoru.
+            </p>
 
-          <p>
-            Rezistor zároveň pomáhá chránit také výstup mikrokontroléru.
-          </p>
+            <p>
+              Po vypsání hodnoty zároveň přejde na
+              <strong>nový řádek</strong>.
+            </p>
 
-          <div class="pra-answer-image">
-            <img src="picture/9.png"
-                 alt="Zapojení LED s rezistorem na nepájivém poli"
-                 loading="lazy"
-                 decoding="async">
+            <pre class="pra-answer-code"><code>Serial.println("LED sviti");
+  Serial.println(cislo);</code></pre>
           </div>
-        </div>
-      </details>
+        </details>
 
 
-      <!-- OTÁZKA 7 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">7.</span>
-          Podle obrázku vysvětlete, jak jsou uvnitř propojené otvory
-          nepájivého pole.
+        <!-- OTÁZKA 5 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">5.</span>
+            Prohlédněte si obrázek. K čemu slouží označené digitální piny
+            na desce Arduino UNO?
 
-          <div class="pra-question-image">
-            <img src="picture/8.png"
-                 alt="Vnitřní propojení nepájivého pole"
-                 loading="lazy"
-                 decoding="async">
+            <div class="pra-question-image">
+              <img src="picture/5.png"
+                   alt="Přehled pinů Arduino UNO"
+                   loading="lazy"
+                   decoding="async">
+            </div>
+          </summary>
+
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
+
+            <p>
+              Digitální piny můžeme používat jako
+              <strong>vstupy nebo výstupy</strong>.
+            </p>
+
+            <p>
+              U výstupu můžeme například nastavit stav
+              <strong>HIGH</strong> nebo <strong>LOW</strong>
+              a tím ovládat LED diodu nebo jiné zařízení.
+            </p>
           </div>
-        </summary>
-
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
-
-          <p>
-            Otvory nepájivého pole nejsou propojené všechny dohromady.
-            Ve střední části jsou elektricky propojené pouze určité
-            skupiny otvorů.
-          </p>
-
-          <p>
-            Boční napájecí lišty označené
-            <strong>+</strong> a <strong>−</strong>
-            jsou obvykle propojené podélně a používají se pro rozvod napájení.
-          </p>
-        </div>
-      </details>
+        </details>
 
 
-      <!-- OTÁZKA 8 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">8.</span>
-          Co udělá následující program?
+        <!-- OTÁZKA 6 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">6.</span>
+            Proč musí být při připojení externí LED k Arduinu použit sériový rezistor?
+          </summary>
 
-          <pre class="pra-answer-code"><code>digitalWrite(5, HIGH);
-delay(2000);
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-digitalWrite(5, LOW);
-delay(1000);</code></pre>
+            <p>
+              Rezistor omezuje proud procházející LED diodou.
+              Bez něj by mohl LED diodou protékat příliš velký proud,
+              který by mohl LED poškodit.
+            </p>
 
-          Jak dlouho bude LED svítit a jak dlouho bude zhasnutá?
-        </summary>
+            <p>
+              Rezistor zároveň pomáhá chránit také výstup mikrokontroléru.
+            </p>
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
-
-          <p>
-            LED na pinu 5 se nejprve <strong>rozsvítí na 2 sekundy</strong>.
-          </p>
-
-          <p>
-            Potom se <strong>vypne na 1 sekundu</strong>.
-          </p>
-
-          <p>
-            Pokud je tento kód ve funkci <code>loop()</code>,
-            bude se tento průběh stále opakovat.
-          </p>
-        </div>
-      </details>
+            <div class="pra-answer-image">
+              <img src="picture/9.png"
+                   alt="Zapojení LED s rezistorem na nepájivém poli"
+                   loading="lazy"
+                   decoding="async">
+            </div>
+          </div>
+        </details>
 
 
-      <!-- OTÁZKA 9 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">9.</span>
-          Najděte chybu v následujícím programu.
+        <!-- OTÁZKA 7 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">7.</span>
+            Podle obrázku vysvětlete, jak jsou uvnitř propojené otvory
+            nepájivého pole.
 
-          <pre class="pra-answer-code"><code>int led = 7;
+            <div class="pra-question-image">
+              <img src="picture/8.png"
+                   alt="Vnitřní propojení nepájivého pole"
+                   loading="lazy"
+                   decoding="async">
+            </div>
+          </summary>
 
-void setup() {
-  pinMode(led, INPUT);
-}
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-void loop() {
-  digitalWrite(led, HIGH);
-  delay(1000);
+            <p>
+              Otvory nepájivého pole nejsou propojené všechny dohromady.
+              Ve střední části jsou elektricky propojené pouze určité
+              skupiny otvorů.
+            </p>
 
-  digitalWrite(led, LOW);
-  delay(1000);
-}</code></pre>
-        </summary>
-
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
-
-          <p>
-            Pin 7 má ovládat LED, a proto musí být nastaven jako
-            <strong>výstup</strong>.
-          </p>
-
-          <p>
-            Chybný řádek:
-          </p>
-
-          <pre class="pra-answer-code"><code>pinMode(led, INPUT);</code></pre>
-
-          <p>
-            Správně:
-          </p>
-
-          <pre class="pra-answer-code"><code>pinMode(led, OUTPUT);</code></pre>
-        </div>
-      </details>
+            <p>
+              Boční napájecí lišty označené
+              <strong>+</strong> a <strong>−</strong>
+              jsou obvykle propojené podélně a používají se pro rozvod napájení.
+            </p>
+          </div>
+        </details>
 
 
-      <!-- OTÁZKA 10 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">10.</span>
-          V programu chceme, aby LED svítila 500 ms a potom byla
-          500 ms zhasnutá. Doplňte chybějící příkazy.
+        <!-- OTÁZKA 8 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">8.</span>
+            Co udělá následující program?
 
-          <pre class="pra-answer-code"><code>int led = 13;
+            <pre class="pra-answer-code"><code>digitalWrite(5, HIGH);
+  delay(2000);
 
-void setup() {
-  _______________________;
-}
+  digitalWrite(5, LOW);
+  delay(1000);</code></pre>
 
-void loop() {
-  digitalWrite(led, ______);
-  delay(500);
+            Jak dlouho bude LED svítit a jak dlouho bude zhasnutá?
+          </summary>
 
-  digitalWrite(led, ______);
-  delay(500);
-}</code></pre>
-        </summary>
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
+            <p>
+              LED na pinu 5 se nejprve <strong>rozsvítí na 2 sekundy</strong>.
+            </p>
 
-          <pre class="pra-answer-code"><code>int led = 13;
+            <p>
+              Potom se <strong>vypne na 1 sekundu</strong>.
+            </p>
 
-void setup() {
-  pinMode(led, OUTPUT);
-}
-
-void loop() {
-  digitalWrite(led, HIGH);
-  delay(500);
-
-  digitalWrite(led, LOW);
-  delay(500);
-}</code></pre>
-        </div>
-      </details>
+            <p>
+              Pokud je tento kód ve funkci <code>loop()</code>,
+              bude se tento průběh stále opakovat.
+            </p>
+          </div>
+        </details>
 
 
-      <!-- OTÁZKA 11 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">11.</span>
-          Co znamenají pojmy vstup, programová logika a výstup
-          u embedded systému?
-        </summary>
+        <!-- OTÁZKA 9 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">9.</span>
+            Najděte chybu v následujícím programu.
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
+            <pre class="pra-answer-code"><code>int led = 7;
 
-          <p>
-            <strong>Vstup</strong> přináší systému informace, například
-            ze senzoru nebo tlačítka.
-          </p>
+  void setup() {
+    pinMode(led, INPUT);
+  }
 
-          <p>
-            <strong>Programová logika</strong> získané informace zpracuje
-            a rozhodne, co se má stát.
-          </p>
+  void loop() {
+    digitalWrite(led, HIGH);
+    delay(1000);
 
-          <p>
-            <strong>Výstup</strong> provede určitou činnost, například
-            rozsvítí LED, spustí motor nebo zobrazí údaj na displeji.
-          </p>
-        </div>
-      </details>
+    digitalWrite(led, LOW);
+    delay(1000);
+  }</code></pre>
+          </summary>
+
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
+
+            <p>
+              Pin 7 má ovládat LED, a proto musí být nastaven jako
+              <strong>výstup</strong>.
+            </p>
+
+            <p>
+              Chybný řádek:
+            </p>
+
+            <pre class="pra-answer-code"><code>pinMode(led, INPUT);</code></pre>
+
+            <p>
+              Správně:
+            </p>
+
+            <pre class="pra-answer-code"><code>pinMode(led, OUTPUT);</code></pre>
+          </div>
+        </details>
 
 
-      <!-- OTÁZKA 12 -->
-      <details class="pra-question">
-        <summary>
-          <span class="pra-question-number">12.</span>
-          Jaký bude výstup následujícího programu v sériovém monitoru?
+        <!-- OTÁZKA 10 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">10.</span>
+            V programu chceme, aby LED svítila 500 ms a potom byla
+            500 ms zhasnutá. Doplňte chybějící příkazy.
 
-          <pre class="pra-answer-code"><code>int cislo = 5;
+            <pre class="pra-answer-code"><code>int led = 13;
 
-void setup() {
-  Serial.begin(9600);
-}
+  void setup() {
+    _______________________;
+  }
 
-void loop() {
-  Serial.print("Hodnota: ");
-  Serial.println(cislo);
-}</code></pre>
-        </summary>
+  void loop() {
+    digitalWrite(led, ______);
+    delay(500);
 
-        <div class="pra-answer">
-          <span class="pra-answer-label">Odpověď</span>
+    digitalWrite(led, ______);
+    delay(500);
+  }</code></pre>
+          </summary>
 
-          <p>
-            Do sériového monitoru se bude stále dokola vypisovat:
-          </p>
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
 
-          <pre class="pra-answer-code"><code>Hodnota: 5
-Hodnota: 5
-Hodnota: 5
-...</code></pre>
+            <pre class="pra-answer-code"><code>int led = 13;
 
-          <p>
-            Protože v programu není žádný <code>delay()</code>,
-            bude se text vypisovat velmi rychle.
-          </p>
-        </div>
-      </details>
+  void setup() {
+    pinMode(led, OUTPUT);
+  }
+
+  void loop() {
+    digitalWrite(led, HIGH);
+    delay(500);
+
+    digitalWrite(led, LOW);
+    delay(500);
+  }</code></pre>
+          </div>
+        </details>
+
+
+        <!-- OTÁZKA 11 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">11.</span>
+            Co znamenají pojmy vstup, programová logika a výstup
+            u embedded systému?
+          </summary>
+
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
+
+            <p>
+              <strong>Vstup</strong> přináší systému informace, například
+              ze senzoru nebo tlačítka.
+            </p>
+
+            <p>
+              <strong>Programová logika</strong> získané informace zpracuje
+              a rozhodne, co se má stát.
+            </p>
+
+            <p>
+              <strong>Výstup</strong> provede určitou činnost, například
+              rozsvítí LED, spustí motor nebo zobrazí údaj na displeji.
+            </p>
+          </div>
+        </details>
+
+
+        <!-- OTÁZKA 12 -->
+        <details class="pra-question">
+          <summary>
+            <span class="pra-question-number">12.</span>
+            Jaký bude výstup následujícího programu v sériovém monitoru?
+
+            <pre class="pra-answer-code"><code>int cislo = 5;
+
+  void setup() {
+    Serial.begin(9600);
+  }
+
+  void loop() {
+    Serial.print("Hodnota: ");
+    Serial.println(cislo);
+  }</code></pre>
+          </summary>
+
+          <div class="pra-answer">
+            <span class="pra-answer-label">Odpověď</span>
+
+            <p>
+              Do sériového monitoru se bude stále dokola vypisovat:
+            </p>
+
+            <pre class="pra-answer-code"><code>Hodnota: 5
+  Hodnota: 5
+  Hodnota: 5
+  ...</code></pre>
+
+            <p>
+              Protože v programu není žádný <code>delay()</code>,
+              bude se text vypisovat velmi rychle.
+            </p>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="pra-quiz-note">
+        <strong>Příprava na test:</strong>
+        Zaměřte se především na funkce <code>setup()</code> a <code>loop()</code>,
+        práci s LED, příkazy <code>pinMode()</code>, <code>digitalWrite()</code>
+        a <code>delay()</code>, zapojení LED na nepájivém poli a základní práci
+        se sériovou linkou.
+      </div>
 
     </div>
+  </section>
 
-    <div class="pra-quiz-note">
-      <strong>Příprava na test:</strong>
-      Zaměřte se především na funkce <code>setup()</code> a <code>loop()</code>,
-      práci s LED, příkazy <code>pinMode()</code>, <code>digitalWrite()</code>
-      a <code>delay()</code>, zapojení LED na nepájivém poli a základní práci
-      se sériovou linkou.
-    </div>
-
-  </div>
-</section>
-
-    <div class="pra-quiz-note">
-      <strong>Tip:</strong>
-      Pokud dokážete na většinu otázek odpovědět ještě před rozbalením odpovědi,
-      máte základní principy této kapitoly zvládnuté.
-    </div>
-  </div>
-</section>
   <section class="pra-section">
     <div class="pra-container">
       <h2>Shrnutí kapitoly</h2>
@@ -1509,7 +891,7 @@ Hodnota: 5
         <img src="picture/1.png"
              alt=""
              role="presentation"
-             style="width: 25px; height: 35px;">
+             class="pra-author-icon-page">
         <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
       </span>
 
@@ -1517,8 +899,8 @@ Hodnota: 5
         <img src="picture/2.png"
              alt=""
              role="presentation"
-             style="width: 35px; height: 20px;">
-        <span>E-mail:&nbsp;<strong>lukas.vavros@frengp.cz</strong></span>
+             class="pra-author-icon-mail">
+        <span>E-mail:&nbsp;<strong><a href="mailto:lukas.vavros@frengp.cz">lukas.vavros@frengp.cz</a></strong></span>
       </span>
     </div>
   </footer>
@@ -1528,3 +910,7 @@ Hodnota: 5
   </div>
 
 </div>
+
+</body>
+
+</html>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kapitola 1: Úvod do Arduina | Praxe – Arduino</title>
-  <link rel="stylesheet" href="kapitola.css">
+  <link rel="stylesheet" href="style/kapitola.css">
 </head>
 
 <body>
@@ -298,7 +298,6 @@
       odpojte desku a porovnejte seznam portů. Po opětovném připojení
       vyberte port, který se znovu objeví.
     </div>
-  </div>
   <h3>Sériový monitor</h3>
 
 <p>
@@ -348,6 +347,7 @@
   Arduino reagovalo, musí program obsahovat kód pro příjem
   a zpracování sériových dat.
 </div>
+  </div>
 </section>
   <section class="pra-section">
     <div class="pra-container">
@@ -3244,6 +3244,18 @@
   Serial.<span class="ide-function">print</span>(<span class="ide-string">"Hodnota promenne cislo je: "</span>);
   Serial.<span class="ide-function">println</span>(cislo);
 }</code></pre>
+
+      <h3>Animace sériového výpisu</h3>
+      <p>
+        Sledujte zvýrazněný řádek programu a odpovídající výpis do Sériového
+        monitoru. Animaci můžete pozastavit nebo procházet po jednotlivých krocích.
+      </p>
+      <iframe class="pra-serial-frame"
+              src="serial-animace.html"
+              title="Animace programu a výpisu do Sériového monitoru"
+              loading="lazy">
+      </iframe>
+
 
       <div class="pra-task-box">
         <h3>Úkoly k sériové lince</h3>

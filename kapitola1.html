@@ -171,135 +171,55 @@
     </div>
   </section>
 
-<section class="pra-section alt" aria-labelledby="pra-ide-heading">
-  <div class="pra-container">
-    <h2 id="pra-ide-heading">Práce s aplikací Arduino IDE</h2>
+<h3>Sériový monitor</h3>
 
-    <h3>Ověření programu</h3>
+<p>
+  Pomocí nástroje <strong><em>Sériový monitor (Serial Monitor)</em></strong>
+  v prostředí Arduino IDE můžete zobrazovat textová data, která Arduino
+  deska odesílá přes sériovou linku do počítače. Tento nástroj slouží
+  k ladění programů, sledování hodnot proměnných nebo komunikaci
+  mezi uživatelem a deskou v reálném čase.
+</p>
 
-    <p>
-      Tlačítko <strong>Ověřit (Verify)</strong> se symbolem fajfky najdete
-      v levém horním rohu Arduino IDE. Spustí překlad programu a zkontroluje,
-      zda kód neobsahuje chyby bránící překladu, například syntaktické chyby.
-    </p>
+<figure class="pra-ide-guide">
+  <img src="picture/21.svg"
+       alt="Ikona Sériového monitoru v pravém horním rohu Arduino IDE a zvětšený detail jeho panelu."
+       loading="lazy"
+       decoding="async">
+  <figcaption>
+    Otevření Sériového monitoru a přehled jeho ovládacích prvků.
+  </figcaption>
+</figure>
 
-    <figure class="pra-ide-guide">
-      <img src="picture/18.svg"
-           alt="Tlačítko Ověřit v levém horním rohu Arduino IDE, označené červeným kroužkem a zvětšené v detailu."
-           loading="lazy"
-           decoding="async">
-      <figcaption>
-        Umístění tlačítka Ověřit (Verify) v Arduino IDE.
-      </figcaption>
-    </figure>
+<ol class="pra-command-list">
+  <li>
+    Připojte Arduino k počítači a vyberte správnou desku a port.
+  </li>
+  <li>
+    Nahrajte program, který spouští sériovou komunikaci pomocí
+    <code>Serial.begin(9600);</code> ve funkci <code>setup()</code>.
+  </li>
+  <li>
+    Otevřete <strong>Sériový monitor</strong> pomocí ikony
+    v pravém horním rohu Arduino IDE.
+  </li>
+  <li>
+    Nastavte rychlost na <strong>9600 baudů</strong>, aby odpovídala
+    hodnotě uvedené v programu.
+  </li>
+  <li>
+    Sledujte zprávy odesílané pomocí <code>Serial.print()</code>
+    nebo <code>Serial.println()</code>.
+  </li>
+</ol>
 
-    <ol class="pra-command-list">
-      <li>
-        V Arduino IDE vyberte používanou desku, v této kapitole
-        <strong>Arduino Uno</strong>.
-      </li>
-      <li>
-        Klikněte na <strong>Ověřit</strong> a počkejte na dokončení překladu.
-      </li>
-      <li>
-        Pokud IDE ohlásí chybu, přečtěte si hlášení, opravte kód
-        a ověření zopakujte.
-      </li>
-    </ol>
-
-    <div class="pra-callout">
-      <strong>Zapamatujte si:</strong> Ověřit program nepřenáší do desky.
-      K tomu slouží tlačítko <strong>Nahrát (Upload)</strong> se šipkou doprava.
-      Úspěšný překlad ještě nezaručuje, že se program bude chovat podle zadání.
-    </div>
-
-    <h3>Nahrání programu do desky</h3>
-
-    <p>
-      Pomocí tlačítka <strong><em>Nahrát (Upload)</em></strong>
-      v prostředí Arduino IDE lze zkompilovaný program nahrát
-      do připojené Arduino desky. Tlačítko má symbol šipky doprava
-      a nachází se vedle tlačítka Ověřit.
-    </p>
-
-    <figure class="pra-ide-guide">
-      <img src="picture/19.svg"
-           alt="Tlačítko Nahrát se šipkou doprava v Arduino IDE, označené červeným kroužkem a zvětšené v detailu."
-           loading="lazy"
-           decoding="async">
-      <figcaption>
-        Umístění tlačítka Nahrát (Upload) v Arduino IDE.
-      </figcaption>
-    </figure>
-
-    <ol class="pra-command-list">
-      <li>
-        Připojte Arduino k počítači pomocí USB kabelu,
-        který umožňuje přenos dat.
-      </li>
-      <li>
-        V Arduino IDE vyberte desku <strong>Arduino Uno</strong>
-        a port, ke kterému je připojená.
-      </li>
-      <li>
-        Klikněte na <strong>Nahrát</strong>. IDE program přeloží
-        a následně přenese do desky.
-      </li>
-      <li>
-        Počkejte na hlášení o úspěšném nahrání.
-        Arduino poté začne nový program vykonávat.
-      </li>
-    </ol>
-
-    <div class="pra-callout">
-      <strong>Zapamatujte si:</strong> Nahráním nového programu
-      se nahradí předchozí program uložený v desce.
-      Pokud nahrávání selže, zkontrolujte připojení USB kabelu,
-      vybranou desku a port.
-    </div>
-
-    <h3>Výběr portu</h3>
-
-    <p>
-      Pomocí nabídky <strong><em>Výběr portu (Select Port)</em></strong>
-      lze zvolit správný komunikační port, ke kterému je Arduino deska
-      připojena. Nabídka zobrazuje dostupné porty a rozpoznané
-      připojené desky.
-    </p>
-
-    <figure class="pra-ide-guide">
-      <img src="picture/20.svg"
-           alt="Nabídka pro výběr desky a portu v horní liště Arduino IDE, označená červeným rámečkem a zvětšená v detailu."
-           loading="lazy"
-           decoding="async">
-      <figcaption>
-        Výběr desky a komunikačního portu v Arduino IDE.
-      </figcaption>
-    </figure>
-
-    <ol class="pra-command-list">
-      <li>
-        Připojte Arduino k počítači pomocí datového USB kabelu.
-      </li>
-      <li>
-        Rozbalte nabídku pro výběr desky a portu v horní liště.
-      </li>
-      <li>
-        Vyberte port odpovídající připojené Arduino desce.
-      </li>
-      <li>
-        Zkontrolujte, že je vybraný také správný typ desky,
-        v této kapitole <strong>Arduino Uno</strong>.
-      </li>
-    </ol>
-
-    <div class="pra-callout">
-      <strong>Tip:</strong> Pokud nevíte, který port patří Arduinu,
-      odpojte desku a porovnejte seznam portů. Po opětovném připojení
-      vyberte port, který se znovu objeví.
-    </div>
-  </div>
-</section>
+<div class="pra-callout">
+  <strong>Zapamatujte si:</strong> Rychlost nastavená v Sériovém
+  monitoru musí odpovídat hodnotě v příkazu <code>Serial.begin()</code>.
+  Vstupní pole umožňuje také odeslat zprávu do desky. Aby na ni
+  Arduino reagovalo, musí program obsahovat kód pro příjem
+  a zpracování sériových dat.
+</div>
   <section class="pra-section">
     <div class="pra-container">
       <h2>Psaní programu pro Arduino</h2>

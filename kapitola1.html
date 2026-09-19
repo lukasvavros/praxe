@@ -1058,8 +1058,8 @@ void loop() {
     <h2>Kontrolní otázky</h2>
 
     <p class="pra-quiz-intro">
-      Zkuste si nejprve na každou otázku odpovědět sami.
-      Poté klikněte na otázku a zobrazte si správnou odpověď.
+      Odpovězte si nejprve sami. Kliknutím na otázku si potom můžete
+      zobrazit správnou odpověď.
     </p>
 
     <div class="pra-question-list">
@@ -1068,17 +1068,17 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">1.</span>
-          Co je Arduino a k čemu se používá?
+          K čemu slouží funkce <code>void loop()</code> a jak často se její kód opakuje?
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Arduino je platforma určená pro výuku a tvorbu elektronických projektů.
-            Obsahuje mikrokontrolér, který vykonává nahraný program a může pomocí
-            vstupů získávat informace ze svého okolí a pomocí výstupů ovládat
-            například LED diody, motory, displeje nebo relé.
+            Funkce <strong>loop()</strong> obsahuje hlavní část programu.
+            Její kód se po spuštění funkce <strong>setup()</strong>
+            neustále opakuje tak dlouho, dokud je Arduino zapnuté
+            nebo dokud nedojde k jeho restartování.
           </p>
         </div>
       </details>
@@ -1088,21 +1088,27 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">2.</span>
-          Jaký mikrokontrolér používá Arduino UNO a jaká je jeho taktovací frekvence?
+          Anoda je kratší vývod LED. Připojuje se k zápornému pólu zdroje nebo na GND.
+          <br>
+          <strong>Pravda / Lež?</strong>
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Arduino UNO používá mikrokontrolér
-            <strong>ATmega328</strong>, který pracuje s taktovací frekvencí
-            <strong>16 MHz</strong>.
+            <strong>Lež.</strong>
+          </p>
+
+          <p>
+            Anoda je obvykle <strong>delší vývod</strong> LED a připojuje se
+            směrem ke kladnému napětí. Kratší vývod je <strong>katoda</strong>
+            a připojuje se směrem k GND.
           </p>
 
           <div class="pra-answer-image">
-            <img src="picture/4.png"
-                 alt="Popis základních částí desky Arduino UNO"
+            <img src="picture/11.png"
+                 alt="LED dioda s označením anody a katody"
                  loading="lazy"
                  decoding="async">
           </div>
@@ -1114,30 +1120,31 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">3.</span>
-          Jaký je rozdíl mezi funkcemi setup() a loop()?
+          Příkaz
+          <code>digitalWrite(led, LOW);</code>
+          zapne LED.
+          <br>
+          <strong>Pravda / Lež?</strong>
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Funkce <strong>setup()</strong> se vykoná pouze jednou po spuštění
-            nebo restartování Arduina. Používá se například k nastavení pinů
-            nebo spuštění sériové komunikace.
+            <strong>Lež.</strong>
           </p>
 
           <p>
-            Funkce <strong>loop()</strong> se potom vykonává stále dokola,
-            dokud je Arduino zapnuté.
+            V zapojení používaném v této kapitole příkaz
+            <code>digitalWrite(led, LOW);</code>
+            LED <strong>vypne</strong>.
           </p>
 
-          <pre class="pra-answer-code"><code>void setup() {
-  // provede se jednou
-}
+          <p>
+            Pro zapnutí používáme:
+          </p>
 
-void loop() {
-  // opakuje se stále dokola
-}</code></pre>
+          <pre class="pra-answer-code"><code>digitalWrite(led, HIGH);</code></pre>
         </div>
       </details>
 
@@ -1146,25 +1153,24 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">4.</span>
-          Co provede následující příkaz?
-          <code>digitalWrite(13, HIGH);</code>
+          K čemu slouží příkaz <code>Serial.println()</code>?
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Příkaz nastaví digitální pin 13 do logického stavu
-            <strong>HIGH</strong>. Pokud je pin nastaven jako výstup,
-            objeví se na něm vysoká logická úroveň a vestavěná LED na
-            Arduino UNO se rozsvítí.
+            Příkaz <strong>Serial.println()</strong> slouží k odeslání textu
+            nebo hodnoty do sériového monitoru.
           </p>
 
           <p>
-            Před použitím musí být pin nastaven jako výstup:
+            Po vypsání hodnoty zároveň přejde na
+            <strong>nový řádek</strong>.
           </p>
 
-          <pre class="pra-answer-code"><code>pinMode(13, OUTPUT);</code></pre>
+          <pre class="pra-answer-code"><code>Serial.println("LED sviti");
+Serial.println(cislo);</code></pre>
         </div>
       </details>
 
@@ -1173,11 +1179,12 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">5.</span>
-          Podívejte se na obrázek. Jak poznáme anodu a katodu běžné LED diody?
+          Prohlédněte si obrázek. K čemu slouží označené digitální piny
+          na desce Arduino UNO?
 
           <div class="pra-question-image">
-            <img src="picture/11.png"
-                 alt="LED diody s anodou a katodou"
+            <img src="picture/5.png"
+                 alt="Přehled pinů Arduino UNO"
                  loading="lazy"
                  decoding="async">
           </div>
@@ -1187,14 +1194,14 @@ void loop() {
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            <strong>Anoda (+)</strong> bývá u nové LED diody delší vývod.
-            Připojuje se směrem ke kladnému napětí.
+            Digitální piny můžeme používat jako
+            <strong>vstupy nebo výstupy</strong>.
           </p>
 
           <p>
-            <strong>Katoda (−)</strong> bývá kratší vývod. Na pouzdru LED ji lze
-            často poznat také podle zploštělé strany. Katoda se obvykle připojuje
-            směrem k GND.
+            U výstupu můžeme například nastavit stav
+            <strong>HIGH</strong> nebo <strong>LOW</strong>
+            a tím ovládat LED diodu nebo jiné zařízení.
           </p>
         </div>
       </details>
@@ -1204,21 +1211,25 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">6.</span>
-          Proč při zapojení externí LED k Arduinu používáme sériový rezistor?
+          Proč musí být při připojení externí LED k Arduinu použit sériový rezistor?
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Rezistor omezuje elektrický proud procházející LED diodou.
-            Bez rezistoru by mohl protékat příliš velký proud, který by mohl
-            poškodit LED diodu nebo výstup mikrokontroléru.
+            Rezistor omezuje proud procházející LED diodou.
+            Bez něj by mohl LED diodou protékat příliš velký proud,
+            který by mohl LED poškodit.
+          </p>
+
+          <p>
+            Rezistor zároveň pomáhá chránit také výstup mikrokontroléru.
           </p>
 
           <div class="pra-answer-image">
             <img src="picture/9.png"
-                 alt="Zapojení externí LED s rezistorem a Arduinem"
+                 alt="Zapojení LED s rezistorem na nepájivém poli"
                  loading="lazy"
                  decoding="async">
           </div>
@@ -1230,8 +1241,8 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">7.</span>
-          Podívejte se na obrázek nepájivého pole. Jsou všechny otvory
-          nepájivého pole elektricky propojené?
+          Podle obrázku vysvětlete, jak jsou uvnitř propojené otvory
+          nepájivého pole.
 
           <div class="pra-question-image">
             <img src="picture/8.png"
@@ -1245,15 +1256,15 @@ void loop() {
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Ne. Otvory jsou propojené pouze v určitých skupinách.
-            Ve střední pracovní oblasti jsou obvykle propojené skupiny několika
-            otvorů vedle sebe.
+            Otvory nepájivého pole nejsou propojené všechny dohromady.
+            Ve střední části jsou elektricky propojené pouze určité
+            skupiny otvorů.
           </p>
 
           <p>
-            Boční napájecí lišty označené <strong>+</strong> a
-            <strong>−</strong> bývají propojené podélně. U některých typů
-            nepájivých polí však mohou být uprostřed přerušené.
+            Boční napájecí lišty označené
+            <strong>+</strong> a <strong>−</strong>
+            jsou obvykle propojené podélně a používají se pro rozvod napájení.
           </p>
         </div>
       </details>
@@ -1263,24 +1274,31 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">8.</span>
-          Jaké tři základní části můžeme rozlišit při popisu embedded systému?
+          Co udělá následující program?
+
+          <pre class="pra-answer-code"><code>digitalWrite(5, HIGH);
+delay(2000);
+
+digitalWrite(5, LOW);
+delay(1000);</code></pre>
+
+          Jak dlouho bude LED svítit a jak dlouho bude zhasnutá?
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            Embedded systém můžeme zjednodušeně rozdělit na:
+            LED na pinu 5 se nejprve <strong>rozsvítí na 2 sekundy</strong>.
           </p>
 
           <p>
-            <strong>Vstupy → programovou logiku → výstupy.</strong>
+            Potom se <strong>vypne na 1 sekundu</strong>.
           </p>
 
           <p>
-            Vstupem může být například tlačítko nebo senzor. Program získané
-            informace vyhodnotí a podle výsledku ovládá výstup, například LED,
-            motor, displej nebo bzučák.
+            Pokud je tento kód ve funkci <code>loop()</code>,
+            bude se tento průběh stále opakovat.
           </p>
         </div>
       </details>
@@ -1290,30 +1308,42 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">9.</span>
-          K čemu slouží Serial.begin(9600), Serial.print() a Serial.println()?
+          Najděte chybu v následujícím programu.
+
+          <pre class="pra-answer-code"><code>int led = 7;
+
+void setup() {
+  pinMode(led, INPUT);
+}
+
+void loop() {
+  digitalWrite(led, HIGH);
+  delay(1000);
+
+  digitalWrite(led, LOW);
+  delay(1000);
+}</code></pre>
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            <strong>Serial.begin(9600)</strong> spustí sériovou komunikaci
-            rychlostí 9600 baudů.
+            Pin 7 má ovládat LED, a proto musí být nastaven jako
+            <strong>výstup</strong>.
           </p>
 
           <p>
-            <strong>Serial.print()</strong> vypíše text nebo hodnotu bez přechodu
-            na nový řádek. <strong>Serial.println()</strong> po vypsání hodnoty
-            přejde na nový řádek.
+            Chybný řádek:
           </p>
 
-          <pre class="pra-answer-code"><code>void setup() {
-  Serial.begin(9600);
-}
+          <pre class="pra-answer-code"><code>pinMode(led, INPUT);</code></pre>
 
-void loop() {
-  Serial.println("Arduino bezi.");
-}</code></pre>
+          <p>
+            Správně:
+          </p>
+
+          <pre class="pra-answer-code"><code>pinMode(led, OUTPUT);</code></pre>
         </div>
       </details>
 
@@ -1322,7 +1352,26 @@ void loop() {
       <details class="pra-question">
         <summary>
           <span class="pra-question-number">10.</span>
-          Co bude dělat následující program?
+          V programu chceme, aby LED svítila 500 ms a potom byla
+          500 ms zhasnutá. Doplňte chybějící příkazy.
+
+          <pre class="pra-answer-code"><code>int led = 13;
+
+void setup() {
+  _______________________;
+}
+
+void loop() {
+  digitalWrite(led, ______);
+  delay(500);
+
+  digitalWrite(led, ______);
+  delay(500);
+}</code></pre>
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
 
           <pre class="pra-answer-code"><code>int led = 13;
 
@@ -1337,29 +1386,88 @@ void loop() {
   digitalWrite(led, LOW);
   delay(500);
 }</code></pre>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 11 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">11.</span>
+          Co znamenají pojmy vstup, programová logika a výstup
+          u embedded systému?
         </summary>
 
         <div class="pra-answer">
           <span class="pra-answer-label">Odpověď</span>
 
           <p>
-            LED na pinu 13 bude pravidelně blikat.
+            <strong>Vstup</strong> přináší systému informace, například
+            ze senzoru nebo tlačítka.
           </p>
 
           <p>
-            Nejprve se na <strong>500 ms rozsvítí</strong>, potom se na
-            <strong>500 ms zhasne</strong>. Funkce <strong>loop()</strong>
-            se neustále opakuje, takže celý cyklus trvá jednu sekundu.
+            <strong>Programová logika</strong> získané informace zpracuje
+            a rozhodne, co se má stát.
           </p>
 
           <p>
-            LED tedy provede jeden celý cyklus bliknutí přibližně
-            <strong>jednou za sekundu</strong>.
+            <strong>Výstup</strong> provede určitou činnost, například
+            rozsvítí LED, spustí motor nebo zobrazí údaj na displeji.
+          </p>
+        </div>
+      </details>
+
+
+      <!-- OTÁZKA 12 -->
+      <details class="pra-question">
+        <summary>
+          <span class="pra-question-number">12.</span>
+          Jaký bude výstup následujícího programu v sériovém monitoru?
+
+          <pre class="pra-answer-code"><code>int cislo = 5;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.print("Hodnota: ");
+  Serial.println(cislo);
+}</code></pre>
+        </summary>
+
+        <div class="pra-answer">
+          <span class="pra-answer-label">Odpověď</span>
+
+          <p>
+            Do sériového monitoru se bude stále dokola vypisovat:
+          </p>
+
+          <pre class="pra-answer-code"><code>Hodnota: 5
+Hodnota: 5
+Hodnota: 5
+...</code></pre>
+
+          <p>
+            Protože v programu není žádný <code>delay()</code>,
+            bude se text vypisovat velmi rychle.
           </p>
         </div>
       </details>
 
     </div>
+
+    <div class="pra-quiz-note">
+      <strong>Příprava na test:</strong>
+      Zaměřte se především na funkce <code>setup()</code> a <code>loop()</code>,
+      práci s LED, příkazy <code>pinMode()</code>, <code>digitalWrite()</code>
+      a <code>delay()</code>, zapojení LED na nepájivém poli a základní práci
+      se sériovou linkou.
+    </div>
+
+  </div>
+</section>
 
     <div class="pra-quiz-note">
       <strong>Tip:</strong>

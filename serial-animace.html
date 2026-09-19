@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arduino – animace sériového výpisu</title>
+  <link rel="stylesheet" href="style/serial-animace.css">
+  <script src="script/serial-animace.js" defer></script>
+</head>
+<body>
+<section class="serial-demo" id="serial-demo" aria-labelledby="serial-title">
+  <header>
+    <span class="serial-eyebrow">ARDUINO · SÉRIOVÁ KOMUNIKACE</span>
+    <h2 id="serial-title">Jak vzniká výpis v Sériovém monitoru</h2>
+    <p>Proměnná <code>cislo</code> má hodnotu <strong>5</strong>. Sledujte, jak se text a číslo spojí do jednoho řádku.</p>
+  </header>
+  <div class="serial-controls">
+    <button type="button" data-action="play">Spustit</button>
+    <button type="button" data-action="step">Další krok</button>
+    <button type="button" data-action="reset">Od začátku</button>
+    <span class="serial-speed">Výukové zpomalení · 1 krok za sekundu</span>
+  </div>
+  <div class="serial-columns">
+    <div class="serial-pane">
+      <div class="serial-bar"><span>Příklad programu</span><span>C++</span></div>
+      <pre aria-label="Zdrojový kód"><code><span class="serial-code-line" data-line="init"><span class="serial-type">int</span> cislo = <span class="serial-number">5</span>;</span><span class="serial-code-line"> </span><span class="serial-code-line"><span class="serial-type">void</span> <span class="serial-fn">setup</span>() {</span><span class="serial-code-line" data-line="begin">  Serial.<span class="serial-fn">begin</span>(<span class="serial-number">9600</span>);</span><span class="serial-code-line">}</span><span class="serial-code-line"> </span><span class="serial-code-line"><span class="serial-type">void</span> <span class="serial-fn">loop</span>() {</span><span class="serial-code-line" data-line="print">  Serial.<span class="serial-fn">print</span>(<span class="serial-string">"Hodnota promenne cislo je: "</span>);</span><span class="serial-code-line" data-line="println">  Serial.<span class="serial-fn">println</span>(cislo);</span><span class="serial-code-line">}</span></code></pre>
+    </div>
+    <div class="serial-pane">
+      <div class="serial-bar"><span>Sériový monitor</span><span>9600 baudů</span></div>
+      <div class="serial-terminal" tabindex="0" aria-label="Výstup Sériového monitoru; nejvýše posledních osm řádků">
+        <div data-output></div><span class="serial-cursor" aria-hidden="true">▌</span>
+      </div>
+      <div class="serial-monitor-footer">Dokončené řádky: <strong data-count>0</strong><span>Zobrazuje posledních 8 řádků</span></div>
+    </div>
+  </div>
+  <p class="serial-explanation" data-explanation role="status" aria-live="polite">Připraveno. Spusťte animaci nebo zvolte Další krok.</p>
+  <p class="serial-note">Animace ukazuje logické kroky programu zpomaleně. Ve skutečném kódu není <code>delay()</code>; rychlost výpisu omezuje také sériová komunikace. <code>setup()</code> proběhne jednou, <code>loop()</code> se opakuje.</p>
+  <noscript>Pro animaci zapněte JavaScript. Program stále vypisuje „Hodnota promenne cislo je: 5“, pokaždé na nový řádek.</noscript>
+</section>
+</body>
+</html>

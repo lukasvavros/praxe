@@ -1,0 +1,737 @@
+/* ============================================================
+   Praxe – Arduino | styly kapitoly
+   Používá se společně se soubory kapitola1.html, kapitola2.html, ...
+   Všechny selektory jsou uvnitř .pra-chapter, aby neovlivnily
+   zbytek stránky.
+   ============================================================ */
+
+.pra-chapter {
+  --orange: #ee7203;
+  --dark: #373841;
+  --light: #f4f4f4;
+  --lighter: #fafafa;
+  --text: #373841;
+  --white: #ffffff;
+
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x: hidden;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--white);
+  box-sizing: border-box;
+}
+
+.pra-chapter *,
+.pra-chapter *::before,
+.pra-chapter *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Hlavička kapitoly ---------- */
+
+.pra-hero {
+  background: var(--dark);
+  color: var(--white);
+  text-align: center;
+  padding: clamp(30px, 5vw, 60px) 20px;
+}
+
+.pra-hero h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 400;
+}
+
+.pra-hero p {
+  margin: 12px 0 0;
+  color: var(--orange);
+  font-size: clamp(15px, 1.7vw, 20px);
+}
+
+/* ---------- Sekce ---------- */
+
+.pra-container {
+  width: min(1200px, 94%);
+  margin: 0 auto;
+}
+
+.pra-section {
+  padding: clamp(34px, 5vw, 70px) 0;
+  border-top: 1px solid #dddddd;
+}
+
+.pra-section.alt {
+  background: var(--lighter);
+}
+
+.pra-section h2 {
+  margin: 0 0 24px;
+  color: var(--dark);
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 400;
+  border-bottom: 3px solid var(--orange);
+  padding-bottom: 12px;
+}
+
+.pra-section h3 {
+  margin: 34px 0 14px;
+  color: var(--dark);
+  font-size: clamp(21px, 2.2vw, 29px);
+}
+
+.pra-section p {
+  margin: 0 0 18px;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.8;
+}
+
+.pra-highlight {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ---------- Karty s parametry a částmi desky ---------- */
+
+.pra-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.pra-spec-card {
+  padding: 18px;
+  border-radius: 14px;
+  border-top: 6px solid var(--orange);
+  background: var(--light);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.pra-spec-card strong {
+  display: block;
+  color: var(--orange);
+  margin-bottom: 7px;
+  font-size: clamp(16px, 1.45vw, 20px);
+}
+
+.pra-spec-card span {
+  display: block;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.55;
+}
+
+.pra-parts-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.pra-part {
+  padding: 16px 18px;
+  border-left: 6px solid var(--orange);
+  border-radius: 10px;
+  background: var(--light);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+}
+
+.pra-part strong {
+  color: var(--orange);
+}
+
+/* ---------- Obrázky ---------- */
+
+.pra-hardware-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin: 32px auto;
+}
+
+.pra-hardware-images img,
+.pra-embedded-image img,
+.pra-breadboard-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+}
+
+.pra-breadboard-image {
+  margin: 32px auto;
+  max-width: 1200px;
+}
+
+.pra-embedded-image {
+  margin-top: 34px;
+}
+
+/* ---------- Schéma vstup / logika / výstup ---------- */
+
+.pra-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.pra-flow-box {
+  min-height: 145px;
+  padding: 20px;
+  border-radius: 18px;
+  text-align: center;
+  border: 3px solid var(--orange);
+  background: var(--white);
+}
+
+.pra-flow-box h4 {
+  margin: 0 0 10px;
+  color: var(--dark);
+  font-size: clamp(18px, 1.7vw, 23px);
+}
+
+.pra-flow-box p {
+  margin: 0;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+}
+
+.pra-flow-arrow {
+  color: var(--orange);
+  font-size: 38px;
+  font-weight: 700;
+}
+
+/* ---------- Poznámky a kód ---------- */
+
+.pra-callout {
+  margin-top: 24px;
+  padding: 20px 24px;
+  border-left: 6px solid var(--orange);
+  border-radius: 10px;
+  background: var(--light);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.7;
+}
+
+.pra-code {
+  margin: 20px 0;
+  padding: 20px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #f1f2f4;
+  color: #25262d;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: clamp(13px, 1.15vw, 16px);
+  line-height: 1.65;
+}
+
+.pra-code code {
+  font-family: inherit;
+}
+
+/* ---------- Seznamy a úkoly ---------- */
+
+.pra-command-list,
+.pra-task-list {
+  margin: 0;
+  padding-left: 24px;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.8;
+}
+
+.pra-command-list li,
+.pra-task-list li {
+  margin-bottom: 9px;
+}
+
+.pra-command-list code {
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #eeeeee;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.pra-task-box {
+  margin-top: 22px;
+  padding: 22px 24px;
+  border-radius: 14px;
+  border-top: 6px solid var(--orange);
+  background: var(--light);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.pra-task-box h3 {
+  margin-top: 0;
+}
+
+.pra-task-box .pra-breadboard-image {
+  margin-bottom: 0;
+}
+
+/* ---------- Teorie LED ---------- */
+
+.pra-led-theory {
+  margin: 0 0 42px;
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 16px;
+  border-top: 6px solid var(--orange);
+  background: var(--light);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.pra-led-theory h3 {
+  margin: 0 0 12px;
+  color: var(--dark);
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+
+.pra-led-intro {
+  margin-bottom: 24px !important;
+}
+
+.pra-led-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.pra-led-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--white);
+  border-left: 6px solid var(--orange);
+}
+
+.pra-led-card h4 {
+  margin: 0 0 10px;
+  color: var(--orange);
+  font-size: clamp(17px, 1.6vw, 21px);
+}
+
+.pra-led-card p {
+  margin: 0;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.7;
+}
+
+.pra-led-card p + p {
+  margin-top: 14px;
+}
+
+.pra-led-pins {
+  display: grid;
+  gap: 12px;
+}
+
+.pra-led-pin {
+  padding: 15px 16px;
+  border-radius: 10px;
+  background: var(--white);
+  border-left: 6px solid var(--orange);
+  line-height: 1.6;
+}
+
+.pra-led-note {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background: var(--dark);
+  color: var(--white);
+  line-height: 1.7;
+}
+
+.pra-led-note strong {
+  color: var(--orange);
+}
+
+.pra-led-image {
+  max-width: 850px;
+  margin: 24px auto 0;
+}
+
+.pra-led-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Kontrolní otázky ---------- */
+
+.pra-quiz-intro {
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.pra-question-list {
+  display: grid;
+  gap: 16px;
+}
+
+.pra-question {
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid #e2e2e2;
+  border-left: 6px solid var(--orange);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.pra-question summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 60px 20px 22px;
+  color: var(--dark);
+  font-size: clamp(15px, 1.35vw, 18px);
+  font-weight: 700;
+  line-height: 1.6;
+  transition: background 0.2s ease;
+}
+
+.pra-question summary::-webkit-details-marker {
+  display: none;
+}
+
+.pra-question summary:hover {
+  background: #f7f7f7;
+}
+
+.pra-question summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.pra-question[open] summary::after {
+  content: "−";
+}
+
+.pra-question[open] summary {
+  background: var(--light);
+}
+
+.pra-question-number {
+  color: var(--orange);
+  margin-right: 6px;
+}
+
+.pra-answer {
+  padding: 20px 22px 24px;
+  border-top: 1px solid #e5e5e5;
+  background: var(--white);
+}
+
+.pra-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.pra-answer-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pra-question-image,
+.pra-answer-image {
+  max-width: 750px;
+  margin: 18px auto;
+}
+
+.pra-question-image img,
+.pra-answer-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.pra-answer-code {
+  margin: 14px 0 0;
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #f1f2f4;
+  color: #25262d;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.6;
+}
+
+.pra-quiz-note {
+  margin-top: 24px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: var(--dark);
+  color: var(--white);
+  line-height: 1.7;
+}
+
+.pra-quiz-note strong {
+  color: var(--orange);
+}
+
+/* ---------- Shrnutí ---------- */
+
+.pra-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pra-summary-card {
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--light);
+  border-top: 6px solid var(--orange);
+}
+
+.pra-summary-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--orange);
+  font-size: clamp(16px, 1.5vw, 20px);
+}
+
+.pra-summary-card span {
+  display: block;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+}
+
+/* ---------- Patička ---------- */
+
+.pra-back {
+  padding: 34px 20px;
+  text-align: center;
+  background: var(--light);
+}
+
+.pra-back a {
+  display: inline-block;
+  padding: 13px 24px;
+  border-radius: 999px;
+  background: var(--dark);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.pra-back a:hover {
+  background: var(--orange);
+  transform: translateY(-2px);
+}
+
+.pra-author {
+  background: var(--light);
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.pra-author-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pra-author-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--dark);
+  font-size: clamp(13px, 1.1vw, 15px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.pra-author-item a {
+  color: inherit;
+}
+
+.pra-author-icon-page {
+  width: 25px;
+  height: 35px;
+}
+
+.pra-author-icon-mail {
+  width: 35px;
+  height: 20px;
+}
+
+.pra-footer {
+  background: var(--dark);
+  color: var(--white);
+  text-align: center;
+  padding: 12px 16px;
+  font-size: clamp(12px, 1vw, 14px);
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (max-width: 850px) {
+  .pra-spec-grid,
+  .pra-summary,
+  .pra-led-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pra-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .pra-flow-arrow {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .pra-parts-list,
+  .pra-hardware-images {
+    grid-template-columns: 1fr;
+  }
+
+  .pra-section {
+    padding: 32px 0;
+  }
+
+  .pra-code {
+    padding: 15px;
+  }
+
+  .pra-author-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pra-author-item {
+    justify-content: center;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .pra-question summary {
+    padding: 17px 54px 17px 17px;
+  }
+
+  .pra-question summary::after {
+    right: 15px;
+  }
+
+  .pra-answer {
+    padding: 17px;
+  }
+}
+
+/* Simulace Blink: původní SVG desky, svit přesně nad LED L. */
+.pra-uno-sim { margin: 26px 0; color: #373841; font-family: Verdana, Arial, sans-serif; }
+.pra-uno-sim * { box-sizing: border-box; }
+.pra-uno-sim .uno-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 20px 0; }
+.pra-uno-sim button, .pra-uno-sim select { font: inherit; font-size: 15px; min-height: 44px; border: 1px solid #a5a6ae; border-radius: 7px; padding: 9px 13px; color: #373841; background: #fff; }
+.pra-uno-sim button { cursor: pointer; }
+.pra-uno-sim button:first-child { background: #373841; color: #fff; }
+.pra-uno-sim .uno-controls label { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+.pra-uno-sim .uno-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.pra-uno-sim .uno-board-wrap { min-width: 0; }
+.pra-uno-sim .uno-board { width: 100%; height: auto; display: block; }
+.pra-uno-sim .uno-status { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; font-size: 14px; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+.pra-uno-sim .uno-program { min-width: 0; }
+.pra-uno-sim pre { background: #242630; color: #f0f2f6; border-radius: 10px; padding: 18px 10px; margin: 0; font-size: clamp(11px, 1.3vw, 15px); line-height: 1.65; overflow-x: auto; }
+.pra-uno-sim pre code { font-family: Consolas, monospace; color: inherit; background: none; padding: 0; }
+.pra-uno-sim [data-line] { display: block; border-left: 3px solid transparent; }
+.pra-uno-sim .uno-active { background: #58411d; border-left-color: #ffb74d; }
+.pra-uno-sim [data-delay] { font-weight: normal; }
+.pra-uno-sim .uno-caption { font-size: 13px; line-height: 1.6; margin: 12px 0 0; }
+.pra-uno-sim .uno-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 760px) {
+  .pra-uno-sim .uno-layout { grid-template-columns: minmax(0, 1fr); }
+  .pra-uno-sim .uno-board { max-width: 580px; margin: auto; }
+  .pra-uno-sim pre { font-size: 14px; }
+}
+
+/* Svit vychází z překresleného pouzdra LED přímo uvnitř SVG. */
+.pra-uno-sim .uno-board .uno-led-switch { animation: none; opacity: 1; }
+.pra-uno-sim[data-high="false"] .uno-board .uno-led-switch { opacity: 0; }
+
+/* Barvy syntaxe Arduino; původní pozadí zůstává. */
+.arduino-code code { color: inherit; background: transparent; }
+.arduino-code .ide-type { color: #00979d; }
+.arduino-code .ide-function { color: #d35400; }
+.arduino-code .ide-number { color: #005c5f; }
+.arduino-code .ide-keyword { color: #728e00; }
+.arduino-code .ide-string { color: #005c5f; }
+.arduino-code .ide-comment { color: #717777; }
+
+
+.pra-uno-sim .arduino-code .ide-type { color: #45cbd1; }
+.pra-uno-sim .arduino-code .ide-function { color: #ff9d54; }
+.pra-uno-sim .arduino-code .ide-number { color: #75d5d8; }
+.pra-uno-sim .arduino-code .ide-keyword { color: #c4d783; }
+.pra-uno-sim .arduino-code .ide-string { color: #75d5d8; }
+.pra-uno-sim .arduino-code .ide-comment { color: #b0b8bb; }
+
+/* Práce s aplikací Arduino IDE. */
+.pra-chapter .pra-ide-guide { margin: 24px 0; }
+.pra-chapter .pra-ide-guide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+}
+.pra-chapter .pra-ide-guide figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #55565e;
+}
+
+/* Styly SVG přesunuté z HTML. */
+
+.uno-led-switch { animation: uno-native-blink 2s step-end infinite; }
+@keyframes uno-native-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .uno-led-switch { animation: none; } }

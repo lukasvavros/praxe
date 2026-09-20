@@ -1,6 +1,6 @@
 /* Automatická výška animací na stejném webu jako kapitola. */
 (() => {
-  const selector = 'iframe.pra-traffic-frame, iframe.pra-button-frame, iframe.pra-serial-frame';
+  const selector = 'iframe.pra-traffic-frame, iframe.pra-button-frame, iframe.pra-serial-frame, iframe.pra-pot-frame';
   document.querySelectorAll(selector).forEach(frame => {
     let observer = null;
     let pending = null;
@@ -13,7 +13,7 @@
       pending = null;
       try {
         child = frame.contentDocument;
-        const root = child && child.querySelector('.traffic-demo, .button-demo, .serial-demo');
+        const root = child && child.querySelector('.traffic-demo, .button-demo, .serial-demo, .pot-demo');
         if (!root) return;
         const measure = () => {
           pending = null;

@@ -1,0 +1,126 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kapitola 5: LCD displej | Praxe – Arduino</title><link rel="stylesheet" href="style/kapitola.css"><link rel="stylesheet" href="style/kapitola5.css?v=kompaktni6"><script src="script/kapitola5.js" defer></script><script src="script/zavora.js?v=3" defer></script></head><body><main class="pra-chapter lcd-chapter"><header class="pra-hero"><h1>Kapitola 5: LCD displej</h1><p>Praxe – Arduino | 3. ročník</p></header><section id="opakovani" class="pra-section alt"><div class="pra-container">
+<h2>Opakování – parkovací závora</h2>
+<p>V předchozích kapitolách jsme ovládali LED, četli stav tlačítka a nastavovali polohu servomotoru. Nyní tyto dovednosti spojíme do modelu vjezdu na parkoviště. Program navrhněte sami podle požadovaného chování.</p>
+<div class="pra-task-box">
+<h3>Úloha – parkovací závora se signalizací</h3>
+<p><strong>Cíl:</strong> Zapojte tlačítko, servomotor a dvě LED. Vytvořte program, který po stisknutí tlačítka otevře závoru, umožní průjezd a potom ji opět zavře.</p>
+<h4>Zapojení</h4>
+<ul class="pra-command-list">
+<li><strong>Tlačítko:</strong> jeden kontakt na pin <strong>D2</strong>, druhý na <strong>GND</strong>. V programu použijte režim <strong>INPUT_PULLUP</strong>.</li>
+<li><strong>Červená LED:</strong> delší vývod přes samostatný rezistor <strong>220 až 330 Ω</strong> na pin <strong>D6</strong>, kratší na <strong>GND</strong>.</li>
+<li><strong>Zelená LED:</strong> delší vývod přes samostatný rezistor <strong>220 až 330 Ω</strong> na pin <strong>D7</strong>, kratší na <strong>GND</strong>.</li>
+<li><strong>Servomotor:</strong> řídicí vodič na pin <strong>D9</strong>. Napájení připojte podle parametrů serva; při použití samostatného zdroje propojte jeho <strong>GND</strong> s GND Arduina.</li>
+<li>Na páku serva připevněte lehké papírové rameno závory. Zvolte dvě bezpečné polohy, například <strong>10° pro zavření</strong> a <strong>90° pro otevření</strong>, a ověřte je podle upevnění ramene.</li>
+</ul>
+<h4>Požadované chování programu</h4>
+<ol class="pra-task-list">
+<li>Po zapnutí je závora <strong>zavřená</strong>, červená LED svítí a zelená je zhasnutá.</li>
+<li>Stisknutí tlačítka zahájí jeden cyklus průjezdu.</li>
+<li>Červená LED <strong>třikrát zabliká</strong>: vždy 300 ms zhasnutá a 300 ms rozsvícená. Závora zatím zůstává zavřená.</li>
+<li>Servo zvedne závoru. Během otevírání ponechte červenou LED rozsvícenou. Pro tento model vyhraďte na pohyb přibližně <strong>1 sekundu</strong>.</li>
+<li>Po otevření červená zhasne a rozsvítí se zelená. Závora zůstane otevřená <strong>4 sekundy</strong>.</li>
+<li>Zelená zhasne, rozsvítí se červená a servo závoru zavře. Na zavření opět vyhraďte přibližně <strong>1 sekundu</strong>.</li>
+<li>Po dokončení čeká program na <strong>nový stisk</strong>. Držení tlačítka nesmí spustit další cyklus; stisky během průjezdu se neukládají.</li>
+</ol>
+<div class="pra-small-note"><strong>Důležité:</strong> Stisknuté tlačítko s INPUT_PULLUP má hodnotu <strong>LOW</strong>. Obě LED nesmějí svítit současně. Servo nechte pohybovat bez mechanických překážek. Jde o školní model bez snímače překážky.</div>
+</div>
+<h3>Jednotlivé fáze závory</h3>
+<div class="lcd-gate-controls" aria-label="Ovládání animace závory">
+<button type="button" id="gate-start">Spustit průjezd</button>
+<button type="button" id="gate-pause" disabled>Pozastavit</button>
+<button type="button" id="gate-next">Další fáze</button>
+<button type="button" id="gate-reset">Od začátku</button>
+</div><p id="gate-status" role="status" aria-live="polite">Závora je zavřená. Spusťte průjezd nebo projděte jednotlivé fáze.</p>
+<div class="lcd-gate-phases" id="gate-phases">
+<div class="lcd-gate-phase"><svg viewBox="0 -95 220 220" role="img" aria-label="Čekání"><path d="M10 113H210" stroke="#a8adb1" stroke-width="3"/><rect x="34" y="56" width="28" height="57" rx="4" fill="#373841"/><g data-gate-arm="" transform="rotate(0 48 64)"><rect x="48" y="58" width="150" height="12" rx="3" fill="#fafafa" stroke="#bbb"/><path d="M60 58l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12" stroke="#e63c46" stroke-width="9"/></g><circle cx="48" cy="64" r="7" fill="#ee7203"/><rect x="9" y="32" width="18" height="44" rx="6" fill="#373841"/><circle data-gate-red="" cx="18" cy="44" r="5" fill="#e63c46"/><circle data-gate-green="" cx="18" cy="63" r="5" fill="#345f40"/></svg><output class="gate-reading" aria-live="off"></output><strong>1. Čekání</strong><span>Zavřeno · čeká na nový stisk</span></div><div class="lcd-gate-phase"><svg viewBox="0 -95 220 220" role="img" aria-label="Upozornění"><path d="M10 113H210" stroke="#a8adb1" stroke-width="3"/><rect x="34" y="56" width="28" height="57" rx="4" fill="#373841"/><g data-gate-arm="" transform="rotate(0 48 64)"><rect x="48" y="58" width="150" height="12" rx="3" fill="#fafafa" stroke="#bbb"/><path d="M60 58l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12" stroke="#e63c46" stroke-width="9"/></g><circle cx="48" cy="64" r="7" fill="#ee7203"/><rect x="9" y="32" width="18" height="44" rx="6" fill="#373841"/><circle data-gate-red="" cx="18" cy="44" r="5" fill="#e63c46"/><circle data-gate-green="" cx="18" cy="63" r="5" fill="#345f40"/></svg><output class="gate-reading" aria-live="off"></output><strong>2. Upozornění</strong><span>3× bliknutí červené · pak otevření</span></div><div class="lcd-gate-phase"><svg viewBox="0 -95 220 220" role="img" aria-label="Průjezd"><path d="M10 113H210" stroke="#a8adb1" stroke-width="3"/><rect x="34" y="56" width="28" height="57" rx="4" fill="#373841"/><g data-gate-arm="" transform="rotate(-70 48 64)"><rect x="48" y="58" width="150" height="12" rx="3" fill="#fafafa" stroke="#bbb"/><path d="M60 58l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12" stroke="#e63c46" stroke-width="9"/></g><circle cx="48" cy="64" r="7" fill="#ee7203"/><rect x="9" y="32" width="18" height="44" rx="6" fill="#373841"/><circle data-gate-red="" cx="18" cy="44" r="5" fill="#77363b"/><circle data-gate-green="" cx="18" cy="63" r="5" fill="#38a95b"/></svg><output class="gate-reading" aria-live="off"></output><strong>3. Průjezd</strong><span>Otevřeno · zelená svítí 4 s</span></div><div class="lcd-gate-phase"><svg viewBox="0 -95 220 220" role="img" aria-label="Zavření"><path d="M10 113H210" stroke="#a8adb1" stroke-width="3"/><rect x="34" y="56" width="28" height="57" rx="4" fill="#373841"/><g data-gate-arm="" transform="rotate(0 48 64)"><rect x="48" y="58" width="150" height="12" rx="3" fill="#fafafa" stroke="#bbb"/><path d="M60 58l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12m14-12l10 12" stroke="#e63c46" stroke-width="9"/></g><circle cx="48" cy="64" r="7" fill="#ee7203"/><rect x="9" y="32" width="18" height="44" rx="6" fill="#373841"/><circle data-gate-red="" cx="18" cy="44" r="5" fill="#e63c46"/><circle data-gate-green="" cx="18" cy="63" r="5" fill="#345f40"/></svg><output class="gate-reading" aria-live="off"></output><strong>4. Zavření</strong><span>Červená svítí · návrat do čekání</span></div></div>
+<div class="pra-callout"><strong>Kontrola výsledku:</strong> Vyzkoušejte krátký stisk, dlouhé držení i stisk během průjezdu. Závora musí po jednom cyklu zůstat zavřená, dokud tlačítko neuvolníte a znovu nestisknete.</div>
+<div class="pra-callout"><strong>Rozšiřující úkol:</strong> Připojte potenciometr na <strong>A0</strong> a nastavujte jím dobu otevření od <strong>2 do 8 sekund</strong>. Hodnotu načtěte při zahájení cyklu, aby se během průjezdu neměnila. Použitou dobu vypište do sériového monitoru.</div>
+<p><strong>V další části kapitoly:</strong> Až zvládnete LCD displej, můžete závoru doplnit o zprávy <strong>„STOP“</strong>, <strong>„VOLNO“</strong> a odpočet do zavření.</p>
+</div></section><section id="cile" class="pra-section "><div class="pra-container"><h2>LCD jako výstup Arduina</h2><p>LCD umožní zobrazit naměřené hodnoty přímo u zařízení. Počítač se sériovým monitorem pak pro čtení údajů nepotřebujete.</p><div class="pra-summary"><div class="pra-summary-card"><strong>16 × 2</strong><span>Dva řádky po šestnácti znacích. Sloupce číslujeme 0–15 a řádky 0–1.</span></div><div class="pra-summary-card"><strong>I²C adaptér</strong><span>Modul na zadní straně displeje zjednoduší propojení s Arduinem. Připojíme napájení, zem a dva komunikační vodiče.</span></div><div class="pra-summary-card"><strong>Co se naučíte</strong><span>Připojit displej, přidat knihovnu a zobrazovat text, odpočet i hodnotu potenciometru.</span></div></div></div></section><section id="zapojeni" class="pra-section alt"><div class="pra-container"><h2>Čtyři vodiče k displeji</h2><figure class="lcd-wiring-figure"><img src="picture/lcd.svg?v=clean3" alt="Arduino propojené s LCD displejem a adaptérem LCM1602 IIC." width="1254" height="663" loading="lazy" decoding="async"><figcaption>LCD displej a Arduino – obrázek zapojení.</figcaption></figure><p>V této kapitole používáme <strong>Arduino Uno R3 a běžný 5V znakový LCD 1602 s I²C adaptérem</strong>. Zapojení kontrolujte podle popisků svého modulu, nikoli podle pořadí pinů na obrázku.</p><table><thead><tr><th>Pin LCD</th><th>Arduino Uno R3</th><th>Úloha</th></tr></thead><tbody><tr><td>GND</td><td>GND</td><td>Společná zem</td></tr><tr><td>VCC</td><td>5 V</td><td>Napájení 5V modulu</td></tr><tr><td>SDA</td><td>A4 / SDA</td><td>Data</td></tr><tr><td>SCL</td><td>A5 / SCL</td><td>Hodinový signál</td></tr></tbody></table><p>Piny označené SDA a SCL u AREF jsou na Uno R3 propojené s A4 a A5. Stačí využít jednu z těchto dvojic. Při přepojování odpojte napájení.</p><div class="pra-callout">Potenciometr z další úlohy připojte na <strong>A0</strong>. A4 a A5 už používá displej. Trimr na I²C adaptéru nastavuje <strong>kontrast LCD</strong>, není to potenciometr pro měření na A0.</div></div></section><section id="i2c" class="pra-section "><div class="pra-container"><h2>Jak probíhá komunikace I²C</h2><p>Arduino zahajuje komunikaci. Vodičem <strong>SDA</strong> se přenášejí data a vodič <strong>SCL</strong> určuje jejich časování. Zařízení rozlišujeme pomocí adres. Dva komunikační vodiče doplňuje společná zem a napájení.</p><p>7bitová adresa má 128 možných hodnot, část je ale rezervovaná. Neznamená to, že lze bez omezení připojit 128 zařízení. Záleží také na adresách, délce vedení a elektrických vlastnostech sběrnice.</p><div class="lcd-i2c"><div class="lcd-bus"><b>Arduino Uno</b><span id="bus-flow">SDA · SCL</span><b>LCD · 0x27</b></div><ol id="bus-steps"><li>START</li><li>Adresa + zápis</li><li>ACK</li><li>Data + ACK</li><li>STOP</li></ol><p id="bus-description" role="status">Klikněte na Další krok a sledujte komunikaci.</p><button id="bus-next" type="button">Další krok</button><button id="bus-reset" type="button">Od začátku</button></div><p class="lcd-note">Zjednodušený model přenosu. Adaptér převádí data na signály LCD; jeden znak obvykle vyžaduje více přenosů. Ukázka nepředstavuje přesný průběh bitů ani skutečnou rychlost.</p></div></section><section id="knihovna" class="pra-section alt"><div class="pra-container"><h2>Přidání knihovny</h2><p>Ukázky níže používají variantu <a href="https://github.com/johnrickman/LiquidCrystal_I2C">LiquidCrystal_I2C z repozitáře johnrickman</a>, která má metody <code>init()</code> a <code>backlight()</code>.</p><ol class="pra-task-list"><li>Stáhněte ZIP této knihovny přes nabídku Code → Download ZIP v jejím repozitáři.</li><li>V Arduino IDE otevřete <strong>Sketch → Include Library → Add .ZIP Library…</strong> a vyberte stažený ZIP.</li><li>Otevřete příklad dodaný s knihovnou a ověřte, že se přeloží pro Uno.</li><li>V programu nastavte skutečnou adresu svého adaptéru. <code>0x27</code> je příklad, nikoli zaručená adresa každého LCD.</li></ol><div class="pra-callout">Existuje více knihoven stejného názvu. Nekombinujte jejich příklady. V této variantě použijte <code>lcd.init();</code>; jiné varianty mohou vyžadovat jiný tvar <code>begin()</code>.</div></div></section><section id="prikazy" class="pra-section "><div class="pra-container"><h2>První text a základní příkazy</h2><pre class="pra-code lcd-code"><code>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print(&quot;Ahoj, svete!&quot;);
+}
+
+void loop() {
+}
+</code></pre><table><thead><tr><th>Příkaz</th><th>Význam</th></tr></thead><tbody><tr><td><code>lcd.init()</code></td><td>Připraví displej; patří do setup().</td></tr><tr><td><code>lcd.backlight()</code></td><td>Zapne podsvícení.</td></tr><tr><td><code>lcd.setCursor(0, 1)</code></td><td>Nastaví začátek druhého řádku.</td></tr><tr><td><code>lcd.print("Text")</code></td><td>Zapíše text od aktuální pozice.</td></tr><tr><td><code>lcd.clear()</code></td><td>Smaže displej a vrátí kurzor na začátek.</td></tr></tbody></table><p>Používejte zatím text bez diakritiky: běžný LCD nemá stejné kódování jako web. Po vypsání kratšího textu zůstávají původní znaky, které jste nepřepsali. Pomohou mezery nebo vymazání řádku. Časté clear() v loop() může způsobit blikání.</p></div></section><section id="simulace" class="pra-section alt"><div class="pra-container"><h2>Vyzkoušejte LCD</h2><p>Nejprve předpovězte výsledek, potom jej ověřte. Simulace ukazuje chování displeje; program pro úlohy vytvoříte sami.</p><div class="lcd-workbench"><div><div class="lcd-board"><div class="lcd-label">LCD 1602 · I²C</div><div id="lcd-screen" class="lcd-screen" role="img" aria-label="Prázdný LCD displej"></div><div class="lcd-label">16 sloupců × 2 řádky</div></div><p id="lcd-status" role="status">Připraveno.</p></div><div class="lcd-controls"><label for="lcd-mode">Režim simulace</label><select id="lcd-mode"><option value="text">Zápis textu a kurzor</option><option value="count">Odpočet 10 → 0</option><option value="pot">Potenciometr v procentech</option></select><div data-panel="text"><label for="lcd-text">Text bez diakritiky</label><input id="lcd-text" value="Ahoj" maxlength="16"><div class="lcd-pair"><label>Sloupec (0–15)<input id="lcd-col" type="number" min="0" max="15" value="0"></label><label>Řádek<select id="lcd-row"><option value="0">0 – první</option><option value="1">1 – druhý</option></select></label></div><button id="lcd-write" type="button">Zapsat text</button><button id="lcd-clear" type="button">Vymazat LCD</button><p class="lcd-note">Zkuste nejprve zapsat 100 a potom ze stejné pozice 9. Co zůstane? Ukázka zapisuje jen do konce zvoleného viditelného řádku; skutečný LCD má i skrytou paměť.</p></div><div data-panel="count" hidden><p>Odpočet mění číslo každých 500 ms. Nula zůstane půl sekundy, potom se objeví vzkaz.</p><button id="count-start" type="button">Spustit odpočet</button><button id="count-pause" type="button" disabled>Pozastavit</button><button id="count-step" type="button">Jeden krok</button></div><div data-panel="pot" hidden><label for="lcd-pot">Poloha potenciometru</label><input id="lcd-pot" type="range" min="0" max="1023" value="512"><p id="pot-report"></p><p class="lcd-note">Výsledek odpovídá celočíselnému map() z rozsahu 0–1023 na 0–100.</p></div></div></div></div></section><section id="ukoly" class="pra-section "><div class="pra-container"><h2>Samostatné úlohy</h2><article class="pra-task-box"><h3>1 · Vizitka</h3><p>Zobrazte své jméno na prvním řádku a příjmení na druhém. Každý text má nejvýše 16 znaků, bez diakritiky. Po resetu se vizitka znovu objeví.</p><details><summary>Nápověda</summary><p>Které příkazy stačí provést jednou? Jaké jsou souřadnice začátku druhého řádku?</p></details></article><article class="pra-task-box"><h3>2 · Odpočet</h3><p>Po resetu zobrazte postupně čísla 10 až 0 včetně. Každé číslo má být viditelné 0,5 s. Pak zobrazte vlastní vzkaz a ponechte jej na displeji. Při přechodu 10 → 9 nesmí zůstat nula.</p><details><summary>Nápověda</summary><p>Potřebujete odpočet opakovat v loop()? Jak přepíšete oba znaky předchozí hodnoty?</p></details></article><article class="pra-task-box"><h3>3 · Potenciometr</h3><p>Zapojte krajní vývody potenciometru na 5 V a GND, jezdec na A0. Na prvním řádku zobrazte popisek, na druhém polohu 0–100 %. Údaj aktualizujte přibližně desetkrát za sekundu. Ověřte krajní polohy i přechod 100 → 9 %.</p><details><summary>Nápověda</summary><p>Využijte převod rozsahu z kapitoly o servu a PWM. Co se stane při zápisu kratšího čísla?</p></details></article><h3>Rozšíření · ovládací panel</h3><p>Zobrazujte na LCD současně ADC a hodnotu PWM pro LED na D6. Tlačítkem D2 s INPUT_PULLUP přepínejte na druhou obrazovku s požadovaným úhlem serva. Jedno stisknutí smí přepnout obrazovku jen jednou. Pokud připojíte i servo, zvolte bezpečný rozsah a společnou zem; s knihovnou Servo na Uno nepoužívejte PWM na D9 a D10.</p><p><strong>Kontrola:</strong> Ukažte funkční zapojení, vysvětlete převod rozsahu a předveďte, že po kratších číslech nezůstávají staré znaky.</p></div></section><section id="reseni" class="pra-section alt"><div class="pra-container"><h2>Řešení po dokončení úloh</h2><p>Nejprve odevzdejte vlastní pokus. Řešení slouží k porovnání postupu po domluvě s vyučujícím.</p><form id="lcd-unlock"><label for="lcd-password">Heslo od vyučujícího</label><input id="lcd-password" type="password" required autocomplete="off"><label class="lcd-check"><input id="lcd-remember" type="checkbox"> Zapamatovat v tomto prohlížeči (jen na vlastním počítači)</label><button>Odemknout řešení</button><p id="lcd-error" role="alert"></p></form><div id="lcd-solutions" hidden><button id="lcd-lock" type="button">Zamknout a zapomenout odemknutí</button><details><summary>Řešení úlohy 1</summary><pre class="pra-code lcd-code"><code>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print(&quot;Jana&quot;);
+  lcd.setCursor(0, 1);
+  lcd.print(&quot;Novakova&quot;);
+}
+void loop() {}
+</code></pre></details><details><summary>Řešení úlohy 2</summary><pre class="pra-code lcd-code"><code>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  lcd.print(&quot;Odpocet:&quot;);
+  for (int cislo = 10; cislo &gt;= 0; cislo--) {
+    lcd.setCursor(0, 1);
+    lcd.print(&quot;                &quot;);
+    lcd.setCursor(0, 1);
+    lcd.print(cislo);
+    delay(500);
+  }
+  lcd.clear();
+  lcd.print(&quot;Hotovo!&quot;);
+}
+void loop() {}
+</code></pre></details><details><summary>Řešení úlohy 3</summary><pre class="pra-code lcd-code"><code>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  lcd.print(&quot;Poloha:&quot;);
+}
+void loop() {
+  int hodnota = analogRead(A0);
+  int procenta = map(hodnota, 0, 1023, 0, 100);
+  lcd.setCursor(0, 1);
+  if (procenta &lt; 100) lcd.print(&quot; &quot;);
+  if (procenta &lt; 10) lcd.print(&quot; &quot;);
+  lcd.print(procenta);
+  lcd.print(&quot; %&quot;);
+  delay(100);
+}
+</code></pre></details></div></div></section><section id="potize" class="pra-section "><div class="pra-container"><h2>Když displej nefunguje</h2><table><thead><tr><th>Problém</th><th>Co ověřit</th></tr></thead><tbody><tr><td>Displej svítí, ale nemá text</td><td>Kontrast trimrem, adresu adaptéru, SDA/SCL, inicializaci.</td></tr><tr><td>Řada tmavých obdélníků</td><td>Kontrast a zda správně proběhla inicializace.</td></tr><tr><td>Chyba u init() nebo begin()</td><td>Zvolenou variantu knihovny a její vlastní příklady.</td></tr><tr><td>Po čísle zůstávají znaky</td><td>Přepište celé pole i mezerami; samotné print() starý obsah nemaže.</td></tr><tr><td>Displej při aktualizaci bliká</td><td>Nepoužívejte clear() při každém průchodu loop().</td></tr><tr><td>Adresa 0x27 nefunguje</td><td>Zjistěte adresu I²C skenerem; nepřepisujte ji naslepo.</td></tr></tbody></table><details><summary>Pomůcka: I²C skener</summary><p>Připojte samotný LCD adaptér, nahrajte program a otevřete sériový monitor na 9600 baudů. Pokud výpis nestihnete, stiskněte RESET. Nalezená adresa potvrzuje odpověď zařízení, nikoli jeho typ. Po kontrole nahrajte zpět program pro LCD.</p><pre class="pra-code lcd-code"><code>#include &lt;Wire.h&gt;
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+  byte nalezeno = 0;
+  for (byte adresa = 8; adresa &lt; 120; adresa++) {
+    Wire.beginTransmission(adresa);
+    if (Wire.endTransmission() == 0) {
+      Serial.print(&quot;Nalezeno: 0x&quot;);
+      if (adresa &lt; 16) Serial.print(&quot;0&quot;);
+      Serial.println(adresa, HEX);
+      nalezeno++;
+    }
+  }
+  if (nalezeno == 0) Serial.println(&quot;Zadne zarizeni.&quot;);
+}
+void loop() {}
+</code></pre></details></div></section><section id="shrnuti" class="pra-section alt"><div class="pra-container"><h2>Shrnutí kapitoly</h2><p>Vysvětlete spolužákovi: proč potřebujeme adresu, proč druhý řádek začíná číslem 1 a proč je po změně 100 na 9 nutné přepsat zbylé znaky.</p><p>Navazuje na <a href="kapitola1.html">kapitolu 1</a>, <a href="kapitola2.html">kapitolu 2</a>, <a href="kapitola3.html">kapitolu 3</a> a <a href="kapitola4.html">kapitolu 4</a>.</p><p class="lcd-note">Zdroje: dodaný podklad LCD displej | PRA; <a href="https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-installing-a-library/">instalace knihoven Arduino</a>; <a href="https://github.com/johnrickman/LiquidCrystal_I2C/blob/master/LiquidCrystal_I2C.h">rozhraní použité knihovny</a>.</p></div></section><div class="pra-back"><a href="index.html">Zpět na obsah</a></div>
+<footer class="pra-author"><div class="pra-author-content"><span class="pra-author-item">Vytvořil: <strong>Lukáš Vavroš</strong></span><span class="pra-author-item">E-mail: <strong>lukas.vavros@frengp.cz</strong></span></div></footer>
+<div class="pra-footer">Gymnázium a SPŠEI Frenštát pod Radhoštěm</div></main></body></html>

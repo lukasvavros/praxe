@@ -1,9 +1,3 @@
-/* ============================================================
-   Praxe – Arduino | styly kapitoly
-   Používá se společně se soubory kapitola1.html, kapitola2.html, ...
-   Všechny selektory jsou uvnitř .pra-chapter, aby neovlivnily
-   zbytek stránky.
-   ============================================================ */
 
 .pra-chapter {
   --orange: #ee7203;

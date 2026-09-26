@@ -1,0 +1,9 @@
+
+.pra-review details{border:1px solid #ddd;border-radius:10px;margin:12px 0;background:#fff;overflow:hidden}
+.pra-review summary{padding:16px 18px;cursor:pointer;font:700 16px/1.6 Verdana,Arial,sans-serif;color:#373841}
+.pra-review summary:hover{background:#fff6ed}
+.pra-review summary:focus-visible{outline:3px solid #ee7203;outline-offset:-3px}
+.pra-review details[open] summary{border-bottom:1px solid #ddd;background:#fff6ed}
+.pra-review-answer{padding:18px;border-left:4px solid #ee7203}
+.pra-review-answer>strong{color:#a74d00}
+.pra-chapter .pra-review-answer p{margin:8px 0 0}

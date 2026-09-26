@@ -55,3 +55,10 @@ body { margin:0; }
   .pot-layout { grid-template-columns:minmax(0,1fr); gap:18px; }
   .pot-diagram .pot-schematic { max-width:340px; }
 }
+
+.pot-lock .pot-remember { display:flex; align-items:flex-start; gap:8px; font-size:12px; margin-top:12px; cursor:pointer; }
+.pot-remember input { flex:none; margin-top:4px; }
+
+#pot-form>input[type=password]{display:block;width:100%;max-width:100%;box-sizing:border-box;padding:10px 12px;font:16px Verdana,Arial,sans-serif;border:1px solid #bbb;border-radius:6px;margin:8px 0 10px}
+#pot-form .pot-remember{display:flex;align-items:center;gap:8px;font:14px/1.5 Verdana,Arial,sans-serif;margin:10px 0 16px}
+#pot-form .pot-remember input[type=checkbox]{appearance:auto;display:inline-block;width:18px;height:18px;min-width:18px;flex:0 0 18px;margin:0;accent-color:#ee7203}

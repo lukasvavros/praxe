@@ -1,0 +1,15 @@
+/* Arduino IDE: pouze písmo a barvy; pozadí zůstává v původních stylech. */
+.pra-chapter pre > code.arduino-ide-code {
+  font-family: Consolas, "Liberation Mono", Menlo, monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-variant-ligatures: none;
+  color: #4e5b62;
+}
+.pra-chapter .arduino-ide-code .ide-type { color: #00979c; }
+.pra-chapter .arduino-ide-code .ide-function { color: #d35400; }
+.pra-chapter .arduino-ide-code .ide-control { color: #728900; }
+.pra-chapter .arduino-ide-code .ide-number { color: #005c5f; }
+.pra-chapter .arduino-ide-code .ide-comment { color: #697b7c; }
+.pra-chapter .arduino-ide-code .ide-string { color: #005c5f; }
+.pra-chapter .arduino-ide-code .ide-directive { color: #728900; }

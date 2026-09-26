@@ -1,0 +1,11 @@
+/* Společné bloky s ikonou vlevo a obsahem vpravo. */
+.pra-chapter .pra-study-row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:40px;align-items:start;margin:0 0 32px}
+.pra-chapter .pra-study-row:last-child{margin-bottom:0}
+.pra-chapter .pra-study-icon{display:block;width:104px;height:104px;max-width:100%;object-fit:contain;margin:0;border:0;border-radius:0;box-shadow:none}
+.pra-chapter .pra-study-content{min-width:0}
+.pra-chapter .pra-study-content>h2{font-size:22px;font-weight:700;line-height:1.4;margin:0 0 10px;padding:0;border:0;text-align:left;color:#373841}
+.pra-chapter .pra-study-content>h2::after,.pra-chapter .pra-study-content>h2::before{display:none}
+.pra-chapter .pra-study-content>p{margin:10px 0 16px}
+.pra-chapter .pra-study-content>.pra-command-list{margin:0 0 20px;padding-left:24px}
+@media(max-width:640px){.pra-chapter .pra-study-row{grid-template-columns:64px minmax(0,1fr);gap:16px}.pra-chapter .pra-study-icon{width:64px;height:64px}.pra-chapter .pra-study-content>h2{font-size:19px}}
+@media(max-width:400px){.pra-chapter .pra-study-row{grid-template-columns:1fr;gap:12px}}

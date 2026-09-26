@@ -1,0 +1,150 @@
+/* Stejný vzhled otázek jako v kapitole 1; omezeno na kapitolu 2. */
+.pra-chapter.pra-chapter-2 .pra-ch2-review{--orange:#ee7203;--white:#fff;--dark:#373841;--light:#f4f4f4}
+
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-quiz-intro {
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question-list {
+  display: grid;
+  gap: 16px;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question {
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid #e2e2e2;
+  border-left: 6px solid var(--orange);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 60px 20px 22px;
+  color: var(--dark);
+  font-size: clamp(15px, 1.35vw, 18px);
+  font-weight: 700;
+  line-height: 1.6;
+  transition: background 0.2s ease;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary::-webkit-details-marker {
+  display: none;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary:hover {
+  background: #f7f7f7;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question[open] summary::after {
+  content: "−";
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question[open] summary {
+  background: var(--light);
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question-number {
+  color: var(--orange);
+  margin-right: 6px;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer {
+  padding: 20px 22px 24px;
+  border-top: 1px solid #e5e5e5;
+  background: var(--white);
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question-image,
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer-image {
+  max-width: 750px;
+  margin: 18px auto;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question-image img,
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer-code {
+  margin: 14px 0 0;
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #f1f2f4;
+  color: #25262d;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.6;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-quiz-note {
+  margin-top: 24px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: var(--dark);
+  color: var(--white);
+  line-height: 1.7;
+}
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-quiz-note strong {
+  color: var(--orange);
+}
+
+
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question{margin:0}
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary::before{content:none}
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary:focus-visible{outline:3px solid #ee7203;outline-offset:-3px}
+@media(max-width:600px){
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary{padding:16px 52px 16px 16px}
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-question summary::after{right:12px;width:28px;height:28px}
+.pra-chapter.pra-chapter-2 .pra-ch2-review .pra-answer{padding:16px}
+}

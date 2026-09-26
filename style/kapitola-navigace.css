@@ -1,0 +1,16 @@
+
+.pra-nav-toggle{position:fixed;top:14px;left:14px;z-index:1000;display:flex;gap:9px;align-items:center;min-height:44px;padding:10px 14px;background:#fff;color:#b75100;border:1px solid #ee7203;border-radius:8px;font:15px Verdana,Arial,sans-serif;box-shadow:0 2px 10px #0002;cursor:pointer}
+.pra-nav-toggle span:first-child{font-size:23px;line-height:1}
+.pra-nav-dialog{position:fixed;inset:0 auto 0 0;margin:0;box-sizing:border-box;width:320px;max-width:90vw;height:100dvh;max-height:100%;padding:20px 16px;border:0;border-right:1px solid #ddd;background:#fff;color:#373841;font:14px/1.5 Verdana,Arial,sans-serif;overflow-y:auto}
+.pra-nav-dialog::backdrop{background:#0006}
+.pra-nav-top{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:14px}
+.pra-nav-top button{background:#f4f4f4;border:0;border-radius:6px;min-width:44px;min-height:44px;font-size:26px;color:#373841;cursor:pointer}
+.pra-nav-dialog a{display:block;color:#373841;text-decoration:none;border-left:3px solid transparent;padding:11px 12px;margin:3px 0;border-radius:5px}
+.pra-nav-dialog a:hover,.pra-nav-dialog a[aria-current]{background:#f4f4f4;border-left-color:#ee7203}
+.pra-nav-dialog .pra-nav-home{color:#ae4c00;font-weight:bold;border-bottom:1px solid #ddd;margin-bottom:14px;padding-bottom:16px}
+.pra-nav-toggle:focus-visible,.pra-nav-dialog :focus-visible{outline:3px solid #ee7203;outline-offset:3px}
+.pra-chapter h2[id]{scroll-margin-top:80px}
+.pra-chapter-3 .servo-inline-example{margin-top:22px;min-width:0}
+.pra-chapter-3 .servo-inline-example>h3{font-size:18px;line-height:1.5}
+.pra-chapter-3 .servo-inline-example pre{max-width:100%;overflow:auto;max-height:480px}
+@media(max-width:600px){.pra-nav-toggle{top:8px;left:8px}.pra-nav-toggle span:last-child{display:none}.pra-chapter .pra-hero{padding-top:74px}}

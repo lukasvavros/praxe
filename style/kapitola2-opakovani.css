@@ -1,0 +1,19 @@
+/* Doplňky pouze pro druhou kapitolu; stejné třídy otázek jako v kapitole 1. */
+.pra-chapter-2 .pra-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.pra-chapter-2 .pra-summary-card{padding:20px;background:#fff;border:1px solid #d9e7e7;border-radius:12px;min-width:0}
+.pra-chapter-2 .pra-summary-card strong{display:block;color:#006d73;margin-bottom:8px}
+.pra-chapter-2 .pra-summary-card span{display:block;line-height:1.65;color:#26484d}
+.pra-ch2-review .pra-question-list{display:grid;gap:12px}
+.pra-ch2-review .pra-question{border:1px solid #d3e4e4;border-radius:12px;background:#fff;color:#26484d;overflow:hidden}
+.pra-ch2-review .pra-question>summary{padding:18px 20px;min-height:48px;cursor:pointer;font-weight:600;line-height:1.6;overflow-wrap:anywhere}
+.pra-ch2-review .pra-question>summary::marker{color:#007c82}
+.pra-ch2-review .pra-question-number{color:#007c82;margin-right:8px;font-weight:700}
+.pra-ch2-review .pra-question[open]>summary{background:#edf6f5;border-bottom:1px solid #d3e4e4}
+.pra-ch2-review .pra-question>summary:focus-visible{outline:3px solid #007c82;outline-offset:-4px}
+.pra-ch2-review .pra-answer{padding:18px 22px;line-height:1.75;overflow-wrap:anywhere}
+.pra-ch2-review .pra-answer-label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:#007c82;margin-bottom:8px}
+.pra-ch2-review .pra-answer p{margin:0 0 10px}
+.pra-ch2-review .pra-answer p:last-child{margin-bottom:0}
+.pra-ch2-review .pra-answer-code{max-width:100%;overflow:auto;padding:16px;border-radius:8px;background:#f3f7f7;color:#183b40}
+.pra-ch2-review code{overflow-wrap:anywhere}
+@media(max-width:600px){.pra-ch2-review .pra-question>summary{padding:15px}.pra-ch2-review .pra-answer{padding:15px}}

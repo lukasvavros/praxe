@@ -94,3 +94,158 @@ body{margin:0}.lcd-chapter{width:100%;margin:0}.lcd-chapter [hidden]{display:non
   .lcd-chapter #simulace .lcd-pair{grid-template-columns:1fr;gap:0}
   .lcd-chapter #simulace button{width:100%;margin-right:0}
 }
+
+/* Kontrolní otázky – stejný vzhled jako v ostatních kapitolách. */
+
+
+.lcd-chapter .pra-quiz-intro {
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.lcd-chapter .pra-question-list {
+  display: grid;
+  gap: 16px;
+}
+
+.lcd-chapter .pra-question {
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid #e2e2e2;
+  border-left: 6px solid var(--orange);
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.lcd-chapter .pra-question summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 60px 20px 22px;
+  color: var(--dark);
+  font-size: clamp(15px, 1.35vw, 18px);
+  font-weight: 700;
+  line-height: 1.6;
+  transition: background 0.2s ease;
+}
+
+.lcd-chapter .pra-question summary::-webkit-details-marker {
+  display: none;
+}
+
+.lcd-chapter .pra-question summary:hover {
+  background: #f7f7f7;
+}
+
+.lcd-chapter .pra-question summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.lcd-chapter .pra-question[open] summary::after {
+  content: "−";
+}
+
+.lcd-chapter .pra-question[open] summary {
+  background: var(--light);
+}
+
+.lcd-chapter .pra-question-number {
+  color: var(--orange);
+  margin-right: 6px;
+}
+
+.lcd-chapter .pra-answer {
+  padding: 20px 22px 24px;
+  border-top: 1px solid #e5e5e5;
+  background: var(--white);
+}
+
+.lcd-chapter .pra-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.lcd-chapter .pra-answer-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lcd-chapter .pra-question-image,
+.lcd-chapter .pra-answer-image {
+  max-width: 750px;
+  margin: 18px auto;
+}
+
+.lcd-chapter .pra-question-image img,
+.lcd-chapter .pra-answer-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, 0.07);
+}
+
+.lcd-chapter .pra-answer-code {
+  margin: 14px 0 0;
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #f1f2f4;
+  color: #25262d;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.6;
+}
+
+.lcd-chapter .pra-quiz-note {
+  margin-top: 24px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: var(--dark);
+  color: var(--white);
+  line-height: 1.7;
+}
+
+.lcd-chapter .pra-quiz-note strong {
+  color: var(--orange);
+}
+
+
+.lcd-chapter details.pra-question{padding:0;margin:0;border:1px solid #e2e2e2;border-left:6px solid #ee7203;border-radius:14px}
+.lcd-chapter .pra-question summary{display:block}
+.lcd-chapter .pra-question summary::marker{content:""}
+.lcd-chapter .pra-question summary::before{content:none}
+.lcd-chapter .pra-question summary:focus-visible{outline:3px solid #ee7203;outline-offset:-3px}
+.lcd-chapter .pra-question .pra-answer p{margin:0 0 18px}
+.lcd-chapter .pra-question .pra-answer p:last-child{margin-bottom:0}
+.lcd-chapter .pra-back a{color:#fff}
+@media(max-width:600px){
+.lcd-chapter .pra-question summary{padding:16px 52px 16px 16px}
+.lcd-chapter .pra-question summary::after{right:12px;width:28px;height:28px}
+.lcd-chapter .pra-answer{padding:16px}
+}

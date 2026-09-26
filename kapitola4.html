@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kapitola 4: PWM a RGB LED | Praxe – Arduino</title><link rel="stylesheet" href="style/kapitola4.css?v=nav1"><link rel="stylesheet" href="style/kapitola-navigace.css?v=2"><script src="script/kapitola-navigace.js?v=2" defer></script></head><body>
+<button class="pra-nav-toggle" type="button" aria-controls="pra-chapter-menu" aria-expanded="false" aria-label="Otevřít obsah kapitoly"><span aria-hidden="true">☰</span><span>Obsah</span></button>
+<dialog id="pra-chapter-menu" class="pra-nav-dialog" aria-labelledby="pra-menu-title">
+<div class="pra-nav-top"><strong id="pra-menu-title">Kapitola 4 · Obsah</strong><button type="button" data-nav-close aria-label="Zavřít menu">×</button></div>
+<a class="pra-nav-home" href="index.html">⌂ Domů – obsah předmětu</a>
+<nav aria-label="Části kapitoly"><a href="#pra-ch4-cast-01">Cíle kapitoly</a><a href="#pra-ch4-cast-02">Pulzně šířková modulace – PWM</a><a href="#pra-ch4-cast-03">Funkce analogWrite()</a><a href="#pra-ch4-cast-04">RGB LED</a><a href="#pra-ch4-cast-05">Zapojení RGB LED k Arduinu</a><a href="#pra-ch4-cast-06">Míchání barev</a><a href="#pra-ch4-cast-07">Úkol 1 – tři úrovně jasu</a><a href="#pra-ch4-cast-08">Úkol 2 – plynulá změna jasu</a><a href="#pra-ch4-cast-09">Potenciometr ovládá jas</a><a href="#pra-ch4-cast-10">Úkol 4 – vlastní barvy</a><a href="#pra-ch4-cast-11">Úkol 5 – plynulý přechod barev</a><a href="#pra-ch4-cast-12">Úkol 6 – tři potenciometry</a><a href="#pra-ch4-cast-13">Shrnutí kapitoly</a></nav></dialog>
+
+<div class="pra-chapter">
+  <header class="pra-hero">
+    <h1>Kapitola 4: PWM a RGB LED</h1>
+    <p>Praxe – Arduino | 3. ročník</p>
+  </header>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-01" tabindex="-1">Cíle kapitoly</h2>
+      <p>
+        V této kapitole se naučíme řídit jas LED pomocí pulzně šířkové modulace a následně
+        samostatně nastavovat červenou, zelenou a modrou složku RGB LED.
+      </p>
+      <div class="pra-grid-3">
+        <div class="pra-card">
+          <strong>PWM</strong
+          ><span>Pochopíme princip rychlého zapínání a vypínání digitálního výstupu.</span>
+        </div>
+        <div class="pra-card">
+          <strong>analogWrite()</strong
+          ><span>Naučíme se nastavovat PWM hodnoty v rozsahu 0 až 255.</span>
+        </div>
+        <div class="pra-card">
+          <strong>RGB LED</strong
+          ><span>Budeme vytvářet různé barvy kombinací tří barevných složek.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-02" tabindex="-1">Pulzně šířková modulace – PWM</h2>
+      <p>
+        <strong>PWM</strong> je metoda, která mění průměrný výkon rychlým zapínáním a vypínáním
+        digitálního signálu. Poměr doby zapnutí k délce celé periody nazýváme
+        <span class="pra-highlight">střída</span> neboli duty cycle.
+      </p>
+      <p>
+        Čím déle je signál v logické jedničce, tím vyšší je průměrný výkon a tím více LED svítí.
+      </p>
+      <div class="pra-duty-grid">
+        <div class="pra-duty-card">
+          <strong>0 %</strong><span>Signál je stále vypnutý.</span
+          ><svg viewBox="0 0 340 120">
+            <line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3" />
+            <polyline points="25,90 315,90" fill="none" stroke="#ee7203" stroke-width="7" />
+          </svg>
+        </div>
+        <div class="pra-duty-card">
+          <strong>50 %</strong><span>Signál je polovinu periody zapnutý.</span
+          ><svg viewBox="0 0 340 120">
+            <line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3" />
+            <polyline
+              points="25,90 25,30 95,30 95,90 165,90 165,30 235,30 235,90 315,90"
+              fill="none"
+              stroke="#ee7203"
+              stroke-width="7"
+            />
+          </svg>
+        </div>
+        <div class="pra-duty-card">
+          <strong>100 %</strong><span>Signál je stále zapnutý.</span
+          ><svg viewBox="0 0 340 120">
+            <line x1="25" y1="90" x2="315" y2="90" stroke="#373841" stroke-width="3" />
+            <polyline points="25,90 25,30 315,30" fill="none" stroke="#ee7203" stroke-width="7" />
+          </svg>
+        </div>
+      </div>
+      <div class="pra-small-note">
+        <strong>Důležité:</strong> PWM není skutečné analogové napětí. Arduino pouze velmi rychle
+        přepíná pin mezi LOW a HIGH.
+      </div>
+      <div class="pra-rgb-image ch4-inline-1">
+        <img
+          src="picture/18.png"
+          alt="Přehled PWM se střídou 0, 25, 50, 75 a 100 procent a schéma míchání barev RGB."
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-03" tabindex="-1">Funkce analogWrite()</h2>
+      <p>
+        PWM nastavujeme pomocí funkce <strong>analogWrite()</strong>. Druhý parametr je hodnota od 0
+        do 255.
+      </p>
+      <div class="pra-formula">analogWrite(pin, hodnota);</div>
+      <div class="pra-grid-3">
+        <div class="pra-card"><strong>0</strong><span>LED nesvítí.</span></div>
+        <div class="pra-card"><strong>128</strong><span>LED svítí přibližně na 50 %.</span></div>
+        <div class="pra-card"><strong>255</strong><span>LED svítí maximálním jasem.</span></div>
+      </div>
+      <pre class="pra-code"><code>const byte pinLed = 9;
+
+void setup() {
+  pinMode(pinLed, OUTPUT);
+}
+
+void loop() {
+  analogWrite(pinLed, 0);
+  delay(1000);
+
+  analogWrite(pinLed, 128);
+  delay(1000);
+
+  analogWrite(pinLed, 255);
+  delay(1000);
+}</code></pre>
+      <div class="pra-warning">
+        <p>
+          <strong>Pozor:</strong> Na Arduino UNO podporují PWM piny označené symbolem
+          <strong>~</strong>: 3, 5, 6, 9, 10 a 11.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-04" tabindex="-1">RGB LED</h2>
+      <div class="pra-rgb-layout">
+        <div class="pra-rgb-image">
+          <img
+            src="picture/17.png"
+            alt="Vývody RGB LED označené R, společný vývod, B a G"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div>
+          <p>
+            RGB LED kombinuje v jednom pouzdře tři LED diody:
+            <span class="pra-highlight">červenou (R)</span>,
+            <span class="pra-highlight">zelenou (G)</span> a
+            <span class="pra-highlight">modrou (B)</span>.
+          </p>
+          <p>
+            Každou složku lze ovládat samostatně. Kombinací jejich jasů můžeme vytvořit mnoho
+            různých barev.
+          </p>
+          <p>
+            RGB LED má čtyři vývody. Tři patří jednotlivým barvám a jeden je společný. Podle typu
+            jde o společnou katodu nebo společnou anodu.
+          </p>
+        </div>
+      </div>
+      <div class="pra-grid-3">
+        <div class="pra-card">
+          <strong>Společná katoda</strong
+          ><span>Společný vývod se připojí na GND. Vyšší PWM znamená vyšší jas.</span>
+        </div>
+        <div class="pra-card">
+          <strong>Společná anoda</strong
+          ><span>Společný vývod se připojí na 5 V a používá se obrácená logika.</span>
+        </div>
+        <div class="pra-card">
+          <strong>Polarita</strong
+          ><span>Před zapojením ověřte typ a pořadí vývodů konkrétní součástky.</span>
+        </div>
+      </div>
+      <div class="pra-warning">
+        <p>
+          <strong>V této kapitole používáme RGB LED se společnou katodou.</strong> Každá barevná
+          složka musí mít vlastní sériový rezistor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-05" tabindex="-1">Zapojení RGB LED k Arduinu</h2>
+      <p>
+        Použijeme PWM piny D9, D10 a D11. Každou barevnou složku připojíme přes samostatný rezistor
+        220 až 330 Ω.
+      </p>
+      <div class="pra-pin-grid">
+        <div class="pra-pin-card red">
+          <strong>R → D9</strong><span>Červená složka přes rezistor.</span>
+        </div>
+        <div class="pra-pin-card green">
+          <strong>G → D10</strong><span>Zelená složka přes rezistor.</span>
+        </div>
+        <div class="pra-pin-card blue">
+          <strong>B → D11</strong><span>Modrá složka přes rezistor.</span>
+        </div>
+      </div>
+      <div class="pra-connection">
+        <div class="pra-connection-box">D9, D10, D11</div>
+        <div class="pra-connection-arrow">→</div>
+        <div class="pra-connection-box">3× rezistor 220–330 Ω</div>
+        <div class="pra-connection-arrow">→</div>
+        <div class="pra-connection-box">RGB LED, společná katoda → GND</div>
+      </div>
+      <pre class="pra-code"><code>const byte pinCervena = 9;
+const byte pinZelena = 10;
+const byte pinModra = 11;
+
+void setup() {
+  pinMode(pinCervena, OUTPUT);
+  pinMode(pinZelena, OUTPUT);
+  pinMode(pinModra, OUTPUT);
+}
+
+void loop() {
+  analogWrite(pinCervena, 255);
+  analogWrite(pinZelena, 0);
+  analogWrite(pinModra, 0);
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-06" tabindex="-1">Míchání barev</h2>
+      <p>
+        Výsledná barva vzniká kombinací hodnot R, G a B. Každá složka může mít hodnotu od 0 do 255.
+      </p>
+      <div class="pra-color-table-wrap">
+        <table class="pra-color-table">
+          <thead>
+            <tr>
+              <th>Barva</th>
+              <th>Ukázka</th>
+              <th>R</th>
+              <th>G</th>
+              <th>B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Červená</td>
+              <td><span class="pra-color-chip ch4-inline-2"></span></td>
+              <td>255</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Zelená</td>
+              <td><span class="pra-color-chip ch4-inline-3"></span></td>
+              <td>0</td>
+              <td>255</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Modrá</td>
+              <td><span class="pra-color-chip ch4-inline-4"></span></td>
+              <td>0</td>
+              <td>0</td>
+              <td>255</td>
+            </tr>
+            <tr>
+              <td>Žlutá</td>
+              <td><span class="pra-color-chip ch4-inline-5"></span></td>
+              <td>255</td>
+              <td>255</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Azurová</td>
+              <td><span class="pra-color-chip ch4-inline-6"></span></td>
+              <td>0</td>
+              <td>255</td>
+              <td>255</td>
+            </tr>
+            <tr>
+              <td>Purpurová</td>
+              <td><span class="pra-color-chip ch4-inline-7"></span></td>
+              <td>255</td>
+              <td>0</td>
+              <td>255</td>
+            </tr>
+            <tr>
+              <td>Růžová</td>
+              <td><span class="pra-color-chip ch4-inline-8"></span></td>
+              <td>255</td>
+              <td>40</td>
+              <td>120</td>
+            </tr>
+            <tr>
+              <td>Bílá</td>
+              <td><span class="pra-color-chip ch4-inline-9"></span></td>
+              <td>255</td>
+              <td>255</td>
+              <td>255</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pra-small-note">
+        Skutečný odstín závisí na konkrétní LED, použitých rezistorech a citlivosti lidského oka.
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-07" tabindex="-1">Úkol 1 – tři úrovně jasu</h2>
+      <div class="pra-task-box">
+        <h3>Zhasnuto, 50 % a 100 %</h3>
+        <p>Vyberte jednu barevnou složku RGB LED. Jednotlivé podúkoly na sebe navazují.</p>
+        <ol class="pra-task-list">
+          <li>Nastavte hodnotu 0.</li>
+          <li>Po jedné sekundě nastavte hodnotu 128.</li>
+          <li>Po další sekundě nastavte hodnotu 255.</li>
+          <li>Po další sekundě LED zhasněte.</li>
+          <li>Celý cyklus nechte stále opakovat.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Vyzkoušejte program pro všechny tři barevné složky.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-08" tabindex="-1">Úkol 2 – plynulá změna jasu</h2>
+      <div class="pra-task-box">
+        <h3>Rozsvícení a zhasnutí pomocí cyklu</h3>
+        <ol class="pra-task-list">
+          <li>Pomocí cyklu <strong>for</strong> měňte jas od 0 do 255.</li>
+          <li>V každém průchodu použijte <strong>analogWrite()</strong>.</li>
+          <li>Přidejte krátkou prodlevu.</li>
+          <li>Druhým cyklem snižte jas zpět na 0.</li>
+          <li>Program nechte stále opakovat.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Změňte krok cyklu na 5 nebo 10 a porovnejte plynulost.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-09" tabindex="-1">Potenciometr ovládá jas</h2>
+      <p>
+        <strong>analogRead()</strong> vrací 0 až 1023, zatímco
+        <strong>analogWrite()</strong> očekává 0 až 255. Rozsah převedeme funkcí
+        <strong>map()</strong>.
+      </p>
+      <pre class="pra-code"><code>int hodnotaPotenciometru = analogRead(A0);
+int jas = map(hodnotaPotenciometru, 0, 1023, 0, 255);
+analogWrite(pinCervena, jas);</code></pre>
+      <div class="pra-task-box">
+        <h3>Úkol 3 – řízení jasu potenciometrem</h3>
+        <ol class="pra-task-list">
+          <li>Připojte potenciometr na A0.</li>
+          <li>Načtěte jeho hodnotu funkcí <strong>analogRead()</strong>.</li>
+          <li>Převeďte ji funkcí <strong>map()</strong> na 0 až 255.</li>
+          <li>Nastavujte jas jedné barevné složky.</li>
+          <li>Vypisujte původní i převedenou hodnotu do sériového monitoru.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Jednu barvu zesilujte a druhou současně zeslabujte.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-10" tabindex="-1">Úkol 4 – vlastní barvy</h2>
+      <div class="pra-task-box">
+        <h3>Míchání barevných složek</h3>
+        <ol class="pra-task-list">
+          <li>Nastavte růžovou barvu.</li>
+          <li>Nastavte žlutou barvu.</li>
+          <li>Nastavte azurovou barvu.</li>
+          <li>Nastavte bílou barvu.</li>
+          <li>Vytvořte vlastní odstín a zapište jeho hodnoty R, G a B.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Vytvořte funkci <strong>nastavBarvu(r, g, b)</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-11" tabindex="-1">Úkol 5 – plynulý přechod barev</h2>
+      <div class="pra-task-box">
+        <h3>Modrá → zelená → modrá</h3>
+        <ol class="pra-task-list">
+          <li>Nastavte počáteční modrou barvu.</li>
+          <li>V cyklu zvyšujte zelenou složku.</li>
+          <li>Ve stejném cyklu snižujte modrou složku.</li>
+          <li>Po dosažení zelené vytvořte opačný přechod.</li>
+          <li>Rychlost upravte pomocí <strong>delay()</strong>.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Přidejte přechody zelená → červená a červená → modrá.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-12" tabindex="-1">Úkol 6 – tři potenciometry</h2>
+      <div class="pra-task-box">
+        <h3>Ruční mixáž RGB barev</h3>
+        <p>Každý potenciometr bude nastavovat jednu barevnou složku.</p>
+        <ul class="pra-task-list">
+          <li>R → A0</li>
+          <li>G → A1</li>
+          <li>B → A2</li>
+        </ul>
+        <ol class="pra-task-list">
+          <li>Načtěte hodnoty všech tří potenciometrů.</li>
+          <li>Každou převeďte na rozsah 0 až 255.</li>
+          <li>Výsledky odešlete na příslušné RGB výstupy.</li>
+          <li>Vypisujte R, G a B do sériového monitoru.</li>
+          <li>Namíchejte růžovou, oranžovou, fialovou a bílou.</li>
+        </ol>
+        <div class="pra-callout">
+          <strong>Rozšiřující úkol:</strong> Přidejte tlačítko, které vypíše aktuální hodnoty jako
+          uloženou barvu.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pra-section alt">
+    <div class="pra-container">
+      <h2 id="pra-ch4-cast-13" tabindex="-1">Shrnutí kapitoly</h2>
+      <div class="pra-summary">
+        <div class="pra-summary-card">
+          <strong>PWM</strong
+          ><span>Mění průměrný výkon rychlým přepínáním digitálního výstupu.</span>
+        </div>
+        <div class="pra-summary-card">
+          <strong>analogWrite()</strong><span>Nastavuje PWM hodnotu od 0 do 255.</span>
+        </div>
+        <div class="pra-summary-card">
+          <strong>RGB LED</strong><span>Kombinuje červenou, zelenou a modrou složku.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pra-back"><a href="index.html">Zpět na obsah</a></div>
+  <footer class="pra-author">
+    <div class="pra-author-content">
+      <span class="pra-author-item"
+        ><img class="ch4-inline-10"
+          src="picture/1.png"
+          alt=""
+          role="presentation"
+         
+        /><span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span></span
+      ><span class="pra-author-item"
+        ><img class="ch4-inline-11"
+          src="picture/2.png"
+          alt=""
+          role="presentation"
+         
+        /><span>E-mail:&nbsp;<strong>lukas.vavros@frengp.cz</strong></span></span
+      >
+    </div>
+  </footer>
+  <div class="pra-footer">Gymnázium a SPŠEI Frenštát pod Radhoštěm</div>
+</div>
+</body></html>

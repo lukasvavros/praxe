@@ -1,0 +1,21 @@
+.dht-chapter .dht-task-picker{padding:20px;background:#edf2f3;border-radius:12px;margin-bottom:24px}
+.dht-chapter .dht-task-picker select{max-width:600px;margin-bottom:12px}
+.dht-chapter #dht-task-description{margin:0;font-size:16px}
+.dht-chapter .dht-real-svg{width:100%;height:auto;display:block}
+.dht-chapter .dht-real-svg #svg-lcd1 text,.dht-chapter .dht-real-svg #svg-lcd2 text{font-family:monospace;font-size:14px;font-weight:400;letter-spacing:0;fill:#26390d;text-anchor:middle}
+.dht-chapter .dht-task-solution{margin-top:24px}
+.dht-chapter .dht-install-window{border:1px solid #b9cdd0;border-radius:12px;overflow:hidden;max-width:760px;margin:auto}
+.dht-chapter .dht-install-bar{background:#007f86;color:#fff;padding:16px;font-weight:bold}
+.dht-chapter .dht-install-body{padding:24px;background:#f7f9f9}
+.dht-chapter #library-search{width:100%;padding:12px;border:1px solid #b9cdd0;border-radius:8px;background:white;font:inherit;box-sizing:border-box}
+.dht-chapter #library-result{padding:20px;background:white;border:1px solid #b9cdd0;border-radius:8px;margin:16px 0}
+.dht-chapter #library-result h3{margin:0 0 10px}
+.dht-chapter #library-badge{color:#007f86}
+.dht-chapter #glyph-editor{margin:0 0 22px;padding:16px;background:#fff;border-radius:10px}
+.dht-chapter #glyph-editor h4{margin:0 0 14px}
+.dht-chapter .glyph-grid{display:grid;grid-template-columns:repeat(5,28px);gap:4px;margin:0 0 15px}
+.dht-chapter .glyph-grid button{width:28px;height:28px;min-height:0;padding:0;border:1px solid #92a846;border-radius:3px;background:#bdd375}
+.dht-chapter .glyph-grid button[aria-pressed=true]{background:#26390d;border-color:#26390d}
+.dht-chapter .glyph-grid button:focus-visible{outline-offset:1px}
+.dht-chapter [data-task-solution][hidden]{display:none!important}
+@media(max-width:520px){.dht-chapter .dht-install-body{padding:16px}}

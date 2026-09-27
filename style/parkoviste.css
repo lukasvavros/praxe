@@ -12,3 +12,19 @@
 .dht-chapter #parking-pause:disabled{opacity:.45;cursor:default}
 @media(max-width:900px){.dht-chapter .parking-layout{grid-template-columns:1fr}.dht-chapter .parking-svg{max-width:780px;margin:auto}}
 @media(max-width:520px){.dht-chapter .parking-phases{grid-template-columns:repeat(2,1fr)}}
+
+/* Údaje o průběhu patří pod zapojení. Pravý panel obsahuje ovládání a heslo. */
+.dht-chapter .parking-dashboard{margin-top:12px}
+.dht-chapter .parking-dashboard .parking-readouts{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:0}
+.dht-chapter .parking-readouts>div{padding:16px}
+.dht-chapter .parking-readouts strong{font-size:clamp(18px,1.8vw,24px);white-space:normal;overflow-wrap:anywhere}
+.dht-chapter .parking-dashboard .dht-note{margin:12px 0 0}
+.dht-chapter .parking-dashboard .dht-status{margin:12px 0 0}
+.dht-chapter .parking-controls>h3:not(:first-child){margin-top:26px;padding-top:22px;border-top:1px solid #cbdcde;font-size:22px}
+.dht-chapter #parking-solution-form{margin-top:18px}
+.dht-chapter #parking-solution-error:empty{margin:0}
+.dht-chapter #parking-solution-content{margin-top:24px;padding-top:24px;border-top:1px solid #d6e1e3}
+@media(max-width:520px){
+.dht-chapter .parking-dashboard .parking-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dht-chapter .parking-readouts>div:last-child{grid-column:1/-1}
+}

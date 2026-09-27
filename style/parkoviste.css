@@ -1,0 +1,14 @@
+/* Úvodní opakování – původní SVG parkoviště. */
+.dht-chapter .parking-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr);gap:24px;align-items:start}
+.dht-chapter .parking-svg{display:block;width:100%;height:auto;max-height:none;background:white;border-radius:12px}
+.dht-chapter .parking-svg text{user-select:none}
+.dht-chapter #parking-button-svg{cursor:pointer;outline:none}
+.dht-chapter #parking-button-svg:focus-visible{stroke:#007f86;stroke-width:1.5}
+.dht-chapter .parking-phases{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;list-style:none;padding:0;margin:0 0 20px}
+.dht-chapter .parking-phases li{padding:12px 8px;border-radius:9px;border:1px solid #d6e1e3;background:#edf2f3;font-size:13px;text-align:center;line-height:1.6}
+.dht-chapter .parking-phases li.active{background:#007f86;border-color:#007f86;color:white;font-weight:bold}
+.dht-chapter .parking-phases small{display:block}
+.dht-chapter .parking-controls .dht-buttons{margin-top:20px}
+.dht-chapter #parking-pause:disabled{opacity:.45;cursor:default}
+@media(max-width:900px){.dht-chapter .parking-layout{grid-template-columns:1fr}.dht-chapter .parking-svg{max-width:780px;margin:auto}}
+@media(max-width:520px){.dht-chapter .parking-phases{grid-template-columns:repeat(2,1fr)}}

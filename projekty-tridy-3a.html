@@ -302,19 +302,16 @@
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">1</span>
-              <h4>Turnikety</h4>
+              <h4>Detekor nezvaných hostů Sebastian Š.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Vstupní systém tvořený dvěma turnikety pro evidenci návštěvníků festivalu.</p>
+              <p>Projekt by kontroloval proctor před sebou zda-li v něm není nějáky nneznámý objekt.</p>
               <ul>
-                <li>Každý turniket využívá dvojici IR senzorů pro detekci směru průchodu.</li>
-                <li>Počítá příchody a odchody návštěvníků.</li>
-                <li>Při změně počtu odešle aktuální stav přes UART do centrální jednotky.</li>
-                <li>OLED displej při příchodu zobrazí bitmapu „Welcome“.</li>
-                <li>OLED displej při odchodu zobrazí bitmapu „Good bye“.</li>
+                <p>Ultrazvukový senzor připevněný na servu se otáčí a hlídá určitou plochu před sebou. Když před ním nic není LCD displej říka: ,,prostor je čistý” a zaroveň svítí dvě zelené ledky. Jestliže se před senzorem objeví nějaký objekt sensor se zastaví, na lcd displeji se objeví: ,,POZOR neznámý objekt spatřen”. Zelené LED se vypnou a rozvítí se dvě červené a začne bzučet bzučák. Jakmile objekt zmizí sensor pokračuje dál ve své kontrole prostředí. 
+ </p>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> Arduino Nano, 2× OLED displej, 4× IR senzor, velké nepájivé pole.
+                <strong>HW:</strong>Senzor HC-SR04, Čtyři LED diody (dvě červené a dvě zelené), Servo, LCD displej, Piezzo bzučák.
               </div>
             </div>
           </article>

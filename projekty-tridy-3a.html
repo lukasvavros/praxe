@@ -302,10 +302,10 @@
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">1</span>
-              <h4>Detekor nezvaných hostů Sebastian Š.</h4>
+              <h4>Vjezdová brána na parkoviště Sebastian Š.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Projekt by kontroloval proctor před sebou zda-li v něm není nějáky nneznámý objekt.</p>
+              <p>Automatický vjezdový systém na parkoviště, který po stisknutí tlačítka pustí auto do areálu.</p>
               <ul>
                 <p>Ultrazvukový senzor připevněný na servu se otáčí a hlídá určitou plochu před sebou. Když před ním nic není LCD displej říka: ,,prostor je čistý” a zaroveň svítí dvě zelené ledky. Jestliže se před senzorem objeví nějaký objekt sensor se zastaví, na lcd displeji se objeví: ,,POZOR neznámý objekt spatřen”. Zelené LED se vypnou a rozvítí se dvě červené a začne bzučet bzučák. Jakmile objekt zmizí sensor pokračuje dál ve své kontrole prostředí. 
  </p>
@@ -315,7 +315,6 @@
               </div>
             </div>
           </article>
-
          
           <article class="arduino-project-card">
             <div class="arduino-project-head">
@@ -323,11 +322,15 @@
               <h4>Alarm reagující na světlo v lednici Jiří S.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Fotorezistor by byl umístěný v lednici kde by byla tma. Po otevření lednice by fotorezistor zaznamenal světlo. Bzučák by nezačal ihned bzučet ale až po nějaké době, jestliže by se lednice nezavřela. Tímto jsme schopni zabránit oteplení v lednici.... Tlačítko by mělo svoje využití, jestliže bychom doplňovali lednici a nechtěli bychom aby lednice bzučela, zmáčkneme tlačítko a bzučák nebude bzučet.</p>
-              <ul>
-              </ul>
+             <ul>
+            <li>V klidovém stavu svítí červená ledka, servo motor je dole a OLED displej zobrazuje text např. „Stop, stiskněte tlačítko“. </li>              
+             <li>Po stisknutí tlačítka pro vjezd zhasne červená ledka, rozsvítí se zelená ledka a servo motor se zvedne nahoru. </li>
+             <li>OLED displej při zvednutí vypíše např. „Můžete projet“. </li>
+             <li>Po uplynutí nějakého času (např. 10 s) se servo motor spustí zpátky dolů, zelená ledka zhasne a rozsvítí se opět červená LED dioda. </li> 
+             <li>Program může ještě vypisovat počet vjezdů na parkoviště do konzole. </li> 
+             </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> Arduino uno, Nepajívé pole, Fotorezistor, Rezistory,Bzučák, Tlačátko, Vodiče.
+                <strong>HW:</strong> Arduino Nano, OLED displej, servo motor, 2× LED dioda (červená, zelená), tlačítko, nepájivé pole.
               </div>
             </div>
           </article>

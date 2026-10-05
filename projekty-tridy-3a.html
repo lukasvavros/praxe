@@ -409,20 +409,21 @@
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">6</span>
-              <h4></h4>
+              <h4>Reverzní parkovací asistent Filip Š.</h4>
             </div>
             <div class="arduino-project-body">
-              <p></p>
+              <p>Vstupní a bezpečnostní asistenční systém pro řidiče, který slouží k bezpečnému parkování vozidla a varování před překážkami při couvání.</p>
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>LCD displej neustále ukazuje přesnou vzdálenost překážky v centimetrech (např. „Vzdálenost: XX cm“).</li>
+                <li>Zařízení využívá ultrazvukový senzor HC-SR04 pro měření aktuální vzdálenosti od překážky.</li>
+                <li>Poskytuje přehlednou vizuální a zvukovou zpětnou vazbu rozdělenou do několika bezpečnostních fází.</li>
+                <li>Při bezpečné vzdálenosti nad 2 m systém zobrazuje na LCD displeji text „Maximalni vzdalenost“.</li>
+                <li>V rozmezí 2 m až 1 m svítí zelená LED, bzučák pomalu pípá a na LCD displeji se zobrazí text „Bezpecna zona“.</li>
+                <li>Ve vzdálenosti 1 m až 0,5 m se rozsvítí oranžová LED, spustí se rychlejší pípání bzučáku a na LCD displeji se zobrazí text „Pozor, blizko!“.</li>
+                <li>V kritické vzdálenosti pod 0,5 m se rozsvítí červená LED, ozve se intenzivní pípání bzučáků a na LCD displeji se zobrazí varování „STOP! NARAZ!“.</li>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong>
+                <strong>HW:Arduino Nano, ultrazvukový senzor HC-SR04, I2C LCD displej (16x2), piezo bzučák, 3× LED dioda (zelená, oranžová, červená), rezistory, propojení a velké nepájivé pole.</strong>
               </div>
             </div>
           </article>

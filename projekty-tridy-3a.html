@@ -298,151 +298,136 @@
 
         <div class="arduino-project-grid">
 
-  
-<article class="arduino-project-card">
-  <div class="arduino-project-head">
-    <span class="arduino-project-number">1</span>
-    <h4>Ultrazvukový hlídací systém Sebastián Š.</h4>
-  </div>
-
-  <div class="arduino-project-body">
-    <ul>
-      <li>
-        Ultrazvukový senzor připevněný na servu se otáčí a hlídá prostor
-        před sebou.
-      </li>
-      <li>
-        Když je prostor čistý, LCD displej zobrazí „Prostor je čistý“
-        a svítí dvě zelené LED diody.
-      </li>
-      <li>
-        Pokud se před senzorem objeví objekt, senzor se zastaví a LCD displej
-        zobrazí „POZOR, spatřen neznámý objekt“. Zelené LED zhasnou, rozsvítí
-        se dvě červené LED a začne bzučet bzučák.
-      </li>
-      <li>
-        Jakmile objekt zmizí, senzor pokračuje v kontrole prostoru.
-      </li>
-    </ul>
-
-    <div class="arduino-hardware">
-      <strong>HW:</strong> Senzor HC-SR04, čtyři LED diody (dvě červené
-      a dvě zelené), servo, LCD displej, piezo bzučák.
-    </div>
-  </div>
-</article>
-         
           <article class="arduino-project-card">
             <div class="arduino-project-head">
-              <span class="arduino-project-number">2</span>
-              <h4>Alarm reagující na světlo v lednici Jiří S.</h4>
+              <span class="arduino-project-number">1</span>
+              <h4>Alarm reagující na světlo v lednici – Jiří S. 22.10</h4>
             </div>
             <div class="arduino-project-body">
-             <ul>
-            <li>V klidovém stavu svítí červená ledka, servo motor je dole a OLED displej zobrazuje text např. „Stop, stiskněte tlačítko“. </li>              
-             <li>Po stisknutí tlačítka pro vjezd zhasne červená ledka, rozsvítí se zelená ledka a servo motor se zvedne nahoru. </li>
-             <li>OLED displej při zvednutí vypíše např. „Můžete projet“. </li>
-             <li>Po uplynutí nějakého času (např. 10 s) se servo motor spustí zpátky dolů, zelená ledka zhasne a rozsvítí se opět červená LED dioda. </li> 
-             <li>Program může ještě vypisovat počet vjezdů na parkoviště do konzole. </li> 
-             </ul>
+              <p>Fotorezistor umístěný uvnitř lednice rozpozná světlo při otevření dveří.</p>
+              <ul>
+                <li>Dokud je lednice zavřená, fotorezistor je ve tmě a alarm se nespouští.</li>
+                <li>Po otevření lednice fotorezistor zaznamená světlo.</li>
+                <li>Pokud lednice zůstane otevřená delší dobu, začne bzučet bzučák. Alarm tak upozorní na riziko oteplení lednice.</li>
+                <li>Při doplňování lednice lze tlačítkem bzučák dočasně vypnout, aby nerušil.</li>
+              </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> Arduino Nano, OLED displej, servo motor, 2× LED dioda (červená, zelená), tlačítko, nepájivé pole.
+                <strong>HW:</strong> Arduino Uno nebo Nano, nepájivé pole, fotorezistor, rezistory, bzučák, tlačítko, vodiče.
               </div>
             </div>
           </article>
 
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">2</span>
+              <h4>Přímo ovládaná robotická ruka – Petr S.</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Robotická ruka ovládaná potenciometry.</p>
+              <ul>
+                <li>Ovládání uchycení robotické ruky.</li>
+                <li>Ovládání točivé podložky.</li>
+                <li>Ovládání jednoho zvedacího motoru.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> Základní sada používaná při výuce, 2–3 serva, vlastní nebo 3D tištěná konstrukce.
+              </div>
+            </div>
+          </article>
 
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">3</span>
-              <h4>Meteostanice Michael T.</h4>
+              <h4>Ovládaný model kanónu – Metoděj S.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Měření teploty a vlhkosti vzduchu a digitální znázornění s upozorněním při teplotě vyšší než požadovaná( upozornění bzučákem). </p>
+              <p>Model kanónu na otočném podstavci s nastavitelným směrem a úhlem pomocí potenciometrů.</p>
               <ul>
-                <li>Měření teploty a vlhkosti provádí Senzor DHT-10</li>
-                <li>Informace se zobrazí na OLED displeji</li>
-                <li>Při překročení teploty (např. 30°C) začne bzučet bzučák a na OLED displeji nám začne blikat upozornění.</li>
-                <li>Příklad umístění je třeba serverovna, kde se musí hlídat teplota, aby se servery nepřehřívali </li>
-                <li>V programu lze nastavit hraniční teplotu.</li>
+                <li>První potenciometr ovládá servo, které otáčí podstavcem.</li>
+                <li>Druhý potenciometr ovládá druhé servo a nastavuje úhel modelu.</li>
+                <li>Pro aktivaci simulovaného výstřelu je potřeba stisknout tři tlačítka.</li>
+                <li>Před simulovaným výstřelem se rozsvítí výstražná LED dioda.</li>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> Arduino UNO, Senzor DHT-10, OLED displej, malé nepájivé pole, bzučák.
+                <strong>HW:</strong> 2 serva, 2 potenciometry, 3 tlačítka, LED dioda, otočný podstavec a konstrukce modelu. Další součástky nebyly upřesněny.
               </div>
             </div>
           </article>
 
-   
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">4</span>
-              <h4>Detekor nezvaných hostů. Štěpán V.</h4>
+              <h4>Vjezdová brána na parkoviště – Sebastián Š. 22.10.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Projekt by kontroloval proctor před sebou zda-li v něm není nějáky neznámý objekt.</p>
-              <p>Ultrazvukový senzor připevněný na servu se otáčí a hlídá určitou plochu před sebou. Když před ním nic není LCD displej říka: ,,prostor je čistý” a zaroveň svítí dvě zelené ledky. Jestliže se před senzorem objeví nějaký objekt sensor se zastaví, na lcd displeji se objeví: ,,POZOR neznámý objekt spatřen”. Zelené LED se vypnou a rozvítí se dvě červené a začne bzučet bzučák. Jakmile objekt zmizí sensor pokračuje dál ve své kontrole prostředí. 
-              </p>
+              <p>Automatický vjezdový systém na parkoviště, který po stisknutí tlačítka umožní autu vjezd do areálu.</p>
+              <ul>
+                <li>V klidovém stavu svítí červená LED dioda, servo je dole a OLED displej zobrazuje např. „Stop, stiskněte tlačítko“.</li>
+                <li>Po stisknutí tlačítka zhasne červená LED, rozsvítí se zelená LED a servo zvedne závoru.</li>
+                <li>OLED displej při otevření zobrazí např. „Můžete projet“.</li>
+                <li>Po uplynutí nastavené doby (např. 10 sekund) se závora vrátí dolů, zelená LED zhasne a červená LED se znovu rozsvítí.</li>
+                <li>Volitelně může program vypisovat počet vjezdů na parkoviště do konzole.</li>
+              </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> Senzor HC-SR04, Čtyři LED – (dvě červené, dvě zelené), Servo, LCD displej, Piezuo bzučák.
+                <strong>HW:</strong> Arduino Nano, OLED displej, servomotor, 2× LED dioda (červená a zelená), tlačítko, nepájivé pole.
               </div>
             </div>
           </article>
 
-     
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">5</span>
-              <h4></h4>
+              <h4>Reverzní parkovací asistent – Filip Š.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Elektronický trezor Michal To.</p>
+              <p>Bezpečnostní asistenční systém pro řidiče, který pomáhá při couvání a varuje před překážkami.</p>
               <ul>
-               <p>Vytvořil bych jednoduchý elektronický trezor, který by se ovládal pomocí potenciometru, kterým bych nastavoval správnou hodnotu. Pokud by byla nastavena správná hodnota, servo by odemklo trezor a rozsvítila by se zelená LED. Pokud by byla nastavena špatná hodnota, trezor by zůstal zamčený a svítila by červená led.​</p>
+                <li>Ultrazvukový senzor HC-SR04 měří vzdálenost překážky a LCD displej ji průběžně zobrazuje v centimetrech (např. „Vzdálenost: XX cm“).</li>
+                <li>Při vzdálenosti nad 2 m LCD zobrazuje „Maximalni vzdalenost“.</li>
+                <li>V rozmezí 2 m až 1 m svítí zelená LED, bzučák pomalu pípá a LCD zobrazuje „Bezpecna zona“.</li>
+                <li>V rozmezí 1 m až 0,5 m svítí oranžová LED, bzučák pípá rychleji a LCD zobrazuje „Pozor, blizko!“.</li>
+                <li>Při vzdálenosti pod 0,5 m svítí červená LED, bzučák intenzivně pípá a LCD zobrazuje „STOP! NARAZ!“.</li>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> 
+                <strong>HW:</strong> Arduino Nano, ultrazvukový senzor HC-SR04, I2C LCD displej (16×2), piezo bzučák, 3× LED dioda (zelená, oranžová a červená), rezistory, propojovací vodiče a velké nepájivé pole.
               </div>
             </div>
           </article>
 
-        
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">6</span>
-              <h4>Reverzní parkovací asistent Filip Š.</h4>
+              <h4>GPS Tracker – Michael T.</h4>
             </div>
             <div class="arduino-project-body">
-              <p>Vstupní a bezpečnostní asistenční systém pro řidiče, který slouží k bezpečnému parkování vozidla a varování před překážkami při couvání.</p>
+              <p>Zařízení pro zjišťování zeměpisné polohy a reálného času s jejich zobrazením na OLED displeji.</p>
               <ul>
-                <li>LCD displej neustále ukazuje přesnou vzdálenost překážky v centimetrech (např. „Vzdálenost: XX cm“).</li>
-                <li>Zařízení využívá ultrazvukový senzor HC-SR04 pro měření aktuální vzdálenosti od překážky.</li>
-                <li>Poskytuje přehlednou vizuální a zvukovou zpětnou vazbu rozdělenou do několika bezpečnostních fází.</li>
-                <li>Při bezpečné vzdálenosti nad 2 m systém zobrazuje na LCD displeji text „Maximalni vzdalenost“.</li>
-                <li>V rozmezí 2 m až 1 m svítí zelená LED, bzučák pomalu pípá a na LCD displeji se zobrazí text „Bezpecna zona“.</li>
-                <li>Ve vzdálenosti 1 m až 0,5 m se rozsvítí oranžová LED, spustí se rychlejší pípání bzučáku a na LCD displeji se zobrazí text „Pozor, blizko!“.</li>
-                <li>V kritické vzdálenosti pod 0,5 m se rozsvítí červená LED, ozve se intenzivní pípání bzučáků a na LCD displeji se zobrazí varování „STOP! NARAZ!“.</li>
+                <li>GPS modul NEO-6M s anténou zjišťuje aktuální polohu.</li>
+                <li>RTC modul poskytuje reálný čas.</li>
+                <li>Arduino zpracovává údaje z obou modulů.</li>
+                <li>OLED displej zobrazuje zeměpisnou šířku, zeměpisnou délku a čas.</li>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:Arduino Nano, ultrazvukový senzor HC-SR04, I2C LCD displej (16x2), piezo bzučák, 3× LED dioda (zelená, oranžová, červená), rezistory, propojení a velké nepájivé pole.</strong>
+                <strong>HW:</strong> Arduino UNO, GPS modul NEO-6M, RTC modul, OLED displej, malé nepájivé pole.
               </div>
             </div>
           </article>
-
 
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">7</span>
-              <h4></h4>
+              <h4>GPS Tracker – Ondřej T.</h4>
             </div>
             <div class="arduino-project-body">
-              <p></p>
+              <p>Zařízení pro zjišťování zeměpisné polohy a reálného času s jejich zobrazením na OLED displeji.</p>
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>GPS modul NEO-6M s anténou zjišťuje aktuální polohu.</li>
+                <li>RTC modul poskytuje reálný čas.</li>
+                <li>Arduino zpracovává údaje z obou modulů.</li>
+                <li>OLED displej zobrazuje zeměpisnou šířku, zeměpisnou délku a čas.</li>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong>
+                <strong>HW:</strong> Arduino UNO, GPS modul NEO-6M, RTC modul, OLED displej, malé nepájivé pole.
               </div>
             </div>
           </article>
@@ -450,20 +435,38 @@
           <article class="arduino-project-card">
             <div class="arduino-project-head">
               <span class="arduino-project-number">8</span>
-              <h4></h4>
+              <h4>Elektronický trezor – Michal T.</h4>
             </div>
             <div class="arduino-project-body">
-              <p></p>
+              <p>Jednoduchý elektronický trezor ovládaný potenciometrem, kterým se nastavuje hodnota pro odemčení.</p>
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>Pomocí potenciometru se nastavuje požadovaná hodnota.</li>
+                <li>Při nastavení správné hodnoty servo trezor odemkne a rozsvítí se zelená LED dioda.</li>
+                <li>Při nesprávné hodnotě zůstane trezor zamčený a svítí červená LED dioda.</li>
               </ul>
               <div class="arduino-hardware">
-                <strong>HW:</strong> 
+                <strong>HW:</strong> Potenciometr, servomotor, zelená a červená LED dioda; řídicí deska a další součástky zatím nebyly upřesněny.
+              </div>
+            </div>
+          </article>
+
+
+          <article class="arduino-project-card">
+            <div class="arduino-project-head">
+              <span class="arduino-project-number">9</span>
+              <h4>Detektor nezvaných hostů – Štěpán V. 22.10.</h4>
+            </div>
+            <div class="arduino-project-body">
+              <p>Zařízení kontroluje prostor před sebou a upozorní na výskyt neznámého objektu.</p>
+              <ul>
+                <li>Ultrazvukový senzor HC-SR04 připevněný na servu se otáčí a sleduje prostor.</li>
+                <li>Pokud není zjištěna překážka, LCD displej zobrazuje „Prostor je čistý“ a svítí dvě zelené LED diody.</li>
+                <li>Při zaznamenání objektu se senzor zastaví a LCD displej zobrazí „POZOR, neznámý objekt spatřen“.</li>
+                <li>Zelené LED zhasnou, rozsvítí se dvě červené LED diody a spustí se piezo bzučák.</li>
+                <li>Jakmile objekt zmizí, senzor pokračuje v kontrole prostoru.</li>
+              </ul>
+              <div class="arduino-hardware">
+                <strong>HW:</strong> Ultrazvukový senzor HC-SR04, 4× LED dioda (2 červené, 2 zelené), servo, LCD displej, piezo bzučák.
               </div>
             </div>
           </article>

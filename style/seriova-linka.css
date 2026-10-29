@@ -2,7 +2,6 @@
 
 .serial-exercises .ls-string{color:#bfe09b}
 
-
 /* Sériový monitor: světlý a tmavý režim samostatně. */
 .pra-chapter .serial-exercises .sr-monitor {border-color:var(--line);background:var(--paper)}
 .pra-chapter .serial-exercises .sr-monitor-title {background:var(--mint);color:var(--ink)}

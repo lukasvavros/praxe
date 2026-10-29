@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const STORAGE_KEY = 'pra-arduino-test1-osobni-v1';
+  const VALIDITY_MS = 24 * 60 * 60 * 1000; // 24 hodin od vygenerování
   const template = document.getElementById('exam-questions-template');
   const form = document.getElementById('exam-form');
   const nameInput = document.getElementById('exam-student');
@@ -31,8 +32,24 @@
       new Set(data.ids).size === 9 && data.ids.every(n => Number.isInteger(n) && n >= 1 && n <= all.length);
   }
   function restore() {
-    try { const raw = localStorage.getItem(STORAGE_KEY);return raw ? JSON.parse(raw) : null; }
-    catch (_) { return null; }
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      const now = Date.now();
+      // Dříve uložené varianty neměly čas vytvoření. Zachováme je na 24 h
+      // od první návštěvy po aktualizaci, aby žák nepřišel o rozpracovaný test.
+      if (valid(data) && !Number.isFinite(data.createdAt)) {
+        data.createdAt = now;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }
+      if (Number.isFinite(data.createdAt) &&
+          (now - data.createdAt >= VALIDITY_MS || data.createdAt > now + 60000)) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+      return data;
+    } catch (_) { return null; }
   }
   function render(data) {
     list.replaceChildren();
@@ -59,7 +76,7 @@
     paper.hidden = false;
     printButton.disabled = false;
     status.removeAttribute('data-error');
-    status.textContent = 'Test je v tomto prohlížeči uložený. Po obnovení stránky se zobrazí stejných 9 otázek.';
+    status.textContent = '';
     saved = data;
   }
   const existing = restore();
@@ -75,7 +92,7 @@
     // Každý test obsahuje 2 otázky s obrázkem schématu a 7 ostatních otázek.
     const diagramIds = all.filter(n => n.querySelector('.diagram')).map(n => Number(n.id.replace('otazka-', '')));
     const otherIds = all.filter(n => !n.querySelector('.diagram')).map(n => Number(n.id.replace('otazka-', '')));
-    const data = {name, date, ids: shuffle([...shuffle(diagramIds).slice(0, 2), ...shuffle(otherIds).slice(0, 7)])};
+    const data = {name, date, createdAt: Date.now(), ids: shuffle([...shuffle(diagramIds).slice(0, 2), ...shuffle(otherIds).slice(0, 7)])};
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
     catch (_) { showError('Prohlížeč nepovoluje ukládání. Test nebyl vygenerován, aby se nepřidělila nová varianta při obnovení stránky. Povolte úložiště webu.');return; }
     render(data);

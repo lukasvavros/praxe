@@ -32,3 +32,11 @@ html[data-theme="dark"] .pra-chapter .ls-remember {
 html[data-theme="dark"] .pra-chapter .pra-callout strong,
 html[data-theme="dark"] .pra-chapter .pra-led-note strong,
 html[data-theme="dark"] .pra-chapter .ls-remember strong { color:#9ae7df!important; }
+
+/* Vložená animace – šířka 100 %, výšku nastavuje skript dle skutečného obsahu. */
+.pra-chapter iframe.pra-serial-frame {
+ display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;
+ height:600px;min-height:0;padding:0;overflow:hidden;
+ border:1px solid var(--line);border-radius:16px;background:var(--paper);
+}
+@media(max-width:700px){.pra-chapter iframe.pra-serial-frame{height:920px}}

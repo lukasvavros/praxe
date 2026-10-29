@@ -6,6 +6,24 @@
   <title>Arduino – animace sériového výpisu</title>
   <link rel="stylesheet" href="style/serial-animace.css">
   <script src="script/serial-animace.js" defer></script>
+  <script>
+  // Jen synchronizace vzhledu s rodičovskou kapitolou; animaci řídí původní serial-animace.js.
+  (function () {
+    function synchronizujTema() {
+      try {
+        var root = window.parent.document.documentElement;
+        document.documentElement.dataset.theme = root.dataset.theme === 'dark' ? 'dark' : 'light';
+        if (!window.__serialThemeObserver) {
+          window.__serialThemeObserver = new MutationObserver(synchronizujTema);
+          window.__serialThemeObserver.observe(root, {attributes:true,attributeFilter:['data-theme']});
+        }
+      } catch (e) {
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+      }
+    }
+    synchronizujTema();
+  })();
+  </script>
 </head>
 <body>
 <section class="serial-demo" id="serial-demo" aria-labelledby="serial-title">

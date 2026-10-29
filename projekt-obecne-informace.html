@@ -1,711 +1,159 @@
-<style>
-  .arduino-page {
-    --orange: #ee7203;
-    --dark: #373841;
-    --light: #f5f5f5;
-    --text: #373841;
-    --white: #ffffff;
-
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: var(--text);
-    box-sizing: border-box;
-  }
-
-  .arduino-page *,
-  .arduino-page *::before,
-  .arduino-page *::after {
-    box-sizing: border-box;
-  }
-
-  .arduino-hero {
-    overflow: hidden;
-    border-radius: 0;
-    background: var(--white);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-  }
-
-  .arduino-title {
-    background: var(--dark);
-    text-align: center;
-    padding: clamp(24px, 4vw, 48px) 18px;
-  }
-
-  .arduino-title h2 {
-    margin: 0;
-    color: var(--white);
-    font-size: clamp(26px, 3.2vw, 42px);
-    font-weight: 400;
-    letter-spacing: 0.5px;
-  }
-
-  .arduino-title span {
-    display: inline-block;
-    margin-top: 10px;
-    color: var(--orange);
-    font-size: clamp(14px, 1.5vw, 19px);
-  }
-
-  .arduino-intro {
-    background: var(--white);
-    padding: clamp(26px, 4vw, 52px) clamp(18px, 5vw, 70px);
-    border-left: 6px solid var(--orange);
-    border-right: 6px solid var(--orange);
-    line-height: 1.75;
-    text-align: center;
-  }
-
-  .arduino-intro p {
-    max-width: 950px;
-    margin: 0 auto;
-    font-size: clamp(15px, 1.35vw, 18px);
-    font-weight: 400;
-  }
-
-  .arduino-highlight {
-    color: var(--orange);
-    font-weight: 700;
-  }
-
-  .arduino-section {
-    background: #ffffff;
-    padding: clamp(30px, 4vw, 60px) clamp(18px, 5vw, 70px);
-    border-left: 6px solid var(--orange);
-    border-right: 6px solid var(--orange);
-    border-top: 1px solid #eeeeee;
-  }
-
-  .arduino-section:nth-of-type(even) {
-    background: #fafafa;
-  }
-
-  .arduino-section-inner {
-    max-width: 1050px;
-    margin: 0 auto;
-  }
-
-  .arduino-section h3 {
-    margin: 0 0 28px;
-    color: var(--dark);
-    text-align: center;
-    font-size: clamp(22px, 2.4vw, 32px);
-    font-weight: 400;
-  }
-
-  .arduino-card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-
-  .arduino-card-grid.two {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .arduino-card {
-    background: var(--light);
-    border-radius: 14px;
-    padding: 22px 20px;
-    border-top: 6px solid var(--orange);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    line-height: 1.55;
-  }
-
-  .arduino-card strong {
-    display: block;
-    color: var(--orange);
-    font-size: clamp(17px, 1.5vw, 22px);
-    margin-bottom: 8px;
-  }
-
-  .arduino-card span {
-    display: block;
-    font-size: clamp(14px, 1.15vw, 16px);
-  }
-
-  .arduino-list {
-    display: grid;
-    gap: 14px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .arduino-list li {
-    background: var(--light);
-    border-left: 6px solid var(--orange);
-    border-radius: 12px;
-    padding: 18px 22px;
-    font-size: clamp(14px, 1.2vw, 17px);
-    line-height: 1.6;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  }
-
-  .arduino-list li strong {
-    color: var(--orange);
-  }
-
-  .arduino-table-wrap {
-    overflow-x: auto;
-  }
-
-  .arduino-table {
-    width: 100%;
-    min-width: 680px;
-    border-collapse: collapse;
-    background: var(--white);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-
-  .arduino-table th {
-    background: var(--dark);
-    color: var(--white);
-    padding: 15px;
-    font-size: 15px;
-    font-weight: 400;
-    text-align: left;
-  }
-
-  .arduino-table td {
-    padding: 15px;
-    border-bottom: 1px solid #eeeeee;
-    font-size: 15px;
-    line-height: 1.5;
-    vertical-align: top;
-  }
-
-  .arduino-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .arduino-table td.component-image {
-    width: 150px;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  .arduino-table td.component-image img {
-    display: block;
-    max-width: 120px;
-    max-height: 90px;
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-    object-fit: contain;
-    border-radius: 8px;
-  }
-
-  .arduino-table td:first-child {
-    color: var(--orange);
-    font-weight: 700;
-    width: 28%;
-  }
-
-  .arduino-project-list {
-    columns: 2;
-    column-gap: 34px;
-    margin: 0;
-    padding-left: 22px;
-    font-size: clamp(14px, 1.2vw, 17px);
-    line-height: 1.8;
-  }
-
-  .arduino-project-list li {
-    break-inside: avoid;
-    margin-bottom: 6px;
-  }
-
-  .arduino-back {
-    background: var(--light);
-    padding: clamp(20px, 3vw, 34px);
-    text-align: center;
-    border-left: 6px solid var(--orange);
-    border-right: 6px solid var(--orange);
-  }
-
-  .arduino-back a {
-    display: inline-block;
-    padding: 13px 24px;
-    border-radius: 999px;
-    background: var(--dark);
-    color: var(--white);
-    text-decoration: none;
-    font-size: clamp(14px, 1.1vw, 16px);
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-
-  .arduino-back a:hover {
-    background: var(--orange);
-    transform: translateY(-2px);
-  }
-
-  .arduino-author {
-    background: var(--light);
-    padding: clamp(18px, 3vw, 28px);
-  }
-
-  .arduino-author-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .arduino-author-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 48px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: var(--white);
-    color: var(--dark);
-    font-size: clamp(13px, 1.1vw, 15px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .arduino-author-item img {
-    display: inline-block;
-    flex: 0 0 auto;
-  }
-
-  .arduino-footer {
-    background: var(--dark);
-    color: var(--white);
-    text-align: center;
-    padding: 12px 16px;
-    font-size: clamp(12px, 1vw, 14px);
-  }
-
-  @media (max-width: 900px) {
-    .arduino-card-grid,
-    .arduino-card-grid.two {
-      grid-template-columns: 1fr;
-    }
-
-    .arduino-project-list {
-      columns: 1;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .arduino-page {
-      width: 100vw;
-    }
-
-    .arduino-hero {
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .arduino-intro,
-    .arduino-section,
-    .arduino-back {
-      border-left: none;
-      border-right: none;
-    }
-
-    .arduino-intro {
-      border-top: 5px solid var(--orange);
-      border-bottom: 5px solid var(--orange);
-      text-align: left;
-    }
-
-    .arduino-author-content {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .arduino-author-item {
-      justify-content: center;
-      border-radius: 12px;
-      text-align: center;
-    }
-  }
-</style>
-
-<div class="arduino-page">
-
-  <section class="arduino-hero">
-
-    <!-- Nadpis -->
-    <header class="arduino-title">
-      <h2>Samostatný projekt</h2>
-      <span>Praxe – Arduino | Informace pro žáky</span>
-    </header>
-
-    <!-- Úvod -->
-    <main class="arduino-intro">
-      <p>
-        Samostatný projekt sestává z vytvoření fyzického zapojení s
-        <span class="arduino-highlight">Arduinem</span> a alespoň
-        <span class="arduino-highlight">dvěma periferiemi</span>
-        například motory, displeji, čidly nebo jinými moduly.
-        Součástí projektu je také vytvoření funkčního programu.
-        Projekt budete vypracovávat převážně doma, na hodinách bude vyhrazen prostor
-        pro dotazy, konzultace a řešení problémů.
-      </p>
-    </main>
-
-    <!-- Využití AI -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Využití AI nástrojů</h3>
-
-        <div class="arduino-card-grid">
-
-          <div class="arduino-card">
-            <strong>AI je konzultant, ne řešitel</strong>
-            <span>
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>Samostatný projekt | Praxe – Arduino</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('pra-arduino-theme')||((matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="style/projekt.css"></head><body>
+<div class="page-shell"><header class="hero" id="nahoru"><nav class="topbar" aria-label="Hlavní navigace"><a class="home" href="index.html">← Hlavní stránka</a><span class="brand">PRAXE <span class="brand-dot">/</span> ARDUINO</span><button class="theme-toggle" type="button" aria-pressed="false" aria-label="Změnit barevný režim"><span aria-hidden="true">☾</span> <span class="theme-label">Tmavý režim</span></button></nav>
+<div class="hero-content"><div><p class="hero-overline">VÝUKOVÝ PROJEKT · 3. ROČNÍK</p><h1>Samostatný<br><em>projekt</em></h1><p class="hero-text">Od vlastního nápadu přes skutečné zapojení až po funkční program, prezentaci a dokumentaci.</p><div class="hero-tags"><span>Arduino</span><span>Hardware</span><span>Programování</span><span>Dokumentace</span></div></div><div class="hero-graphic" aria-hidden="true"><span class="chip">UNO</span><span class="chip-dot a"></span><span class="chip-dot b"></span><span class="chip-dot c"></span><span class="trace t1"></span><span class="trace t2"></span><span class="trace t3"></span><span class="trace t4"></span></div></div></header>
+<main class="main-content"><nav class="quick-nav" aria-label="Obsah stránky"><strong>Na této stránce</strong><div><a href="#zadani">Zadání</a><a href="#ai">Využití AI</a><a href="#program">Pravidla programu</a><a href="#hodnoceni">Hodnocení</a><a href="#dokumentace">Dokumentace</a><a href="#znamky">Známky</a><a href="#napady">Náměty</a><a href="#soucasky">Součástky</a></div></nav>
+<section id="zadani" class="content-card intro-section"><header class="section-header"><p class="eyebrow">01 / ZÁKLADNÍ ZADÁNÍ</p><h2>Co má projekt splňovat</h2></header><div class="intro-grid"><div class="intro-lead"><p>Samostatný projekt sestává z vytvoření fyzického zapojení s <strong>Arduinem</strong> a alespoň <strong>dvěma periferiemi</strong> například motory, displeji, čidly nebo jinými moduly. Součástí projektu je také vytvoření funkčního programu.</p><p>Projekt budete vypracovávat převážně doma, na hodinách bude vyhrazen prostor pro dotazy, konzultace a řešení problémů.</p></div><div class="intro-stats"><div><strong>Arduino</strong><span>Řídicí deska</span></div><div><strong>2+</strong><span>Periferie</span></div><div><strong>Program</strong><span>Funkční řešení</span></div></div></div></section>
+<section id="ai" class="content-card "><header class="section-header"><p class="eyebrow">02 / POMOCNÉ NÁSTROJE</p><h2>Jak používat AI</h2></header><div class="feature-grid"><article class="feature-card"><span class="feature-index">01</span><h3>AI je konzultant, ne řešitel</h3><p>
               AI můžete použít k vysvětlení nejasností, hledání chyb,
               získání nápadů nebo pochopení principů. Není dovoleno pouze zadat celé zadání
               a použít výsledek jako hotové řešení.
-            </span>
-          </div>
-
-          <div class="arduino-card">
-            <strong>Dokumentujte použití</strong>
-            <span>
+            </p></article><article class="feature-card"><span class="feature-index">02</span><h3>Dokumentujte použití</h3><p>
               Každé využití AI, které vám pomohlo, stručně popište v dokumentaci projektu.
               Například: „AI jsem použil k vysvětlení funkce map().“
-            </span>
-          </div>
-
-          <div class="arduino-card">
-            <strong>Buďte schopni obhájit řešení</strong>
-            <span>
+            </p></article><article class="feature-card"><span class="feature-index">03</span><h3>Buďte schopni obhájit řešení</h3><p>
               Pokud použijete nápad získaný pomocí AI, musíte umět vysvětlit,
               proč je v projektu použitý a jak funguje.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Program -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Obecná pravidla pro psaní programu</h3>
-
-        <ul class="arduino-list">
-          <li>Zarovnávejte kód. V Arduino IDE můžete použít funkci autoformat pomocí klávesové zkratky <strong>CTRL + T</strong>.</li>
-          <li>Pro kód, který se opakuje za sebou, používejte <strong>cyklus</strong>.</li>
-          <li>Kód, který se opakuje na různých místech programu, vytvořte jako <strong>samostatnou funkci</strong>.</li>
-          <li>Pro čísla pinů a různé výpočetní konstanty si nadefinujte <strong>konstantní proměnné</strong>. Nepoužívejte takzvaná „magic numbers“.</li>
-          <li>Používejte komentáře. Nemusí být na každém řádku, ale měly by vysvětlovat jednotlivé bloky programu.</li>
-        </ul>
-
-      </div>
-    </section>
-
-    <!-- Hodnocení projektu -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Hodnocení projektu</h3>
-
-        <div class="arduino-card-grid two">
-
-          <div class="arduino-card">
-            <strong>Kontrola hardwaru</strong>
-            <span>
+            </p></article></div></section>
+<section id="program" class="content-card "><header class="section-header"><p class="eyebrow">03 / KVALITA KÓDU</p><h2>Pravidla pro psaní programu</h2></header><ol class="practice-list"><li><span class="list-number">01</span><span>Zarovnávejte kód. V Arduino IDE můžete použít funkci autoformat pomocí klávesové zkratky <strong>CTRL + T</strong>.</span></li><li><span class="list-number">02</span><span>Pro kód, který se opakuje za sebou, používejte <strong>cyklus</strong>.</span></li><li><span class="list-number">03</span><span>Kód, který se opakuje na různých místech programu, vytvořte jako <strong>samostatnou funkci</strong>.</span></li><li><span class="list-number">04</span><span>Pro čísla pinů a různé výpočetní konstanty si nadefinujte <strong>konstantní proměnné</strong>. Nepoužívejte takzvaná „magic numbers“.</span></li><li><span class="list-number">05</span><span>Používejte komentáře. Nemusí být na každém řádku, ale měly by vysvětlovat jednotlivé bloky programu.</span></li></ol></section>
+<section id="hodnoceni" class="content-card "><header class="section-header"><p class="eyebrow">04 / HODNOCENÍ</p><h2>Projekt a prezentace</h2></header><div class="metric-grid"><article class="metric-card"><p>Kontrola hardwaru</p><div>
               Jedna známka s váhou <strong>0,25</strong> za kontrolu hardwarové části
               podle instrukcí.
-            </span>
-          </div>
-
-          <div class="arduino-card">
-            <strong>Projekt a prezentace</strong>
-            <span>
+            </div></article><article class="metric-card"><p>Projekt a prezentace</p><div>
               Jedna známka s váhou <strong>1,0</strong> za fyzické zapojení,
               program a prezentaci projektu.
-            </span>
-          </div>
-
-        </div>
-
-        <br>
-
-        <div class="arduino-table-wrap">
-          <table class="arduino-table">
-            <thead>
-              <tr>
-                <th>Oblast hodnocení</th>
-                <th>Body</th>
-                <th>Popis</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Funkčnost</td>
-                <td>7 bodů</td>
-                <td>Projekt splňuje všechny body zadání a je funkční.</td>
-              </tr>
-              <tr>
-                <td>Znalost programu</td>
-                <td>8 bodů</td>
-                <td>Žák prokáže, že programu rozumí a pouze jej bez pochopení nezkopíroval.</td>
-              </tr>
-              <tr>
-                <td>Včasné odevzdání</td>
-                <td>5 bodů</td>
-                <td>Projekt je odevzdán ve stanoveném termínu.</td>
-              </tr>
-              <tr>
-                <td>Prezentace</td>
-                <td>5 bodů</td>
-                <td>
+            </div></article></div><h3 class="subheading">Bodové hodnocení realizace</h3><div class="table-scroll "><table class="arduino-table">
+<thead>
+<tr>
+<th>Oblast hodnocení</th>
+<th>Body</th>
+<th>Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Funkčnost</td>
+<td>7 bodů</td>
+<td>Projekt splňuje všechny body zadání a je funkční.</td>
+</tr>
+<tr>
+<td>Znalost programu</td>
+<td>8 bodů</td>
+<td>Žák prokáže, že programu rozumí a pouze jej bez pochopení nezkopíroval.</td>
+</tr>
+<tr>
+<td>Včasné odevzdání</td>
+<td>5 bodů</td>
+<td>Projekt je odevzdán ve stanoveném termínu.</td>
+</tr>
+<tr>
+<td>Prezentace</td>
+<td>5 bodů</td>
+<td>
                   Prezentace před třídou včetně předvedení funkčnosti.
                   Doporučená délka je přibližně 2 minuty plus čas na dotazy.
                 </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Dokumentace -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Dokumentace projektu</h3>
-
-        <p style="max-width: 900px; margin: 0 auto 24px; text-align: center; font-size: clamp(15px, 1.25vw, 17px); line-height: 1.7;">
+</tr>
+</tbody>
+</table></div></section>
+<section id="dokumentace" class="content-card "><header class="section-header"><p class="eyebrow">05 / ODEVZDÁNÍ</p><h2>Dokumentace projektu</h2></header><div class="document-intro"><span class="document-icon" aria-hidden="true">PDF</span><p>
           Druhá známka s váhou <strong>1,0</strong> je za dokumentaci projektu.
           Dokumentace se odevzdává jako PDF soubor pojmenovaný
           <strong>Jmeno_Prijmeni_trida.pdf</strong> podle šablony.
-        </p>
-
-        <div class="arduino-table-wrap">
-          <table class="arduino-table">
-            <thead>
-              <tr>
-                <th>Část dokumentace</th>
-                <th>Body</th>
-                <th>Co má obsahovat</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Název PDF</td>
-                <td>1 bod</td>
-                <td>Soubor pojmenovaný ve tvaru Jmeno_Prijmeni_trida.pdf.</td>
-              </tr>
-              <tr>
-                <td>Zadání</td>
-                <td>1 bod</td>
-                <td>Kompletní zadání zkopírované z Githubu.</td>
-              </tr>
-              <tr>
-                <td>Popis řešení</td>
-                <td>2 body</td>
-                <td>Několik vět vlastními slovy o postupu řešení, použitých nástrojích, knihovnách a variantách řešení.</td>
-              </tr>
-              <tr>
-                <td>Schéma</td>
-                <td>5 bodů</td>
-                <td>Schéma zapojení vytvořené například ve Wokwi, KiCADu nebo jiném vhodném programu.</td>
-              </tr>
-              <tr>
-                <td>Včasné odevzdání</td>
-                <td>5 bodů</td>
-                <td>Dokumentace je odevzdána ve stanoveném termínu.</td>
-              </tr>
-              <tr>
-                <td>Fotografie zapojení</td>
-                <td>2 body</td>
-                <td>Fotografie skutečně sestaveného zapojení.</td>
-              </tr>
-              <tr>
-                <td>Kód</td>
-                <td>2 body</td>
-                <td>Přehledně naformátovaný kód s komentáři, vložený jako text, nikoli jako obrázek.</td>
-              </tr>
-              <tr>
-                <td>Zdroje</td>
-                <td>2 body</td>
-                <td>Seznam použitých zdrojů včetně odkazů na použité knihovny.</td>
-              </tr>
-              <tr>
-                <td>Závěr</td>
-                <td>2 body</td>
-                <td>Zhodnocení, zda byly splněny všechny body zadání a jaké problémy se řešily.</td>
-              </tr>
-              <tr>
-                <td>Celková úprava</td>
-                <td>3 body</td>
-                <td>Vhodné písmo, zarovnání, přehlednost a žádné osamocené nadpisy na konci stránky.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Převod bodů -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Orientační převod bodů na známku</h3>
-
-        <div class="arduino-table-wrap">
-          <table class="arduino-table">
-            <thead>
-              <tr>
-                <th>Body</th>
-                <th>Známka</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>25–22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>21–16</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>15–10</td>
-                <td>3</td>
-              </tr>
-              <tr>
-                <td>9–5</td>
-                <td>4</td>
-              </tr>
-              <tr>
-                <td>5–0</td>
-                <td>5</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Náměty projektů -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Příklady možných projektů</h3>
-
-        <ul class="arduino-project-list">
-          <li>Hra na postřeh pro dva hráče</li>
-          <li>Hodinky s budíkem a stopkami</li>
-          <li>Automatické ovládání dvířek do kurníku s počítadlem slepic</li>
-          <li>Voltmetr se dvěma napěťovými rozsahy a měřením proudu</li>
-          <li>Ovládání výtahu s krokovým motorem, tlačítky a displejem</li>
-          <li>Kódový zámek s možností změny kódu</li>
-          <li>Hudební přehrávač s dálkovým ovládáním</li>
-          <li>Reklamní banner s maticovým displejem</li>
-          <li>Robot jako sledovač čáry s funkcí objetí překážky</li>
-          <li>Přidání počitadla ujeté vzdálenosti pro robota</li>
-          <li>Úprava školního robota pro ovládání joystickem</li>
-          <li>Stavba robota podle vlastního návrhu</li>
-        </ul>
-
-      </div>
-    </section>
-
-    <!-- Součástky -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Moduly a součástky pro projekt</h3>
-
-        <div class="arduino-table-wrap">
-          <table class="arduino-table">
-            <thead>
-              <tr>
-                <th>Komponenta</th>
-                <th>Popis</th>
-                <th>Obrázek</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Arduino Nano</td><td>Menší deska se stejným procesorem jako Arduino UNO, vhodná do nepájivého pole.</td><td class="component-image"><img src="projekty/Arduino_nano.png" alt="Arduino Nano" loading="lazy"></td></tr>
-              <tr><td>Arduino MEGA</td><td>Deska s ATmega 2560, 56 IO piny a 16 analogovými vstupy.</td><td class="component-image"><img src="projekty/Arduino_mega.png" alt="Arduino MEGA" loading="lazy"></td></tr>
-              <tr><td>Arduino Nano 33 IoT</td><td>Arduino s výkonnějším procesorem, Bluetooth a WiFi modulem.</td><td class="component-image"><img src="projekty/Arduino_Nano_33_IoT.png" alt="Arduino Nano 33 IoT" loading="lazy"></td></tr>
-              <tr><td>RTC modul</td><td>Modul reálného času s bateriovým zálohováním, komunikace přes I2C.</td><td class="component-image"><img src="projekty/RTC modul.png" alt="RTC modul" loading="lazy"></td></tr>
-              <tr><td>Datalogger shield</td><td>Shield s RTC modulem a SD kartou, vhodný pro ukládání naměřených dat.</td><td class="component-image"></td></tr>
-              <tr><td>Piezzo bzučák</td><td>Pro jednoduché zvukové efekty, pípání a tóny.</td><td class="component-image"><img src="projekty/Piezzo_bzučák.png" alt="Piezzo bzučák" loading="lazy"></td></tr>
-              <tr><td>Fotorezistor</td><td>Součástka s odporem závislým na osvětlení.</td><td class="component-image"><img src="projekty/Fotorezistor.png" alt="Fotorezistor" loading="lazy"></td></tr>
-              <tr><td>Senzor DHT-10</td><td>Senzor pro měření teploty a vlhkosti.</td><td class="component-image"><img src="projekty/Senzor_dht_10.png" alt="Senzor DHT-10" loading="lazy"></td></tr>
-              <tr><td>Bluetooth modul HC-05</td><td>Bezdrátový modul pro sériovou komunikaci přes Bluetooth.</td><td class="component-image"><img src="projekty/Bluetooth_modul_HC_05.png" alt="Bluetooth modul HC-05" loading="lazy"></td></tr>
-              <tr><td>Senzor HC-SR04</td><td>Ultrazvukový senzor vzdálenosti s rozsahem přibližně 2 cm až 3 m.</td><td class="component-image"><img src="projekty/Senzor_HC_SR04.png" alt="Senzor HC-SR04" loading="lazy"></td></tr>
-              <tr><td>Joystick shield</td><td>Rozšiřující deska s joystickem a několika tlačítky pro ovládání projektů.</td><td class="component-image"><img src="projekty/Joystick_shield.png" alt="Joystick shield" loading="lazy"></td></tr>
-              <tr><td>RFID sada</td><td>Modul pro čtení RFID karet a čipů s frekvencí 13,56 MHz.</td><td class="component-image"></td></tr>
-              <tr><td>LCD displej</td><td>Znakový LCD displej 16×2 pro zobrazení textových informací.</td><td class="component-image"><img src="projekty/LCD_displej.png" alt="LCD displej" loading="lazy"></td></tr>
-              <tr><td>OLED displej</td><td>Malý grafický displej s vysokým kontrastem, komunikace přes I2C.</td><td class="component-image"><img src="projekty/OLED_displej.png" alt="OLED displej" loading="lazy"></td></tr>
-              <tr><td>Klávesnice</td><td>Membránová klávesnice 4×4.</td><td class="component-image"><img src="projekty/Klávesnice.png" alt="Klávesnice" loading="lazy"></td></tr>
-              <tr><td>Školní robot</td><td>Robot s Arduinem, motory, ultrazvukovým senzorem a senzory čáry.</td><td class="component-image"><img src="projekty/Školní_robot.png" alt="Školní robot" loading="lazy"></td></tr>
-              <tr><td>DC motor s kolem</td><td>Stejnosměrný motor s převodovkou a kolem, vhodný pro stavbu vlastního robota.</td><td class="component-image"><img src="projekty/DC_motor_s_kolem.png" alt="DC motor s kolem" loading="lazy"></td></tr>
-              <tr><td>Servo</td><td>Malý servomotor s přesným řízením polohy 0–180°.</td><td class="component-image"><img src="projekty/Servo.png" alt="Servo" loading="lazy"></td></tr>
-              <tr><td>Krokový motor s řadičem</td><td>Motor s přesným krokovým řízením, používaný například v CNC nebo 3D tisku.</td><td class="component-image"><img src="projekty/Krokový_motor_s_řadičem.png" alt="Krokový motor s řadičem" loading="lazy"></td></tr>
-              <tr><td>Hmotnostní senzor</td><td>Hmotnostní senzor s modulem HX711 do 5 kg nebo do 20 kg.</td><td class="component-image"><img src="projekty/Hmotnostní_senzor.png" alt="Hmotnostní senzor" loading="lazy"></td></tr>
-              <tr><td>Senzor srdečního tepu</td><td>Senzor srdečního tepu s modulem MAX30100.</td><td class="component-image"><img src="projekty/Senzor_srdečního_tepu.png" alt="Senzor srdečního tepu" loading="lazy"></td></tr>
-              <tr><td>Modul s MP3 přehrávačem</td><td>Modul s MP3 přehrávačem a integrovaným zesilovačem pro připojení reproduktoru.</td><td class="component-image"><img src="projekty/Modul_s_MP3_přehrávačem.png" alt="Modul s MP3 přehrávačem" loading="lazy"></td></tr>
-              <tr><td>Maticový displej</td><td>LED Matrix matice 8×8×4 s MAX7219.</td><td class="component-image"><img src="projekty/Maticový_displej.png" alt="Maticový displej" loading="lazy"></td></tr>
-              <tr><td>GPS modul</td><td>Modul GPS NEO-6M s anténou.</td><td class="component-image"><img src="projekty/GPS_modul.png" alt="GPS modul" loading="lazy"></td></tr>
-              <tr><td>Ventilátor</td><td>Ventilátor 50 mm, 5 V.</td><td class="component-image"><img src="projekty/Ventilátor.png" alt="Ventilátor" loading="lazy"></td></tr>
-              <tr><td>Senzor proudu</td><td>Senzor INA219 pro měření proudu, připojení přes I2C.</td><td class="component-image"><img src="projekty/Senzor_proudu.png" alt="Senzor proudu" loading="lazy"></td></tr>
-              <tr><td>Akcelerometr</td><td>Tříosý akcelerometr GY-521.</td><td class="component-image"><img src="projekty/Akcelerometr.png" alt="Akcelerometr" loading="lazy"></td></tr>
-              <tr><td>Kruh z RGB LED</td><td>24× RGB LED WS2812B.</td><td class="component-image"><img src="projekty/Kruh_z_RGB_LEDek.png" alt="Kruh z RGB LED" loading="lazy"></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Návrat -->
-    <div class="arduino-back">
-      <a href="./index.html" target="_self">Zpět na hlavní stránku</a>
-    </div>
-
-    <!-- Autor a kontakt -->
-    <footer class="arduino-author">
-      <div class="arduino-author-content">
-
-        <span class="arduino-author-item">
-          <img class="image img-fluid"
-               src="picture/1.png"
-               alt=""
-               role="presentation"
-               style="width: 25px; height: 35px;">
-          <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
-        </span>
-
-        <span class="arduino-author-item">
-          <img class="img-responsive atto_image_button_text-bottom img-fluid"
-               src="picture/2.png"
-               alt=""
-               role="presentation"
-               style="width: 35px; height: 20px;">
-          <span>E-mail:&nbsp;<strong>lukas.vavros@frengp.cz</strong></span>
-        </span>
-
-      </div>
-    </footer>
-
-    <div class="arduino-footer">
-      Gymnázium a SPŠEI Frenštát pod Radhoštěm
-    </div>
-
-  </section>
-
-</div>
+        </p></div><div class="table-scroll "><table class="arduino-table">
+<thead>
+<tr>
+<th>Část dokumentace</th>
+<th>Body</th>
+<th>Co má obsahovat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Název PDF</td>
+<td>1 bod</td>
+<td>Soubor pojmenovaný ve tvaru Jmeno_Prijmeni_trida.pdf.</td>
+</tr>
+<tr>
+<td>Zadání</td>
+<td>1 bod</td>
+<td>Kompletní zadání zkopírované z Githubu.</td>
+</tr>
+<tr>
+<td>Popis řešení</td>
+<td>2 body</td>
+<td>Několik vět vlastními slovy o postupu řešení, použitých nástrojích, knihovnách a variantách řešení.</td>
+</tr>
+<tr>
+<td>Schéma</td>
+<td>5 bodů</td>
+<td>Schéma zapojení vytvořené například ve Wokwi, KiCADu nebo jiném vhodném programu.</td>
+</tr>
+<tr>
+<td>Včasné odevzdání</td>
+<td>5 bodů</td>
+<td>Dokumentace je odevzdána ve stanoveném termínu.</td>
+</tr>
+<tr>
+<td>Fotografie zapojení</td>
+<td>2 body</td>
+<td>Fotografie skutečně sestaveného zapojení.</td>
+</tr>
+<tr>
+<td>Kód</td>
+<td>2 body</td>
+<td>Přehledně naformátovaný kód s komentáři, vložený jako text, nikoli jako obrázek.</td>
+</tr>
+<tr>
+<td>Zdroje</td>
+<td>2 body</td>
+<td>Seznam použitých zdrojů včetně odkazů na použité knihovny.</td>
+</tr>
+<tr>
+<td>Závěr</td>
+<td>2 body</td>
+<td>Zhodnocení, zda byly splněny všechny body zadání a jaké problémy se řešily.</td>
+</tr>
+<tr>
+<td>Celková úprava</td>
+<td>3 body</td>
+<td>Vhodné písmo, zarovnání, přehlednost a žádné osamocené nadpisy na konci stránky.</td>
+</tr>
+</tbody>
+</table></div></section>
+<section id="znamky" class="content-card "><header class="section-header"><p class="eyebrow">06 / ORIENTAČNÍ PŘEVOD</p><h2>Body a známky</h2></header><p class="section-note">Orientační převod podle původních pravidel:</p><div class="table-scroll grades-table"><table class="arduino-table">
+<thead>
+<tr>
+<th>Body</th>
+<th>Známka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25–22</td>
+<td>1</td>
+</tr>
+<tr>
+<td>21–16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>15–10</td>
+<td>3</td>
+</tr>
+<tr>
+<td>9–5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5–0</td>
+<td>5</td>
+</tr>
+</tbody>
+</table></div></section>
+<section id="napady" class="content-card "><header class="section-header"><p class="eyebrow">07 / INSPIRACE</p><h2>Příklady možných projektů</h2></header><div class="ideas-grid"><article class="idea"><span aria-hidden="true">✦</span><p>Hra na postřeh pro dva hráče</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Hodinky s budíkem a stopkami</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Automatické ovládání dvířek do kurníku s počítadlem slepic</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Voltmetr se dvěma napěťovými rozsahy a měřením proudu</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Ovládání výtahu s krokovým motorem, tlačítky a displejem</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Kódový zámek s možností změny kódu</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Hudební přehrávač s dálkovým ovládáním</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Reklamní banner s maticovým displejem</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Robot jako sledovač čáry s funkcí objetí překážky</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Přidání počitadla ujeté vzdálenosti pro robota</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Úprava školního robota pro ovládání joystickem</p></article><article class="idea"><span aria-hidden="true">✦</span><p>Stavba robota podle vlastního návrhu</p></article></div></section>
+<section id="soucasky" class="content-card catalog-section"><header class="section-header"><p class="eyebrow">08 / KATALOG</p><h2>Moduly a součástky</h2></header><p class="section-note">Přehled dostupných modulů a součástek pro inspiraci při návrhu vlastního projektu.</p><div class="component-toolbar"><label for="component-search">Vyhledat součástku</label><input type="search" id="component-search" placeholder="Např. motor, senzor, displej…" autocomplete="off"><span id="component-count" aria-live="polite"></span></div><div class="components-grid" id="components-grid"><article class="component-card" data-component="arduino nano menší deska se stejným procesorem jako arduino uno, vhodná do nepájivého pole."><div class="component-image"><img alt="Arduino Nano" loading="lazy" src="projekty/Arduino_nano.png"/></div><div class="component-details"><h3>Arduino Nano</h3><p>Menší deska se stejným procesorem jako Arduino UNO, vhodná do nepájivého pole.</p></div></article><article class="component-card" data-component="arduino mega deska s atmega 2560, 56 io piny a 16 analogovými vstupy."><div class="component-image"><img alt="Arduino MEGA" loading="lazy" src="projekty/Arduino_mega.png"/></div><div class="component-details"><h3>Arduino MEGA</h3><p>Deska s ATmega 2560, 56 IO piny a 16 analogovými vstupy.</p></div></article><article class="component-card" data-component="arduino nano 33 iot arduino s výkonnějším procesorem, bluetooth a wifi modulem."><div class="component-image"><img alt="Arduino Nano 33 IoT" loading="lazy" src="projekty/Arduino_Nano_33_IoT.png"/></div><div class="component-details"><h3>Arduino Nano 33 IoT</h3><p>Arduino s výkonnějším procesorem, Bluetooth a WiFi modulem.</p></div></article><article class="component-card" data-component="rtc modul modul reálného času s bateriovým zálohováním, komunikace přes i2c."><div class="component-image"><img alt="RTC modul" loading="lazy" src="projekty/RTC modul.png"/></div><div class="component-details"><h3>RTC modul</h3><p>Modul reálného času s bateriovým zálohováním, komunikace přes I2C.</p></div></article><article class="component-card" data-component="datalogger shield shield s rtc modulem a sd kartou, vhodný pro ukládání naměřených dat."><div class="component-image"><div class="component-placeholder" aria-hidden="true">◈</div></div><div class="component-details"><h3>Datalogger shield</h3><p>Shield s RTC modulem a SD kartou, vhodný pro ukládání naměřených dat.</p></div></article><article class="component-card" data-component="piezzo bzučák pro jednoduché zvukové efekty, pípání a tóny."><div class="component-image"><img alt="Piezzo bzučák" loading="lazy" src="projekty/Piezzo_bzučák.png"/></div><div class="component-details"><h3>Piezzo bzučák</h3><p>Pro jednoduché zvukové efekty, pípání a tóny.</p></div></article><article class="component-card" data-component="fotorezistor součástka s odporem závislým na osvětlení."><div class="component-image"><img alt="Fotorezistor" loading="lazy" src="projekty/Fotorezistor.png"/></div><div class="component-details"><h3>Fotorezistor</h3><p>Součástka s odporem závislým na osvětlení.</p></div></article><article class="component-card" data-component="senzor dht-10 senzor pro měření teploty a vlhkosti."><div class="component-image"><img alt="Senzor DHT-10" loading="lazy" src="projekty/Senzor_dht_10.png"/></div><div class="component-details"><h3>Senzor DHT-10</h3><p>Senzor pro měření teploty a vlhkosti.</p></div></article><article class="component-card" data-component="bluetooth modul hc-05 bezdrátový modul pro sériovou komunikaci přes bluetooth."><div class="component-image"><img alt="Bluetooth modul HC-05" loading="lazy" src="projekty/Bluetooth_modul_HC_05.png"/></div><div class="component-details"><h3>Bluetooth modul HC-05</h3><p>Bezdrátový modul pro sériovou komunikaci přes Bluetooth.</p></div></article><article class="component-card" data-component="senzor hc-sr04 ultrazvukový senzor vzdálenosti s rozsahem přibližně 2 cm až 3 m."><div class="component-image"><img alt="Senzor HC-SR04" loading="lazy" src="projekty/Senzor_HC_SR04.png"/></div><div class="component-details"><h3>Senzor HC-SR04</h3><p>Ultrazvukový senzor vzdálenosti s rozsahem přibližně 2 cm až 3 m.</p></div></article><article class="component-card" data-component="joystick shield rozšiřující deska s joystickem a několika tlačítky pro ovládání projektů."><div class="component-image"><img alt="Joystick shield" loading="lazy" src="projekty/Joystick_shield.png"/></div><div class="component-details"><h3>Joystick shield</h3><p>Rozšiřující deska s joystickem a několika tlačítky pro ovládání projektů.</p></div></article><article class="component-card" data-component="rfid sada modul pro čtení rfid karet a čipů s frekvencí 13,56 mhz."><div class="component-image"><div class="component-placeholder" aria-hidden="true">◈</div></div><div class="component-details"><h3>RFID sada</h3><p>Modul pro čtení RFID karet a čipů s frekvencí 13,56 MHz.</p></div></article><article class="component-card" data-component="lcd displej znakový lcd displej 16×2 pro zobrazení textových informací."><div class="component-image"><img alt="LCD displej" loading="lazy" src="projekty/LCD_displej.png"/></div><div class="component-details"><h3>LCD displej</h3><p>Znakový LCD displej 16×2 pro zobrazení textových informací.</p></div></article><article class="component-card" data-component="oled displej malý grafický displej s vysokým kontrastem, komunikace přes i2c."><div class="component-image"><img alt="OLED displej" loading="lazy" src="projekty/OLED_displej.png"/></div><div class="component-details"><h3>OLED displej</h3><p>Malý grafický displej s vysokým kontrastem, komunikace přes I2C.</p></div></article><article class="component-card" data-component="klávesnice membránová klávesnice 4×4."><div class="component-image"><img alt="Klávesnice" loading="lazy" src="projekty/Klávesnice.png"/></div><div class="component-details"><h3>Klávesnice</h3><p>Membránová klávesnice 4×4.</p></div></article><article class="component-card" data-component="školní robot robot s arduinem, motory, ultrazvukovým senzorem a senzory čáry."><div class="component-image"><img alt="Školní robot" loading="lazy" src="projekty/Školní_robot.png"/></div><div class="component-details"><h3>Školní robot</h3><p>Robot s Arduinem, motory, ultrazvukovým senzorem a senzory čáry.</p></div></article><article class="component-card" data-component="dc motor s kolem stejnosměrný motor s převodovkou a kolem, vhodný pro stavbu vlastního robota."><div class="component-image"><img alt="DC motor s kolem" loading="lazy" src="projekty/DC_motor_s_kolem.png"/></div><div class="component-details"><h3>DC motor s kolem</h3><p>Stejnosměrný motor s převodovkou a kolem, vhodný pro stavbu vlastního robota.</p></div></article><article class="component-card" data-component="servo malý servomotor s přesným řízením polohy 0–180°."><div class="component-image"><img alt="Servo" loading="lazy" src="projekty/Servo.png"/></div><div class="component-details"><h3>Servo</h3><p>Malý servomotor s přesným řízením polohy 0–180°.</p></div></article><article class="component-card" data-component="krokový motor s řadičem motor s přesným krokovým řízením, používaný například v cnc nebo 3d tisku."><div class="component-image"><img alt="Krokový motor s řadičem" loading="lazy" src="projekty/Krokový_motor_s_řadičem.png"/></div><div class="component-details"><h3>Krokový motor s řadičem</h3><p>Motor s přesným krokovým řízením, používaný například v CNC nebo 3D tisku.</p></div></article><article class="component-card" data-component="hmotnostní senzor hmotnostní senzor s modulem hx711 do 5 kg nebo do 20 kg."><div class="component-image"><img alt="Hmotnostní senzor" loading="lazy" src="projekty/Hmotnostní_senzor.png"/></div><div class="component-details"><h3>Hmotnostní senzor</h3><p>Hmotnostní senzor s modulem HX711 do 5 kg nebo do 20 kg.</p></div></article><article class="component-card" data-component="senzor srdečního tepu senzor srdečního tepu s modulem max30100."><div class="component-image"><img alt="Senzor srdečního tepu" loading="lazy" src="projekty/Senzor_srdečního_tepu.png"/></div><div class="component-details"><h3>Senzor srdečního tepu</h3><p>Senzor srdečního tepu s modulem MAX30100.</p></div></article><article class="component-card" data-component="modul s mp3 přehrávačem modul s mp3 přehrávačem a integrovaným zesilovačem pro připojení reproduktoru."><div class="component-image"><img alt="Modul s MP3 přehrávačem" loading="lazy" src="projekty/Modul_s_MP3_přehrávačem.png"/></div><div class="component-details"><h3>Modul s MP3 přehrávačem</h3><p>Modul s MP3 přehrávačem a integrovaným zesilovačem pro připojení reproduktoru.</p></div></article><article class="component-card" data-component="maticový displej led matrix matice 8×8×4 s max7219."><div class="component-image"><img alt="Maticový displej" loading="lazy" src="projekty/Maticový_displej.png"/></div><div class="component-details"><h3>Maticový displej</h3><p>LED Matrix matice 8×8×4 s MAX7219.</p></div></article><article class="component-card" data-component="gps modul modul gps neo-6m s anténou."><div class="component-image"><img alt="GPS modul" loading="lazy" src="projekty/GPS_modul.png"/></div><div class="component-details"><h3>GPS modul</h3><p>Modul GPS NEO-6M s anténou.</p></div></article><article class="component-card" data-component="ventilátor ventilátor 50 mm, 5 v."><div class="component-image"><img alt="Ventilátor" loading="lazy" src="projekty/Ventilátor.png"/></div><div class="component-details"><h3>Ventilátor</h3><p>Ventilátor 50 mm, 5 V.</p></div></article><article class="component-card" data-component="senzor proudu senzor ina219 pro měření proudu, připojení přes i2c."><div class="component-image"><img alt="Senzor proudu" loading="lazy" src="projekty/Senzor_proudu.png"/></div><div class="component-details"><h3>Senzor proudu</h3><p>Senzor INA219 pro měření proudu, připojení přes I2C.</p></div></article><article class="component-card" data-component="akcelerometr tříosý akcelerometr gy-521."><div class="component-image"><img alt="Akcelerometr" loading="lazy" src="projekty/Akcelerometr.png"/></div><div class="component-details"><h3>Akcelerometr</h3><p>Tříosý akcelerometr GY-521.</p></div></article><article class="component-card" data-component="kruh z rgb led 24× rgb led ws2812b."><div class="component-image"><img alt="Kruh z RGB LED" loading="lazy" src="projekty/Kruh_z_RGB_LEDek.png"/></div><div class="component-details"><h3>Kruh z RGB LED</h3><p>24× RGB LED WS2812B.</p></div></article></div><p id="component-empty" hidden>Žádná součástka neodpovídá hledání.</p></section>
+<footer class="footer"><a class="footer-back" href="index.html">← Zpět na hlavní stránku</a><p>Vytvořil: <strong>Lukáš Vavroš</strong> · <a href="mailto:lukas.vavros@frengp.cz">lukas.vavros@frengp.cz</a></p><small>Gymnázium a SPŠEI Frenštát pod Radhoštěm</small><a class="to-top" href="#nahoru">↑ Nahoru</a></footer></main></div>
+<script src="script/projekt.js" defer></script></body></html>

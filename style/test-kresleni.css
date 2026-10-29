@@ -15,3 +15,7 @@
  #exam-paper .diagram-sketch .sketch-over-diagram{position:absolute!important;inset:0!important;display:block!important}
  #exam-paper .sketch-frame canvas{display:block!important;width:100%!important;height:100%!important;}
 }
+
+/* U kreslicích zadání žádná textová odpověď; pouze schéma a kreslení. */
+#exam-paper .question-card:has(.sketch-frame) textarea,
+#exam-paper .question-card:has(.sketch-frame) .input-label{display:none!important}

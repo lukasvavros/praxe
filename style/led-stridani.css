@@ -3,6 +3,8 @@
 
 .led-sequence .ls-external,.led-sequence .ls-external.active{filter:none!important}
 
+
+/* Vzhled simulací při vložení do kapitol. Vlastní barvy syntaxe a SVG neměnit. */
 .pra-chapter .led-sequence {font-family:inherit; color:var(--ink); background:var(--card-bg); border-color:var(--line)}
 .pra-chapter .led-sequence .ls-eyebrow {color:var(--teal-dark)}
 .pra-chapter .led-sequence h2 {color:var(--teal-dark)}

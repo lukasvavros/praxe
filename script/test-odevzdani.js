@@ -2,7 +2,9 @@
 (() => {
 'use strict';
 
-const WORKER = 'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
+const WORKER =
+  'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
+
 window.ARDUINO_SUBMIT_WORKER = WORKER;
 
 const button = document.getElementById('exam-print');
@@ -19,20 +21,21 @@ button.textContent = 'Odeslat test';
 
 const escapeHtml = value =>
   String(value).replace(/[&<>"']/g, x => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#39;'
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
   }[x]));
 
 const fileData = async blob =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
+
     reader.onload = () => resolve(reader.result);
-    reader.onerror = () => reject(
-      Error('Nelze převést obrázek.')
-    );
+    reader.onerror = () =>
+      reject(Error('Nelze převést obrázek.'));
+
     reader.readAsDataURL(blob);
   });
 
@@ -52,6 +55,10 @@ const imageData = async url => {
   return await fileData(await response.blob());
 };
 
+// ============================================
+// HODNOCENÍ V ODEVZDANÉM HTML
+// ============================================
+
 const teacherScript = String.raw`
 (() => {
   'use strict';
@@ -64,16 +71,25 @@ const teacherScript = String.raw`
     c.querySelector('.body-score')
   );
 
-  const total = document.querySelector('#score-total');
-  const outcome = document.querySelector('#score-grade');
-  const progress = document.querySelector('#score-progress');
-  const pctEl = document.querySelector('#score-percent');
+  const total =
+    document.querySelector('#score-total');
 
-  const grade = p =>
-    p >= 90 ? 1 :
-    p >= 75 ? 2 :
-    p >= 60 ? 3 :
-    p >= 40 ? 4 : 5;
+  const outcome =
+    document.querySelector('#score-grade');
+
+  const progress =
+    document.querySelector('#score-progress');
+
+  const pctEl =
+    document.querySelector('#score-percent');
+
+  function grade(p) {
+    if (p >= 90) return 1;
+    if (p >= 75) return 2;
+    if (p >= 60) return 3;
+    if (p >= 40) return 4;
+    return 5;
+  }
 
   function recalc() {
     let sum = 0;
@@ -81,6 +97,8 @@ const teacherScript = String.raw`
     let done = 0;
 
     sels.forEach(el => {
+      if (!el) return;
+
       max += Number(el.dataset.max);
 
       if (el.value !== '') {
@@ -109,42 +127,56 @@ const teacherScript = String.raw`
       ' z ' + sels.length + ' otázek';
   }
 
-  sels.forEach(s =>
-    s.addEventListener('change', recalc)
-  );
+  sels.forEach(s => {
+    if (s) {
+      s.addEventListener('change', recalc);
+    }
+  });
 
+  // Uloží aktuální bodování do HTML.
   function updatedHtml() {
     recalc();
 
     const copy =
       document.documentElement.cloneNode(true);
 
-    const oriS = [
+    const originalSelects = [
       ...document.querySelectorAll('.body-score')
     ];
 
-    [
+    const copiedSelects = [
       ...copy.querySelectorAll('.body-score')
-    ].forEach((s, i) => {
-      [...s.options].forEach(o => {
-        o.selected = o.value === oriS[i].value;
+    ];
 
-        if (o.selected) {
-          o.setAttribute('selected', '');
+    copiedSelects.forEach((select, i) => {
+      const currentValue =
+        originalSelects[i].value;
+
+      [...select.options].forEach(option => {
+        const selected =
+          option.value === currentValue;
+
+        option.selected = selected;
+
+        if (selected) {
+          option.setAttribute('selected', '');
         } else {
-          o.removeAttribute('selected');
+          option.removeAttribute('selected');
         }
       });
     });
 
-    const oriN = [
+    const originalNotes = [
       ...document.querySelectorAll('.teacher-note')
     ];
 
-    [
+    const copiedNotes = [
       ...copy.querySelectorAll('.teacher-note')
-    ].forEach((n, i) => {
-      n.textContent = oriN[i].value;
+    ];
+
+    copiedNotes.forEach((note, i) => {
+      note.textContent =
+        originalNotes[i].value;
     });
 
     for (const id of [
@@ -160,13 +192,15 @@ const teacherScript = String.raw`
     return '<!doctype html>\n' + copy.outerHTML;
   }
 
+  // Stáhnout ohodnocené HTML.
   document.querySelector('#save-graded')
     .addEventListener('click', () => {
 
       if (
         sels.some(s => s.value === '') &&
         !confirm(
-          'Některé otázky nejsou ohodnocené. Přesto uložit?'
+          'Některé otázky nejsou ohodnocené. ' +
+          'Přesto uložit?'
         )
       ) {
         return;
@@ -174,13 +208,14 @@ const teacherScript = String.raw`
 
       const blob = new Blob(
         [updatedHtml()],
-        { type:'text/html;charset=utf-8' }
+        { type: 'text/html;charset=utf-8' }
       );
 
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
 
       a.href = url;
+
       a.download =
         (document.body.dataset.filename || 'test') +
         '-hodnoceni.html';
@@ -194,27 +229,32 @@ const teacherScript = String.raw`
       }, 10000);
     });
 
-  function script(url) {
+  // Načítání knihoven pro PDF.
+  function loadScript(url) {
     return new Promise((resolve, reject) => {
-      const s = document.createElement('script');
+      const script =
+        document.createElement('script');
 
-      s.src = url;
-      s.onload = resolve;
-      s.onerror = () => reject(
+      script.src = url;
+
+      script.onload = resolve;
+
+      script.onerror = () => reject(
         Error(
           'Nepodařilo se načíst knihovnu pro PDF. ' +
-          'Pro export PDF je nutný internet.'
+          'Pro export je nutný internet.'
         )
       );
 
-      document.head.appendChild(s);
+      document.head.appendChild(script);
     });
   }
 
+  // Export do jednoho dlouhého PDF.
   document.querySelector('#export-pdf')
-    .addEventListener('click', async e => {
+    .addEventListener('click', async event => {
 
-      const btn = e.currentTarget;
+      const btn = event.currentTarget;
 
       if (sels.some(s => s.value === '')) {
         alert(
@@ -225,19 +265,21 @@ const teacherScript = String.raw`
 
       btn.disabled = true;
 
-      const old = btn.textContent;
+      const oldText = btn.textContent;
       btn.textContent = 'Vytvářím PDF…';
 
       try {
         if (!window.html2canvas) {
-          await script(
-            'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'
+          await loadScript(
+            'https://cdn.jsdelivr.net/npm/' +
+            'html2canvas@1.4.1/dist/html2canvas.min.js'
           );
         }
 
         if (!window.jspdf?.jsPDF) {
-          await script(
-            'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js'
+          await loadScript(
+            'https://cdn.jsdelivr.net/npm/' +
+            'jspdf@2.5.2/dist/jspdf.umd.min.js'
           );
         }
 
@@ -251,6 +293,7 @@ const teacherScript = String.raw`
             backgroundColor: '#ffffff',
             useCORS: true,
             logging: false,
+
             windowWidth: Math.max(
               main.scrollWidth,
               980
@@ -276,28 +319,30 @@ const teacherScript = String.raw`
                 ) {
                   el.style.display = 'none';
                 } else {
-                  const d =
+                  const div =
                     doc.createElement('div');
 
-                  d.className = 'print-note';
-                  d.textContent =
+                  div.className = 'print-note';
+                  div.textContent =
                     el.value || '';
 
-                  el.replaceWith(d);
+                  el.replaceWith(div);
                 }
               });
 
               doc.querySelectorAll(
                 '.body-score'
               ).forEach(el => {
-                const d =
+                const div =
                   doc.createElement('strong');
 
-                d.textContent =
-                  el.value + ' / ' +
-                  el.dataset.max + ' bodů';
+                div.textContent =
+                  el.value +
+                  ' / ' +
+                  el.dataset.max +
+                  ' bodů';
 
-                el.replaceWith(d);
+                el.replaceWith(div);
               });
             }
           }
@@ -306,13 +351,12 @@ const teacherScript = String.raw`
         const widthMM = 210;
 
         const heightMM =
-          widthMM *
-          canvas.height /
-          canvas.width;
+          widthMM * canvas.height / canvas.width;
 
         if (heightMM > 3000) {
           throw Error(
-            'Dokument je příliš dlouhý pro jedno PDF.'
+            'Dokument je příliš dlouhý ' +
+            'pro jedno PDF.'
           );
         }
 
@@ -337,234 +381,314 @@ const teacherScript = String.raw`
           '-hodnoceni.pdf'
         );
 
-      } catch (err) {
+      } catch (error) {
         alert(
-          err.message ||
+          error.message ||
           'Nepodařilo se vytvořit PDF.'
         );
       } finally {
         btn.disabled = false;
-        btn.textContent = old;
+        btn.textContent = oldText;
       }
     });
 
   recalc();
-})();`;
+})();
+`;
+
+// ============================================
+// VZHLED ODEVZDANÉHO HTML
+// ============================================
 
 const style = String.raw`
-:root{
-  font-family:system-ui,-apple-system,
-  'Segoe UI',Arial,sans-serif;
-  color:#172c30;
-  background:#f2f6f5;
-  font-size:16px;
+:root {
+  font-family: system-ui, -apple-system,
+    'Segoe UI', Arial, sans-serif;
+  color: #172c30;
+  background: #f2f6f5;
+  font-size: 16px;
 }
-*{box-sizing:border-box}
-body{margin:0}
-main{
-  max-width:980px;
-  margin:24px auto;
-  padding:0 16px 36px;
+
+* {
+  box-sizing: border-box;
 }
-h1{
-  font-size:clamp(24px,4vw,35px);
-  margin:0 0 10px;
+
+body {
+  margin: 0;
 }
-header{
-  background:#fff;
-  border-radius:16px;
-  padding:25px;
-  margin-bottom:20px;
-  border-top:6px solid #087f84;
+
+main {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 0 16px 36px;
 }
-header p{margin:5px 0}
-.question-card{
-  background:#fff;
-  border:1px solid #d5e2e0;
-  border-radius:14px;
-  padding:22px;
-  margin:16px 0;
-  overflow:hidden;
+
+h1 {
+  font-size: clamp(24px, 4vw, 35px);
+  margin: 0 0 10px;
 }
-.question-top{
-  display:flex;
-  align-items:flex-start;
-  gap:13px;
+
+header {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-top: 6px solid #087f84;
 }
-.question-top h2{
-  font-size:19px;
-  margin:0 0 15px;
-  line-height:1.45;
+
+header p {
+  margin: 5px 0;
 }
-.question-number{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:8px;
-  background:#d5f4ee;
-  min-width:32px;
-  height:32px;
-  font-weight:bold;
+
+.question-card {
+  background: #fff;
+  border: 1px solid #d5e2e0;
+  border-radius: 14px;
+  padding: 22px;
+  margin: 16px 0;
+  overflow: hidden;
 }
-.question-content{line-height:1.65}
-.question-content img{
-  max-width:100%;
-  height:auto;
+
+.question-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
 }
-.diagram{
-  margin:12px 0;
-  text-align:center;
+
+.question-top h2 {
+  font-size: 19px;
+  margin: 0 0 15px;
+  line-height: 1.45;
 }
-.diagram figcaption{
-  font-size:13px;
-  color:#5e7578;
+
+.question-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #d5f4ee;
+  min-width: 32px;
+  height: 32px;
+  font-weight: bold;
 }
-.code-panel{
-  background:#112b31;
-  color:#eff;
-  padding:15px;
-  border-radius:10px;
-  overflow:auto;
+
+.question-content {
+  line-height: 1.65;
 }
-.code-panel pre{
-  white-space:pre-wrap;
-  margin:0;
+
+.question-content img {
+  max-width: 100%;
+  height: auto;
 }
-.code-panel code{color:inherit}
-.answer{
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  background:#f5faf9;
-  border:1px solid #ccdedb;
-  border-radius:8px;
-  padding:12px;
-  min-height:38px;
+
+.diagram {
+  margin: 12px 0;
+  text-align: center;
 }
-.options{display:grid;gap:6px}
-.options label{
-  display:block;
-  background:#f5faf9;
-  border:1px solid #dbe5e4;
-  border-radius:8px;
-  padding:8px 10px;
+
+.diagram figcaption {
+  font-size: 13px;
+  color: #5e7578;
 }
-.options label.is-checked{
-  background:#dbf5eb;
-  border-color:#078172;
-  font-weight:bold;
+
+.code-panel {
+  background: #112b31;
+  color: #eff;
+  padding: 15px;
+  border-radius: 10px;
+  overflow: auto;
 }
-.options input{accent-color:#087f84}
-.teacher-box{
-  margin-top:18px;
-  border-top:1px dashed #aec8c3;
-  padding-top:15px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  align-items:center;
-  background:#fff;
+
+.code-panel pre {
+  white-space: pre-wrap;
+  margin: 0;
 }
-.auto-result{
-  font-weight:700;
-  color:#087f84;
+
+.code-panel code {
+  color: inherit;
 }
-.print-note{
-  white-space:pre-wrap;
-  color:#34464a;
-  padding:8px;
-  border:1px solid #d5e2e0;
-  width:100%;
-  min-height:30px;
+
+.answer {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f5faf9;
+  border: 1px solid #ccdedb;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 38px;
 }
-.export-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+
+.options {
+  display: grid;
+  gap: 6px;
 }
-.teacher-box select{
-  font:inherit;
-  padding:9px;
-  border:1px solid #87aaa5;
-  border-radius:8px;
-  min-width:100px;
+
+.options label {
+  display: block;
+  background: #f5faf9;
+  border: 1px solid #dbe5e4;
+  border-radius: 8px;
+  padding: 8px 10px;
 }
-.teacher-note{
-  width:100%;
-  font:inherit;
-  border:1px solid #c4d6d3;
-  border-radius:8px;
-  padding:10px;
-  min-height:58px;
-  resize:vertical;
+
+.options label.is-checked {
+  background: #dbf5eb;
+  border-color: #078172;
+  font-weight: bold;
 }
-.results{
-  background:#fff;
-  border:2px solid #087f84;
-  border-radius:16px;
-  padding:22px;
-  margin-top:18px;
+
+.options input {
+  accent-color: #087f84;
 }
-.results strong{font-size:22px}
-.grade{
-  font-size:32px;
-  font-weight:800;
-  color:#087f84;
+
+.teacher-box {
+  margin-top: 18px;
+  border-top: 1px dashed #aec8c3;
+  padding-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
 }
-button{
-  background:#087f84;
-  color:#fff;
-  border:0;
-  border-radius:10px;
-  padding:13px 22px;
-  font:inherit;
-  font-weight:700;
-  cursor:pointer;
+
+.auto-result {
+  font-weight: 700;
+  color: #087f84;
 }
-.muted{color:#50696c}
-.sketch-image-holder{
-  position:relative;
-  display:table;
-  width:fit-content;
-  max-width:100%;
-  margin:10px auto;
+
+.print-note {
+  white-space: pre-wrap;
+  color: #34464a;
+  padding: 8px;
+  border: 1px solid #d5e2e0;
+  width: 100%;
+  min-height: 30px;
 }
-.sketch-image-holder>img{
-  display:block;
-  max-width:100%;
-  height:auto;
+
+.export-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-.sketch-over-diagram{
-  position:absolute;
-  inset:0;
+
+.teacher-box select {
+  font: inherit;
+  padding: 9px;
+  border: 1px solid #87aaa5;
+  border-radius: 8px;
+  min-width: 100px;
 }
-.sketch-over-diagram img{
-  display:block;
-  width:100%;
-  height:100%;
+
+.teacher-note {
+  width: 100%;
+  font: inherit;
+  border: 1px solid #c4d6d3;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 58px;
+  resize: vertical;
 }
-.sketch-blank{
-  height:210px;
-  border:1px solid #c0d2d0;
-  position:relative;
+
+.results {
+  background: #fff;
+  border: 2px solid #087f84;
+  border-radius: 16px;
+  padding: 22px;
+  margin-top: 18px;
 }
-.sketch-blank img{
-  width:100%;
-  height:100%;
+
+.results strong {
+  font-size: 22px;
 }
+
+.grade {
+  font-size: 32px;
+  font-weight: 800;
+  color: #087f84;
+}
+
+button {
+  background: #087f84;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 22px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.muted {
+  color: #50696c;
+}
+
+.sketch-image-holder {
+  position: relative;
+  display: table;
+  width: fit-content;
+  max-width: 100%;
+  margin: 10px auto;
+}
+
+.sketch-image-holder > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.sketch-over-diagram {
+  position: absolute;
+  inset: 0;
+}
+
+.sketch-over-diagram img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sketch-blank {
+  height: 210px;
+  border: 1px solid #c0d2d0;
+  position: relative;
+}
+
+.sketch-blank img {
+  width: 100%;
+  height: 100%;
+}
+
 .sketch-print-image,
 .sketch-actions,
 .draw-area,
 .helper,
-.input-label{
-  display:none!important;
+.input-label {
+  display: none !important;
 }
-body .diagram-sketch{position:relative}
-figure.diagram img{object-fit:contain}
-@media(max-width:600px){
-  .question-card{padding:14px}
-  .question-top h2{font-size:17px}
+
+body .diagram-sketch {
+  position: relative;
+}
+
+figure.diagram img {
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .question-card {
+    padding: 14px;
+  }
+
+  .question-top h2 {
+    font-size: 17px;
+  }
 }
 `;
+
+// ============================================
+// GENEROVÁNÍ HTML TESTU
+// ============================================
 
 async function buildHtml() {
   const name = nameField.value.trim();
@@ -585,6 +709,17 @@ async function buildHtml() {
 
   const all = [];
 
+  // Klíč správných odpovědí.
+  // Čísla odpovídají původním ID otázek.
+  const correct = {
+    3: 'lez',
+    4: 'lez',
+    5: 'lez',
+    6: 'lez',
+    11: 'pravda',
+    15: '1'
+  };
+
   for (
     let index = 0;
     index < cards.length;
@@ -595,10 +730,12 @@ async function buildHtml() {
 
     copy.removeAttribute('id');
 
+    // Odstranění ovládacích prvků kreslení.
     copy.querySelectorAll(
       '.sketch-actions,.helper,.draw-area,.sketch-print-image'
     ).forEach(el => el.remove());
 
+    // Převod textových odpovědí.
     const sources = [
       ...original.querySelectorAll('textarea')
     ];
@@ -609,19 +746,23 @@ async function buildHtml() {
           document.createElement('div');
 
         answer.className = 'answer';
+
         answer.textContent =
           sources[i]?.value || '—';
 
         el.replaceWith(answer);
       });
 
+    // Zjištění původního čísla otázky.
     const radio = original.querySelector(
       'input[type="radio"]'
     );
 
     const originalId = radio
       ? Number(
-          (radio.name.match(/q(\d+)$/) || [])[1]
+          (
+            radio.name.match(/q(\d+)$/) || []
+          )[1]
         )
       : Number(
           (
@@ -631,6 +772,7 @@ async function buildHtml() {
           )[1]
         );
 
+    // Zachování vybraných odpovědí.
     const originalRadios = [
       ...original.querySelectorAll(
         'input[type="radio"]'
@@ -648,6 +790,7 @@ async function buildHtml() {
 
       if (checked) {
         el.setAttribute('checked', '');
+
         el.closest('label')
           ?.classList.add('is-checked');
       } else {
@@ -655,6 +798,7 @@ async function buildHtml() {
       }
     });
 
+    // Zachování kreslených schémat.
     const originalCanvases = [
       ...original.querySelectorAll('canvas')
     ];
@@ -677,6 +821,7 @@ async function buildHtml() {
         el.replaceWith(image);
       });
 
+    // Vložení obrázků přímo do HTML.
     for (
       const img of copy.querySelectorAll('img')
     ) {
@@ -694,26 +839,23 @@ async function buildHtml() {
       img.removeAttribute('loading');
     }
 
+    // Odstranění událostí z původních prvků.
     copy.querySelectorAll(
       '[onload],[onerror],[onclick],[onmouseover]'
     ).forEach(el => {
-      for (const a of [...el.attributes]) {
-        if (a.name.startsWith('on')) {
-          el.removeAttribute(a.name);
+      for (const attr of [...el.attributes]) {
+        if (attr.name.startsWith('on')) {
+          el.removeAttribute(attr.name);
         }
       }
     });
 
-    const correct = {
-      3: 'lez',
-      4: 'lez',
-      5: 'lez',
-      6: 'lez',
-      11: 'pravda',
-      15: '1'
-    };
+    // ========================================
+    // AUTOMATICKÉ A RUČNÍ BODOVÁNÍ
+    // ========================================
 
     const automatic = Boolean(radio);
+
     const isDrawing =
       [9, 10, 16].includes(originalId);
 
@@ -737,19 +879,41 @@ async function buildHtml() {
       Array.from(
         { length: max + 1 },
         (_, n) =>
-          `<option value="${n}">${n} / ${max}</option>`
+          `<option value="${n}">` +
+          `${n} / ${max}</option>`
       ).join('');
 
+    // OPRAVA AUTOMATICKÉHO ZAPOČÍTÁVÁNÍ BODŮ.
     if (automatic) {
-      const chosen = original.querySelector(
-        'input[type="radio"]:checked'
-      )?.value;
+      const chosen =
+        original.querySelector(
+          'input[type="radio"]:checked'
+        )?.value;
 
-      select.value =
+      const awarded =
         chosen === correct[originalId]
           ? '1'
           : '0';
 
+      select.value = awarded;
+
+      // DŮLEŽITÉ:
+      // Bod se musí uložit jako atribut
+      // selected přímo do výsledného HTML.
+      for (const option of select.options) {
+        const isSelected =
+          option.value === awarded;
+
+        option.selected = isSelected;
+
+        if (isSelected) {
+          option.setAttribute('selected', '');
+        } else {
+          option.removeAttribute('selected');
+        }
+      }
+
+      // Automatické hodnocení je uzamčené.
       select.disabled = true;
     }
 
@@ -784,15 +948,15 @@ async function buildHtml() {
     all.push(copy.outerHTML);
   }
 
+  // Název souboru podle žáka.
   const filename = name
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-zA-Z0-9]+/g, '_')
-    .replace(/^_|_$/g, '')
+    .replace(/^_+|_+$/g, '')
     .slice(0, 70);
 
-  const html =
-    `<!doctype html>
+  const html = `<!doctype html>
 <html lang="cs">
 <head>
 <meta charset="utf-8">
@@ -806,50 +970,68 @@ async function buildHtml() {
 <h1>PRAXE – ARDUINO / OSTRÝ TEST</h1>
 <p><b>Žák:</b> ${escapeHtml(name)}</p>
 <p><b>Datum:</b> ${escapeHtml(date)}</p>
-<p class="muted">Hodnocení vyučujícího · původní odpovědi žáka jsou uzamčené</p>
+<p class="muted">
+Hodnocení vyučujícího · původní odpovědi žáka jsou uzamčené
+</p>
 </header>
+
 ${all.join('\n')}
+
 <section class="results">
 <h2>Celkové hodnocení</h2>
+
 <p id="score-progress"></p>
+
 <p>
 <strong id="score-total">—</strong>
 ·
 <span id="score-percent">—</span>
 </p>
+
 <p>
 Výsledná známka:
 <span class="grade" id="score-grade">—</span>
 </p>
+
 <p class="muted">
-Stupnice: 90–100 % = 1,
+Stupnice:
+90–100 % = 1,
 75–89,9 % = 2,
 60–74,9 % = 3,
 40–59,9 % = 4,
 jinak 5.
 </p>
+
 <div class="export-actions">
 <button id="save-graded" type="button">
 Stáhnout ohodnocené HTML
 </button>
+
 <button id="export-pdf" type="button">
 Exportovat jedno dlouhé PDF
 </button>
 </div>
+
 <p class="muted">
 Hodnocení se automaticky neukládá na GitHub.
 Pro uložení bodů stáhněte ohodnocené HTML.
-PDF lze exportovat jako jedinou dlouhou stránku
-(pro export je potřeba internet).
+PDF lze exportovat jako jedinou dlouhou stránku.
+Pro export PDF je potřeba internet.
 </p>
+
 </section>
 </main>
+
 <script>${teacherScript.replace(/<\/script/gi, '<\\/script')}</script>
 </body>
 </html>`;
 
   return html;
 }
+
+// ============================================
+// ODESLÁNÍ HTML NA GITHUB
+// ============================================
 
 const encodeHtml = async html =>
   (
@@ -871,7 +1053,8 @@ button.addEventListener('click', async () => {
 
   if (
     !confirm(
-      'Opravdu odeslat test? Po odevzdání už jej nelze změnit.'
+      'Opravdu odeslat test? ' +
+      'Po odevzdání už jej nelze změnit.'
     )
   ) {
     return;
@@ -889,7 +1072,8 @@ button.addEventListener('click', async () => {
 
     if (!token) {
       throw Error(
-        'Přihlášení vypršelo. Otevřete test znovu.'
+        'Přihlášení vypršelo. ' +
+        'Otevřete test znovu.'
       );
     }
 
@@ -898,7 +1082,8 @@ button.addEventListener('click', async () => {
 
     if (htmlBase64.length > 6_000_000) {
       throw Error(
-        'HTML test je příliš velký (zejména kresby).'
+        'HTML test je příliš velký, ' +
+        'zejména kvůli obrázkům a kresbám.'
       );
     }
 
@@ -909,9 +1094,11 @@ button.addEventListener('click', async () => {
       WORKER + '/submit',
       {
         method: 'POST',
+
         headers: {
           'Content-Type': 'application/json'
         },
+
         body: JSON.stringify({
           token,
           student: nameField.value,
@@ -925,7 +1112,8 @@ button.addEventListener('click', async () => {
 
     if (!response.ok) {
       throw Error(
-        result.error || 'Odeslání selhalo.'
+        result.error ||
+        'Test se nepodařilo odevzdat.'
       );
     }
 
@@ -943,4 +1131,5 @@ button.addEventListener('click', async () => {
     button.disabled = false;
   }
 });
+
 })();

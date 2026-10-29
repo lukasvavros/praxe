@@ -1,0 +1,21 @@
+/* Přístupová obrazovka testu – využívá proměnné společného vzhledu. */
+[hidden] { display: none !important; }
+.test-lock { max-width: 980px; margin: 38px auto 70px; padding: 0 20px; }
+.test-lock-card { border: 1px solid var(--line); background: var(--surface); color: var(--ink, inherit); box-shadow: 0 16px 45px #092f3514; border-radius: 24px; padding: clamp(26px, 6vw, 58px); max-width: 650px; margin: auto; }
+.test-lock-icon { display: inline-grid; place-items: center; height: 60px; width: 60px; border-radius: 18px; background: #e2f4f1; font-size: 27px; }
+[data-theme="dark"] .test-lock-icon { background: #1c4245; }
+.test-lock-label { font-size: .76rem; letter-spacing: .1em; font-weight: 800; color: #0d8587; margin: 22px 0 8px; }
+[data-theme="dark"] .test-lock-label { color: #8de0d7; }
+.test-lock-card h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.14; margin: 0 0 14px; }
+.test-lock-card > p:not(.test-lock-label) { opacity: .8; }
+#test-login { margin-top: 26px; }
+#test-login label { font-weight: 700; display: block; margin-bottom: 9px; }
+.test-lock-row { display: flex; gap: 10px; }
+.test-lock-row input { flex: 1; min-width: 0; min-height: 50px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface, #fff); color: inherit; font: inherit; }
+.test-lock-row input:focus-visible { outline: 3px solid #34aaa6; outline-offset: 2px; }
+.test-lock-row button { cursor: pointer; min-height: 50px; border: 0; border-radius: 12px; padding: 12px 20px; font: inherit; font-weight: 700; background: #087f83; color: #fff; }
+.test-lock-row button:hover { background: #076b70; }
+.test-password-error { min-height: 1.5em; color: #b53731; font-size: .93rem; margin: 8px 0 0; }
+[data-theme="dark"] .test-password-error { color: #ff9d91; }
+.test-lock-back { display: inline-block; margin-top: 20px; }
+@media (max-width: 520px) { .test-lock-row { flex-direction: column; } }

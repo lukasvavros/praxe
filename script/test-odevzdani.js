@@ -1,7 +1,7 @@
 (() => {
 'use strict';
 // Nahraďte DOPLNIT_ADRESU skutečnou HTTPS adresou z Cloudflare Workeru, bez koncového lomítka.
-window.ARDUINO_SUBMIT_WORKER='https://DOPLNIT_ADRESU.workers.dev';
+window.ARDUINO_SUBMIT_WORKER='https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
 const button=document.getElementById('exam-print');
 const paper=document.getElementById('exam-paper');
 const list=document.getElementById('exam-questions');

@@ -5,60 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kapitola 1: Úvod do Arduina | Praxe – Arduino</title>
-  <link rel="stylesheet" href="style/kapitola.css">
-  <link rel="stylesheet" href="style/led-stridani.css?v=led-oprava2">
+    <link rel="stylesheet" href="style/led-stridani.css?v=led-oprava2">
   <link rel="stylesheet" href="style/seriova-linka.css?v=led-oprava2">
   <script src="script/led-stridani.js?v=led-oprava2" defer></script>
   <script src="script/seriova-linka.js?v=obe-led3" defer></script>
   <link rel="stylesheet" href="style/kapitola-bloky.css?v=1">
   
   
-<link rel="stylesheet" href="style/kapitola-navigace.css?v=2">
 <script src="script/kapitola-navigace.js?v=2" defer></script>
-<style id="pra-redesign-2026">
 
-:root{color-scheme:light;--ink:#17272b;--muted:#52666b;--teal:#087f83;--teal-dark:#075e63;--mint:#eaf6f4;--paper:#fff;--line:#d8e4e2;--warm:#f4f7f6;--orange:#ef8a27;--code-bg:#18282d;--code-ink:#ecf8f6;--card-bg:#fbfdfc;--soft-shadow:0 5px 18px #17393a0a}
-html[data-theme="dark"]{color-scheme:dark;--ink:#e7f2f0;--muted:#a8bdbc;--teal:#54c7be;--teal-dark:#74d8d0;--mint:#173633;--paper:#182729;--line:#355052;--warm:#101c1f;--orange:#f5a64b;--code-bg:#0d161a;--code-ink:#e8f5f3;--card-bg:#203235;--soft-shadow:0 7px 20px #0003}
-*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0!important;background:var(--warm)!important;color:var(--ink)!important;font:16px/1.68 system-ui,-apple-system,"Segoe UI",sans-serif!important;transition:background .2s,color .2s}button,input,select,textarea{font:inherit}a{color:var(--teal-dark)}
-.pra-chapter{max-width:1100px!important;margin:0 auto!important;padding:24px!important;background:transparent!important;color:var(--ink)!important;overflow:visible!important}
-.pra-hero{position:relative!important;min-height:190px!important;padding:42px clamp(24px,5vw,56px)!important;margin:0 0 20px!important;border:0!important;border-radius:22px!important;background:linear-gradient(125deg,#075e63,#0b8587)!important;color:#fff!important;box-shadow:0 12px 32px #075e6322!important;text-align:left!important;overflow:hidden}
-.pra-hero::after{content:"01";position:absolute;right:26px;bottom:-75px;font-size:clamp(140px,22vw,260px);font-weight:900;line-height:1;color:#ffffff0e;pointer-events:none}
-.pra-hero h1{position:relative;z-index:1;margin:0 0 12px!important;font-size:clamp(2rem,5vw,3.2rem)!important;line-height:1.15!important;letter-spacing:-.035em;color:#fff!important}.pra-hero p{position:relative;z-index:1;max-width:620px;margin:0!important;color:#e2fbf7!important;font-size:1rem!important}
-.pra-chapter .pra-section{margin:18px 0!important;padding:clamp(22px,4vw,38px)!important;background:var(--paper)!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:var(--soft-shadow)!important;color:var(--ink)!important;scroll-margin-top:20px}.pra-chapter .pra-section.alt{background:var(--paper)!important}.pra-chapter .pra-section:first-of-type{background:var(--mint)!important}
-.pra-chapter .pra-container{max-width:none!important;padding:0!important;margin:0!important;background:transparent!important;width:100%!important}.pra-section h2{margin:0 0 17px!important;color:var(--teal-dark)!important;font-size:clamp(1.45rem,3vw,2rem)!important;line-height:1.24!important;letter-spacing:-.025em}.pra-section h3{color:var(--ink)!important;font-size:1.2rem!important;margin:1.5em 0 .5em!important}.pra-section p,.pra-section li{color:var(--ink);line-height:1.7}.pra-section p{margin:.7em 0}.pra-section img{max-width:100%;height:auto}.pra-section figure{max-width:100%;margin:24px 0}.pra-section figcaption{font-size:.9rem;color:var(--muted);margin:9px 0}.pra-study-row{display:flex;align-items:flex-start;gap:22px;padding:8px 0 20px}.pra-study-row+.pra-study-row{border-top:1px solid var(--line);padding-top:24px}.pra-study-icon{flex:0 0 72px;width:72px;height:72px;object-fit:contain}.pra-study-content{min-width:0;flex:1}.pra-command-list{padding-left:25px}.pra-command-list li{padding-left:3px;margin-bottom:8px}
-.pra-chapter .pra-callout,.pra-chapter .pra-led-note,.pra-chapter .ls-remember{margin:20px 0;padding:16px 20px;border:0!important;border-left:5px solid var(--orange)!important;border-radius:10px!important;background:color-mix(in srgb,var(--orange) 11%,var(--paper))!important;color:var(--ink)!important;box-shadow:none!important}
-.pra-spec-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:22px 0}.pra-spec-card,.pra-part,.pra-flow-box,.pra-summary-card,.pra-led-card,.pra-task-box{background:var(--card-bg)!important;border:1px solid var(--line)!important;border-radius:13px!important;padding:16px 18px!important;color:var(--ink)!important;box-shadow:none!important}.pra-spec-card strong{display:block;color:var(--teal-dark);font-size:.91rem;margin-bottom:6px}.pra-spec-card span{display:block;color:var(--ink)}.pra-parts-list{display:grid;gap:12px;margin:18px 0}.pra-part strong{color:var(--teal-dark)}.pra-flow{display:flex;align-items:stretch;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0}.pra-flow-box{flex:1 1 180px;min-width:0}.pra-flow-box h4{margin:0 0 8px;color:var(--teal-dark)}.pra-flow-arrow{align-self:center;color:var(--teal);font-size:1.5rem}.pra-hardware-images{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:18px;margin:22px 0}.pra-hardware-images img,.pra-embedded-image img,.pra-ide-guide img,.pra-breadboard-image img{display:block;max-width:100%;height:auto;margin:auto;border-radius:12px}.pra-hardware-images img,.pra-ide-guide,.pra-embedded-image,.pra-breadboard-image{background:var(--card-bg);border:1px solid var(--line);border-radius:15px;padding:12px}
-.pra-highlight{color:var(--teal-dark)!important;background:var(--mint)!important;border-radius:5px;padding:.12em .32em}.pra-chapter :not(pre)>code{background:var(--mint)!important;color:var(--teal-dark)!important;padding:.12em .37em;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
-/* Zbarvení tokenů kódu odpovídá původním třídám Arduino IDE. */
-.pra-chapter pre.arduino-code,.pra-chapter pre.pra-code,.pra-chapter pre.pra-answer-code{display:block;max-width:100%;overflow-x:auto!important;padding:20px 22px!important;margin:18px 0!important;background:var(--code-bg)!important;color:var(--code-ink)!important;border:1px solid color-mix(in srgb,var(--line) 65%,transparent)!important;border-radius:14px!important;box-shadow:inset 0 1px #ffffff08!important;font: .92rem/1.67 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace!important;white-space:pre!important;tab-size:2}
-.pra-chapter pre.arduino-code code,.pra-chapter pre.pra-code code,.pra-chapter pre.pra-answer-code code{padding:0!important;background:transparent!important;color:inherit!important;border:0!important;font:inherit!important;white-space:inherit!important}
-.pra-chapter pre .ide-comment{color:#86ad95!important}.pra-chapter pre .ide-function{color:#66cce4!important}.pra-chapter pre .ide-type{color:#f3a7d7!important}.pra-chapter pre .ide-number{color:#f5b778!important}.pra-chapter pre .ide-string{color:#a9db8c!important}
-.pra-chapter pre .ls-comment{color:#86ad95!important}.pra-chapter pre .ls-function{color:#66cce4!important}.pra-chapter pre .ls-type{color:#f3a7d7!important}.pra-chapter pre .ls-number{color:#f5b778!important}
-.pra-question-list{display:grid;gap:12px}.pra-question{background:var(--card-bg)!important;border:1px solid var(--line)!important;border-radius:13px!important;margin:0!important;padding:0!important;overflow:hidden;color:var(--ink)!important}.pra-question>summary{cursor:pointer;padding:16px 19px!important;color:var(--ink)!important;font-weight:650;line-height:1.6}.pra-question[open]>summary{border-bottom:1px solid var(--line);color:var(--teal-dark)!important}.pra-question-number{color:var(--teal-dark)!important}.pra-answer{padding:16px 20px!important;background:var(--paper)!important;color:var(--ink)!important}.pra-answer-label{color:var(--teal-dark)!important;font-weight:750}
-.pra-uno-sim,.led-sequence,.pra-serial-frame,.serial-exercises,.ls-panel,.ls-schematic,.ls-onboard,.sr-monitor,.pra-led-theory,.pra-led-grid,.pra-summary,.pra-quiz-intro,.pra-quiz-note{max-width:100%;color:var(--ink);border-radius:15px}.pra-uno-sim,.led-sequence,.pra-serial-frame,.serial-exercises{border:1px solid var(--line);background:var(--card-bg);padding:clamp(12px,2vw,22px);margin:20px 0;overflow-x:auto}.pra-chapter button:not(.pra-nav-toggle):not(.pra-theme-toggle),.pra-chapter select{max-width:100%;border-radius:9px;border:1px solid var(--line);padding:7px 12px}.pra-chapter button{cursor:pointer}.pra-chapter .pra-back,.pra-chapter .pra-author{color:var(--muted)}
-.pra-nav-toggle,.pra-theme-toggle{position:fixed;z-index:1000;top:16px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);padding:10px 16px;box-shadow:0 4px 14px #0002;cursor:pointer;font-weight:650}.pra-nav-toggle{left:16px;display:flex;gap:8px;align-items:center}.pra-theme-toggle{right:16px;display:flex;gap:8px;align-items:center}.pra-nav-toggle:hover,.pra-theme-toggle:hover{border-color:var(--teal)}
-.pra-nav-dialog{position:fixed;inset:0 auto 0 0;margin:0;max-height:100dvh;height:100dvh;max-width:min(410px,94vw);width:410px;background:var(--paper);color:var(--ink);border:0;border-right:1px solid var(--line);padding:24px;box-shadow:8px 0 40px #0004;overflow:auto}.pra-nav-dialog::backdrop{background:#071a1db3;backdrop-filter:blur(3px)}.pra-nav-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.pra-nav-top button{font-size:1.8rem;background:transparent;border:0;color:var(--ink);cursor:pointer}.pra-nav-home{display:block;margin-bottom:20px;padding:11px;border-radius:10px;background:var(--mint);text-decoration:none}.pra-nav-dialog nav{display:grid;gap:5px}.pra-nav-dialog nav a{display:block;padding:9px 12px;border-radius:9px;text-decoration:none;color:var(--ink)}.pra-nav-dialog nav a:hover{background:var(--mint);color:var(--teal-dark)}
-.pra-chapter table{width:100%;border-collapse:collapse}.pra-chapter th,.pra-chapter td{padding:10px 13px;border:1px solid var(--line);color:var(--ink)}.pra-chapter th{background:var(--mint)}
-@media(max-width:680px){.pra-chapter{padding:70px 12px 20px!important}.pra-hero{border-radius:17px!important;padding:29px 22px!important;min-height:160px!important}.pra-chapter .pra-section{padding:20px!important;border-radius:16px!important}.pra-study-row{gap:12px;flex-direction:column}.pra-study-icon{width:54px;height:54px;flex-basis:auto}.pra-flow-arrow{display:none}.pra-nav-toggle,.pra-theme-toggle{top:10px;padding:8px 12px}.pra-hardware-images{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
-
-</style>
-<script>
-
-(function(){
- const root=document.documentElement;
- const themeKey='pra-arduino-theme';
- let saved=null;try{saved=localStorage.getItem(themeKey)}catch(e){}
- const systemDark=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
- root.dataset.theme=saved==='light'||saved==='dark'?saved:(systemDark?'dark':'light');
- function sync(){const dark=root.dataset.theme==='dark';const btn=document.querySelector('.pra-theme-toggle');if(btn){btn.innerHTML=dark?'☀️ <span>Světlý režim</span>':'🌙 <span>Tmavý režim</span>';btn.setAttribute('aria-label',dark?'Přepnout na světlý režim':'Přepnout na tmavý režim');btn.setAttribute('aria-pressed',String(dark));}}
- function init(){const btn=document.createElement('button');btn.type='button';btn.className='pra-theme-toggle';document.body.appendChild(btn);btn.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem(themeKey,root.dataset.theme)}catch(e){}sync()});sync();
- const dialog=document.getElementById('pra-chapter-menu');const toggle=document.querySelector('.pra-nav-toggle');if(dialog&&toggle){toggle.addEventListener('click',()=>{if(!dialog.open){dialog.showModal();toggle.setAttribute('aria-expanded','true')}});dialog.querySelectorAll('[data-nav-close], nav a, .pra-nav-home').forEach(a=>a.addEventListener('click',()=>{if(dialog.open)dialog.close();toggle.setAttribute('aria-expanded','false')}));dialog.addEventListener('close',()=>toggle.setAttribute('aria-expanded','false'));}
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-
-</script>
+<script src="script/tema.js" defer></script>
+  <link rel="stylesheet" href="style/kapitola.css">
+  <link rel="stylesheet" href="style/navigace.css">
 </head>
 
 <body>

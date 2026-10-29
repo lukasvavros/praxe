@@ -2,3 +2,44 @@
 @media(max-width:800px){.led-sequence .ls-layout{grid-template-columns:1fr}.led-sequence .ls-schematic{max-width:650px;margin:auto}.led-sequence{padding:16px}.led-sequence .ls-gate{padding:16px}}@media(prefers-reduced-motion:reduce){.led-sequence progress{visibility:hidden}}
 
 .led-sequence .ls-external,.led-sequence .ls-external.active{filter:none!important}
+
+.pra-chapter .led-sequence {font-family:inherit; color:var(--ink); background:var(--card-bg); border-color:var(--line)}
+.pra-chapter .led-sequence .ls-eyebrow {color:var(--teal-dark)}
+.pra-chapter .led-sequence h2 {color:var(--teal-dark)}
+.pra-chapter .led-sequence .ls-gate,
+.pra-chapter .led-sequence .ls-readings>div,
+.pra-chapter .led-sequence .ls-timeline span {background:var(--mint);color:var(--ink);border-color:var(--line)}
+.pra-chapter .led-sequence .ls-readings strong {color:var(--teal-dark)}
+.pra-chapter .led-sequence .ls-readings .active {background:#d5f0ed;border-color:#087f83}
+.pra-chapter .led-sequence .ls-timeline .active {background:#087f83;color:#fff}
+.pra-chapter .led-sequence .ls-gate h3,
+.pra-chapter .led-sequence .ls-gate p,
+.pra-chapter .led-sequence .ls-gate label,
+.pra-chapter .led-sequence .ls-status {color:var(--ink)}
+.pra-chapter .led-sequence .ls-progress {color:var(--muted)}
+.pra-chapter .led-sequence .ls-tip {background:var(--mint);color:var(--ink)}
+.pra-chapter .led-sequence .ls-secondary,
+.pra-chapter .led-sequence select,
+.pra-chapter .led-sequence input[type=password] {background:var(--paper);color:var(--ink);border-color:var(--line)}
+.pra-chapter .led-sequence pre {background:var(--code-bg);color:var(--code-ink)}
+.pra-chapter .led-sequence pre .ls-type,
+.pra-chapter .led-sequence pre .ls-number {color:#75d5d8}
+.pra-chapter .led-sequence pre .ls-function {color:#ff9d54}
+.pra-chapter .led-sequence pre .ls-comment {color:#b3bdc6}
+
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-gate,
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-readings>div,
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-timeline span {background:#273f42;color:#eaf6f4;border-color:#4e696b}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-readings span,
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-gate p,
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-gate h3,
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-gate label {color:#eaf6f4}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-readings strong {color:#a8eae4}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-readings .active {background:#164f51;border-color:#72d6d0}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-timeline .active {background:#087f83;color:#fff}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-secondary,
+html[data-theme="dark"] .pra-chapter .led-sequence select,
+html[data-theme="dark"] .pra-chapter .led-sequence input[type=password] {background:#253e41;color:#eaf6f4;border-color:#628183}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-tip {background:#1a3537;color:#eaf6f4}
+html[data-theme="dark"] .pra-chapter .led-sequence button:not(.ls-secondary) {background:#087f83;color:#fff}
+html[data-theme="dark"] .pra-chapter .led-sequence .ls-gate button {color:#fff}

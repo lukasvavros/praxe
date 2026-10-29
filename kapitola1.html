@@ -96,6 +96,47 @@
     body > button.pra-nav-toggle { inset:12px auto auto 12px !important; padding:10px 13px !important; }
     body > button.pra-theme-toggle { inset:12px 12px auto auto !important; padding:9px 11px !important; font-size:13px !important; }
   }
+
+  /* Nové, přehlednější rozvržení kapitoly při zachování všech původních bloků. */
+  .pra-chapter.page { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:22px; max-width:1240px; }
+  .pra-chapter.page > .pra-hero,
+  .pra-chapter.page > .contents,
+  .pra-chapter.page > .pra-back,
+  .pra-chapter.page > .pra-author,
+  .pra-chapter.page > .pra-footer { grid-column:1 / -1; min-width:0; }
+  .pra-chapter.page > .pra-hero { padding-top:68px; position:relative; overflow:hidden; }
+  .pra-chapter.page > .pra-hero::after { content:""; position:absolute; width:300px; height:300px; right:-90px; bottom:-180px; border:1px solid #ffffff38; border-radius:50%; box-shadow:0 0 0 26px #ffffff12,0 0 0 52px #ffffff0c; pointer-events:none; }
+  .pra-chapter.page > .pra-section { grid-column:1 / -1; min-width:0; margin:0; padding:clamp(22px,3.2vw,38px); border-radius:22px; }
+  .pra-chapter.page > .pra-section:nth-of-type(2),
+  .pra-chapter.page > .pra-section:nth-of-type(3) { grid-column:span 6; }
+  .pra-chapter.page > .pra-section:nth-of-type(10) { grid-column:span 5; }
+  .pra-chapter.page > .pra-section:nth-of-type(11) { grid-column:span 7; }
+  .pra-chapter.page > .pra-section:first-of-type .pra-container { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); gap:24px; align-items:start; }
+  .pra-chapter.page > .pra-section:first-of-type .pra-study-row { min-width:0; margin:0; padding:18px; border:1px solid var(--line); border-radius:18px; background:var(--mint); }
+  .pra-chapter.page > .pra-section:first-of-type .pra-study-row:last-child { margin:0; }
+  .pra-inline-icon { overflow:visible; }
+  .pra-chapter.page > .pra-section h2 { padding-bottom:12px; border-bottom:1px solid var(--line); }
+  .pra-chapter.page > .pra-section:first-of-type .pra-study-content>h2 { border:0; padding:0; }
+  .pra-chapter.page .pra-ide-guide,.pra-chapter.page .pra-spec-grid,
+  .pra-chapter.page .pra-parts-list,.pra-chapter.page .pra-summary-grid { gap:16px; }
+  .pra-chapter.page .pra-spec-card,.pra-chapter.page .pra-part,
+  .pra-chapter.page .pra-summary-card { border-radius:16px; }
+  .pra-chapter.page .pra-question { border-radius:14px; }
+  .pra-chapter.page .pra-question summary { padding:14px 16px; }
+  .pra-chapter.page .pra-question-image img,.pra-chapter.page .pra-breadboard-image img { max-width:100%; height:auto; border-radius:14px; }
+  @media (max-width:900px) {
+    .pra-chapter.page > .pra-section:nth-of-type(2),
+    .pra-chapter.page > .pra-section:nth-of-type(3),
+    .pra-chapter.page > .pra-section:nth-of-type(10),
+    .pra-chapter.page > .pra-section:nth-of-type(11) { grid-column:1 / -1; }
+  }
+  @media (max-width:650px) {
+    .pra-chapter.page { gap:14px; padding:12px; }
+    .pra-chapter.page > .pra-hero { padding-top:68px; }
+    .pra-chapter.page > .pra-section { padding:20px 16px; border-radius:17px; }
+    .pra-chapter.page > .pra-section:first-of-type .pra-container { grid-template-columns:1fr; gap:12px; }
+    .pra-chapter.page > .pra-section:first-of-type .pra-study-row { padding:14px; }
+  }
   /* Arduino IDE syntax palette */
   .pra-chapter pre .ide-type,.pra-chapter pre .ls-type { color:#4ec9b0 !important; }
   .pra-chapter pre .ide-keyword,.pra-chapter pre .ls-keyword { color:#c586c0 !important; }
@@ -170,7 +211,16 @@
   </header>
   <nav class="contents" aria-label="Obsah kapitoly"><strong>V této kapitole</strong><a href="#pra-goals-heading">Cíle kapitoly</a><a href="#pra-nav-cast-02">Klíčová slova kapitoly</a><a href="#pra-nav-cast-03">Co je to Arduino?</a><a href="#pra-nav-cast-04">Hardware – Arduino UNO</a><a href="#pra-nav-cast-05">Princip fungování embedded systémů</a><a href="#pra-ide-heading">Práce s aplikací Arduino IDE</a><a href="#pra-nav-cast-07">Psaní programu pro Arduino</a><a href="#pra-nav-cast-08">Blikání LEDkou na desce Arduina</a><a href="#pra-nav-cast-09">Přidání další LED a nepájivé pole</a><a href="#pra-nav-cast-10">Tři LED. Každá má svůj okamžik.</a><a href="#pra-nav-cast-11">Sériová linka</a><a href="#pra-nav-cast-12">Sleduj LED. Čti, co Arduino posílá.</a><a href="#pra-nav-cast-13">Průvodce studiem</a><a href="#pra-nav-cast-14">Kontrolní otázky</a></nav>
   <section class="pra-section" aria-labelledby="pra-goals-heading"><div class="pra-container">
-<div class="pra-study-row"><img class="pra-study-icon" src="picture/cile-kapitoly.png" width="104" height="104" alt="" aria-hidden="true"><div class="pra-study-content"><h2 id="pra-goals-heading" tabindex="-1">Po nastudování této kapitoly budete schopni:</h2><ul class="pra-command-list">
+<div class="pra-study-row"><svg class="pra-study-icon pra-inline-icon" viewBox="0 0 200 200" role="img" aria-label="Cíle kapitoly: šipka mířící na terč" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="184" height="184" rx="40" fill="#fff" stroke="#ef7800" stroke-width="12"/>
+  <path d="M99 93 190 184v-35l-57-72z" fill="#d8d8d8" opacity=".9"/>
+  <circle cx="96" cy="94" r="44" fill="#fff" stroke="#292d37" stroke-width="8"/>
+  <circle cx="96" cy="94" r="29" fill="#fff" stroke="#292d37" stroke-width="8"/>
+  <circle cx="96" cy="94" r="14" fill="#fff" stroke="#292d37" stroke-width="8"/>
+  <path d="m96 91 9-7 57 58 17 24-24-8-59-58z" fill="#292d37"/>
+  <path d="m146 139 23 4 14 21-22 3-16-14z" fill="#292d37"/>
+  <path d="m145 141 15 16-3 18-13-11-7-15z" fill="#292d37"/>
+</svg><div class="pra-study-content"><h2 id="pra-goals-heading" tabindex="-1">Po nastudování této kapitoly budete schopni:</h2><ul class="pra-command-list">
         <li>vysvětlit, co je Arduino a jak spolu souvisejí vstupy, program a výstupy;</li>
         <li>rozpoznat základní části desky Uno, digitální piny a GND;</li>
         <li>vybrat desku a port, ověřit program a nahrát jej do Arduina;</li>
@@ -180,7 +230,12 @@
         <li>odesílat text a hodnoty do sériového monitoru a vysvětlit jednoduchý cyklus nebo přetečení proměnné <code>byte</code>;</li>
         <li>najít nesoulad mezi zapojením, čísly pinů, příkazy a komentáři v programu.</li>
       </ul><p>V této kapitole se seznámíte s deskou Arduino Uno a prostředím Arduino IDE. Od prvního nahrání programu přejdete k ovládání LED a k zobrazování údajů v sériovém monitoru.</p><p>Při práci propojujte zapojení s programem: sledujte, ke kterému pinu vede vodič, jak je pin nastavený a co způsobí jednotlivé příkazy. U animací nejprve odhadněte výsledek a teprve potom si jej ověřte.</p></div></div>
-<div class="pra-study-row"><img class="pra-study-icon" src="picture/klicova-slova.png" width="104" height="104" alt="" aria-hidden="true"><div class="pra-study-content"><h2 id="pra-nav-cast-02" tabindex="-1">Klíčová slova kapitoly:</h2><p>Arduino Uno, mikrokontrolér, Arduino IDE, sketch, digitální pin, vstup, výstup, GND, LED, anoda, katoda, rezistor, nepájivé pole, <code>setup()</code>, <code>loop()</code>, <code>pinMode()</code>, <code>digitalWrite()</code>, HIGH, LOW, <code>delay()</code>, proměnná, datový typ, <code>byte</code>, přetečení, cyklus <code>for</code>, sériová linka, sériový monitor, <code>Serial.begin()</code>, <code>Serial.print()</code>, <code>Serial.println()</code>.</p></div></div>
+<div class="pra-study-row"><svg class="pra-study-icon pra-inline-icon" viewBox="0 0 200 200" role="img" aria-label="Klíčová slova kapitoly: klíč" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="184" height="184" rx="40" fill="#fff" stroke="#ef7800" stroke-width="12"/>
+  <path d="m106 73 85 85v34h-34l-65-65z" fill="#d8d8d8" opacity=".9"/>
+  <path d="M108 37c-10 0-18 8-18 18 0 7 4 13 9 17L48 126l16 16 11-11 10 10 10-10-10-10 38-38c9 5 21 3 27-5 8-10 7-24-2-33-8-8-21-9-30-2-3-9-11-16-20-16zm7 14c5 0 10 3 12 8l3 7 7-2c4-1 8 0 11 3 4 4 4 11 0 15-4 5-11 5-16 1l-20-17c-4-3-6-7-6-11 0-3 2-5 5-5z" fill="#292d37"/>
+  <path d="m58 137 13 13-14 14-13-13z" fill="#292d37"/>
+</svg><div class="pra-study-content"><h2 id="pra-nav-cast-02" tabindex="-1">Klíčová slova kapitoly:</h2><p>Arduino Uno, mikrokontrolér, Arduino IDE, sketch, digitální pin, vstup, výstup, GND, LED, anoda, katoda, rezistor, nepájivé pole, <code>setup()</code>, <code>loop()</code>, <code>pinMode()</code>, <code>digitalWrite()</code>, HIGH, LOW, <code>delay()</code>, proměnná, datový typ, <code>byte</code>, přetečení, cyklus <code>for</code>, sériová linka, sériový monitor, <code>Serial.begin()</code>, <code>Serial.print()</code>, <code>Serial.println()</code>.</p></div></div>
 </div></section>
 
 
@@ -11570,7 +11625,11 @@
 
   <section class="pra-section alt">
     <div class="pra-container">
-      <div class="pra-study-row"><img class="pra-study-icon" src="picture/kontrolni-otazky.png" width="104" height="104" alt="" aria-hidden="true"><div class="pra-study-content">
+      <div class="pra-study-row"><svg class="pra-study-icon pra-inline-icon" viewBox="0 0 200 200" role="img" aria-label="Kontrolní otázky: otazník" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="184" height="184" rx="40" fill="#fff" stroke="#ef7800" stroke-width="12"/>
+  <path d="m118 84 74 74v34h-34l-58-58z" fill="#d8d8d8" opacity=".9"/>
+  <path d="M58 76c2-25 20-40 44-40 25 0 43 16 43 39 0 17-9 27-24 39-12 9-16 15-16 28H82c0-20 6-31 21-43 13-10 19-16 19-25 0-9-7-15-18-15-10 0-17 7-18 18H58zm23 81h27v28H81z" fill="#292d37"/>
+</svg><div class="pra-study-content">
       <h2 id="pra-nav-cast-14" tabindex="-1">Kontrolní otázky:</h2>
 
       <p class="pra-quiz-intro">

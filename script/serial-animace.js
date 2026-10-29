@@ -54,3 +54,29 @@
   reduced.addEventListener('change', event => { if (event.matches) setRunning(false); });
   if (!reduced.matches) { step(); setRunning(true); }
 })();
+
+
+/* Přizpůsobení vložené animace hlavní stránce. Nezasahuje do kroků animace. */
+(() => {
+  const doc = document.documentElement;
+  const sendHeight = () => {
+    if (window.parent === window) return;
+    const content = document.getElementById('serial-demo');
+    if (!content) return;
+    const height = Math.ceil(Math.max(content.getBoundingClientRect().bottom, document.body.scrollHeight)) + 4;
+    window.parent.postMessage({ type: 'pra-serial-height', height }, '*');
+  };
+  window.addEventListener('message', event => {
+    if (event.source !== window.parent || !event.data || event.data.type !== 'pra-serial-theme') return;
+    doc.dataset.theme = event.data.theme === 'dark' ? 'dark' : 'light';
+    requestAnimationFrame(sendHeight);
+  });
+  if (window.parent !== window) window.parent.postMessage({ type: 'pra-serial-ready' }, '*');
+  window.addEventListener('load', sendHeight);
+  if (window.ResizeObserver) {
+    const el = document.getElementById('serial-demo');
+    if (el) new ResizeObserver(sendHeight).observe(el);
+  }
+  window.addEventListener('resize', sendHeight);
+  requestAnimationFrame(sendHeight);
+})();

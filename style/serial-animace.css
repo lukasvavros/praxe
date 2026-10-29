@@ -12,10 +12,12 @@ body {margin:0;padding:0;background:var(--sa-bg);color:var(--sa-ink);font:15px/1
 .serial-demo p code {padding:1px 5px;border-radius:4px;background:var(--sa-accent);color:var(--sa-teal)}
 .serial-controls {display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:18px 0 22px}
 .serial-controls button {background:var(--sa-teal);border:1px solid var(--sa-teal);color:#062124;border-radius:9px;padding:10px 16px;min-height:42px;font-weight:650;cursor:pointer}
-html:not([data-theme="dark"]) .serial-controls button{color:#fff}
+html:not([data-theme="dark"]) .serial-controls button:first-child{color:#fff}
 .serial-controls button:hover{filter:brightness(1.1)}
 .serial-controls button:focus-visible{outline:3px solid #ef9b43;outline-offset:3px}
 .serial-controls button:nth-child(n+2){color:var(--sa-teal);background:transparent}
+html:not([data-theme="dark"]) .serial-controls button:nth-child(n+2){color:#075e63;background:#fff;border-color:#087f83}
+html[data-theme="dark"] .serial-controls button:nth-child(n+2){color:#8be6df;background:transparent;border-color:#78d9d2}
 .serial-speed {color:var(--sa-muted);font-size:12px;margin-left:auto}
 .serial-columns {display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:stretch}
 .serial-pane {min-width:0;overflow:hidden;border:1px solid var(--sa-line);border-radius:13px;background:var(--sa-panel)}

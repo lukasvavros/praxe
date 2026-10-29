@@ -1,286 +1,45 @@
-<style>
-  .arduino-page {
-    --orange: #ee7203;
-    --dark: #373841;
-    --light: #f5f5f5;
-    --text: #373841;
-    --white: #ffffff;
-
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: var(--text);
-    box-sizing: border-box;
-  }
-
-  .arduino-page *,
-  .arduino-page *::before,
-  .arduino-page *::after {
-    box-sizing: border-box;
-  }
-
-  .arduino-hero {
-    overflow: hidden;
-    border-radius: 0;
-    background: var(--white);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-  }
-
-  .arduino-title {
-    background: var(--dark);
-    text-align: center;
-    padding: clamp(24px, 4vw, 48px) 18px;
-  }
-
-  .arduino-title h2 {
-    margin: 0;
-    color: var(--white);
-    font-size: clamp(26px, 3.2vw, 42px);
-    font-weight: 400;
-    letter-spacing: 0.5px;
-  }
-
-  .arduino-title span {
-    display: inline-block;
-    margin-top: 10px;
-    color: var(--orange);
-    font-size: clamp(14px, 1.5vw, 19px);
-  }
-
-  .arduino-section {
-    background: #ffffff;
-    padding: clamp(32px, 5vw, 70px) clamp(18px, 5vw, 70px);
-    border-left: 6px solid var(--orange);
-    border-right: 6px solid var(--orange);
-  }
-
-  .arduino-section-inner {
-    max-width: 950px;
-    margin: 0 auto;
-  }
-
-  .arduino-section h3 {
-    margin: 0 0 32px;
-    color: var(--dark);
-    text-align: center;
-    font-size: clamp(22px, 2.4vw, 32px);
-    font-weight: 400;
-  }
-
-  .arduino-rules {
-    display: grid;
-    gap: 18px;
-  }
-
-  .arduino-rule {
-    background: var(--light);
-    border-left: 6px solid var(--orange);
-    border-radius: 14px;
-    padding: 22px 26px;
-    font-size: clamp(15px, 1.25vw, 18px);
-    line-height: 1.65;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .arduino-rule strong {
-    color: var(--orange);
-    font-weight: 700;
-  }
-
-  .arduino-warning {
-    background: #fff4e8;
-    border-left: 6px solid var(--orange);
-  }
-
-  .arduino-back {
-    background: var(--light);
-    padding: clamp(20px, 3vw, 34px);
-    text-align: center;
-    border-left: 6px solid var(--orange);
-    border-right: 6px solid var(--orange);
-  }
-
-  .arduino-back a {
-    display: inline-block;
-    padding: 13px 24px;
-    border-radius: 999px;
-    background: var(--dark);
-    color: var(--white);
-    text-decoration: none;
-    font-size: clamp(14px, 1.1vw, 16px);
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-
-  .arduino-back a:hover {
-    background: var(--orange);
-    transform: translateY(-2px);
-  }
-
-  .arduino-author {
-    background: var(--light);
-    padding: clamp(18px, 3vw, 28px);
-  }
-
-  .arduino-author-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .arduino-author-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 48px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: var(--white);
-    color: var(--dark);
-    font-size: clamp(13px, 1.1vw, 15px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .arduino-author-item img {
-    display: inline-block;
-    flex: 0 0 auto;
-  }
-
-  .arduino-footer {
-    background: var(--dark);
-    color: var(--white);
-    text-align: center;
-    padding: 12px 16px;
-    font-size: clamp(12px, 1vw, 14px);
-  }
-
-  @media (max-width: 600px) {
-    .arduino-page {
-      width: 100vw;
-    }
-
-    .arduino-hero {
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .arduino-section,
-    .arduino-back {
-      border-left: none;
-      border-right: none;
-    }
-
-    .arduino-author-content {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .arduino-author-item {
-      justify-content: center;
-      border-radius: 12px;
-      text-align: center;
-    }
-  }
-</style>
-
-<div class="arduino-page">
-
-  <section class="arduino-hero">
-
-    <!-- Nadpis -->
-    <header class="arduino-title">
-      <h2>Kritéria hodnocení v předmětu</h2>
-      <span>Praxe – Arduino | 3. ročník</span>
-    </header>
-
-    <!-- Kritéria hodnocení -->
-    <section class="arduino-section">
-      <div class="arduino-section-inner">
-
-        <h3>Kritéria hodnocení</h3>
-
-        <div class="arduino-rules">
-
-          <div class="arduino-rule">
-            <strong>Krátké testy na probrané učivo</strong><br>
-            Váha známky: <strong>0,25</strong>
-          </div>
-
-          <div class="arduino-rule">
-            <strong>Dobrovolná známka za aktivitu v hodině</strong><br>
-            Váha známky: <strong>0,25</strong>
-          </div>
-
-          <div class="arduino-rule">
-            <strong>Jeden samostatný projekt</strong><br>
-            Projekt je ohodnocen <strong>dvěma známkami</strong>.
-          </div>
-
-          <div class="arduino-rule">
-            <strong>Realizace projektu</strong><br>
-            Zapojení, program a prezentace.<br>
-            Váha známky: <strong>1,0</strong>
-          </div>
-
-          <div class="arduino-rule">
-            <strong>Dokumentace projektu</strong><br>
-            Váha známky: <strong>1,0</strong>
-          </div>
-
-          <div class="arduino-rule arduino-warning">
-            <strong>Podmínka úspěšného dokončení předmětu</strong><br>
-            Úspěšné odevzdání projektu je nezbytnou podmínkou pro
-            úspěšné dokončení předmětu.<br><br>
-
-            Neodevzdaný nebo neuznaný projekt či jeho dokumentace
-            znamená známku <strong>Nedostatečný</strong> za tuto část PRA,
-            a tím i na vysvědčení <strong>(viz školní řád)</strong>.
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Návrat -->
-    <div class="arduino-back">
-      <a href="https://lukasvavros.github.io/praxe/">
-        Zpět na hlavní stránku
-      </a>
-    </div>
-
-    <!-- Autor a kontakt -->
-    <footer class="arduino-author">
-      <div class="arduino-author-content">
-
-        <span class="arduino-author-item">
-          <img class="image img-fluid"
-               src="picture/1.png"
-               alt=""
-               role="presentation"
-               style="width: 25px; height: 35px;">
-          <span>Vytvořil:&nbsp;<strong>Lukáš Vavroš</strong></span>
-        </span>
-
-        <span class="arduino-author-item">
-          <img class="img-responsive atto_image_button_text-bottom img-fluid"
-               src="picture/2.png"
-               alt=""
-               role="presentation"
-               style="width: 35px; height: 20px;">
-          <span>E-mail:&nbsp;<strong>lukas.vavros@frengp.cz</strong></span>
-        </span>
-
-      </div>
-    </footer>
-
-    <div class="arduino-footer">
-      Gymnázium a SPŠEI Frenštát pod Radhoštěm
-    </div>
-
-  </section>
-
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kritéria hodnocení | Praxe – Arduino</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('pra-arduino-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="style/uvod.css">
+<link rel="stylesheet" href="style/hodnoceni.css">
+<script defer src="script/uvod-tema.js"></script>
+</head>
+<body>
+<div class="site-shell">
+<header class="topbar">
+<a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
+<nav class="top-links" aria-label="Hlavní navigace"><a href="index.html">Úvod</a><a href="index.html#kapitoly">Kapitoly</a><a href="index.html#testy">Testy</a></nav>
+<button class="theme-toggle" type="button" aria-label="Přepnout barevný režim" aria-pressed="false"><span aria-hidden="true">☾</span><span class="theme-label">Tmavý režim</span></button>
+</header>
+<main class="page criteria-page">
+<section class="criteria-hero" aria-labelledby="criteria-title">
+<div class="eyebrow"><span class="eyebrow-dot"></span> PRAXE – ARDUINO · 3. ROČNÍK</div>
+<h1 id="criteria-title">Kritéria <em>hodnocení</em></h1>
+<p>Jaké aktivity se hodnotí, jakou mají váhu a jaká podmínka platí pro úspěšné dokončení předmětu.</p>
+<a class="criteria-hero-link" href="#pravidla">Prohlédnout kritéria ↓</a>
+</section>
+<section class="criteria-card" id="pravidla" aria-labelledby="pravidla-title">
+<div class="section-kicker">PŘEHLED HODNOCENÍ</div>
+<h2 id="pravidla-title">Z čeho se skládá hodnocení</h2>
+<div class="criteria-grid">
+<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">✓</span><span class="weight">Váha 0,25</span></div><h3>Krátké testy na probrané učivo</h3><p>Krátké průběžné ověřování znalostí.</p></article>
+<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">✦</span><span class="weight">Váha 0,25</span></div><h3>Dobrovolná známka za aktivitu v hodině</h3><p>Hodnocení aktivity během výuky.</p></article>
 </div>
+<div class="project-heading"><div><span class="section-kicker">SAMOSTATNÝ PROJEKT</span><h3>Jeden projekt, dvě známky</h3></div><span class="project-count">2 známky</span></div>
+<div class="criteria-grid">
+<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">⌘</span><span class="weight">Váha 1,0</span></div><h3>Realizace projektu</h3><p>Zapojení, program a prezentace.</p></article>
+<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">▤</span><span class="weight">Váha 1,0</span></div><h3>Dokumentace projektu</h3><p>Samostatně hodnocená dokumentace projektu.</p></article>
+</div>
+<div class="criteria-warning" role="note"><div class="warning-mark" aria-hidden="true">!</div><div><h3>Podmínka úspěšného dokončení předmětu</h3><p><strong>Úspěšné odevzdání projektu je nezbytnou podmínkou pro úspěšné dokončení předmětu.</strong></p><p>Neodevzdaný nebo neuznaný projekt či jeho dokumentace znamená známku <strong>Nedostatečný</strong> za tuto část PRA, a tím i na vysvědčení <strong>(viz školní řád)</strong>.</p></div></div>
+</section>
+<div class="criteria-back"><a href="index.html">← Zpět na hlavní stránku</a></div>
+</main>
+<footer class="footer"><div class="footer-inner"><div><strong>Praxe – Arduino</strong><p>Gymnázium a SPŠEI Frenštát pod Radhoštěm</p></div><div class="footer-contact"><span>Vytvořil: <strong>Lukáš Vavroš</strong></span><a href="mailto:lukas.vavros@frengp.cz">lukas.vavros@frengp.cz</a></div></div></footer>
+</div>
+</body>
+</html>

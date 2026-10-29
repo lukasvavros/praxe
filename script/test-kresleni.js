@@ -2,7 +2,7 @@
   'use strict';
   const paper = document.getElementById('exam-paper');
   const list = document.getElementById('exam-questions');
-  const STORE = 'pra-arduino-test1-osobni-kresby-v2';
+  const STORE = 'pra-arduino-test1-osobni-kresby-v3';
   const EXAM_STORE = 'pra-arduino-test1-osobni-v1';
   const DRAW_CONFIG = {
     9: {
@@ -20,6 +20,7 @@
   };
 
   let activeStamp = null;
+  const printPreviews = new Map();
 
   function examInfo() {
     try {
@@ -50,6 +51,14 @@
     }
   }
 
+  function setButtonState(actions, tool) {
+    actions.querySelectorAll('[data-tool]').forEach(btn => {
+      const active = btn.dataset.tool === tool;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
   function setup(card, id, savedImage) {
     const config = DRAW_CONFIG[id];
     if (!config) return;
@@ -57,7 +66,6 @@
     const content = card.querySelector('.question-content');
     const diagram = content.querySelector('.diagram');
 
-    // U kreslicích otázek má žák pouze kreslicí plochu, nikoli textové pole.
     content.querySelectorAll('textarea, label.input-label, p.helper').forEach(el => el.remove());
 
     const area = document.createElement('div');
@@ -66,7 +74,11 @@
 
     if (diagram) {
       const img = diagram.querySelector('img');
-      img.insertAdjacentElement('afterend', area);
+      const holder = document.createElement('div');
+      holder.className = 'sketch-image-holder';
+      img.parentNode.insertBefore(holder, img);
+      holder.appendChild(img);
+      holder.appendChild(area);
       diagram.classList.add('diagram-sketch');
     } else {
       const original = content.querySelector('.draw-area');
@@ -74,6 +86,14 @@
       else content.appendChild(area);
     }
 
+    // Tisk používá jediný obrázek obsahující podklad i kresbu. Nedojde tak
+    // k rozdílnému měřítku vrstev při změně šířky stránky na A4.
+    const printImage = document.createElement('img');
+    printImage.className = 'sketch-print-image';
+    printImage.alt = 'Schéma s nakreslenou odpovědí';
+    printImage.setAttribute('aria-hidden', 'true');
+    if (diagram) diagram.insertAdjacentElement('afterend', printImage);
+    else area.insertAdjacentElement('afterend', printImage);
     const canvas = document.createElement('canvas');
     canvas.setAttribute('aria-label', 'Kreslete myší, dotykem nebo perem');
     area.appendChild(canvas);
@@ -82,6 +102,8 @@
     actions.className = 'sketch-actions';
     actions.innerHTML = `
       <span>${config.hint}</span>
+      <button type="button" data-tool="pen" aria-pressed="true">✏️ Pero</button>
+      <button type="button" data-tool="eraser" aria-pressed="false">🧽 Guma</button>
       <button type="button" data-undo>↶ Zpět</button>
       <button type="button" data-clear>Smazat kresbu</button>
     `;
@@ -91,9 +113,12 @@
 
     const undo = actions.querySelector('[data-undo]');
     const clear = actions.querySelector('[data-clear]');
+    const penBtn = actions.querySelector('[data-tool="pen"]');
+    const eraserBtn = actions.querySelector('[data-tool="eraser"]');
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let tool = 'pen';
     let drawing = false;
     let history = [];
     const maxHistory = 20;
@@ -101,26 +126,39 @@
     let startImage = null;
     let activePointer = null;
 
+    function applyStrokeStyle() {
+      if (tool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.lineWidth = 14;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = '#d3482f';
+        ctx.lineWidth = 2.8;
+      }
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+    }
+
     function paint(url) {
       const img = new Image();
       img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        applyStrokeStyle();
       };
       img.src = url;
     }
 
     function dimensions() {
+      if (window.matchMedia('print').matches || document.documentElement.classList.contains('preparing-sketch-print')) return;
       const w = Math.max(1, Math.round(area.clientWidth));
       const h = Math.max(1, Math.round(area.clientHeight));
       if (canvas.width === w && canvas.height === h) return;
       const snapshot = canvas.width ? canvas.toDataURL() : null;
       canvas.width = w;
       canvas.height = h;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.strokeStyle = '#d3482f';
-      ctx.lineWidth = 2.8;
+      applyStrokeStyle();
       if (snapshot) paint(snapshot);
       else if (savedImage) paint(savedImage);
     }
@@ -142,13 +180,13 @@
           ? { x: point.x, y: startPoint.y }
           : { x: startPoint.x, y: point.y };
       }
-      // free-line = rovná čára v libovolném směru
       return point;
     }
 
     function preview(point) {
       if (!startPoint || !startImage) return;
       ctx.putImageData(startImage, 0, 0);
+      applyStrokeStyle();
       const end = lineEnd(point);
       ctx.beginPath();
       ctx.moveTo(startPoint.x, startPoint.y);
@@ -156,6 +194,21 @@
       ctx.stroke();
       ctx.closePath();
     }
+
+    penBtn.addEventListener('click', () => {
+      tool = 'pen';
+      setButtonState(actions, tool);
+      applyStrokeStyle();
+    });
+
+    eraserBtn.addEventListener('click', () => {
+      tool = 'eraser';
+      setButtonState(actions, tool);
+      applyStrokeStyle();
+    });
+
+    setButtonState(actions, tool);
+    applyStrokeStyle();
 
     canvas.addEventListener('pointerdown', event => {
       if (event.button !== 0 && event.pointerType === 'mouse') return;
@@ -204,6 +257,7 @@
       if (!previous) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.putImageData(previous, 0, 0);
+      applyStrokeStyle();
       save(id, canvas);
     });
 
@@ -211,9 +265,27 @@
       history.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
       if (history.length > maxHistory) history.shift();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      applyStrokeStyle();
       save(id, canvas);
     });
 
+    function preparePrintImage() {
+      const output = document.createElement('canvas');
+      const sourceWidth = canvas.width || 1;
+      const sourceHeight = canvas.height || 1;
+      output.width = sourceWidth;
+      output.height = sourceHeight;
+      const combined = output.getContext('2d');
+      combined.fillStyle = '#fff';
+      combined.fillRect(0, 0, sourceWidth, sourceHeight);
+      const baseImg = diagram?.querySelector('.sketch-image-holder img');
+      if (baseImg && baseImg.complete && baseImg.naturalWidth) {
+        combined.drawImage(baseImg, 0, 0, sourceWidth, sourceHeight);
+      }
+      combined.drawImage(canvas, 0, 0, sourceWidth, sourceHeight);
+      printImage.src = output.toDataURL('image/png');
+    }
+    printPreviews.set(card, preparePrintImage);
     const observer = new ResizeObserver(dimensions);
     observer.observe(area);
     const image = diagram?.querySelector('img');
@@ -242,5 +314,16 @@
     obs.observe(paper, { attributes: true, attributeFilter: ['hidden'] });
     init();
   }
-  window.addEventListener('beforeprint', init);
+
+  function preparePrint() {
+    init();
+    document.documentElement.classList.add('preparing-sketch-print');
+    printPreviews.forEach(fn => fn());
+  }
+  window.addEventListener('beforeprint', preparePrint);
+  document.getElementById('exam-print')?.addEventListener('click', preparePrint, { capture: true });
+  window.addEventListener('afterprint', () => {
+    document.documentElement.classList.remove('preparing-sketch-print');
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+  });
 })();

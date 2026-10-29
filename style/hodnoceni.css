@@ -1,0 +1,27 @@
+/* Kritéria hodnocení – doplněk ke společnému stylu uvod.css. */
+.criteria-page{max-width:1050px}
+.criteria-hero{border-radius:24px;background:linear-gradient(118deg,#075e63,#09878b);padding:46px clamp(26px,5vw,55px);color:#fff;box-shadow:0 16px 38px #075e6326}
+.criteria-hero h1{font-size:clamp(2.25rem,4.8vw,3.8rem);margin:13px 0}
+.criteria-hero h1 em{color:#a6eae5}
+.criteria-hero p{max-width:640px;color:#e1f3f1;margin:8px 0 22px;font-size:16px}
+.criteria-hero-link{display:inline-block;text-decoration:none;padding:11px 17px;background:#fff;border-radius:10px;color:#075e63;font-size:14px;font-weight:750}
+.criteria-hero-link:hover{background:#ddf9f6}
+.criteria-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);margin-top:24px;padding:clamp(22px,4vw,36px);scroll-margin-top:20px}
+.criteria-card h2{font-size:clamp(1.5rem,3vw,1.95rem);line-height:1.25;margin:6px 0 22px;letter-spacing:-.02em}
+.criteria-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.criteria-item{min-width:0;padding:22px;background:var(--surface-soft);border:1px solid var(--line);border-radius:16px}
+.criteria-item-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.criteria-icon{display:grid;place-items:center;background:var(--teal-light);color:var(--teal-dark);height:44px;width:44px;border-radius:12px;font-size:24px;font-weight:700}
+.weight,.project-count{border-radius:999px;background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:800;padding:6px 12px;white-space:nowrap}
+.criteria-item h3{margin:17px 0 6px;font-size:17px;line-height:1.4}
+.criteria-item p{margin:0;color:var(--muted);font-size:14px}
+.project-heading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:30px 0 17px}
+.project-heading h3{font-size:clamp(1.2rem,2.5vw,1.55rem);margin:5px 0 0}
+.criteria-warning{margin-top:24px;display:flex;align-items:flex-start;gap:16px;padding:22px;border:1px solid var(--warn-line);border-left:5px solid var(--orange);border-radius:14px;background:var(--warn-bg);color:var(--ink)}
+.criteria-warning h3{margin:0 0 11px;font-size:18px}
+.criteria-warning p{margin:8px 0;line-height:1.65;font-size:14px}
+.warning-mark{display:grid;place-items:center;border-radius:50%;height:34px;width:34px;flex:0 0 34px;background:var(--warn-mark);color:var(--warn-ink);font-weight:900}
+.criteria-back{text-align:center;margin:24px 0 0}.criteria-back a{display:inline-flex;border:1px solid var(--line);border-radius:11px;text-decoration:none;font-size:14px;font-weight:700;background:var(--surface);padding:11px 18px;color:var(--teal-dark)}.criteria-back a:hover{background:var(--teal-light)}
+:root{--warn-bg:#fff7ed;--warn-line:#f3d1a8;--warn-mark:#f9e5cb;--warn-ink:#8b4b10}
+html[data-theme="dark"]{--warn-bg:#302a23;--warn-line:#71543a;--warn-mark:#573b25;--warn-ink:#ffd2a0}
+@media(max-width:650px){.criteria-grid{grid-template-columns:1fr}.criteria-hero{padding:34px 24px}.criteria-warning{padding:17px}.criteria-item{padding:18px}}

@@ -1,21 +1,126 @@
 /* Kreslení odpovědi přímo do schémat – pouze ostrý test */
 #exam-paper .diagram-sketch{position:relative;}
-#exam-paper .diagram-sketch .sketch-over-diagram{position:absolute;inset:0;z-index:2;background:transparent;}
-#exam-paper .sketch-frame canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;user-select:none;-webkit-user-select:none;}
-#exam-paper .sketch-frame.sketch-blank{height:210px;border:1px dashed var(--line);border-radius:10px;background:var(--surface);margin-top:10px;overflow:hidden;}
-#exam-paper .sketch-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:9px 0 14px;font-size:13px;color:var(--muted);}
+#exam-paper .diagram-sketch .sketch-over-diagram{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background-image:
+    linear-gradient(to right, rgba(17,24,39,.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17,24,39,.10) 1px, transparent 1px);
+  background-size:20px 20px;
+  background-color:transparent;
+}
+#exam-paper .sketch-frame canvas{
+  display:block;
+  width:100%;
+  height:100%;
+  touch-action:none;
+  cursor:crosshair;
+  user-select:none;
+  -webkit-user-select:none;
+}
+#exam-paper .sketch-frame.sketch-blank{
+  height:210px;
+  border:1px dashed var(--line);
+  border-radius:10px;
+  background-image:
+    linear-gradient(to right, rgba(17,24,39,.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17,24,39,.10) 1px, transparent 1px);
+  background-size:20px 20px;
+  background-color:var(--surface);
+  margin-top:10px;
+  overflow:hidden;
+}
+#exam-paper .sketch-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:9px 0 14px;
+  font-size:13px;
+  color:var(--muted);
+}
 #exam-paper .sketch-actions span{margin-right:auto}
-#exam-paper .sketch-actions button{border:1px solid var(--line);border-radius:8px;background:var(--surface-soft);color:var(--ink);padding:7px 10px;font:inherit;cursor:pointer;}
+#exam-paper .sketch-actions button{
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--surface-soft);
+  color:var(--ink);
+  padding:7px 10px;
+  font:inherit;
+  cursor:pointer;
+}
 #exam-paper .sketch-actions button:hover{border-color:var(--teal)}
-#exam-paper .question-card:has(.sketch-frame) .helper,#exam-paper .question-card:has(.sketch-frame) .draw-area{display:none}
+#exam-paper .sketch-actions button.is-active{
+  background:var(--teal);
+  border-color:var(--teal);
+  color:#fff;
+}
+#exam-paper .question-card:has(.sketch-frame) .helper,
+#exam-paper .question-card:has(.sketch-frame) .draw-area{display:none}
+
 @media print {
  #exam-paper .sketch-actions{display:none!important}
- #exam-paper .sketch-blank{height:28mm!important;min-height:28mm!important;background:#fff!important}
+ #exam-paper .sketch-blank{
+   height:28mm!important;
+   min-height:28mm!important;
+   background:#fff!important;
+   background-image:
+     linear-gradient(to right, rgba(0,0,0,.12) 1px, transparent 1px),
+     linear-gradient(to bottom, rgba(0,0,0,.12) 1px, transparent 1px)!important;
+   background-size:20px 20px!important;
+ }
  #exam-paper .diagram-sketch{position:relative!important}
- #exam-paper .diagram-sketch .sketch-over-diagram{position:absolute!important;inset:0!important;display:block!important}
+ #exam-paper .diagram-sketch .sketch-over-diagram{
+   position:absolute!important;
+   inset:0!important;
+   display:block!important;
+   background-image:
+     linear-gradient(to right, rgba(0,0,0,.10) 1px, transparent 1px),
+     linear-gradient(to bottom, rgba(0,0,0,.10) 1px, transparent 1px)!important;
+   background-size:20px 20px!important;
+ }
  #exam-paper .sketch-frame canvas{display:block!important;width:100%!important;height:100%!important;}
 }
 
 /* U kreslicích zadání žádná textová odpověď; pouze schéma a kreslení. */
 #exam-paper .question-card:has(.sketch-frame) textarea,
 #exam-paper .question-card:has(.sketch-frame) .input-label{display:none!important}
+
+
+/* Podklad a tahy jsou na obrazovce ve STEJNÉM souřadném systému. */
+#exam-paper .sketch-image-holder {
+  position:relative;
+  display:table;
+  width:fit-content;
+  max-width:100%;
+  margin-inline:auto;
+}
+#exam-paper .sketch-image-holder > img {
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+}
+#exam-paper .sketch-image-holder .sketch-over-diagram {
+  position:absolute;
+  inset:0;
+}
+#exam-paper .sketch-print-image { display:none; }
+
+@media print {
+  /* Obě vrstvy se sloučí ještě PŘED tiskem, nic se nepřepočítává zvlášť. */
+  #exam-paper .diagram-sketch,
+  #exam-paper .sketch-blank { display:none!important; }
+  #exam-paper .sketch-print-image {
+    display:block!important;
+    width:auto!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:72mm!important;
+    margin:2mm auto!important;
+    object-fit:contain!important;
+    border:1px solid #ddd!important;
+    break-inside:avoid;
+  }
+}

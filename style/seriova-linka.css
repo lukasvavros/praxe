@@ -1,66 +1,33 @@
-.serial-exercises .sr-readings{grid-template-columns:1fr 1fr}.serial-exercises .sr-monitor{border:1px solid #d5dddd;border-radius:8px;overflow:hidden;background:white;margin:18px 0}.serial-exercises .sr-monitor-title{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;background:#edf2f2;font-size:12px}.serial-exercises .sr-monitor pre{height:220px;margin:0;border-radius:0;background:white;color:#373841;white-space:pre-wrap;font:15px/1.65 Consolas,monospace;padding:14px}.serial-exercises .sr-overflow{color:#ae4c00;background:#fff0db;outline:2px solid #e9a957}.serial-exercises [data-sr-error]{color:#a11}.serial-exercises .ls-readings strong{white-space:normal}.serial-exercises [data-sr-solution]{margin-top:14px}
-
-.serial-exercises .ls-string{color:#bfe09b}
-
-
-/* Sériový monitor: světlý a tmavý režim samostatně. */
-.pra-chapter .serial-exercises .sr-monitor {border-color:var(--line);background:var(--paper)}
-.pra-chapter .serial-exercises .sr-monitor-title {background:var(--mint);color:var(--ink)}
-.pra-chapter .serial-exercises .sr-monitor pre {background:var(--paper)!important;color:var(--ink)!important}
-.pra-chapter .serial-exercises .sr-overflow {color:#8a420a;background:#fff0db;outline-color:#e9a957}
-html[data-theme="dark"] .pra-chapter .serial-exercises .sr-monitor {background:#14282c;border-color:#4c696b}
-html[data-theme="dark"] .pra-chapter .serial-exercises .sr-monitor-title {background:#284145;color:#eaf6f4}
-html[data-theme="dark"] .pra-chapter .serial-exercises .sr-monitor pre {background:#14282c!important;color:#eaf6f4!important}
-html[data-theme="dark"] .pra-chapter .serial-exercises .sr-overflow {color:#ffca89;background:#49331e;outline-color:#f5a64b}
-html[data-theme="dark"] .pra-chapter .serial-exercises [data-sr-error] {color:#ffaaa5}
-
-
-/* === Sériová linka: kompaktní rozložení a čitelný kód === */
-.pra-chapter .serial-exercises {
-  --sr-code-bg:#101b20;
-  --sr-code-text:#f0f5f7;
-  --sr-code-type:#81d6e0;
-  --sr-code-function:#ffad67;
-  --sr-code-number:#e9b4fa;
-  --sr-code-string:#c3e9a1;
-  --sr-code-comment:#98aeb6;
-  padding:clamp(14px,2.5vw,24px);
-}
-.pra-chapter .serial-exercises .ls-toolbar { margin:12px 0 16px;gap:8px; }
-.pra-chapter .serial-exercises .ls-layout {grid-template-columns:minmax(0,1.12fr) minmax(320px,0.88fr);gap:16px;align-items:start;}
-.pra-chapter .serial-exercises .ls-layout>div {min-width:0;}
-.pra-chapter .serial-exercises .ls-schematic {width:100%;max-width:530px;height:auto;margin:0 auto;display:block;}
-.pra-chapter .serial-exercises .ls-readings {gap:7px;}
-.pra-chapter .serial-exercises .ls-readings>div {padding:9px 11px;min-height:67px;}
-.pra-chapter .serial-exercises .ls-status {min-height:0;margin:9px 0;font-size:.94rem;}
-.pra-chapter .serial-exercises .ls-progress {margin:9px 0 11px;}
-.pra-chapter .serial-exercises .sr-monitor {margin:9px 0;}
-.pra-chapter .serial-exercises .sr-monitor-title {padding:7px 10px;}
-.pra-chapter .serial-exercises .sr-monitor pre {height:128px;min-height:128px;padding:10px 12px;font-size:13px;}
-.pra-chapter .serial-exercises .ls-tip {margin:10px 0;padding:9px 12px;}
-.pra-chapter .serial-exercises .ls-gate {margin-top:12px;padding:13px 15px;}
-.pra-chapter .serial-exercises .ls-gate h3 {margin:0 0 4px;font-size:1.04rem;}
-.pra-chapter .serial-exercises .ls-gate p {margin:6px 0 10px;font-size:.88rem;}
-.pra-chapter .serial-exercises [data-sr-solution] {margin-top:9px;}
-.pra-chapter .serial-exercises [data-sr-solution] > button {margin-bottom:8px;}
-.pra-chapter .serial-exercises [data-sr-code] {
-  background:var(--sr-code-bg)!important;color:var(--sr-code-text)!important;
-  margin:7px 0 0;padding:13px 14px;
-  max-height:255px;overflow:auto;
-  font:13px/1.58 ui-monospace,SFMono-Regular,Consolas,monospace;
-  white-space:pre;tab-size:2;
-}
-.pra-chapter .serial-exercises [data-sr-code] code {font:inherit!important;background:none!important;padding:0!important;color:inherit!important;}
-.pra-chapter .serial-exercises [data-sr-code] .ls-type {color:var(--sr-code-type)!important;}
-.pra-chapter .serial-exercises [data-sr-code] .ls-function {color:var(--sr-code-function)!important;}
-.pra-chapter .serial-exercises [data-sr-code] .ls-number {color:var(--sr-code-number)!important;}
-.pra-chapter .serial-exercises [data-sr-code] .ls-string {color:var(--sr-code-string)!important;}
-.pra-chapter .serial-exercises [data-sr-code] .ls-comment {color:var(--sr-code-comment)!important;}
-/* Původní zeleno-tyrkysové pozadí monitoru v tmavém režimu zůstává. */
-html[data-theme="dark"] .pra-chapter .serial-exercises .ls-gate {background:#263f43;color:#ecf4f3;}
-html[data-theme="dark"] .pra-chapter .serial-exercises [data-sr-code] {background:#0d171b!important;}
-@media(max-width:850px) {
-  .pra-chapter .serial-exercises .ls-layout {grid-template-columns:1fr;}
-  .pra-chapter .serial-exercises .ls-schematic {max-width:480px;}
-  .pra-chapter .serial-exercises .sr-monitor pre {height:120px;min-height:120px;}
-}
+/* Animace sériového výpisu – samostatný responzivní vzhled. */
+:root { color-scheme:light; --sa-bg:#ffffff; --sa-ink:#17272b; --sa-muted:#52666b; --sa-panel:#f5faf9; --sa-line:#d8e4e2; --sa-teal:#087f83; --sa-accent:#e4f5f2; --sa-code:#18282d; --sa-code-ink:#eff8f7; --sa-terminal:#111d21; --sa-terminal-ink:#c9f5e7; }
+html[data-theme="dark"] { color-scheme:dark; --sa-bg:#182729; --sa-ink:#e7f2f0; --sa-muted:#afc6c3; --sa-panel:#203438; --sa-line:#365154; --sa-teal:#78d9d2; --sa-accent:#183f41; --sa-code:#0d161a; --sa-code-ink:#e7f5f3; --sa-terminal:#0b1519; --sa-terminal-ink:#c9f5e7; }
+*,*::before,*::after {box-sizing:border-box}
+html {background:var(--sa-bg)}
+body {margin:0;padding:0;background:var(--sa-bg);color:var(--sa-ink);font:15px/1.65 system-ui,-apple-system,'Segoe UI',Arial,sans-serif;}
+.serial-demo {width:100%;max-width:none;margin:0;padding:clamp(18px,3vw,30px);background:var(--sa-bg);color:var(--sa-ink);}
+.serial-demo header {margin:0 0 20px}
+.serial-eyebrow {display:block;font-size:12px;font-weight:750;letter-spacing:.1em;color:var(--sa-teal)}
+.serial-demo h2 {font-size:clamp(1.35rem,3vw,1.85rem);line-height:1.25;margin:6px 0 8px;color:var(--sa-ink)}
+.serial-demo p {margin:9px 0;color:var(--sa-ink)}
+.serial-demo p code {padding:1px 5px;border-radius:4px;background:var(--sa-accent);color:var(--sa-teal)}
+.serial-controls {display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:18px 0 22px}
+.serial-controls button {background:var(--sa-teal);border:1px solid var(--sa-teal);color:#062124;border-radius:9px;padding:10px 16px;min-height:42px;font-weight:650;cursor:pointer}
+html:not([data-theme="dark"]) .serial-controls button{color:#fff}
+.serial-controls button:hover{filter:brightness(1.1)}
+.serial-controls button:focus-visible{outline:3px solid #ef9b43;outline-offset:3px}
+.serial-controls button:nth-child(n+2){color:var(--sa-teal);background:transparent}
+.serial-speed {color:var(--sa-muted);font-size:12px;margin-left:auto}
+.serial-columns {display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.serial-pane {min-width:0;overflow:hidden;border:1px solid var(--sa-line);border-radius:13px;background:var(--sa-panel)}
+.serial-bar {display:flex;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--sa-accent);color:var(--sa-ink);font-size:13px;font-weight:650;border-bottom:1px solid var(--sa-line)}
+.serial-pane pre {margin:0;padding:17px 14px;overflow:auto;max-width:100%;min-height:280px;background:var(--sa-code);color:var(--sa-code-ink);font:13px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}
+.serial-pane pre code{display:block;color:inherit;background:transparent;white-space:pre;font:inherit}
+.serial-code-line{display:block;min-height:1.85em;padding-left:6px;border-left:3px solid transparent}
+.serial-code-line.active,.serial-code-line.is-active,.serial-code-line[data-active="true"]{background:#17606565;border-color:#53cdc1}
+.serial-type{color:#f3a7d7}.serial-fn{color:#66cce4}.serial-number{color:#f5b778}.serial-string{color:#a9db8c}
+.serial-terminal{padding:17px 14px;min-height:280px;max-height:365px;overflow:auto;background:var(--sa-terminal);color:var(--sa-terminal-ink);font:13px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.serial-terminal [data-output]{white-space:pre-wrap}.serial-cursor{color:#7ce7d9}
+.serial-monitor-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;font-size:12px;color:var(--sa-muted)}
+.serial-explanation{border-left:4px solid var(--sa-teal);border-radius:7px;background:var(--sa-accent);padding:13px 16px;margin-top:18px!important}
+.serial-note{color:var(--sa-muted)!important;font-size:13px}
+@media(max-width:660px){.serial-columns{grid-template-columns:1fr}.serial-speed{margin-left:0;width:100%}.serial-pane pre,.serial-terminal{min-height:220px}.serial-demo{padding:16px}}

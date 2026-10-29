@@ -2,6 +2,7 @@
 
 .serial-exercises .ls-string{color:#bfe09b}
 
+
 /* Sériový monitor: světlý a tmavý režim samostatně. */
 .pra-chapter .serial-exercises .sr-monitor {border-color:var(--line);background:var(--paper)}
 .pra-chapter .serial-exercises .sr-monitor-title {background:var(--mint);color:var(--ink)}
@@ -12,3 +13,54 @@ html[data-theme="dark"] .pra-chapter .serial-exercises .sr-monitor-title {backgr
 html[data-theme="dark"] .pra-chapter .serial-exercises .sr-monitor pre {background:#14282c!important;color:#eaf6f4!important}
 html[data-theme="dark"] .pra-chapter .serial-exercises .sr-overflow {color:#ffca89;background:#49331e;outline-color:#f5a64b}
 html[data-theme="dark"] .pra-chapter .serial-exercises [data-sr-error] {color:#ffaaa5}
+
+
+/* === Sériová linka: kompaktní rozložení a čitelný kód === */
+.pra-chapter .serial-exercises {
+  --sr-code-bg:#101b20;
+  --sr-code-text:#f0f5f7;
+  --sr-code-type:#81d6e0;
+  --sr-code-function:#ffad67;
+  --sr-code-number:#e9b4fa;
+  --sr-code-string:#c3e9a1;
+  --sr-code-comment:#98aeb6;
+  padding:clamp(14px,2.5vw,24px);
+}
+.pra-chapter .serial-exercises .ls-toolbar { margin:12px 0 16px;gap:8px; }
+.pra-chapter .serial-exercises .ls-layout {grid-template-columns:minmax(0,1.12fr) minmax(320px,0.88fr);gap:16px;align-items:start;}
+.pra-chapter .serial-exercises .ls-layout>div {min-width:0;}
+.pra-chapter .serial-exercises .ls-schematic {width:100%;max-width:530px;height:auto;margin:0 auto;display:block;}
+.pra-chapter .serial-exercises .ls-readings {gap:7px;}
+.pra-chapter .serial-exercises .ls-readings>div {padding:9px 11px;min-height:67px;}
+.pra-chapter .serial-exercises .ls-status {min-height:0;margin:9px 0;font-size:.94rem;}
+.pra-chapter .serial-exercises .ls-progress {margin:9px 0 11px;}
+.pra-chapter .serial-exercises .sr-monitor {margin:9px 0;}
+.pra-chapter .serial-exercises .sr-monitor-title {padding:7px 10px;}
+.pra-chapter .serial-exercises .sr-monitor pre {height:128px;min-height:128px;padding:10px 12px;font-size:13px;}
+.pra-chapter .serial-exercises .ls-tip {margin:10px 0;padding:9px 12px;}
+.pra-chapter .serial-exercises .ls-gate {margin-top:12px;padding:13px 15px;}
+.pra-chapter .serial-exercises .ls-gate h3 {margin:0 0 4px;font-size:1.04rem;}
+.pra-chapter .serial-exercises .ls-gate p {margin:6px 0 10px;font-size:.88rem;}
+.pra-chapter .serial-exercises [data-sr-solution] {margin-top:9px;}
+.pra-chapter .serial-exercises [data-sr-solution] > button {margin-bottom:8px;}
+.pra-chapter .serial-exercises [data-sr-code] {
+  background:var(--sr-code-bg)!important;color:var(--sr-code-text)!important;
+  margin:7px 0 0;padding:13px 14px;
+  max-height:255px;overflow:auto;
+  font:13px/1.58 ui-monospace,SFMono-Regular,Consolas,monospace;
+  white-space:pre;tab-size:2;
+}
+.pra-chapter .serial-exercises [data-sr-code] code {font:inherit!important;background:none!important;padding:0!important;color:inherit!important;}
+.pra-chapter .serial-exercises [data-sr-code] .ls-type {color:var(--sr-code-type)!important;}
+.pra-chapter .serial-exercises [data-sr-code] .ls-function {color:var(--sr-code-function)!important;}
+.pra-chapter .serial-exercises [data-sr-code] .ls-number {color:var(--sr-code-number)!important;}
+.pra-chapter .serial-exercises [data-sr-code] .ls-string {color:var(--sr-code-string)!important;}
+.pra-chapter .serial-exercises [data-sr-code] .ls-comment {color:var(--sr-code-comment)!important;}
+/* Původní zeleno-tyrkysové pozadí monitoru v tmavém režimu zůstává. */
+html[data-theme="dark"] .pra-chapter .serial-exercises .ls-gate {background:#263f43;color:#ecf4f3;}
+html[data-theme="dark"] .pra-chapter .serial-exercises [data-sr-code] {background:#0d171b!important;}
+@media(max-width:850px) {
+  .pra-chapter .serial-exercises .ls-layout {grid-template-columns:1fr;}
+  .pra-chapter .serial-exercises .ls-schematic {max-width:480px;}
+  .pra-chapter .serial-exercises .sr-monitor pre {height:120px;min-height:120px;}
+}

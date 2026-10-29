@@ -1,3 +1,131 @@
+/* ================================================================
+   PRAXE – ARDUINO | SPOLEČNÁ NAVIGACE KAPITOL 1 A 2
+   Horní lišta, nabídka Obsah a přepínač světlého/tmavého režimu.
+   Nezasahuje do obsahu kapitoly ani do iframe animací.
+   ================================================================ */
+
+/* Nezávislé proměnné: lišta funguje i při výpadku jiného CSS. */
+:root, html[data-theme="light"] {
+  --nav-bg: #f3f7f6;
+  --nav-surface: #ffffff;
+  --nav-ink: #17272b;
+  --nav-muted: #486166;
+  --nav-line: #d8e4e2;
+  --nav-accent: #087f83;
+  --nav-accent-soft: #e4f4f1;
+  --nav-overlay: rgba(5, 23, 26, .69);
+}
+html[data-theme="dark"] {
+  --nav-bg: #132124;
+  --nav-surface: #1d3033;
+  --nav-ink: #edf6f5;
+  --nav-muted: #bfd1d0;
+  --nav-line: #375155;
+  --nav-accent: #82dfda;
+  --nav-accent-soft: #234244;
+  --nav-overlay: rgba(2, 13, 16, .78);
+}
+
+/* Horní navigace má vlastní úplné rozložení. Vyšší specificita
+   chrání před původními globálními styly kapitoly. */
+body > .site-topbar {
+  position: relative !important;
+  inset: auto !important;
+  float: none !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 18px !important;
+  width: 100% !important;
+  max-width: 1170px !important;
+  min-height: 72px;
+  margin: 0 auto !important;
+  padding: 14px 24px !important;
+  box-sizing: border-box;
+  background: var(--nav-bg) !important;
+  color: var(--nav-ink) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  z-index: 20;
+}
+body > .site-topbar .site-brand {
+  position: static !important;
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  color: var(--nav-ink) !important;
+  font: 800 14px/1.3 system-ui, sans-serif !important;
+  letter-spacing: .04em;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+body > .site-topbar .site-brand b { color: var(--nav-accent) !important; }
+body > .site-topbar .site-brand-mark {
+  display: grid !important;
+  place-items: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: var(--nav-accent-soft) !important;
+  color: var(--nav-accent) !important;
+  font-size: 25px;
+  line-height: 1;
+}
+body > .site-topbar .site-links {
+  position: static !important;
+  display: flex !important;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  align-items: center !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px 20px !important;
+  width: auto !important;
+  margin: 0 0 0 auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+body > .site-topbar .site-links a {
+  display: inline-flex !important;
+  align-items: center;
+  width: auto !important;
+  padding: 7px 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  color: var(--nav-muted) !important;
+  font: 650 14px/1.4 system-ui, sans-serif !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+body > .site-topbar .site-links a:hover,
+body > .site-topbar .site-links a:focus-visible {
+  color: var(--nav-accent) !important;
+}
+body > .site-topbar .theme-toggle {
+  position: static !important;
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  align-items: center !important;
+  justify-content: center;
+  gap: 8px;
+  width: auto !important;
+  min-height: 40px;
+  margin: 0 !important;
+  padding: 8px 12px !important;
+  border: 1px solid var(--nav-line) !important;
+  border-radius: 10px !important;
+  background: var(--nav-surface) !important;
+  color: var(--nav-ink) !important;
+  font: 650 13px/1.4 system-ui, sans-serif !important;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
   box-shadow: none !important;
 }
 body > .site-topbar .theme-toggle:hover {
@@ -121,3 +249,27 @@ body > .pra-nav-dialog nav a:focus-visible {
 @media (max-width: 360px) {
   body > .site-topbar .theme-toggle .theme-label { display: none; }
 }
+
+
+/* =============================================
+   DOLADĚNÍ SPOLEČNÉ LIŠTY A PLOVOUCÍCH TLAČÍTEK
+   ============================================= */
+/* Kapitola 2 – oprava navigace a plovoucího přepínače.
+   Tento soubor se načítá jako POSLEDNÍ CSS v HTML. */
+:root { --fix-nav-surface:#ffffff;--fix-nav-text:#163136;--fix-nav-edge:#bfd5d3;--fix-nav-accent:#087f83; }
+html[data-theme="dark"] { --fix-nav-surface:#172b2e;--fix-nav-text:#f1f8f7;--fix-nav-edge:#375357;--fix-nav-accent:#80dfd8; }
+body > .site-topbar {display:flex!important;position:relative!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:12px!important;max-width:1180px!important;width:100%!important;margin:0 auto!important;padding:14px 160px 14px 20px!important;min-height:76px!important;box-sizing:border-box!important;background:transparent!important;}
+body > .site-topbar .site-brand {display:inline-flex!important;align-items:center!important;gap:10px!important;color:var(--fix-nav-text)!important;text-decoration:none!important;white-space:nowrap!important;font-weight:800!important;}
+body > .site-topbar .site-links {display:flex!important;position:static!important;flex:1 1 auto!important;flex-wrap:wrap!important;justify-content:flex-end!important;align-items:center!important;gap:10px 20px!important;min-width:0!important;background:transparent!important;margin:0!important;padding:0!important;}
+body > .site-topbar .site-links a {color:var(--fix-nav-text)!important;background:transparent!important;text-decoration:none!important;white-space:nowrap!important;}
+body > .site-topbar .site-links a:hover {color:var(--fix-nav-accent)!important;}
+/* Obsah a motiv: obě tlačítka sledují posun stránky. */
+body > .pra-nav-toggle, body > .site-topbar > .theme-toggle {position:fixed!important;top:90px!important;bottom:auto!important;z-index:1100!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;width:auto!important;min-width:0!important;min-height:44px!important;margin:0!important;padding:10px 16px!important;border:1px solid var(--fix-nav-edge)!important;border-radius:999px!important;background:var(--fix-nav-surface)!important;color:var(--fix-nav-text)!important;box-shadow:0 6px 22px rgba(0,0,0,.16)!important;font:700 14px/1.3 system-ui,Arial,sans-serif!important;white-space:nowrap!important;cursor:pointer!important;}
+body > .pra-nav-toggle {left:16px!important;right:auto!important;}
+body > .site-topbar > .theme-toggle {right:16px!important;left:auto!important;}
+body > .site-topbar > .theme-toggle .theme-label {color:inherit!important;display:inline!important;}
+/* Dialog Obsah je vysouvací panel, nezávislý na horní liště. */
+body > #pra-chapter-menu {position:fixed!important;inset:0 auto 0 0!important;width:min(420px,92vw)!important;height:100dvh!important;max-height:100dvh!important;margin:0!important;overflow:auto!important;border-radius:0!important;z-index:2000!important;}
+body > #pra-chapter-menu:not([open]) {display:none!important;}
+@media(max-width:760px) {body > .site-topbar {padding:12px 14px 12px!important;min-height:110px!important;justify-content:center!important;}body > .site-topbar .site-links{flex:1 0 100%!important;justify-content:center!important;}body > .pra-nav-toggle{top:auto!important;bottom:16px!important;left:12px!important;}body > .site-topbar > .theme-toggle{top:auto!important;bottom:16px!important;right:12px!important;}body > .pra-nav-toggle,body > .site-topbar > .theme-toggle {padding:9px 12px!important;font-size:13px!important;z-index:1200!important;}}
+@media(max-width:400px){body > .site-topbar > .theme-toggle .theme-label{font-size:12px!important;}}

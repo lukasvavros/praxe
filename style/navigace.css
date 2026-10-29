@@ -1,8 +1,4 @@
-/* ================================================================
-   PRAXE – ARDUINO | SPOLEČNÁ NAVIGACE KAPITOL 1 A 2
-   Horní lišta, nabídka Obsah a přepínač světlého/tmavého režimu.
-   Nezasahuje do obsahu kapitoly ani do iframe animací.
-   ================================================================ */
+
 
 /* Nezávislé proměnné: lišta funguje i při výpadku jiného CSS. */
 :root, html[data-theme="light"] {
@@ -26,8 +22,7 @@ html[data-theme="dark"] {
   --nav-overlay: rgba(2, 13, 16, .78);
 }
 
-/* Horní navigace má vlastní úplné rozložení. Vyšší specificita
-   chrání před původními globálními styly kapitoly. */
+
 body > .site-topbar {
   position: relative !important;
   inset: auto !important;

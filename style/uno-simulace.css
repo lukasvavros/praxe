@@ -1,0 +1,30 @@
+
+/* Blink – bezpečně oddělený styl, načíst až po kapitola.css */
+#uno-sim .uno-board-wrap {width:100%;max-width:640px;margin-inline:auto;}
+#uno-sim .uno-board {display:block;width:100%;height:auto;max-height:440px;}
+#uno-sim .uno-layout {display:grid;grid-template-columns:minmax(0,1fr);gap:15px;}
+#uno-sim .uno-controls {display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 18px;}
+#uno-sim .uno-controls button {background:var(--teal,#087f83);border-color:var(--teal,#087f83);color:#fff;}
+#uno-sim .uno-controls button:hover {filter:brightness(1.13);}
+#uno-sim .uno-controls select {background:var(--paper,#fff);color:var(--ink,#17272b);}
+#uno-sim .uno-status {display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0;}
+#uno-sim .uno-status strong {color:var(--teal-dark,#087f83);}
+#uno-sim .uno-program pre {margin:8px 0!important;}
+#uno-sim .uno-program [data-line] {display:inline;border-radius:4px;transition:background .12s;}
+#uno-sim .uno-program [data-line].is-active {background:#196d76!important;outline:2px solid #4ccfc6;outline-offset:0;color:#fff;}
+#uno-sim .uno-program [data-line].is-active .ide-function {color:#a7f3ff!important;}
+#uno-sim .uno-program [data-line].is-active .ide-number {color:#ffd097!important;}
+#uno-sim .uno-led-switch {opacity:.16;transition:opacity .13s ease;}
+#uno-sim .uno-led-switch.is-lit {opacity:1;}
+#uno-sim .uno-caption {color:var(--muted,#52666b);font-size:.88rem;}
+#uno-sim .uno-sr {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media (prefers-reduced-motion:reduce){#uno-sim .uno-led-switch,#uno-sim [data-line]{transition:none;}}
+
+/* Celý zvýrazněný příkaz na samostatném řádku, nikoliv jen obarvený text. */
+#uno-sim .uno-program [data-line] { display:block; width:fit-content; max-width:100%; padding:0 5px; margin-left:-5px; }
+#uno-sim .uno-program [data-line].uno-active { background:#196d76!important; outline:2px solid #4ccfc6; color:#fff; }
+/* Světlo LED L na D13; zelená ON LED zůstává trvale rozsvícená. */
+#uno-sim .uno-led-switch { opacity:.10; transition:opacity .15s ease,filter .15s ease; }
+#uno-sim[data-high="true"] .uno-led-switch,
+#uno-sim .uno-led-switch.is-lit { opacity:1; filter:drop-shadow(0 0 3px rgba(255,194,58,.9)); }
+#uno-sim[data-high="false"] .uno-led-switch:not(.is-lit) { opacity:.10; filter:none; }

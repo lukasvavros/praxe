@@ -1,7 +1,6 @@
 (() => {
 'use strict';
 const WORKER = 'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
-// Přihlašovací skript test-heslo.js používá tuto veřejnou adresu.
 window.ARDUINO_SUBMIT_WORKER = WORKER;
 const button = document.getElementById('exam-print');
 const paper = document.getElementById('exam-paper');

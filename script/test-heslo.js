@@ -7,8 +7,6 @@
   const error = document.getElementById('test-password-error');
   if (!form || !lock || !content || !input || !error) return;
 
-  // SHA-256 otisk hesla; původní heslo zde není uloženo jako text.
-  // Pozor: klientské ověření nebrání zobrazení HTML ani obcházení zámku.
   const expectedHash = '7f2d6c571a86315dfa0ede2a26c8d1c1176e42faeb2637fd015bf09df5473cd2';
   const button = form.querySelector('button[type="submit"]');
 

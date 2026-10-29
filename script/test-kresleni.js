@@ -30,6 +30,8 @@
   function setup(card, id, savedImage) {
     const content = card.querySelector('.question-content');
     const diagram = content.querySelector('.diagram');
+    // U kreslicích otázek má žák pouze kreslicí plochu, nikoli textové pole.
+    content.querySelectorAll('textarea, label.input-label, p.helper').forEach(el => el.remove());
     const area = document.createElement('div');
     area.className = 'sketch-frame' + (diagram ? ' sketch-over-diagram' : ' sketch-blank');
     area.setAttribute('aria-label', 'Kreslicí plocha pro odpověď');
@@ -47,7 +49,7 @@
     area.appendChild(canvas);
     const actions = document.createElement('div');
     actions.className = 'sketch-actions';
-    actions.innerHTML = '<span>✏️ Kreslete přímo do schématu</span><button type="button" data-undo>↶ Zpět</button><button type="button" data-clear>Smazat kresbu</button>';
+    actions.innerHTML = '<span>✏️ Vodiče kreslete vodorovně nebo svisle (X / Y)</span><button type="button" data-undo>↶ Zpět</button><button type="button" data-clear>Smazat kresbu</button>';
     if (diagram) diagram.insertAdjacentElement('afterend', actions); else area.insertAdjacentElement('afterend', actions);
     const undo = actions.querySelector('[data-undo]');
     const clear = actions.querySelector('[data-clear]');
@@ -75,21 +77,64 @@
       const rect = canvas.getBoundingClientRect();
       return {x:(event.clientX-rect.left)*canvas.width/rect.width,y:(event.clientY-rect.top)*canvas.height/rect.height};
     }
+    let startPoint = null;
+    let startImage = null;
+    let activePointer = null;
+    function orthogonalEnd(point) {
+      // Každý jednotlivý tah je přímka rovnoběžná s osou X nebo Y.
+      const dx = point.x - startPoint.x;
+      const dy = point.y - startPoint.y;
+      return Math.abs(dx) >= Math.abs(dy)
+        ? {x: point.x, y: startPoint.y}
+        : {x: startPoint.x, y: point.y};
+    }
+    function preview(point) {
+      if (!startPoint || !startImage) return;
+      ctx.putImageData(startImage, 0, 0);
+      const end = orthogonalEnd(point);
+      ctx.beginPath();
+      ctx.moveTo(startPoint.x, startPoint.y);
+      ctx.lineTo(end.x, end.y);
+      ctx.stroke();
+      ctx.closePath();
+    }
     canvas.addEventListener('pointerdown', event => {
       if (event.button !== 0 && event.pointerType === 'mouse') return;
       dimensions();
-      history.push(ctx.getImageData(0,0,canvas.width,canvas.height));
-      if(history.length>maxHistory) history.shift();
-      const p=pos(event);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+.01,p.y+.01);ctx.stroke();
-      drawing=true;canvas.setPointerCapture(event.pointerId);event.preventDefault();
+      startImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      history.push(startImage);
+      if (history.length > maxHistory) history.shift();
+      startPoint = pos(event);
+      activePointer = event.pointerId;
+      drawing = true;
+      canvas.setPointerCapture(event.pointerId);
+      event.preventDefault();
     });
     canvas.addEventListener('pointermove', event => {
-      if (!drawing) return;
-      const p=pos(event);ctx.lineTo(p.x,p.y);ctx.stroke();event.preventDefault();
+      if (!drawing || event.pointerId !== activePointer) return;
+      preview(pos(event));
+      event.preventDefault();
     });
-    function finish() { if (!drawing) return; drawing=false;ctx.closePath();save(id,canvas); }
-    canvas.addEventListener('pointerup',finish);
-    canvas.addEventListener('pointercancel',finish);
+    function finish(event) {
+      if (!drawing || event.pointerId !== activePointer) return;
+      preview(pos(event));
+      drawing = false;
+      startPoint = null;
+      startImage = null;
+      activePointer = null;
+      save(id, canvas);
+      event.preventDefault();
+    }
+    canvas.addEventListener('pointerup', finish);
+    canvas.addEventListener('pointercancel', event => {
+      if (event.pointerId !== activePointer) return;
+      if (startImage) ctx.putImageData(startImage, 0, 0);
+      drawing = false;
+      startPoint = null;
+      startImage = null;
+      activePointer = null;
+      history.pop();
+    });
     undo.addEventListener('click', () => {
       const previous=history.pop();if (!previous) return;
       ctx.clearRect(0,0,canvas.width,canvas.height);ctx.putImageData(previous,0,0);save(id,canvas);

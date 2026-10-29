@@ -1,0 +1,17 @@
+/* Kreslení odpovědi přímo do schémat – pouze ostrý test */
+#exam-paper .diagram-sketch{position:relative;}
+#exam-paper .diagram-sketch .sketch-over-diagram{position:absolute;inset:0;z-index:2;background:transparent;}
+#exam-paper .sketch-frame canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;user-select:none;-webkit-user-select:none;}
+#exam-paper .sketch-frame.sketch-blank{height:210px;border:1px dashed var(--line);border-radius:10px;background:var(--surface);margin-top:10px;overflow:hidden;}
+#exam-paper .sketch-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:9px 0 14px;font-size:13px;color:var(--muted);}
+#exam-paper .sketch-actions span{margin-right:auto}
+#exam-paper .sketch-actions button{border:1px solid var(--line);border-radius:8px;background:var(--surface-soft);color:var(--ink);padding:7px 10px;font:inherit;cursor:pointer;}
+#exam-paper .sketch-actions button:hover{border-color:var(--teal)}
+#exam-paper .question-card:has(.sketch-frame) .helper,#exam-paper .question-card:has(.sketch-frame) .draw-area{display:none}
+@media print {
+ #exam-paper .sketch-actions{display:none!important}
+ #exam-paper .sketch-blank{height:28mm!important;min-height:28mm!important;background:#fff!important}
+ #exam-paper .diagram-sketch{position:relative!important}
+ #exam-paper .diagram-sketch .sketch-over-diagram{position:absolute!important;inset:0!important;display:block!important}
+ #exam-paper .sketch-frame canvas{display:block!important;width:100%!important;height:100%!important;}
+}

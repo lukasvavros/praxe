@@ -60,8 +60,24 @@ const teacherScript = String.raw`
   const pct=max?Math.round(1000*sum/max)/10:0;
   total.textContent=sum+' / '+max+' bodů';
   pctEl.textContent=pct.toLocaleString('cs-CZ')+' %';
-  outcome.textContent=done===sels.length?String(grade(pct)):'—';
+  outcome.textContent=done===sels.length?String(grade(max?100*sum/max:0)):'—';
   progress.textContent='Ohodnoceno '+done+' z '+sels.length+' otázek';
+  const complete=done===sels.length;
+  const currentGrade=complete?grade(max?100*sum/max:0):null;
+  document.querySelectorAll('.grade-scale tr[data-grade]').forEach(row=>{
+   row.classList.toggle('current-grade',complete&&Number(row.dataset.grade)===currentGrade);
+  });
+  const pointsNeeded=document.querySelector('#score-next-grade');
+  if(pointsNeeded){
+   if(!complete){pointsNeeded.textContent='Známka se zobrazí po ohodnocení všech otázek.';}
+   else if(currentGrade===1){pointsNeeded.textContent='Dosažena nejvyšší známka.';}
+   else {
+    const thresholds={2:90,3:75,4:60,5:40};
+    const next=thresholds[currentGrade];
+    const needed=Math.max(0,Math.ceil(max*next/100-1e-10)-sum);
+    pointsNeeded.textContent='Na lepší známku chybí '+needed+' bodů.';
+   }
+  }
  }
  sels.forEach(s=>s.addEventListener('change',recalc));
  function updatedHtml(){
@@ -74,7 +90,8 @@ const teacherScript = String.raw`
   });
   const oriN=[...document.querySelectorAll('.teacher-note')];
   [...copy.querySelectorAll('.teacher-note')].forEach((n,i)=>{n.textContent=oriN[i].value;});
-  for(const id of ['score-total','score-grade','score-percent','score-progress']) copy.querySelector('#'+id).textContent=document.querySelector('#'+id).textContent;
+  for(const id of ['score-total','score-grade','score-percent','score-progress','score-next-grade']) copy.querySelector('#'+id).textContent=document.querySelector('#'+id).textContent;
+  copy.querySelectorAll('.grade-scale tr[data-grade]').forEach((row,i)=>row.className=document.querySelectorAll('.grade-scale tr[data-grade]')[i].className);
   return '<!doctype html>\n'+copy.outerHTML;
  }
  document.querySelector('#save-graded').addEventListener('click',()=>{
@@ -124,7 +141,8 @@ header p{margin:5px 0}.question-card{background:#fff;border:1px solid #d5e2e0;bo
 .options{display:grid;gap:6px}.options label{display:block;background:#f5faf9;border:1px solid #dbe5e4;border-radius:8px;padding:8px 10px}.options label.is-checked{background:#dbf5eb;border-color:#078172;font-weight:bold}.options input{accent-color:#087f84}
 .teacher-box{margin-top:18px;border-top:1px dashed #aec8c3;padding-top:15px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#fff}
 .auto-result{font-weight:700;color:#087f84}.print-note{white-space:pre-wrap;color:#34464a;padding:8px;border:1px solid #d5e2e0;width:100%;min-height:30px}.export-actions{display:flex;gap:10px;flex-wrap:wrap}.teacher-box select{font:inherit;padding:9px;border:1px solid #87aaa5;border-radius:8px;min-width:100px}.teacher-note{width:100%;font:inherit;border:1px solid #c4d6d3;border-radius:8px;padding:10px;min-height:58px;resize:vertical}
-.results{background:#fff;border:2px solid #087f84;border-radius:16px;padding:22px;margin-top:18px}.results strong{font-size:22px}.grade{font-size:32px;font-weight:800;color:#087f84}
+.results{background:#fff;border:2px solid #087f84;border-radius:16px;padding:22px;margin-top:18px}
+.grade-scale{border-collapse:collapse;width:100%;max-width:600px;margin:12px 0 18px;background:#fff}.grade-scale th,.grade-scale td{border:1px solid #cbdedb;padding:9px 12px;text-align:left}.grade-scale th{background:#eaf5f2}.grade-scale .current-grade{background:#d9f3e9;font-weight:800}.grade-scale .current-grade td:first-child{border-left:5px solid #087f84}.results strong{font-size:22px}.grade{font-size:32px;font-weight:800;color:#087f84}
 button{background:#087f84;color:#fff;border:0;border-radius:10px;padding:13px 22px;font:inherit;font-weight:700;cursor:pointer}.muted{color:#50696c}.sketch-image-holder{position:relative;display:table;width:fit-content;max-width:100%;margin:10px auto}.sketch-image-holder>img{display:block;max-width:100%;height:auto}.sketch-over-diagram{position:absolute;inset:0}.sketch-over-diagram img{display:block;width:100%;height:100%}.sketch-blank{height:210px;border:1px solid #c0d2d0;position:relative}.sketch-blank img{width:100%;height:100%}
 .sketch-print-image,.sketch-actions,.draw-area,.helper,.input-label{display:none!important}body .diagram-sketch{position:relative}figure.diagram img{object-fit:contain}
 @media(max-width:600px){.question-card{padding:14px}.question-top h2{font-size:17px}}
@@ -195,7 +213,7 @@ async function buildHtml(){
   all.push(copy.outerHTML);
  }
  const filename=name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'_').replace(/^_|_$/g,'').slice(0,70);
- const html=`<!doctype html>\n<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arduino – test – ${escapeHtml(name)}</title><style>${style}</style></head><body data-filename="${escapeHtml(filename)}"><main><header><h1>PRAXE – ARDUINO / OSTRÝ TEST</h1><p><b>Žák:</b> ${escapeHtml(name)}</p><p><b>Datum:</b> ${escapeHtml(date)}</p><p class="muted">Hodnocení vyučujícího · původní odpovědi žáka jsou uzamčené</p></header>${all.join('\n')}<section class="results"><h2>Celkové hodnocení</h2><p id="score-progress"></p><p><strong id="score-total">—</strong> · <span id="score-percent">—</span></p><p>Výsledná známka: <span class="grade" id="score-grade">—</span></p><p class="muted">Stupnice: 90–100 % = 1, 75–89,9 % = 2, 60–74,9 % = 3, 40–59,9 % = 4, jinak 5.</p><div class="export-actions"><button id="save-graded" type="button">Stáhnout ohodnocené HTML</button><button id="export-pdf" type="button">Exportovat jedno dlouhé PDF</button></div><p class="muted">Hodnocení se automaticky neukládá na GitHub. Pro uložení bodů stáhněte ohodnocené HTML. PDF lze exportovat jako jedinou dlouhou stránku (pro export je potřeba internet).</p></section></main><script>${teacherScript.replace(/<\/script/gi,'<\\/script')}</script></body></html>`;
+ const html=`<!doctype html>\n<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arduino – test – ${escapeHtml(name)}</title><style>${style}</style></head><body data-filename="${escapeHtml(filename)}"><main><header><h1>PRAXE – ARDUINO / OSTRÝ TEST</h1><p><b>Žák:</b> ${escapeHtml(name)}</p><p><b>Datum:</b> ${escapeHtml(date)}</p><p class="muted">Hodnocení vyučujícího · původní odpovědi žáka jsou uzamčené</p></header>${all.join('\n')}<section class="results"><h2>Celkové hodnocení</h2><p id="score-progress"></p><p><strong id="score-total">—</strong> · <span id="score-percent">—</span></p><p>Výsledná známka: <span class="grade" id="score-grade">—</span></p><h3>Bodová a známkovací stupnice</h3><p class="muted">Hodnocení se přepočítává podle maximálního počtu bodů právě vylosovaných otázek. Procenta rozhodují o známce.</p><table class="grade-scale" aria-label="Stupnice hodnocení"><thead><tr><th>Známka</th><th>Výsledek</th></tr></thead><tbody><tr data-grade="1"><td>1 – výborný</td><td>90–100 %</td></tr><tr data-grade="2"><td>2 – chvalitebný</td><td>75 až méně než 90 %</td></tr><tr data-grade="3"><td>3 – dobrý</td><td>60 až méně než 75 %</td></tr><tr data-grade="4"><td>4 – dostatečný</td><td>40 až méně než 60 %</td></tr><tr data-grade="5"><td>5 – nedostatečný</td><td>méně než 40 %</td></tr></tbody></table><p id="score-next-grade" class="muted"></p><div class="export-actions"><button id="save-graded" type="button">Stáhnout ohodnocené HTML</button><button id="export-pdf" type="button">Exportovat jedno dlouhé PDF</button></div><p class="muted">Hodnocení se automaticky neukládá na GitHub. Pro uložení bodů stáhněte ohodnocené HTML. PDF lze exportovat jako jedinou dlouhou stránku (pro export je potřeba internet).</p></section></main><script>${teacherScript.replace(/<\/script/gi,'<\\/script')}</script></body></html>`;
  return html;
 }
 const encodeHtml = async html => (await fileData(new Blob([html],{type:'text/html;charset=utf-8'}))).split(',')[1];

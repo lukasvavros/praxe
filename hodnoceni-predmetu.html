@@ -1,13 +1,11 @@
 <!doctype html>
 <html lang="cs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kritéria hodnocení | Praxe – Arduino</title>
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('pra-arduino-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
-<link rel="stylesheet" href="style/uvod.css">
-<link rel="stylesheet" href="style/hodnoceni.css">
-<script defer src="script/uvod-tema.js"></script>
+<link rel="stylesheet" href="style/uvod.css"><link rel="stylesheet" href="style/hodnoceni.css">
+<script src="script/uvod-tema.js" defer></script>
 </head>
 <body>
 <div class="site-shell">
@@ -18,28 +16,31 @@
 </header>
 <main class="page criteria-page">
 <section class="criteria-hero" aria-labelledby="criteria-title">
-<div class="eyebrow"><span class="eyebrow-dot"></span> PRAXE – ARDUINO · 3. ROČNÍK</div>
-<h1 id="criteria-title">Kritéria <em>hodnocení</em></h1>
-<p>Jaké aktivity se hodnotí, jakou mají váhu a jaká podmínka platí pro úspěšné dokončení předmětu.</p>
-<a class="criteria-hero-link" href="#pravidla">Prohlédnout kritéria ↓</a>
+<div class="hero-copy"><span class="criteria-eyebrow">PRAXE – ARDUINO / 3. ROČNÍK</span><h1 id="criteria-title">Jak se hodnotí <em>Praxe – Arduino?</em></h1><p>Vše na jednom místě: průběžné známky, projekt a podmínka úspěšného dokončení předmětu.</p><a href="#prehled" class="criteria-hero-link">Zobrazit přehled <span aria-hidden="true">↓</span></a></div>
+<div class="hero-diagram" aria-hidden="true"><div class="diagram-terminal"><span>HODNOCENÍ / PŘEHLED</span><div><i class="dot a"></i><i class="dot b"></i><i class="dot c"></i></div><div class="diagram-lines"><b></b><b></b><b></b></div><div class="diagram-bottom"><span>0,25</span><span>1,0</span><span>2×</span></div></div></div>
 </section>
-<section class="criteria-card" id="pravidla" aria-labelledby="pravidla-title">
-<div class="section-kicker">PŘEHLED HODNOCENÍ</div>
-<h2 id="pravidla-title">Z čeho se skládá hodnocení</h2>
-<div class="criteria-grid">
-<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">✓</span><span class="weight">Váha 0,25</span></div><h3>Krátké testy na probrané učivo</h3><p>Krátké průběžné ověřování znalostí.</p></article>
-<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">✦</span><span class="weight">Váha 0,25</span></div><h3>Dobrovolná známka za aktivitu v hodině</h3><p>Hodnocení aktivity během výuky.</p></article>
-</div>
-<div class="project-heading"><div><span class="section-kicker">SAMOSTATNÝ PROJEKT</span><h3>Jeden projekt, dvě známky</h3></div><span class="project-count">2 známky</span></div>
-<div class="criteria-grid">
-<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">⌘</span><span class="weight">Váha 1,0</span></div><h3>Realizace projektu</h3><p>Zapojení, program a prezentace.</p></article>
-<article class="criteria-item"><div class="criteria-item-top"><span class="criteria-icon" aria-hidden="true">▤</span><span class="weight">Váha 1,0</span></div><h3>Dokumentace projektu</h3><p>Samostatně hodnocená dokumentace projektu.</p></article>
-</div>
-<div class="criteria-warning" role="note"><div class="warning-mark" aria-hidden="true">!</div><div><h3>Podmínka úspěšného dokončení předmětu</h3><p><strong>Úspěšné odevzdání projektu je nezbytnou podmínkou pro úspěšné dokončení předmětu.</strong></p><p>Neodevzdaný nebo neuznaný projekt či jeho dokumentace znamená známku <strong>Nedostatečný</strong> za tuto část PRA, a tím i na vysvědčení <strong>(viz školní řád)</strong>.</p></div></div>
+<section class="criteria-overview" id="prehled" aria-label="Rychlý přehled">
+<div class="overview-tile"><span class="tile-icon" aria-hidden="true">✓</span><div><strong>0,25</strong><span>Krátké testy</span></div></div>
+<div class="overview-tile"><span class="tile-icon" aria-hidden="true">✦</span><div><strong>0,25</strong><span>Dobrovolná aktivita</span></div></div>
+<div class="overview-tile"><span class="tile-icon" aria-hidden="true">2×</span><div><strong>1,0</strong><span>Každá známka z projektu</span></div></div>
 </section>
+<section class="criteria-block" aria-labelledby="prubezne-title">
+<div class="section-intro"><div><span class="section-kicker">01 / BĚHEM VÝUKY</span><h2 id="prubezne-title">Průběžné hodnocení</h2></div><p>Menší známky získávané v průběhu předmětu.</p></div>
+<div class="criteria-two">
+<article class="criteria-activity"><div class="activity-symbol" aria-hidden="true">?</div><div class="activity-info"><h3>Krátké testy na probrané učivo</h3><p>Ověření znalostí z právě probíraných témat.</p></div><span class="weight-pill">Váha <strong>0,25</strong></span></article>
+<article class="criteria-activity"><div class="activity-symbol" aria-hidden="true">✦</div><div class="activity-info"><h3>Dobrovolná známka za aktivitu v hodině</h3><p>Možnost získat známku za aktivní práci ve výuce.</p></div><span class="weight-pill">Váha <strong>0,25</strong></span></article>
+</div>
+</section>
+<section class="criteria-block project-block" aria-labelledby="projekt-title">
+<div class="section-intro"><div><span class="section-kicker">02 / SAMOSTATNÝ PROJEKT</span><h2 id="projekt-title">Jeden projekt. Dvě známky.</h2></div><span class="project-tag">2 samostatná hodnocení</span></div>
+<p class="project-lead">Samostatný projekt je ohodnocen dvěma známkami. Každá část má váhu <strong>1,0</strong>.</p>
+<div class="project-pair">
+<article class="project-part"><div class="project-part-top"><span class="part-number">01</span><span class="weight-pill">Váha <strong>1,0</strong></span></div><div class="project-art" aria-hidden="true"><span class="board-shape"><i></i><i></i><i></i></span><span class="art-line"></span><span class="art-led"></span></div><h3>Realizace projektu</h3><p>Zapojení, program a prezentace.</p></article>
+<article class="project-part"><div class="project-part-top"><span class="part-number">02</span><span class="weight-pill">Váha <strong>1,0</strong></span></div><div class="project-art docs-art" aria-hidden="true"><span class="paper-shape"><i></i><i></i><i></i></span></div><h3>Dokumentace projektu</h3><p>Samostatně hodnocená dokumentace.</p></article>
+</div>
+</section>
+<section class="completion-block" role="note" aria-labelledby="podminka-title"><div class="completion-icon" aria-hidden="true">!</div><div><span class="completion-kicker">DŮLEŽITÁ PODMÍNKA</span><h2 id="podminka-title">Odevzdání projektu je povinné</h2><p><strong>Úspěšné odevzdání projektu je nezbytnou podmínkou pro úspěšné dokončení předmětu.</strong></p><p>Neodevzdaný nebo neuznaný projekt či jeho dokumentace znamená známku <strong>Nedostatečný</strong> za tuto část PRA, a tím i na vysvědčení <strong>(viz školní řád)</strong>.</p></div></section>
 <div class="criteria-back"><a href="index.html">← Zpět na hlavní stránku</a></div>
 </main>
 <footer class="footer"><div class="footer-inner"><div><strong>Praxe – Arduino</strong><p>Gymnázium a SPŠEI Frenštát pod Radhoštěm</p></div><div class="footer-contact"><span>Vytvořil: <strong>Lukáš Vavroš</strong></span><a href="mailto:lukas.vavros@frengp.cz">lukas.vavros@frengp.cz</a></div></div></footer>
-</div>
-</body>
-</html>
+</div></body></html>

@@ -1,0 +1,11 @@
+/* Ostrý test: blokování běžného výběru a kopírování zadání. */
+#exam-paper .question-top, #exam-paper .code-panel, #exam-paper .diagram,
+#exam-paper .question-content .helper, #exam-paper .exam-paper-head {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+#exam-paper textarea, #exam-paper input { -webkit-user-select: text; user-select: text; }
+@media print {
+  #exam-paper, #exam-paper * { -webkit-user-select: auto !important; user-select: auto !important; }
+}

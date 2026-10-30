@@ -1,0 +1,10 @@
+
+/* Test 3 – pouze doplňky, základní vzhled využívá style/testy.css */
+.test3-variant .question-number {min-width:2.3rem; font-weight:800}
+.test3-variant .question-content > p {line-height:1.7}
+.test3-variant .question-content li {margin-bottom:.45rem}
+.test3-code {display:block;width:100%;min-height:420px;resize:vertical;box-sizing:border-box;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2;white-space:pre;overflow:auto;padding:16px;border:1px solid #88aea9;border-radius:12px;background:var(--surface,#f9fcfb);color:var(--text,#172c30)}
+html[data-theme="dark"] .test3-code {background:#12272c;color:#effbfa;border-color:#48676a}
+.test3-rubric{margin:20px 0;border:1px solid #82bcb4;padding:14px 18px;border-radius:12px;background:rgba(25,153,144,.07)}
+.test3-rubric ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px 18px;padding-left:20px;margin:10px 0 0}
+.test3-note{margin:16px 0;padding:14px 18px;border-left:4px solid #087f83;border-radius:8px;background:rgba(27,150,143,.08)}

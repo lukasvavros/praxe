@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Test 2 – Arduino | Praxe</title>
+<script>
+      try{const t=localStorage.getItem('pra-arduino-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}
+    </script>
+<link href="style/uvod.css" rel="stylesheet"/>
+<link href="style/testy.css" rel="stylesheet"/>
+<link href="style/test-heslo.css" rel="stylesheet"/>
+<script defer="" src="script/uvod-tema.js">
+</script>
+<link href="style/testy-tisk.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="site-shell">
+<header class="topbar">
+<a class="brand" href="index.html">
+<span aria-hidden="true" class="brand-mark">
+            ∞
+          </span>
+<span>
+            PRAXE
+            <b>
+              ARDUINO
+            </b>
+</span>
+</a>
+<nav class="top-links">
+<a href="index.html">
+            Hlavní stránka
+          </a>
+<a href="#otazky">
+            Otázky
+          </a>
+</nav>
+<button aria-label="Přepnout barevný režim" class="theme-toggle" type="button">
+<span aria-hidden="true">
+            ☾
+          </span>
+<span class="theme-label">
+            Tmavý režim
+          </span>
+</button>
+</header>
+<main class="page test-page" id="test-obsah">
+<header class="test-hero">
+<div>
+<span class="test-eyebrow">
+              OVĚŘENÍ ZNALOSTÍ · PRAXE ARDUINO
+            </span>
+<h1>
+              Studijní otázky · Test 2
+            </h1>
+<p>
+              Úvod do Arduina, LED, tlačítka, analogové vstupy a čtení programu.
+            </p>
+<div class="test-meta">
+<span>
+                28 otázek
+              </span>
+<span>
+                Studijní verze
+              </span>
+</div>
+</div>
+<div aria-hidden="true" class="test-art">
+            { ? }
+          </div>
+</header>
+<section class="test-intro">
+<div>
+<h2>
+              Příprava na test
+            </h2>
+<p>
+              Studijní sada všech 28 otázek. Můžete je vyplňovat na webu nebo si je vytisknout na papír.
+            </p>
+</div>
+<div class="identity">
+<label>
+              Jméno a příjmení
+              <input autocomplete="name" placeholder="Jméno a příjmení" type="text"/>
+</label>
+<label>
+              Datum
+              <input type="date"/>
+</label>
+</div>
+</section>
+<div class="test-section-heading" id="otazky">
+<span>
+            TEST · VŠECHNY OTÁZKY
+          </span>
+<h2>
+            28 otázek k procvičení
+          </h2>
+<p>
+            Všechna zadání pohromadě, bez dělení na skupiny.
+          </p>
+</div>
+<div class="questions">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="question-card" id="otazka-1"><div class="question-top"><span class="question-number">01</span><h2>Popište katodu u LED diody.</h2></div><div class="question-content"><label class="input-label" for="odpoved-1">Prostor pro odpověď</label><textarea id="odpoved-1" name="odpoved-1" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-2"><div class="question-top"><span class="question-number">02</span><h2>Servo má vodiče pro napájení, zem a řídicí signál. Který z nich připojíte na digitální pin D9?</h2></div><div class="question-content"><label class="input-label" for="odpoved-2">Prostor pro odpověď</label><textarea id="odpoved-2" name="odpoved-2" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-3"><div class="question-top"><span class="question-number">03</span><h2>Co vypíše tento cyklus? Kolikrát se jeho tělo provede?</h2></div><div class="question-content"><pre class="pra-code"><code>for (int i = 0; i &lt;= 15; i++) {
+  Serial.println(i);
+}</code></pre><div class="options"><label><input name="q3" type="radio" value="a"/> Vypíše čísla 0 až 15 včetně, každé na samostatný řádek. Tělo se provede 16krát.</label><label><input name="q3" type="radio" value="b"/> Vypíše čísla 1 až 14 včetně, každé na samostatný řádek. Tělo se provede 14krát.</label><label><input name="q3" type="radio" value="c"/> Vypíše čísla 1 až 15 včetně, každé na samostatný řádek. Tělo se provede 15krát.</label><label><input name="q3" type="radio" value="d"/> Vypíše čísla 0 až 15 včetně, každé na samostatný řádek. Tělo se provede 17krát.</label></div></div></article><article class="question-card" id="otazka-4"><div class="question-top"><span class="question-number">04</span><h2>U serva připojeného k Arduinu uveďte účel tří vodičů.</h2></div><div class="question-content"><label class="input-label" for="odpoved-4">Prostor pro odpověď</label><textarea id="odpoved-4" name="odpoved-4" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-5"><div class="question-top"><span class="question-number">05</span><h2>Jaký rozsah hodnot vrací analogRead() na Arduino Uno?</h2></div><div class="question-content"><div class="options"><label><input name="q5" type="radio" value="a"/> 0–255</label><label><input name="q5" type="radio" value="b"/> 0–1023</label><label><input name="q5" type="radio" value="c"/> 0–5</label><label><input name="q5" type="radio" value="d"/> pouze LOW nebo HIGH</label></div></div></article><article class="question-card" id="otazka-6"><div class="question-top"><span class="question-number">06</span><h2>Servo je řídicím vodičem zapojené na D9, v programu je servo1.attach(6). V čem je chyba?</h2></div><div class="question-content"><label class="input-label" for="odpoved-6">Prostor pro odpověď</label><textarea id="odpoved-6" name="odpoved-6" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-7"><div class="question-top"><span class="question-number">07</span><h2>Popište funkci nepájivého pole.</h2></div><div class="question-content"><label class="input-label" for="odpoved-7">Prostor pro odpověď</label><textarea id="odpoved-7" name="odpoved-7" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-8"><div class="question-top"><span class="question-number">08</span><h2>Anoda LED je kratší vývod a připojuje se ke GND.</h2></div><div class="question-content"><div class="options"><label><input name="q8" type="radio" value="pravda"/> Pravda</label><label><input name="q8" type="radio" value="lez"/> Lež</label></div></div></article><article class="question-card" id="otazka-9"><div class="question-top"><span class="question-number">09</span><h2>Je daný kód správně napsaný? Pokud není, najděte a opravte chyby.</h2></div><div class="question-content"><pre class="pra-code"><code>const byte pinCervena = 11;
+const byte pinZelena = 10;
+const byte pinModra = 9;
+
+void setup() {
+  pinMode(pinCervena, OUTPUT);
+  pinMode(pinZelena, INPUT);
+  pinMode(pinzluta, OUTPUT);
+}
+
+void loop() {
+  analogWrite(pinCervena, 255);
+  analogWrite(pinZelena, 0);
+  analogWrite(pinModra, 0);
+}</code></pre><label class="input-label" for="odpoved-9">Prostor pro odpověď</label><textarea id="odpoved-9" name="odpoved-9" placeholder="Sem napište odpověď…" rows="7"></textarea></div></article><article class="question-card" id="otazka-10"><div class="question-top"><span class="question-number">10</span><h2>RGB LED se společnou katodou: kam připojíte společný vývod a proč potřebuje každá barevná složka vlastní rezistor?</h2></div><div class="question-content"><label class="input-label" for="odpoved-10">Prostor pro odpověď</label><textarea id="odpoved-10" name="odpoved-10" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-11"><div class="question-top"><span class="question-number">11</span><h2>Běžné polohové servo se při správném řízení samo snaží dosáhnout zadaného úhlu pomocí vnitřní zpětné vazby.</h2></div><div class="question-content"><div class="options"><label><input name="q11" type="radio" value="pravda"/> Pravda</label><label><input name="q11" type="radio" value="lez"/> Lež</label></div></div></article><article class="question-card" id="otazka-12"><div class="question-top"><span class="question-number">12</span><h2>Popište anodu u LED diody.</h2></div><div class="question-content"><label class="input-label" for="odpoved-12">Prostor pro odpověď</label><textarea id="odpoved-12" name="odpoved-12" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-13"><div class="question-top"><span class="question-number">13</span><h2>Polohové servo se po zadání požadovaného úhlu snaží polohu udržet.</h2></div><div class="question-content"><div class="options"><label><input name="q13" type="radio" value="pravda"/> Pravda</label><label><input name="q13" type="radio" value="lez"/> Lež</label></div></div></article><article class="question-card" id="otazka-14"><div class="question-top"><span class="question-number">14</span><h2>K čemu slouží void setup() a kolikrát se spustí?</h2></div><div class="question-content"><label class="input-label" for="odpoved-14">Prostor pro odpověď</label><textarea id="odpoved-14" name="odpoved-14" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-15"><div class="question-top"><span class="question-number">15</span><h2>Co znamená střída PWM 50 %?</h2></div><div class="question-content"><div class="options"><label><input name="q15" type="radio" value="a"/> Pin je polovinu periody zapnutý</label><label><input name="q15" type="radio" value="b"/> Napětí je stále 2,5 V</label><label><input name="q15" type="radio" value="c"/> LED svítí 50 sekund</label><label><input name="q15" type="radio" value="d"/> Frekvence je 50 Hz</label></div></div></article><article class="question-card" id="otazka-16"><div class="question-top"><span class="question-number">16</span><h2>U RGB LED se společnou katodou chcete rozsvítit pouze červenou složku. Kam patří společný vývod a co nastavíte pro zelenou a modrou složku?</h2></div><div class="question-content"><label class="input-label" for="odpoved-16">Prostor pro odpověď</label><textarea id="odpoved-16" name="odpoved-16" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-17"><div class="question-top"><span class="question-number">17</span><h2>Jaký stav přečte Arduino při stisknutí tlačítka mezi D2 a GND v režimu INPUT_PULLUP?</h2></div><div class="question-content"><div class="options"><label><input name="q17" type="radio" value="a"/> HIGH</label><label><input name="q17" type="radio" value="b"/> LOW</label><label><input name="q17" type="radio" value="c"/> 1023</label><label><input name="q17" type="radio" value="d"/> 255</label></div></div></article><article class="question-card" id="otazka-18"><div class="question-top"><span class="question-number">18</span><h2>Nakreslete schématickou značku LED diody.</h2></div><div class="question-content"><p class="helper">Nakreslete značku do kreslicí plochy. Použijte rovné čáry.</p><div class="draw-area"></div><label class="input-label" for="odpoved-18">Prostor pro kreslení</label><textarea id="odpoved-18" name="odpoved-18" placeholder="Zde lze doplnit krátké vysvětlení." rows="3"></textarea></div></article><article class="question-card" id="otazka-19"><div class="question-top"><span class="question-number">19</span><h2>Nakreslete schématickou značku RGB LED.</h2></div><div class="question-content"><p class="helper">Nakreslete značku do kreslicí plochy. Použijte rovné čáry.</p><div class="draw-area"></div><label class="input-label" for="odpoved-19">Prostor pro kreslení</label><textarea id="odpoved-19" name="odpoved-19" placeholder="Zde lze doplnit krátké vysvětlení." rows="3"></textarea></div></article><article class="question-card" id="otazka-20"><div class="question-top"><span class="question-number">20</span><h2>V programu chceme, aby LED svítila 500 ms a potom byla 500 ms zhasnutá. Doplňte chybějící příkazy.</h2></div><div class="question-content"><pre class="pra-code"><code>int led = 13;
+
+void setup() {
+  _______________________;
+}
+
+void loop() {
+  digitalWrite(led, ______);
+  delay(500);
+  digitalWrite(led, ______);
+  delay(500);
+}</code></pre><label class="input-label" for="odpoved-20">Prostor pro odpověď</label><textarea id="odpoved-20" name="odpoved-20" placeholder="Sem napište odpověď…" rows="7"></textarea></div></article><article class="question-card" id="otazka-21"><div class="question-top"><span class="question-number">21</span><h2>K čemu slouží void loop() a jak často se její kód opakuje?</h2></div><div class="question-content"><label class="input-label" for="odpoved-21">Prostor pro odpověď</label><textarea id="odpoved-21" name="odpoved-21" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-22"><div class="question-top"><span class="question-number">22</span><h2>Potenciometr má krajní vývody na 5 V a GND. Kam připojíte prostřední vývod, chcete-li jeho polohu měřit Arduinem?</h2></div><div class="question-content"><label class="input-label" for="odpoved-22">Prostor pro odpověď</label><textarea id="odpoved-22" name="odpoved-22" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-23"><div class="question-top"><span class="question-number">23</span><h2>Servo napájíte z externího zdroje. Proč spojíte GND zdroje a GND Arduina?</h2></div><div class="question-content"><label class="input-label" for="odpoved-23">Prostor pro odpověď</label><textarea id="odpoved-23" name="odpoved-23" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-24"><div class="question-top"><span class="question-number">24</span><h2>U tlačítka mezi D2 a GND s nastavením INPUT_PULLUP platí: stisknuté = LOW, uvolněné = HIGH.</h2></div><div class="question-content"><div class="options"><label><input name="q24" type="radio" value="pravda"/> Pravda</label><label><input name="q24" type="radio" value="lez"/> Lež</label></div></div></article><article class="question-card" id="otazka-25"><div class="question-top"><span class="question-number">25</span><h2>PWM na digitálním pinu znamená rychlé střídání stavů LOW a HIGH, nikoli stálé analogové napětí.</h2></div><div class="question-content"><div class="options"><label><input name="q25" type="radio" value="pravda"/> Pravda</label><label><input name="q25" type="radio" value="lez"/> Lež</label></div></div></article><article class="question-card" id="otazka-26"><div class="question-top"><span class="question-number">26</span><h2>Co přibližně znamená analogWrite(9, 255) pro LED připojenou na PWM pin D9?</h2></div><div class="question-content"><label class="input-label" for="odpoved-26">Prostor pro odpověď</label><textarea id="odpoved-26" name="odpoved-26" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-27"><div class="question-top"><span class="question-number">27</span><h2>K čemu slouží potenciometr a jakou veličinu lze jeho otočením změnit na analogovém vstupu?</h2></div><div class="question-content"><label class="input-label" for="odpoved-27">Prostor pro odpověď</label><textarea id="odpoved-27" name="odpoved-27" placeholder="Sem napište odpověď…" rows="4"></textarea></div></article><article class="question-card" id="otazka-28"><div class="question-top"><span class="question-number">28</span><h2>Která hodnota nastaví funkcí analogWrite() přibližně poloviční střídu PWM?</h2></div><div class="question-content"><div class="options"><label><input name="q28" type="radio" value="a"/> 0</label><label><input name="q28" type="radio" value="b"/> 50</label><label><input name="q28" type="radio" value="c"/> 128</label><label><input name="q28" type="radio" value="d"/> 1023</label></div></div></article></div>
+<div class="test-bottom">
+<p>
+            Studijní otázky k procvičování. Vyplněné údaje se neodesílají.
+          </p>
+<div>
+<button class="print-button" onclick="window.print()" type="button">
+              Vytisknout test
+            </button>
+<a class="back-button" href="index.html">
+              Zpět na hlavní stránku
+            </a>
+<a class="back-button" href="test-ostry.html">
+              Ostrý test A/B
+            </a>
+</div>
+</div>
+</main>
+<footer class="footer">
+<div class="footer-inner">
+<div>
+<strong>
+              Praxe – Arduino
+            </strong>
+<p>
+              Gymnázium a SPŠEI Frenštát pod Radhoštěm
+            </p>
+</div>
+</div>
+</footer>
+</div>
+</body>
+</html>

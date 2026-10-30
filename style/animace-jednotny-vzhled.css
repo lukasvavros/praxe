@@ -59,3 +59,22 @@ body{margin:0!important}
 /* Barva nadpisů, popisků a nápověd, které původní CSS vykreslovalo téměř neviditelně. */
 :is(.traffic-demo,.button-demo,.pot-demo) :is(.traffic-layout,.button-layout,.pot-layout) :is(label,small) {color:var(--sim-muted)!important}
 :is(.traffic-demo,.button-demo,.pot-demo) :is(.traffic-layout,.button-layout,.pot-layout) :is(h2,h3,h4,strong) {color:var(--sim-ink)}
+
+/* Světlý i tmavý režim */
+#button-demo [data-why],
+#button-demo .button-why,
+#button-demo [data-why] * {
+  background-color: #254448 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Zvýraznění vysvětlení */
+#button-demo [data-why] {
+  display: block;
+  padding: 12px 14px;
+  border-left: 4px solid #79dcd4 !important;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.6;
+}

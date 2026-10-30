@@ -60,21 +60,38 @@ body{margin:0!important}
 :is(.traffic-demo,.button-demo,.pot-demo) :is(.traffic-layout,.button-layout,.pot-layout) :is(label,small) {color:var(--sim-muted)!important}
 :is(.traffic-demo,.button-demo,.pot-demo) :is(.traffic-layout,.button-layout,.pot-layout) :is(h2,h3,h4,strong) {color:var(--sim-ink)}
 
-/* Světlý i tmavý režim */
-#button-demo [data-why],
-#button-demo .button-why,
-#button-demo [data-why] * {
-  background-color: #254448 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+
+/* ==========================================
+   TLAČÍTKO – VYSVĚTLENÍ INPUT_PULLUP
+   Světlý a tmavý režim
+========================================== */
+
+/* Světlý režim */
+html:not([data-theme="dark"])
+#button-demo [data-why] {
+  background: #f1f7f6 !important;
+  color: #172c30 !important;
+  -webkit-text-fill-color: #172c30 !important;
+  border: 1px solid #cbdedb !important;
+  border-left: 4px solid #087f83 !important;
   opacity: 1 !important;
 }
 
-/* Zvýraznění vysvětlení */
+/* Tmavý režim */
+html[data-theme="dark"]
+#button-demo [data-why] {
+  background: #254448 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #365c60 !important;
+  border-left: 4px solid #79dcd4 !important;
+  opacity: 1 !important;
+}
+
+/* Společné rozměry rámečku */
 #button-demo [data-why] {
   display: block;
   padding: 12px 14px;
-  border-left: 4px solid #79dcd4 !important;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px;
   line-height: 1.6;
 }

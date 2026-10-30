@@ -1,39 +1,576 @@
 <!DOCTYPE html>
-
 <html data-theme="light" lang="cs">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="light dark" name="color-scheme"/>
-<title>Praxe – Arduino | Výukové materiály</title>
-<script>try{const t=localStorage.getItem('pra-arduino-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
-<link href="style/uvod.css" rel="stylesheet"/>
-<script defer="" src="script/uvod-tema.js"></script>
-</head>
-<body>
-<div class="site-shell" id="nahoru">
-<header class="topbar">
-<a aria-label="Praxe Arduino – úvodní stránka" class="brand" href="index.html"><span aria-hidden="true" class="brand-mark">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
-<nav aria-label="Hlavní navigace" class="top-links"><a href="#materialy">Materiály</a><a href="#projekt">Projekt</a><a href="#kapitoly">Kapitoly</a><a href="#testy">Testy</a></nav>
-<button aria-label="Přepnout barevný režim" aria-pressed="false" class="theme-toggle" type="button"><span aria-hidden="true">☾</span><span class="theme-label">Tmavý režim</span></button>
-</header>
-<main class="page">
-<section aria-labelledby="page-title" class="hero">
-<div class="hero-content"><div class="eyebrow"><span class="eyebrow-dot"></span> VÝUKOVÉ MATERIÁLY · 3. ROČNÍK</div><h1 id="page-title">Praxe – <em>Arduino</em></h1>
-<p class="hero-intro">Od prvního programu až po vlastní elektronický projekt. Všechna výuka, praktická zadání a potřebné podklady na jednom místě.</p>
-<div class="hero-buttons"><a class="primary-button" href="#kapitoly">Procházet kapitoly <span aria-hidden="true">→</span></a><a class="secondary-button" href="#testy">Přejít na testy</a></div>
-</div><div aria-hidden="true" class="hero-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-board"><div class="visual-board-head">ARDUINO <span>UNO</span></div><div class="visual-board-chip"></div><div class="visual-board-pins"></div><div class="visual-led"></div><div class="visual-board-label">DIGITAL / ANALOG / PWM</div></div><div class="visual-caption">INPUT <b>→</b> CODE <b>→</b> OUTPUT</div></div>
-</section>
-<section class="intro-card"><div aria-hidden="true" class="intro-accent">i</div><p>Materiály jsou určeny pro předmět <strong>Praxe – Arduino</strong> ve 3. ročníku Gymnázia a Střední průmyslové školy elektrotechniky a informatiky ve Frenštátě pod Radhoštěm. Postupujte po kapitolách, zkoušejte si zapojení a ověřujte své znalosti v testech.</p></section>
-<section class="content-section" id="materialy"><div class="section-heading"><div><span class="section-kicker">PODKLADY K VÝUCE</span><h2>Obecné informace</h2></div><p>Pravidla, přehled příkazů a oficiální dokumentace.</p></div><div class="resource-grid"><a class="resource-card" href="hodnoceni-predmetu.html" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="resource-icon">▤</span><span class="resource-text"><strong>Hodnocení předmětu</strong><span>Pravidla hodnocení, požadavky a podmínky splnění předmětu.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a>
-<a class="resource-card" href="dokumenty/Arduino_tahak.pdf" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="resource-icon">{ }</span><span class="resource-text"><strong>Tahák Arduino</strong><span>Arduino tahák vytvořený Tomášem Chovancem.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a>
-<a class="resource-card" href="https://docs.arduino.cc/language-reference/" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="resource-icon">↗</span><span class="resource-text"><strong>Dokumentace Arduino</strong><span>Oficiální dokumentace k deskám, programování a knihovnám Arduino.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a></div></section>
-<section class="content-section" id="projekt"><div class="section-heading"><div><span class="section-kicker">SAMOSTATNÁ PRÁCE</span><h2>Projekt</h2></div><p>Podklady a informace k vašemu vlastnímu projektu.</p></div><div class="resource-grid project-grid"><a class="resource-card" href="projekt-obecne-informace.html" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="resource-icon">⚙</span><span class="resource-text"><strong>Obecné informace</strong><span>Základní informace k samostatnému projektu, zadání, termínům a odevzdání.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a>
-<a class="resource-card" href="projekty-tridy-3a.html" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="resource-icon">▦</span><span class="resource-text"><strong>Projekty třídy 3A</strong><span>Přehled projektů, rozdělení témat a informace pro třídu 3A.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a></div></section>
-<section class="content-section" id="kapitoly"><div class="section-heading"><div><span class="section-kicker">VÝUKA KROK ZA KROKEM</span><h2>Kapitoly</h2></div><p>Vyberte si téma a pokračujte v praktické výuce.</p></div><div class="chapter-grid"><a class="chapter-card" href="kapitola1.html"><span class="chapter-number">01</span><span class="chapter-title">Úvod do Arduina</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola2.html"><span class="chapter-number">02</span><span class="chapter-title">Digitální a analogový vstup Arduina</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola3.html"><span class="chapter-number">03</span><span class="chapter-title">Servomotor</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola4.html"><span class="chapter-number">04</span><span class="chapter-title">PWM s Arduinem</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola5.html"><span class="chapter-number">05</span><span class="chapter-title">LCD displej a sběrnice I2C</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola6.html"><span class="chapter-number">06</span><span class="chapter-title">Teplotní a vlhkostní čidlo DHT11</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola7.html"><span class="chapter-number">07</span><span class="chapter-title">Fotorezistor</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola8.html"><span class="chapter-number">08</span><span class="chapter-title">Ultrazvukový senzor</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola9.html"><span class="chapter-number">09</span><span class="chapter-title">Krokový motor</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola-10.html"><span class="chapter-number">10</span><span class="chapter-title">Kapitola 10</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola-11.html"><span class="chapter-number">11</span><span class="chapter-title">Kapitola 11</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola-12.html"><span class="chapter-number">12</span><span class="chapter-title">Kapitola 12</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola-13.html"><span class="chapter-number">13</span><span class="chapter-title">Kapitola 13</span><span aria-hidden="true" class="chapter-arrow">↗</span></a><a class="chapter-card" href="kapitola-14.html"><span class="chapter-number">14</span><span class="chapter-title">Kapitola 14</span><span aria-hidden="true" class="chapter-arrow">↗</span></a></div></section>
-<section class="content-section tests-section" id="testy"><div class="section-heading"><div><span class="section-kicker">OVĚŘENÍ ZNALOSTÍ</span><h2>Testy</h2></div><span class="soft-label">6 testů k dispozici</span></div>
-<div class="tests-layout"><div><p class="tests-lead">Vyzkoušejte si, co už umíte.</p><p>Testy budou sloužit k procvičení učiva z jednotlivých kapitol a k přípravě na ověřování znalostí. Zaměří se na principy Arduina, elektronické součástky, zapojení i porozumění programům.</p><a class="resource-card" href="test1.html" style="margin-top:18px;max-width:540px"><span aria-hidden="true" class="resource-icon">01</span><span class="resource-text"><strong>Test 1 – Arduino</strong><span>18 studijních otázek z úvodu do Arduina, zapojování a programování.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a><a class="resource-card" href="test-ostry.html" style="margin-top:12px;max-width:540px"><span aria-hidden="true" class="resource-icon">A/B</span><span class="resource-text"><strong>Ostrý test</strong><span>Náhodně vygenerovaný test</span></span><span aria-hidden="true" class="card-arrow">↗</span></a><a class="resource-card" href="test2.html" style="margin-top:12px;max-width:540px"><span aria-hidden="true" class="resource-icon">02</span><span class="resource-text"><strong>Test 2 – Arduino</strong><span>28 otázek z kapitol 1–4.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a><a class="resource-card" href="test2-ostry.html" style="margin-top:12px;max-width:540px"><span aria-hidden="true" class="resource-icon">A/B</span><span class="resource-text"><strong>Ostrý test 2</strong><span>Devět náhodně vybraných otázek.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a><a class="resource-card" href="test3.html" style="margin-top:12px;max-width:540px"><span aria-hidden="true" class="resource-icon">03</span><span class="resource-text"><strong>Test 3 – praktický (A–H)</strong><span>Osm variant: tlačítko nebo potenciometr, dvě LED, programování a sériový monitor.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a><a class="resource-card" href="test3-ostry.html" style="margin-top:12px;max-width:540px"><span aria-hidden="true" class="resource-icon">A–H</span><span class="resource-text"><strong>Ostrý test 3</strong><span>Jedna náhodná praktická varianta, vložení kódu z Arduino IDE a odevzdání na GitHub.</span></span><span aria-hidden="true" class="card-arrow">↗</span></a></div><div aria-hidden="true" class="tests-icon"><span>?</span><div class="tests-lines"><i></i><i></i><i></i></div></div></div>
-</section>
-</main>
-<footer class="footer"><div class="footer-inner"><div><strong>Praxe – Arduino</strong><p>Gymnázium a SPŠEI Frenštát pod Radhoštěm</p></div><div class="footer-contact"><span>Vytvořil: <strong>Lukáš Vavroš</strong></span><a href="mailto:lukas.vavros@frengp.cz">lukas.vavros@frengp.cz</a></div></div></footer>
-</div></body></html>
+ <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="light dark" name="color-scheme"/>
+  <title>
+   Praxe &ndash; Arduino | V&yacute;ukov&eacute; materi&aacute;ly
+  </title>
+  <script>
+   try{const t=localStorage.getItem('pra-arduino-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}
+  </script>
+  <link href="style/uvod.css" rel="stylesheet"/>
+  <script defer="" src="script/uvod-tema.js">
+  </script>
+ </head>
+ <body>
+  <div class="site-shell" id="nahoru">
+   <header class="topbar">
+    <a aria-label="Praxe Arduino &ndash; &uacute;vodn&iacute; str&aacute;nka" class="brand" href="index.html">
+     <span aria-hidden="true" class="brand-mark">
+      &infin;
+     </span>
+     <span>
+      PRAXE
+      <b>
+       ARDUINO
+      </b>
+     </span>
+    </a>
+    <nav aria-label="Hlavn&iacute; navigace" class="top-links">
+     <a href="#materialy">
+      Materi&aacute;ly
+     </a>
+     <a href="#projekt">
+      Projekt
+     </a>
+     <a href="#kapitoly">
+      Kapitoly
+     </a>
+     <a href="#testy">
+      Testy
+     </a>
+    </nav>
+    <button aria-label="P&rcaron;epnout barevn&yacute; re&zcaron;im" aria-pressed="false" class="theme-toggle" type="button">
+     <span aria-hidden="true">
+      ☾
+     </span>
+     <span class="theme-label">
+      Tmav&yacute; re&zcaron;im
+     </span>
+    </button>
+   </header>
+   <main class="page">
+    <section aria-labelledby="page-title" class="hero">
+     <div class="hero-content">
+      <div class="eyebrow">
+       <span class="eyebrow-dot">
+       </span>
+       V&Yacute;UKOV&Eacute; MATERI&Aacute;LY &middot; 3. RO&Ccaron;N&Iacute;K
+      </div>
+      <h1 id="page-title">
+       Praxe &ndash;
+       <em>
+        Arduino
+       </em>
+      </h1>
+      <p class="hero-intro">
+       Od prvn&iacute;ho programu a&zcaron; po vlastn&iacute; elektronick&yacute; projekt. V&scaron;echna v&yacute;uka, praktick&aacute; zad&aacute;n&iacute; a pot&rcaron;ebn&eacute; podklady na jednom m&iacute;st&ecaron;.
+      </p>
+      <div class="hero-buttons">
+       <a class="primary-button" href="#kapitoly">
+        Proch&aacute;zet kapitoly
+        <span aria-hidden="true">
+         &rarr;
+        </span>
+       </a>
+       <a class="secondary-button" href="#testy">
+        P&rcaron;ej&iacute;t na testy
+       </a>
+      </div>
+     </div>
+     <div aria-hidden="true" class="hero-visual">
+      <div class="visual-orbit orbit-one">
+      </div>
+      <div class="visual-orbit orbit-two">
+      </div>
+      <div class="visual-board">
+       <div class="visual-board-head">
+        ARDUINO
+        <span>
+         UNO
+        </span>
+       </div>
+       <div class="visual-board-chip">
+       </div>
+       <div class="visual-board-pins">
+       </div>
+       <div class="visual-led">
+       </div>
+       <div class="visual-board-label">
+        DIGITAL / ANALOG / PWM
+       </div>
+      </div>
+      <div class="visual-caption">
+       INPUT
+       <b>
+        &rarr;
+       </b>
+       CODE
+       <b>
+        &rarr;
+       </b>
+       OUTPUT
+      </div>
+     </div>
+    </section>
+    <section class="intro-card">
+     <div aria-hidden="true" class="intro-accent">
+      i
+     </div>
+     <p>
+      Materi&aacute;ly jsou ur&ccaron;eny pro p&rcaron;edm&ecaron;t
+      <strong>
+       Praxe &ndash; Arduino
+      </strong>
+      ve 3. ro&ccaron;n&iacute;ku Gymn&aacute;zia a St&rcaron;edn&iacute; pr&uring;myslov&eacute; &scaron;koly elektrotechniky a informatiky ve Fren&scaron;t&aacute;t&ecaron; pod Radho&scaron;t&ecaron;m. Postupujte po kapitol&aacute;ch, zkou&scaron;ejte si zapojen&iacute; a ov&ecaron;&rcaron;ujte sv&eacute; znalosti v testech.
+     </p>
+    </section>
+    <section class="content-section" id="materialy">
+     <div class="section-heading">
+      <div>
+       <span class="section-kicker">
+        PODKLADY K V&Yacute;UCE
+       </span>
+       <h2>
+        Obecn&eacute; informace
+       </h2>
+      </div>
+      <p>
+       Pravidla, p&rcaron;ehled p&rcaron;&iacute;kaz&uring; a ofici&aacute;ln&iacute; dokumentace.
+      </p>
+     </div>
+     <div class="resource-grid">
+      <a class="resource-card" href="hodnoceni-predmetu.html" rel="noopener noreferrer" target="_blank">
+       <span aria-hidden="true" class="resource-icon">
+        ▤
+       </span>
+       <span class="resource-text">
+        <strong>
+         Hodnocen&iacute; p&rcaron;edm&ecaron;tu
+        </strong>
+        <span>
+         Pravidla hodnocen&iacute;, po&zcaron;adavky a podm&iacute;nky spln&ecaron;n&iacute; p&rcaron;edm&ecaron;tu.
+        </span>
+       </span>
+       <span aria-hidden="true" class="card-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="resource-card" href="dokumenty/Arduino_tahak.pdf" rel="noopener noreferrer" target="_blank">
+       <span aria-hidden="true" class="resource-icon">
+        { }
+       </span>
+       <span class="resource-text">
+        <strong>
+         Tah&aacute;k Arduino
+        </strong>
+        <span>
+         Arduino tah&aacute;k vytvo&rcaron;en&yacute; Tom&aacute;&scaron;em Chovancem.
+        </span>
+       </span>
+       <span aria-hidden="true" class="card-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="resource-card" href="https://docs.arduino.cc/language-reference/" rel="noopener noreferrer" target="_blank">
+       <span aria-hidden="true" class="resource-icon">
+        &nearrow;
+       </span>
+       <span class="resource-text">
+        <strong>
+         Dokumentace Arduino
+        </strong>
+        <span>
+         Ofici&aacute;ln&iacute; dokumentace k desk&aacute;m, programov&aacute;n&iacute; a knihovn&aacute;m Arduino.
+        </span>
+       </span>
+       <span aria-hidden="true" class="card-arrow">
+        &nearrow;
+       </span>
+      </a>
+     </div>
+    </section>
+    <section class="content-section" id="projekt">
+     <div class="section-heading">
+      <div>
+       <span class="section-kicker">
+        SAMOSTATN&Aacute; PR&Aacute;CE
+       </span>
+       <h2>
+        Projekt
+       </h2>
+      </div>
+      <p>
+       Podklady a informace k va&scaron;emu vlastn&iacute;mu projektu.
+      </p>
+     </div>
+     <div class="resource-grid project-grid">
+      <a class="resource-card" href="projekt-obecne-informace.html" rel="noopener noreferrer" target="_blank">
+       <span aria-hidden="true" class="resource-icon">
+        ⚙
+       </span>
+       <span class="resource-text">
+        <strong>
+         Obecn&eacute; informace
+        </strong>
+        <span>
+         Z&aacute;kladn&iacute; informace k samostatn&eacute;mu projektu, zad&aacute;n&iacute;, term&iacute;n&uring;m a odevzd&aacute;n&iacute;.
+        </span>
+       </span>
+       <span aria-hidden="true" class="card-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="resource-card" href="projekty-tridy-3a.html" rel="noopener noreferrer" target="_blank">
+       <span aria-hidden="true" class="resource-icon">
+        ▦
+       </span>
+       <span class="resource-text">
+        <strong>
+         Projekty t&rcaron;&iacute;dy 3A
+        </strong>
+        <span>
+         P&rcaron;ehled projekt&uring;, rozd&ecaron;len&iacute; t&eacute;mat a informace pro t&rcaron;&iacute;du 3A.
+        </span>
+       </span>
+       <span aria-hidden="true" class="card-arrow">
+        &nearrow;
+       </span>
+      </a>
+     </div>
+    </section>
+    <section class="content-section" id="kapitoly">
+     <div class="section-heading">
+      <div>
+       <span class="section-kicker">
+        V&Yacute;UKA KROK ZA KROKEM
+       </span>
+       <h2>
+        Kapitoly
+       </h2>
+      </div>
+      <p>
+       Vyberte si t&eacute;ma a pokra&ccaron;ujte v praktick&eacute; v&yacute;uce.
+      </p>
+     </div>
+     <div class="chapter-grid">
+      <a class="chapter-card" href="kapitola1.html">
+       <span class="chapter-number">
+        01
+       </span>
+       <span class="chapter-title">
+        &Uacute;vod do Arduina
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola2.html">
+       <span class="chapter-number">
+        02
+       </span>
+       <span class="chapter-title">
+        Digit&aacute;ln&iacute; a analogov&yacute; vstup Arduina
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola3.html">
+       <span class="chapter-number">
+        03
+       </span>
+       <span class="chapter-title">
+        Servomotor
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola4.html">
+       <span class="chapter-number">
+        04
+       </span>
+       <span class="chapter-title">
+        PWM s Arduinem
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola5.html">
+       <span class="chapter-number">
+        05
+       </span>
+       <span class="chapter-title">
+        LCD displej a sb&ecaron;rnice I2C
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola6.html">
+       <span class="chapter-number">
+        06
+       </span>
+       <span class="chapter-title">
+        Teplotn&iacute; a vlhkostn&iacute; &ccaron;idlo DHT11
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola7.html">
+       <span class="chapter-number">
+        07
+       </span>
+       <span class="chapter-title">
+        Fotorezistor
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola8.html">
+       <span class="chapter-number">
+        08
+       </span>
+       <span class="chapter-title">
+        Ultrazvukov&yacute; senzor
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola9.html">
+       <span class="chapter-number">
+        09
+       </span>
+       <span class="chapter-title">
+        Krokov&yacute; motor
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola-10.html">
+       <span class="chapter-number">
+        10
+       </span>
+       <span class="chapter-title">
+        Kapitola 10
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola-11.html">
+       <span class="chapter-number">
+        11
+       </span>
+       <span class="chapter-title">
+        Kapitola 11
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola-12.html">
+       <span class="chapter-number">
+        12
+       </span>
+       <span class="chapter-title">
+        Kapitola 12
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola-13.html">
+       <span class="chapter-number">
+        13
+       </span>
+       <span class="chapter-title">
+        Kapitola 13
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+      <a class="chapter-card" href="kapitola-14.html">
+       <span class="chapter-number">
+        14
+       </span>
+       <span class="chapter-title">
+        Kapitola 14
+       </span>
+       <span aria-hidden="true" class="chapter-arrow">
+        &nearrow;
+       </span>
+      </a>
+     </div>
+    </section>
+    <section class="content-section tests-section" id="testy">
+     <div class="section-heading">
+      <div>
+       <span class="section-kicker">
+        OV&Ecaron;&Rcaron;EN&Iacute; ZNALOST&Iacute;
+       </span>
+       <h2>
+        Testy
+       </h2>
+      </div>
+      <span class="soft-label">
+       6 test&uring; k dispozici
+      </span>
+     </div>
+     <div class="tests-layout">
+      <div>
+       <p class="tests-lead">
+        Vyzkou&scaron;ejte si, co u&zcaron; um&iacute;te.
+       </p>
+       <p>
+        Procvi&ccaron;ujte si zapojen&iacute;, programov&aacute;n&iacute; a pr&aacute;ci s Arduinem. Cvi&ccaron;n&eacute; testy slou&zcaron;&iacute; k p&rcaron;&iacute;prav&ecaron;, ostr&eacute; testy jsou chr&aacute;n&ecaron;n&eacute; heslem a umo&zcaron;&ncaron;uj&iacute; odevzd&aacute;n&iacute;.
+       </p>
+       <a class="resource-card" href="test1.html" style="margin-top:18px;max-width:540px">
+        <span aria-hidden="true" class="resource-icon">
+         01
+        </span>
+        <span class="resource-text">
+         <strong>
+          Test 1 &ndash; Arduino
+         </strong>
+         <span>
+          18 studijn&iacute;ch ot&aacute;zek z &uacute;vodu do Arduina, zapojov&aacute;n&iacute; a programov&aacute;n&iacute;.
+         </span>
+        </span>
+        <span aria-hidden="true" class="card-arrow">
+         &nearrow;
+        </span>
+       </a>
+       <a class="resource-card" href="test-ostry.html" style="margin-top:12px;max-width:540px">
+        <span aria-hidden="true" class="resource-icon">
+         🔒
+        </span>
+        <span class="resource-text">
+         <strong>
+          Ostr&yacute; test 1
+         </strong>
+         <span>
+          9 n&aacute;hodn&ecaron; vybran&yacute;ch ot&aacute;zek z Testu 1 &middot; p&rcaron;&iacute;stup na heslo.
+         </span>
+        </span>
+        <span aria-hidden="true" class="card-arrow">
+         &nearrow;
+        </span>
+       </a>
+       <a class="resource-card" href="test2.html" style="margin-top:12px;max-width:540px">
+        <span aria-hidden="true" class="resource-icon">
+         02
+        </span>
+        <span class="resource-text">
+         <strong>
+          Test 2 &ndash; Arduino
+         </strong>
+         <span>
+          28 ot&aacute;zek z kapitol 1&ndash;4.
+         </span>
+        </span>
+        <span aria-hidden="true" class="card-arrow">
+         &nearrow;
+        </span>
+       </a>
+       <a class="resource-card" href="test2-ostry.html" style="margin-top:12px;max-width:540px">
+        <span aria-hidden="true" class="resource-icon">
+         🔒
+        </span>
+        <span class="resource-text">
+         <strong>
+          Ostr&yacute; test 2
+         </strong>
+         <span>
+          9 n&aacute;hodn&ecaron; vybran&yacute;ch ot&aacute;zek z Testu 2 &middot; p&rcaron;&iacute;stup na heslo.
+         </span>
+        </span>
+        <span aria-hidden="true" class="card-arrow">
+         &nearrow;
+        </span>
+       </a>
+       <a class="resource-card" href="test3.html" style="margin-top:12px;max-width:540px">
+        <span aria-hidden="true" class="resource-icon">
+         03
+        </span>
+        <span class="resource-text">
+         <strong>
+          Test 3 &ndash; praktick&yacute; (A&ndash;H)
+         </strong>
+         <span>
+          Osm variant: tla&ccaron;&iacute;tko nebo potenciometr, dv&ecaron; LED, programov&aacute;n&iacute; a s&eacute;riov&yacute; monitor.
+         </span>
+        </span>
+        <span aria-hidden="true" class="card-arrow">
+         &nearrow;
+        </span>
+       </a>
+       <a class="resource-card" href="test3-ostry.html" style="margin-top:12px;max-width:540px">
+        <span aria-hidden="true" class="resource-icon">
+         🔒
+        </span>
+        <span class="resource-text">
+         <strong>
+          Ostr&yacute; test 3
+         </strong>
+         <span>
+          1 n&aacute;hodn&aacute; praktick&aacute; varianta &middot; k&oacute;d z Arduino IDE a online odevzd&aacute;n&iacute;.
+         </span>
+        </span>
+        <span aria-hidden="true" class="card-arrow">
+         &nearrow;
+        </span>
+       </a>
+      </div>
+      <div aria-hidden="true" class="tests-icon">
+       <span>
+        ?
+       </span>
+       <div class="tests-lines">
+        <i>
+        </i>
+        <i>
+        </i>
+        <i>
+        </i>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="footer">
+    <div class="footer-inner">
+     <div>
+      <strong>
+       Praxe &ndash; Arduino
+      </strong>
+      <p>
+       Gymn&aacute;zium a SP&Scaron;EI Fren&scaron;t&aacute;t pod Radho&scaron;t&ecaron;m
+      </p>
+     </div>
+     <div class="footer-contact">
+      <span>
+       Vytvo&rcaron;il:
+       <strong>
+        Luk&aacute;&scaron; Vavro&scaron;
+       </strong>
+      </span>
+      <a href="mailto:lukas.vavros@frengp.cz">
+       lukas.vavros@frengp.cz
+      </a>
+     </div>
+    </div>
+   </footer>
+  </div>
+ </body>
+</html>
+

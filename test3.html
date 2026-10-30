@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Test 3 – praktický Arduino | Praxe</title>
+<script>
+      try{const t=localStorage.getItem('pra-arduino-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}
+    </script>
+<link href="style/uvod.css" rel="stylesheet"/>
+<link href="style/testy.css" rel="stylesheet"/>
+<link href="style/test-heslo.css" rel="stylesheet"/>
+<script defer="" src="script/uvod-tema.js">
+</script>
+<link href="style/testy-tisk.css" rel="stylesheet"/>
+<link href="style/test3.css?v=1" rel="stylesheet"/></head>
+<body>
+<div class="site-shell">
+<header class="topbar">
+<a class="brand" href="index.html">
+<span aria-hidden="true" class="brand-mark">
+            ∞
+          </span>
+<span>
+            PRAXE
+            <b>
+              ARDUINO
+            </b>
+</span>
+</a>
+<nav class="top-links">
+<a href="index.html">
+            Hlavní stránka
+          </a>
+<a href="#otazky">
+            Otázky
+          </a>
+</nav>
+<button aria-label="Přepnout barevný režim" class="theme-toggle" type="button">
+<span aria-hidden="true">
+            ☾
+          </span>
+<span class="theme-label">
+            Tmavý režim
+          </span>
+</button>
+</header>
+<main class="page test-page" id="test-obsah">
+<header class="test-hero">
+<div>
+<span class="test-eyebrow">
+              OVĚŘENÍ ZNALOSTÍ · PRAXE ARDUINO
+            </span>
+<h1>
+              Studijní otázky · Test 3
+            </h1>
+<p>Praktické úlohy: tlačítko, potenciometr, dvě LED a sériový monitor.</p>
+<div class="test-meta">
+<span>8 praktických variant</span>
+<span>
+                Studijní verze
+              </span>
+</div>
+</div>
+<div aria-hidden="true" class="test-art">
+            { ? }
+          </div>
+</header>
+<section class="test-intro">
+<div>
+<h2>
+              Příprava na test
+            </h2>
+<p>8 praktických variant A–H. Procvičte zapojení, programování i výpis do sériového monitoru.</p>
+</div>
+<div class="identity">
+<label>
+              Jméno a příjmení
+              <input autocomplete="name" placeholder="Jméno a příjmení" type="text"/>
+</label>
+<label>
+              Datum
+              <input type="date"/>
+</label>
+</div>
+</section>
+<div class="test-section-heading" id="otazky">
+<span>
+            TEST · VŠECHNY OTÁZKY
+          </span>
+<h2>8 variant k procvičení</h2>
+<p>Projděte si varianty A–H. Každá úloha je hodnocena maximálně 10 body.</p>
+</div>
+<div class="questions"><article class="question-card test3-variant" data-variant="A" id="otazka-1"><div class="question-top"><span class="question-number">A</span><h2>Varianta A – Přepínání LED tlačítkem</h2></div><div class="question-content"><p><strong>Zapojte</strong> tlačítko na D2, červenou LED na D8 a zelenou na D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Stisknuté tlačítko: svítí červená LED.</li><li>Uvolněné tlačítko: svítí zelená LED.</li><li>Do sériového monitoru vypisujte hodnotu proměnné <code>stavTlacitka</code>.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. U tlačítka zapojeného mezi D2 a GND použijte <code>INPUT_PULLUP</code> (stisk = LOW).</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="B" id="otazka-2"><div class="question-top"><span class="question-number">B</span><h2>Varianta B – Dvě LED současně</h2></div><div class="question-content"><p><strong>Zapojte</strong> tlačítko na D2 a dvě LED na D8 a D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Stisknuté tlačítko: obě LED svítí.</li><li>Uvolněné tlačítko: obě LED nesvítí.</li><li>Do sériového monitoru vypisujte hodnotu proměnné <code>stavTlacitka</code>.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. U tlačítka zapojeného mezi D2 a GND použijte <code>INPUT_PULLUP</code> (stisk = LOW).</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="C" id="otazka-3"><div class="question-top"><span class="question-number">C</span><h2>Varianta C – Vypínání jedné LED</h2></div><div class="question-content"><p><strong>Zapojte</strong> tlačítko na D2, červenou LED na D8 a zelenou na D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Stisknuté tlačítko: svítí pouze zelená LED.</li><li>Uvolněné tlačítko: svítí obě LED.</li><li>Do sériového monitoru vypisujte hodnotu proměnné <code>stavTlacitka</code>.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. U tlačítka zapojeného mezi D2 a GND použijte <code>INPUT_PULLUP</code> (stisk = LOW).</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="D" id="otazka-4"><div class="question-top"><span class="question-number">D</span><h2>Varianta D – Přidání druhé LED tlačítkem</h2></div><div class="question-content"><p><strong>Zapojte</strong> tlačítko na D2, červenou LED na D8 a zelenou na D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Stisknuté tlačítko: svítí obě LED.</li><li>Uvolněné tlačítko: svítí pouze červená LED.</li><li>Do sériového monitoru vypisujte hodnotu proměnné <code>stavTlacitka</code>.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. U tlačítka zapojeného mezi D2 a GND použijte <code>INPUT_PULLUP</code> (stisk = LOW).</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="E" id="otazka-5"><div class="question-top"><span class="question-number">E</span><h2>Varianta E – Přepínání LED potenciometrem</h2></div><div class="question-content"><p><strong>Zapojte</strong> potenciometr na A0, červenou LED na D8 a zelenou na D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Hodnota větší než 500: svítí červená LED.</li><li>Hodnota 500 nebo menší: svítí zelená LED.</li><li>Do sériového monitoru vypisujte hodnotu potenciometru.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. Hodnotu získáte funkcí <code>analogRead(A0)</code> a porovnáte s hranicí 500.</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="F" id="otazka-6"><div class="question-top"><span class="question-number">F</span><h2>Varianta F – Rozsvícení dvou LED potenciometrem</h2></div><div class="question-content"><p><strong>Zapojte</strong> potenciometr na A0 a dvě LED na D8 a D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Hodnota větší než 500: obě LED svítí.</li><li>Hodnota 500 nebo menší: obě LED nesvítí.</li><li>Do sériového monitoru vypisujte hodnotu potenciometru.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. Hodnotu získáte funkcí <code>analogRead(A0)</code> a porovnáte s hranicí 500.</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="G" id="otazka-7"><div class="question-top"><span class="question-number">G</span><h2>Varianta G – Zhasínání LED potenciometrem</h2></div><div class="question-content"><p><strong>Zapojte</strong> potenciometr na A0, červenou LED na D8 a zelenou na D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Hodnota větší než 500: svítí pouze zelená LED.</li><li>Hodnota 500 nebo menší: svítí obě LED.</li><li>Do sériového monitoru vypisujte hodnotu potenciometru.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. Hodnotu získáte funkcí <code>analogRead(A0)</code> a porovnáte s hranicí 500.</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article>
+<article class="question-card test3-variant" data-variant="H" id="otazka-8"><div class="question-top"><span class="question-number">H</span><h2>Varianta H – Přidání LED potenciometrem</h2></div><div class="question-content"><p><strong>Zapojte</strong> potenciometr na A0, červenou LED na D8 a zelenou na D9. Pro LED použijte samostatné sériové rezistory 220–330 Ω a společnou GND.</p><ul class="pra-command-list"><li>Hodnota větší než 500: svítí obě LED.</li><li>Hodnota 500 nebo menší: svítí pouze červená LED.</li><li>Do sériového monitoru vypisujte hodnotu potenciometru.</li></ul><p class="helper">Použijte jednu podmínku <code>if/else</code>. Hodnotu získáte funkcí <code>analogRead(A0)</code> a porovnáte s hranicí 500.</p><div class="test3-rubric"><strong>Hodnocení · 10 bodů</strong><ul><li>Zapojení: 2 b.</li><li>Nastavení pinů a Serial: 2 b.</li><li>Čtení vstupu do proměnné: 2 b.</li><li>Podmínka a LED: 3 b.</li><li>Výpis do monitoru: 1 b.</li></ul></div></div></article></div>
+<div class="test-bottom">
+<p>
+            Studijní otázky k procvičování. Vyplněné údaje se neodesílají.
+          </p>
+<div>
+<button class="print-button" onclick="window.print()" type="button">
+              Vytisknout test
+            </button>
+<a class="back-button" href="index.html">
+              Zpět na hlavní stránku
+            </a>
+<a class="back-button" href="test-ostry.html">
+              Ostrý test A/B
+            </a>
+</div>
+</div>
+</main>
+<footer class="footer">
+<div class="footer-inner">
+<div>
+<strong>
+              Praxe – Arduino
+            </strong>
+<p>
+              Gymnázium a SPŠEI Frenštát pod Radhoštěm
+            </p>
+</div>
+</div>
+</footer>
+</div>
+</body>
+</html>

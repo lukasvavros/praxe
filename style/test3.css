@@ -1,3 +1,5 @@
+
+/* Test 3 – pouze doplňky, základní vzhled využívá style/testy.css */
 .test3-variant .question-number {min-width:2.3rem; font-weight:800}
 .test3-variant .question-content > p {line-height:1.7}
 .test3-variant .question-content li {margin-bottom:.45rem}
@@ -52,3 +54,22 @@ html[data-theme="dark"] .test3-code {background:#12272c;color:#effbfa;border-col
 html[data-theme="dark"] .test3-sketch,html[data-theme="dark"] .test3-serial-shot{border-color:#41666a;background:rgba(103,208,198,.055)}
 html[data-theme="dark"] .test3-serial-file{background:#193237;color:#e7f8f5}
 @media(max-width:600px){.test3-sketch,.test3-serial-shot{padding:12px}.test3-draw-tools{gap:7px}}
+
+.test3-component-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
+.test3-toolbar-title{font-size:.88rem;margin-right:5px}
+.test3-component-tools button{font:inherit;padding:9px 12px;border-radius:9px;border:1px solid #148b89;background:transparent;color:inherit;cursor:pointer}
+.test3-component-tools button:hover{border-color:#087f83;background:rgba(8,127,131,.09)}
+.test3-component-tools button:focus-visible{outline:3px solid #60cebf;outline-offset:2px}
+.test3-symbol-note{font-size:.9rem;margin:4px 0 14px;color:inherit;opacity:.85}
+.test3-symbol-layer{position:absolute;inset:0;z-index:4;pointer-events:none}
+.test3-symbol{position:absolute;display:flex;align-items:center;justify-content:center;box-sizing:border-box;
+  border:1px solid #90aaa7;border-radius:7px;background:rgba(255,255,255,.92);padding:4px;
+  transform:translate(-50%,-50%) rotate(var(--symbol-rotation,0deg));transform-origin:center;
+  cursor:grab;touch-action:none;pointer-events:auto;user-select:none;box-shadow:0 1px 5px #0002}
+.test3-symbol:active{cursor:grabbing}
+.test3-symbol.is-selected{outline:3px solid #0d999e;outline-offset:2px}
+.test3-symbol img,.test3-symbol svg{width:100%;height:100%;display:block;pointer-events:none}
+.test3-symbol .test3-svg-placeholder{color:#163438;font-weight:800;font-size:12px;display:grid;place-items:center;text-align:center;width:100%;height:100%;border:1px dashed #a3b9b5;border-radius:3px}
+.test3-canvas-board>.test3-draw-canvas{z-index:3}
+.test3-canvas-board>.test3-symbol-layer{z-index:4}
+@media (max-width:640px){.test3-component-tools{gap:6px}.test3-component-tools button{padding:8px 10px}}

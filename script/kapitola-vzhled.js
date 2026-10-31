@@ -1,4 +1,3 @@
-/* Jednotný přepínač vzhledu sdílený s index.html. */
 (() => {
   'use strict';
   const root = document.documentElement;
@@ -20,4 +19,15 @@
     update();
   });
   update();
+})();
+
+(() => {
+  document.querySelectorAll('.pra-study-icon-pair img[data-pra-fallback]').forEach(img => {
+    img.addEventListener('error', () => {
+      const fallback = img.dataset.praFallback;
+      if (fallback && img.getAttribute('src') !== fallback) {
+        img.setAttribute('src', fallback);
+      }
+    });
+  });
 })();

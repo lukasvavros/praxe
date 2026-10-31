@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" baseProfile="tiny" height="1.46657in" version="1.2" viewBox="0 0 61.7311 105.593" width="0.857377in" x="0in" y="0in">
+ <g partID="854149650">
+  <g transform="translate(0,53.0191)">
+   <g id="schematic">
+    <g faction="resistance" faction-resistance="transform:translate(245,205) rotate(f{resistance}) translate(-245,-205)" frange-resistance-end="40" frange-resistance-start="-40">
+     <line fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.72" x1="8.98632" x2="17.64" y1="14.76" y2="14.76"/>
+     <g transform="matrix(10.391, 0, 0, 10.417, -0.677959, -1.4405)">
+      <polygon faction="slider" points="0.9792,1.6632,0.9792,1.4472,0.6768,1.5552" stroke-width="0.0720864"/>
+     </g>
+     <line id="connector1pin" stroke="#555" stroke-linecap="round" stroke-width="0.72" x1="10.8187" x2="17.6472" y1="14.8033" y2="14.8033"/>
+     <line id="connector3pin" stroke-linecap="round" stroke-width="0.72" x1="10.8187" x2="17.6472" y1="14.76" y2="14.76"/>
+    </g>
+    <g fill="#555555" font-family="Noto Sans" font-size="1.8" stroke-width="0.750024">
+     <text x="1.13556" y="24.7885">1</text>
+     <text x="1.22018" y="6.24892">3</text>
+     <text x="12.5471" y="13.7699">2</text>
+    </g>
+    <g stroke="#000" stroke-linecap="round" stroke-width="0.432">
+     <line x1="3.24871" x2="0.216" y1="22.2041" y2="20.88"/>
+     <line x1="0.216" x2="5.976" y1="20.88" y2="19.08"/>
+     <line x1="5.976" x2="0.216" y1="19.08" y2="17.28"/>
+     <line x1="0.216" x2="5.976" y1="17.28" y2="15.48"/>
+     <line x1="5.976" x2="0.216" y1="15.48" y2="13.68"/>
+     <line x1="0.216" x2="5.976" y1="13.68" y2="11.88"/>
+     <line x1="5.976" x2="0.216" y1="11.88" y2="10.08"/>
+     <line x1="0.216" x2="5.976" y1="10.08" y2="8.28"/>
+     <line x1="5.976" x2="3.30984" y1="8.28" y2="7.31592"/>
+    </g>
+    <g fill="none">
+     <line id="connector0pin" stroke="#555" stroke-linecap="round" stroke-width="0.72" x1="3.29479" x2="3.29479" y1="29.1715" y2="22.3099"/>
+     <g height="0.72" id="connector0terminal" stroke-width="0" width="0.72" x="2.89901" y="28.8"/>
+     <g height="0.72" id="connector1terminal" stroke-width="0" width="0.72" x="17.2987" y="14.4"/>
+     <line id="connector2pin" stroke="#555" stroke-linecap="round" stroke-width="0.72" x1="3.29479" x2="3.29479" y1="0.36" y2="7.1725"/>
+     <g>
+      <g height="0.72" id="connector2terminal" stroke-width="0" width="0.72" x="2.89901" y="1.02319e-15"/>
+      <rect height="0.72" id="connector3terminal" stroke-width="0" width="0.72" x="17.2987" y="14.4"/>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+ </svg>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" baseProfile="tiny" height="1.18987in" version="1.2" viewBox="0 0 90.486 85.6705" width="1.25675in" x="0in" y="0in">
+ <g partID="854148740">
+  <g transform="translate(0,56.3383)">
+   <g id="schematic">
+    <text class="text" fill="#8c8c8c" font-family="'Droid Sans'" font-size="2.50169" id="text22" stroke="none" stroke-width="0" text-anchor="middle" x="25.5672" y="2.08341">2</text>
+    <text class="text" fill="#8c8c8c" font-family="'Droid Sans'" font-size="2.50169" id="text26" stroke="none" stroke-width="0" text-anchor="middle" x="3.95266" y="2.08341">1</text>
+    <rect fill="none" height="5.42921" id="rect206" stroke="#000000" stroke-width="0.673636" width="14.3028" x="7.56446" y="0.432639"/>
+    <line class="pin" connectorname="1" id="connector0pin" stroke="#787878" stroke-linecap="round" stroke-width="0.700471" x1="0.350234" x2="7.55509" y1="3.13412" y2="3.13412"/>
+    <g class="terminal" fill="none" height="0.000283656" id="connector0terminal" stroke="none" stroke-width="0" width="0.000283656" x="0.350234" y="3.13412"/>
+    <line class="pin" connectorname="2" id="connector1pin" stroke="#787878" stroke-linecap="round" stroke-width="0.700471" x1="29.1698" x2="21.9648" y1="3.13412" y2="3.13412"/>
+    <g class="terminal" fill="none" height="0.000283656" id="connector1terminal" stroke="none" stroke-width="0" width="0.000283656" x="29.1698" y="3.13412"/>
+   </g>
+  </g>
+ </g>
+ </svg>

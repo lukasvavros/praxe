@@ -219,16 +219,24 @@ async function buildHtml(){
       const img = symbol.querySelector('img');
       if (!img) throw Error('Značka ještě není načtená. Zkuste odevzdání znovu.');
       await ready(img, img.alt || 'součástka');
+      // Použijeme SKUTEČNOU velikost obrázku na pracovní ploše, nikoliv
+      // rozměry tlačítka ani původní rozměry SVG (viewBox).
+      // offsetLeft/Top měří layout BEZ otočení, transformaci přidáme jen jednou.
       const css = getComputedStyle(symbol);
-      const width = parseFloat(css.width) * sx;
-      const height = parseFloat(css.height) * sy;
       const cx = parseFloat(css.left) * sx;
       const cy = parseFloat(css.top) * sy;
       const rotation = parseFloat(css.getPropertyValue('--symbol-rotation')) || 0;
+      const boxWidth = symbol.offsetWidth;
+      const boxHeight = symbol.offsetHeight;
+      const imageWidth = img.offsetWidth;
+      const imageHeight = img.offsetHeight;
+      const imageX = (img.offsetLeft - boxWidth / 2) * sx;
+      const imageY = (img.offsetTop - boxHeight / 2) * sy;
+      if (!imageWidth || !imageHeight) throw Error('SVG značka nemá platné rozměry.');
       mergedCtx.save();
       mergedCtx.translate(cx, cy);
       mergedCtx.rotate(rotation * Math.PI / 180);
-      mergedCtx.drawImage(img, -width / 2, -height / 2, width, height);
+      mergedCtx.drawImage(img, imageX, imageY, imageWidth * sx, imageHeight * sy);
       mergedCtx.restore();
     }
 

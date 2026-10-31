@@ -1,0 +1,125 @@
+
+/* Test 3 – pouze doplňky, základní vzhled využívá style/testy.css */
+.test3-variant .question-number {min-width:2.3rem; font-weight:800}
+.test3-variant .question-content > p {line-height:1.7}
+.test3-variant .question-content li {margin-bottom:.45rem}
+.test3-code {display:block;width:100%;min-height:420px;resize:vertical;box-sizing:border-box;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2;white-space:pre;overflow:auto;padding:16px;border:1px solid #88aea9;border-radius:12px;background:var(--surface,#f9fcfb);color:var(--text,#172c30)}
+html[data-theme="dark"] .test3-code {background:#12272c;color:#effbfa;border-color:#48676a}
+.test3-rubric{margin:20px 0;border:1px solid #82bcb4;padding:14px 18px;border-radius:12px;background:rgba(25,153,144,.07)}
+/* Hodnocení: jeden přehledný řádek pro každé kritérium */
+.test3-rubric ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  list-style: decimal;
+  margin: 12px 0 0;
+  padding-left: 28px;
+}
+.test3-rubric li {
+  display: list-item;
+  margin: 0;
+  padding: 9px 4px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.test3-rubric li + li {
+  border-top: 1px solid rgba(130, 188, 180, .28);
+}
+.test3-rubric > strong {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.test3-note{margin:16px 0;padding:14px 18px;border-left:4px solid #087f83;border-radius:8px;background:rgba(27,150,143,.08)}
+
+
+/* ===== TEST 3: KRESLICÍ PLOCHA A SÉRIOVÝ MONITOR ===== */
+.test3-sketch,.test3-serial-shot{margin:22px 0;padding:18px;border-radius:14px;border:1px solid var(--line,#bddad6);background:rgba(17,139,133,.055)}
+.test3-sketch h3,.test3-serial-shot h3{margin:0 0 8px}
+.test3-sketch>p,.test3-serial-shot>p{line-height:1.55}
+.test3-draw-tools{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:14px 0}
+.test3-draw-tools button,.test3-serial-preview button{font:inherit;border-radius:9px;padding:9px 13px;border:1px solid #148b89;background:transparent;color:inherit;cursor:pointer}
+.test3-draw-tools button[aria-pressed="true"]{background:#087f83;color:#fff}
+.test3-draw-tools button:focus-visible,.test3-serial-preview button:focus-visible{outline:3px solid #60cebf;outline-offset:2px}
+.test3-color-label,.test3-snap-label{display:inline-flex;align-items:center;gap:8px;font-size:.9rem}
+.test3-color-label input{width:40px;height:36px;border:1px solid #88aaa6;border-radius:8px;background:transparent;padding:3px;cursor:pointer}
+.test3-canvas-scroller{max-width:100%;overflow-x:auto;border:1px solid #a7c5c1;border-radius:12px;background:#fff}
+.test3-canvas-board{width:1080px;height:660px;position:relative;overflow:hidden;background-color:#fff;background-image:linear-gradient(to right,rgba(27,92,95,.11) 1px,transparent 1px),linear-gradient(to bottom,rgba(27,92,95,.11) 1px,transparent 1px);background-size:20px 20px}
+.test3-board-image{position:absolute;left:20px;top:100px;width:360px;height:auto;max-height:480px;object-fit:contain;z-index:1;pointer-events:none;user-select:none}
+.test3-draw-canvas{position:absolute;inset:0;width:1080px;height:660px;z-index:2;touch-action:none;cursor:crosshair}
+.test3-draw-hint,.test3-file-status{margin:9px 0 0;font-size:.89rem;opacity:.82}
+.test3-serial-file{display:block;width:100%;margin:10px 0;padding:12px;border-radius:10px;border:1px dashed #78a7a4;background:var(--surface,#fff);color:var(--text,#172c30)}
+.test3-serial-preview{margin-top:12px}
+.test3-serial-preview img{display:block;max-width:100%;max-height:650px;margin-bottom:12px;border-radius:10px;border:1px solid #abc9c5;background:#fff}
+html[data-theme="dark"] .test3-sketch,html[data-theme="dark"] .test3-serial-shot{border-color:#41666a;background:rgba(103,208,198,.055)}
+html[data-theme="dark"] .test3-serial-file{background:#193237;color:#e7f8f5}
+@media(max-width:600px){.test3-sketch,.test3-serial-shot{padding:12px}.test3-draw-tools{gap:7px}}
+
+
+/* ============================================================
+   TEST 3 · PALETA SCHEMATICKÝCH ZNAČEK
+   SVG značky načítáme přímo z picture/*.svg
+   ============================================================ */
+.test3-component-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
+.test3-toolbar-title{font-size:.88rem;margin-right:5px}
+.test3-component-tools button{font:inherit;padding:9px 12px;border-radius:9px;border:1px solid #148b89;background:transparent;color:inherit;cursor:pointer}
+.test3-component-tools button:hover{border-color:#087f83;background:rgba(8,127,131,.09)}
+.test3-component-tools button:focus-visible{outline:3px solid #60cebf;outline-offset:2px}
+.test3-symbol-note{font-size:.9rem;margin:4px 0 14px;color:inherit;opacity:.85}
+.test3-symbol-layer{position:absolute;inset:0;z-index:4;pointer-events:none}
+.test3-symbol{position:absolute;display:flex;align-items:center;justify-content:center;box-sizing:border-box;
+  border:1px solid #90aaa7;border-radius:7px;background:rgba(255,255,255,.92);padding:4px;
+  transform:translate(-50%,-50%) rotate(var(--symbol-rotation,0deg));transform-origin:center;
+  cursor:grab;touch-action:none;pointer-events:auto;user-select:none;box-shadow:0 1px 5px #0002}
+.test3-symbol:active{cursor:grabbing}
+.test3-symbol.is-selected{outline:3px solid #0d999e;outline-offset:2px}
+.test3-symbol img,.test3-symbol svg{width:100%;height:100%;display:block;pointer-events:none}
+.test3-symbol .test3-svg-placeholder{color:#163438;font-weight:800;font-size:12px;display:grid;place-items:center;text-align:center;width:100%;height:100%;border:1px dashed #a3b9b5;border-radius:3px}
+.test3-canvas-board>.test3-draw-canvas{z-index:3}
+.test3-canvas-board>.test3-symbol-layer{z-index:4}
+@media (max-width:640px){.test3-component-tools{gap:6px}.test3-component-tools button{padding:8px 10px}}
+
+/* Oprava: pouze samotné SVG značky, 4× větší, bez karty, stínu a podkladu. */
+.test3-symbol,
+.test3-symbol:hover,
+.test3-symbol:focus,
+html[data-theme="light"] .test3-symbol,
+html[data-theme="dark"] .test3-symbol {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.test3-symbol.is-selected { outline: 2px dashed #168b8d; outline-offset: 2px; }
+.test3-symbol img { object-fit: fill; background: transparent; }
+
+/* Výchozí kreslení: SVG značky jsou vizuální, ale nepřekážejí myši.
+   Jen v režimu Přesunout součástky se na ně dá kliknout a táhnout je. */
+.test3-canvas-board:not(.test3-mode-move) .test3-symbol,
+.test3-canvas-board:not(.test3-mode-move) .test3-symbol * {
+  pointer-events: none !important;
+}
+.test3-canvas-board.test3-mode-move .test3-symbol {
+  pointer-events: auto !important;
+  cursor: grab;
+}
+.test3-canvas-board.test3-mode-move .test3-symbol:active {
+  cursor: grabbing;
+}
+
+/* ===== Stabilní pracovní plocha Testu 3 (1:1) ===== */
+.test3-canvas-board { width:1080px !important; height:660px !important; }
+.test3-board-image { left:20px !important; top:80px !important; width:360px !important; height:auto !important; }
+.test3-canvas-board .test3-draw-canvas { z-index:3; cursor:crosshair !important; }
+.test3-canvas-board .test3-symbol-layer { z-index:4; pointer-events:none !important; }
+/* Přes značky se v režimu čáry i gumy normálně kreslí. */
+.test3-canvas-board:not(.test3-mode-move) .test3-symbol,
+.test3-canvas-board:not(.test3-mode-move) .test3-symbol * {
+  pointer-events:none !important; cursor:crosshair !important;
+}
+/* Výhradně při přesouvání značky přijímají události myši. */
+.test3-canvas-board.test3-mode-move .test3-symbol {
+  pointer-events:auto !important; cursor:grab !important;
+}
+.test3-canvas-board.test3-mode-move .test3-draw-canvas {cursor:default !important;}

@@ -7,9 +7,6 @@
   const snap = n => Math.round(n / GRID) * GRID;
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
-  // Jednotlivé vlastní SVG nahraj do picture/symboly/.
-  // Dokud soubor neexistuje, zobrazí se textová náhradní značka.
-  // GND a VCC záměrně nejsou v nabídce — žák je dokreslí.
   const SYMBOLS = {
     led:      { name: 'LED',          file: 'picture/symboly/led.svg',          w: 380, h: 232 },
     resistor: { name: 'Rezistor',     file: 'picture/symboly/rezistor.svg',     w: 440, h: 200 },

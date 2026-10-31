@@ -41,3 +41,39 @@
 
 .station-board [data-svg-pot]{cursor:ew-resize;touch-action:none}
 .station-board [data-svg-pot]:hover,.station-board [data-svg-pot]:focus-visible{stroke:#007f86;stroke-width:1}
+
+
+/* Světlý a tmavý režim – polohovací stanice */
+.pra-chapter-4 .pra-station {
+  --panel: var(--mint);
+  --station-text: var(--ink);
+  --station-accent: var(--teal-dark);
+  --teal: #087f83;
+  background: var(--card-bg);
+  color: var(--station-text);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.pra-chapter-4 .pra-station .station-eyebrow,
+.pra-chapter-4 .pra-station h3 { color: var(--station-accent); }
+.pra-chapter-4 .pra-station p,
+.pra-chapter-4 .pra-station label,
+.pra-chapter-4 .pra-station small,
+.pra-chapter-4 .pra-station .station-range-labels { color: var(--station-text); }
+.pra-chapter-4 .station-leds > div,
+.pra-chapter-4 .station-values > div,
+.pra-chapter-4 .station-slider,
+.pra-chapter-4 .station-console > div,
+.pra-chapter-4 .station-solution,
+.pra-chapter-4 .pra-station .station-status { background: var(--panel); color: var(--station-text); }
+.pra-chapter-4 .station-values strong { color: var(--station-accent); }
+.pra-chapter-4 .station-board { background: #fff; color: #26343a; }
+.pra-chapter-4 .station-console { border-color: var(--line); }
+.pra-chapter-4 .station-console pre { color: #21383c; background: #fff; }
+.pra-chapter-4 .pra-station button,
+.pra-chapter-4 .station-solution input[type=password] { background: var(--paper); color: var(--station-accent); border-color: var(--line); }
+.pra-chapter-4 .pra-station button:hover { background: var(--mint); }
+.pra-chapter-4 .pra-station [data-station-confirm],
+.pra-chapter-4 .pra-station button[type=submit] { background: #087f83; color: #fff; border-color: #087f83; }
+.pra-chapter-4 .pra-station .station-solution h4 { color: var(--ink); }
+.pra-chapter-4 .pra-station [data-station-error] { color: #df5757; }

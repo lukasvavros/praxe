@@ -7,9 +7,6 @@
   const snap = n => Math.round(n / GRID) * GRID;
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
-  // SVG jsou přímo ve složce picture/.
-  // Dokud soubor neexistuje, zobrazí se textová náhradní značka.
-  // GND a VCC záměrně nejsou v nabídce — žák je dokreslí.
   const SYMBOLS = {
     led:      { name: 'LED',          file: 'picture/led.svg',          w: 120, h: 148 },
     resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 300, h: 44 },
@@ -92,7 +89,7 @@
       const symbol=state.symbols.find(s=>s.id===anchor.id);
       return symbol ? terminals(symbol)[anchor.index]||null : null;
     }
-    function nearestTerminal(p, radius=26) {
+    function nearestTerminal(p, radius=12) {
       let best=null, distance=radius;
       for (const s of state.symbols) for (const t of terminals(s)) {
         const d=Math.hypot(p.x-t.x,p.y-t.y);
@@ -159,7 +156,7 @@
       s.x = clamp(s.x, SYMBOLS[type].w / 2, canvas.width - SYMBOLS[type].w / 2);
       s.y = clamp(s.y, SYMBOLS[type].h / 2, canvas.height - SYMBOLS[type].h / 2);
       state.symbols.push(s); selected = s.id;
-      attachNearbyLooseEnds(s); redraw(); persist(); render(); chooseMode('move'); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo; potom klikněte na Čára.');
+      redraw(); persist(); render(); chooseMode('move'); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo; potom klikněte na Čára.');
     }
     function selectedSymbol() { return state.symbols.find(s => s.id === selected); }
     function removeSelected() {
@@ -255,7 +252,7 @@
       const x=clamp(snap(p.x-dragging.dx),def.w/2,canvas.width-def.w/2);
       const y=clamp(snap(p.y-dragging.dy),def.h/2,canvas.height-def.h/2);
       if (x!==s.x || y!==s.y) {
-        if(!dragging.moved)attachNearbyLooseEnds(s);
+        // Nepřipojujeme automaticky sousední volné vodiče při přesunu.
         s.x=x;s.y=y;dragging.moved=true;syncAnchors();redraw();render();
       }
     });

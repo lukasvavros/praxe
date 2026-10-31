@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-labelledby="title desc" shape-rendering="geometricPrecision">
+  <title id="title">Cíle kapitoly</title>
+  <desc id="desc">Hladká vektorová ikona v tyrkysové a šedé paletě ve světlé nebo tmavé variantě.</desc>
+  <defs><clipPath id="tile"><rect x="6" y="6" width="188" height="188" rx="42"/></clipPath></defs>
+  <g clip-path="url(#tile)">
+    
+<g transform="translate(15 15)" opacity="0.9">
+<g fill="none" stroke="#DCE9E8" stroke-width="8">
+  <circle cx="94" cy="94" r="44"/><circle cx="94" cy="94" r="30"/><circle cx="94" cy="94" r="16"/>
+</g>
+<circle cx="94" cy="94" r="4" fill="#DCE9E8"/>
+<g transform="rotate(45 94 94)" stroke="#DCE9E8" stroke-linejoin="round">
+  <path d="M94 94L106 91L106 97Z" fill="#DCE9E8" stroke-width="1"/>
+  <path d="M104 90H126L132 94L126 98H104Z" fill="#DCE9E8" stroke-width="2"/>
+  <path d="M128 94H151" fill="none" stroke-width="4"/>
+  <path d="M143 91L170 79L165 94L143 96Z" fill="#DCE9E8" stroke-width="2"/>
+  <path d="M143 97L170 109L165 94L143 92Z" fill="#DCE9E8" stroke-width="2"/>
+</g>
+</g>
+<g fill="none" stroke="#24343A" stroke-width="11">
+  <circle cx="94" cy="94" r="44"/><circle cx="94" cy="94" r="30"/><circle cx="94" cy="94" r="16"/>
+</g>
+<g fill="none" stroke="#24343A" stroke-width="7">
+  <circle cx="94" cy="94" r="44"/><circle cx="94" cy="94" r="30"/><circle cx="94" cy="94" r="16"/>
+</g>
+<circle cx="94" cy="94" r="4" fill="#12817F"/>
+<g transform="rotate(45 94 94)" stroke-linejoin="round">
+  <path d="M94 94L106 91L106 97Z" fill="#24343A" stroke="#24343A" stroke-width="1.5"/>
+  <path d="M104 90H126L132 94L126 98H104Z" fill="#24343A" stroke="#24343A" stroke-width="2.5"/>
+  <path d="M128 94H151" fill="none" stroke="#24343A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M128 94H151" fill="none" stroke="#24343A" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M143 91L170 79L165 94L143 96Z" fill="#24343A" stroke="#24343A" stroke-width="2.5"/>
+  <path d="M143 97L170 109L165 94L143 92Z" fill="#24343A" stroke="#24343A" stroke-width="2.5"/>
+  <path d="M109 91L109 97M115 91L115 97M121 91L121 97" fill="none" stroke="#DCE9E8" stroke-width="1.5"/>
+  <path d="M149 91L163 85M149 97L163 103" fill="none" stroke="#DCE9E8" stroke-width="1.5"/>
+</g>
+
+  </g>
+  <rect x="10" y="10" width="180" height="180" rx="39" fill="none" stroke="#12817F" stroke-width="11"/>
+</svg>

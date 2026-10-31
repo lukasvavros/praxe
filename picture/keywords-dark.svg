@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Klíčová slova</title>
+  <desc id="desc">Klíčová slova — dark theme icon</desc>
+  <g transform="translate(3 4)" opacity="0.45"><g transform="rotate(-43 65 65)" fill="none" stroke="#0F2424" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="65" cy="40" r="17"/><path d="M65 57v47M65 86h13M65 99h9"/></g></g>
+  <g><g transform="rotate(-43 65 65)" fill="none" stroke="#E6F2F0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="65" cy="40" r="17"/><path d="M65 57v47M65 86h13M65 99h9"/></g></g>
+  <rect x="5" y="5" width="118" height="118" rx="29" fill="none" stroke="#74D7D0" stroke-width="7"/>
+</svg>

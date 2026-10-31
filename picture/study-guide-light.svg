@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Průvodce studiem</title>
+  <desc id="desc">Průvodce studiem — light theme icon</desc>
+  <g transform="translate(3 4)" opacity="0.9"><path d="M83 37H45l25 27-25 27h38" fill="none" stroke="#DCE9E8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g><path d="M83 37H45l25 27-25 27h38" fill="none" stroke="#24343A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <rect x="5" y="5" width="118" height="118" rx="29" fill="none" stroke="#12817F" stroke-width="7"/>
+</svg>

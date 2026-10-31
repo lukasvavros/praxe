@@ -123,3 +123,20 @@ html[data-theme="dark"] .test3-symbol {
   pointer-events:auto !important; cursor:grab !important;
 }
 .test3-canvas-board.test3-mode-move .test3-draw-canvas {cursor:default !important;}
+
+/* SVG v editoru: stejné rozměry jako při exportu, bez vlivu obecných stylů img. */
+.test3-canvas-board .test3-symbol > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  object-fit: fill !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  flex: none !important;
+}

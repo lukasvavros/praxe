@@ -158,20 +158,33 @@ async function buildHtml(){
   const original=cards[index], copy=original.cloneNode(true);
   copy.removeAttribute('id');
   copy.querySelectorAll('.sketch-actions,.helper,.draw-area,.sketch-print-image').forEach(el=>el.remove());
-  // Dokreslené schéma: ponecháme pevný podklad a překryjeme jej exportem canvasu.
-  const originalBoard=original.querySelector('.test3-canvas-board');
-  const copiedBoard=copy.querySelector('.test3-canvas-board');
-  if(originalBoard&&copiedBoard){
-   const live=originalBoard.querySelector('canvas');
-   const staticImage=document.createElement('img');
-   staticImage.src=live.toDataURL('image/png');
-   staticImage.alt='Dokreslené elektrické zapojení žáka';
-   staticImage.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:2';
-   copiedBoard.querySelector('canvas')?.replaceWith(staticImage);
-   copiedBoard.style.cssText='width:1080px;height:660px;position:relative;background:#fff;overflow:hidden;';
-   // Bez ovládacích tlačítek a pole pro nahrání; uchováme jen hotový snímek.
-   copy.querySelector('.test3-draw-tools')?.remove();
-   copy.querySelector('.test3-draw-hint')?.remove();
+  // Export sloučí podkladový obrázek, vodiče i SVG značky do jediného snímku.
+  const originalBoard = original.querySelector('.test3-canvas-board');
+  const copiedBoard = copy.querySelector('.test3-canvas-board');
+  if (originalBoard && copiedBoard) {
+    if (!window.html2canvas) throw Error('Chybí knihovna pro uložení schématu (html2canvas).');
+    const background = originalBoard.querySelector('.test3-board-image');
+    if (background && (!background.complete || !background.naturalWidth)) {
+      try { await background.decode(); } catch {}
+    }
+    if (background && !background.naturalWidth) {
+      throw Error('Chybí obrázek Arduino UNO: picture/schema-test3.png.');
+    }
+    // Počkáme na načtení značek SVG; při chybě zůstává textová náhrada.
+    await Promise.all([...originalBoard.querySelectorAll('.test3-symbol img')].map(img => img.decode().catch(() => {})));
+    const canvasShot = await window.html2canvas(originalBoard, {
+      scale: 1.5, backgroundColor: '#ffffff', useCORS: true, logging: false,
+      width: 1080, height: 660, scrollX: 0, scrollY: 0
+    });
+    const merged = document.createElement('img');
+    merged.src = canvasShot.toDataURL('image/jpeg', .92);
+    merged.alt = 'Zapojení Arduino UNO se součástkami a vodiči';
+    merged.style.cssText = 'display:block;width:100%;height:auto;border:1px solid #cbdedb;border-radius:10px;';
+    copiedBoard.replaceWith(merged);
+    copy.querySelector('.test3-component-tools')?.remove();
+    copy.querySelector('.test3-symbol-note')?.remove();
+    copy.querySelector('.test3-draw-tools')?.remove();
+    copy.querySelector('.test3-draw-hint')?.remove();
   }
   const serial=original.querySelector('.test3-serial-preview img');
   const serialCopy=copy.querySelector('.test3-serial-preview');

@@ -507,3 +507,76 @@ body{margin:0}
 .pra-chapter-4 .pra-command-list li{margin-bottom:9px}
 .pra-chapter-4 .pra-task-box h4{font-size:18px;margin:24px 0 12px}
 .pra-chapter-4 .pra-question summary:focus-visible{outline:3px solid #ee7203;outline-offset:-3px}
+
+
+/* ======================================================================
+   Kapitola 4 – sjednocení se společným vzhledem kapitol 1–3.
+   Ponechává původní rozložení a výukové grafy, mění pouze vizuální styl.
+   ====================================================================== */
+.pra-chapter-4 {
+  --orange: var(--teal-dark);
+  --dark: var(--ink);
+  --light: var(--card-bg);
+  --lighter: var(--paper);
+  --text: var(--ink);
+  --white: var(--paper);
+  max-width: 1100px;
+  width: auto;
+  margin: 0 auto;
+  overflow: visible;
+  color: var(--ink);
+  background: transparent;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.pra-chapter-4 .pra-hero { text-align: left; }
+.pra-chapter-4 .pra-section h2,
+.pra-chapter-4 .pra-section h3,
+.pra-chapter-4 .pra-section p,
+.pra-chapter-4 .pra-section li { color: var(--ink); }
+.pra-chapter-4 .pra-section h2 { color: var(--teal-dark); border-bottom: 0; padding-bottom: 0; }
+.pra-chapter-4 .pra-card,
+.pra-chapter-4 .pra-summary-card,
+.pra-chapter-4 .pra-duty-card,
+.pra-chapter-4 .pra-pin-card,
+.pra-chapter-4 .pra-task-box,
+.pra-chapter-4 .pra-connection-box,
+.pra-chapter-4 .pra-formula {
+  background: var(--card-bg); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 13px;
+  box-shadow: none;
+}
+.pra-chapter-4 .pra-card strong,
+.pra-chapter-4 .pra-summary-card strong,
+.pra-chapter-4 .pra-duty-card strong { color: var(--teal-dark); }
+.pra-chapter-4 .pra-warning,
+.pra-chapter-4 .pra-callout,
+.pra-chapter-4 .pra-small-note { color: var(--ink); background: var(--mint); border-left: 4px solid var(--teal); }
+.pra-chapter-4 .pra-warning p,
+.pra-chapter-4 .pra-warning strong { color: var(--ink); }
+.pra-chapter-4 .pra-pin-card.red { border-top: 4px solid #dc5a5a; }
+.pra-chapter-4 .pra-pin-card.green { border-top: 4px solid #38a95b; }
+.pra-chapter-4 .pra-pin-card.blue { border-top: 4px solid #4285d4; }
+.pra-chapter-4 .pra-pin-card.red strong { color: #cb4747; }
+.pra-chapter-4 .pra-pin-card.green strong { color: #268748; }
+.pra-chapter-4 .pra-pin-card.blue strong { color: #3176b9; }
+html[data-theme="dark"] .pra-chapter-4 .pra-pin-card.red strong { color: #ff9b9b; }
+html[data-theme="dark"] .pra-chapter-4 .pra-pin-card.green strong { color: #8ce3a6; }
+html[data-theme="dark"] .pra-chapter-4 .pra-pin-card.blue strong { color: #96c8ff; }
+.pra-chapter-4 .pra-color-table { color: var(--ink); background: var(--paper); box-shadow: none; }
+.pra-chapter-4 .pra-color-table th { background: var(--mint); color: var(--ink); }
+.pra-chapter-4 .pra-color-table td,
+.pra-chapter-4 .pra-color-table th { border-color: var(--line); }
+.pra-chapter-4 .pra-question { border: 1px solid var(--line); background: var(--card-bg); box-shadow: none; }
+.pra-chapter-4 .pra-question summary { color: var(--ink); }
+.pra-chapter-4 .pra-question summary:hover,
+.pra-chapter-4 .pra-question[open] summary { background: var(--mint); }
+.pra-chapter-4 .pra-answer { background: var(--paper); color: var(--ink); border-color: var(--line); }
+.pra-chapter-4 .pra-answer-label { background: var(--teal); color: #fff; }
+.pra-chapter-4 .pra-question summary::after { background: var(--teal); color: #fff; }
+.pra-chapter-4 .pra-quiz-note { background: var(--mint); color: var(--ink); }
+.pra-chapter-4 .pra-quiz-note strong { color: var(--teal-dark); }
+.pra-chapter-4 .pra-rgb-image,
+.pra-chapter-4 .pra-duty-card svg { background: #fff; }
+.pra-chapter-4 .pra-code,
+.pra-chapter-4 .pra-answer-code { background: var(--code-bg); color: var(--code-ink); }
+.pra-chapter-4 .pra-connection-box { background: var(--card-bg); }

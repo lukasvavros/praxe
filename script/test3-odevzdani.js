@@ -158,27 +158,83 @@ async function buildHtml(){
   const original=cards[index], copy=original.cloneNode(true);
   copy.removeAttribute('id');
   copy.querySelectorAll('.sketch-actions,.helper,.draw-area,.sketch-print-image').forEach(el=>el.remove());
-  // Export sloučí podkladový obrázek, vodiče i SVG značky do jediného snímku.
+  // Souřadnice všech vrstev jsou totožné s pracovním canvasem (1080 × 660).
+  // Nekreslíme screenshot HTML: při html2canvas se mohou transformované SVG
+  // posunout vůči vodičům a výsledné schéma pak neodpovídá práci žáka.
   const originalBoard = original.querySelector('.test3-canvas-board');
   const copiedBoard = copy.querySelector('.test3-canvas-board');
   if (originalBoard && copiedBoard) {
-    if (!window.html2canvas) throw Error('Chybí knihovna pro uložení schématu (html2canvas).');
-    const background = originalBoard.querySelector('.test3-board-image');
-    if (background && (!background.complete || !background.naturalWidth)) {
-      try { await background.decode(); } catch {}
+    const wires = originalBoard.querySelector('.test3-draw-canvas');
+    const uno = originalBoard.querySelector('.test3-board-image');
+    if (!wires || !uno) throw Error('Schéma nemá podklad nebo kreslicí plochu.');
+
+    const W = wires.width, H = wires.height;
+    const mergedCanvas = document.createElement('canvas');
+    mergedCanvas.width = W;
+    mergedCanvas.height = H;
+    const mergedCtx = mergedCanvas.getContext('2d');
+    mergedCtx.fillStyle = '#ffffff';
+    mergedCtx.fillRect(0, 0, W, H);
+
+    // Zachováme i jemnou mřížku, včetně její původní polohy.
+    mergedCtx.strokeStyle = 'rgba(27,92,95,.11)';
+    mergedCtx.lineWidth = 1;
+    for (let x = 0.5; x < W; x += 20) {
+      mergedCtx.beginPath(); mergedCtx.moveTo(x, 0); mergedCtx.lineTo(x, H); mergedCtx.stroke();
     }
-    if (background && !background.naturalWidth) {
-      throw Error('Chybí obrázek Arduino UNO: picture/schema-test3.png.');
+    for (let y = 0.5; y < H; y += 20) {
+      mergedCtx.beginPath(); mergedCtx.moveTo(0, y); mergedCtx.lineTo(W, y); mergedCtx.stroke();
     }
-    // Počkáme na načtení značek SVG; při chybě zůstává textová náhrada.
-    await Promise.all([...originalBoard.querySelectorAll('.test3-symbol img')].map(img => img.decode().catch(() => {})));
-    const canvasShot = await window.html2canvas(originalBoard, {
-      scale: 1.5, backgroundColor: '#ffffff', useCORS: true, logging: false,
-      width: 1080, height: 660, scrollX: 0, scrollY: 0
-    });
+
+    // Pouze předem načtené obrázky. Při chybě nenecháme odejít
+    // neúplné schéma bez Arduina nebo vložené součástky.
+    const ready = async (img, label) => {
+      if (!img.complete || !img.naturalWidth) {
+        try { await img.decode(); } catch (_) {}
+      }
+      if (!img.naturalWidth) throw Error('Nelze načíst obrázek: ' + label);
+    };
+    await ready(uno, 'Arduino UNO');
+
+    // Podklad Arduino: přeneseme reálné polohy a velikosti z HTML/CSS.
+    const parentRect = originalBoard.getBoundingClientRect();
+    const sx = W / parentRect.width, sy = H / parentRect.height;
+    const position = element => {
+      const r = element.getBoundingClientRect();
+      return { x: (r.left - parentRect.left) * sx,
+               y: (r.top - parentRect.top) * sy,
+               w: r.width * sx, h: r.height * sy };
+    };
+    const base = position(uno);
+    mergedCtx.drawImage(uno, base.x, base.y, base.w, base.h);
+
+    // Vodiče jsou již přesně vykreslené v původním canvasu.
+    mergedCtx.drawImage(wires, 0, 0, W, H);
+
+    // SVG značky kreslíme podle uložené pozice a rozměru, nikoli podle
+    // bounding boxu otočeného tlačítka, který se při exportu mění.
+    for (const symbol of originalBoard.querySelectorAll('.test3-symbol')) {
+      const img = symbol.querySelector('img');
+      if (!img) throw Error('Značka ještě není načtená. Zkuste odevzdání znovu.');
+      await ready(img, img.alt || 'součástka');
+      const css = getComputedStyle(symbol);
+      const width = parseFloat(css.width) * sx;
+      const height = parseFloat(css.height) * sy;
+      const cx = parseFloat(css.left) * sx;
+      const cy = parseFloat(css.top) * sy;
+      const rotation = parseFloat(css.getPropertyValue('--symbol-rotation')) || 0;
+      mergedCtx.save();
+      mergedCtx.translate(cx, cy);
+      mergedCtx.rotate(rotation * Math.PI / 180);
+      mergedCtx.drawImage(img, -width / 2, -height / 2, width, height);
+      mergedCtx.restore();
+    }
+
     const merged = document.createElement('img');
-    merged.src = canvasShot.toDataURL('image/jpeg', .92);
+    merged.src = mergedCanvas.toDataURL('image/png');
     merged.alt = 'Zapojení Arduino UNO se součástkami a vodiči';
+    merged.width = W;
+    merged.height = H;
     merged.style.cssText = 'display:block;width:100%;height:auto;border:1px solid #cbdedb;border-radius:10px;';
     copiedBoard.replaceWith(merged);
     copy.querySelector('.test3-component-tools')?.remove();

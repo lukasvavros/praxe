@@ -65,6 +65,56 @@
         y: clamp(snap((event.clientY - r.top) * canvas.height / r.height), 0, canvas.height)
       };
     }
+    // Každý kontakt má stabilní ID. Konce vodičů se k němu přichytí,
+    // takže se při přesunu nebo otočení značky posunou spolu s ní.
+    function terminals(s) {
+      const def = SYMBOLS[s.type];
+      if (!def) return [];
+      let local;
+      if (s.type === 'button') {
+        local = [[-def.w/2,-def.h*.28],[-def.w/2,def.h*.28],
+                 [def.w/2,-def.h*.28],[def.w/2,def.h*.28]];
+      } else if (s.type === 'led') {
+        local = [[0,-def.h/2],[0,def.h/2]];
+      } else if (s.type === 'pot') {
+        local = [[0,-def.h/2],[0,def.h/2],[def.w/2,0]];
+      } else {
+        local = [[-def.w/2,0],[def.w/2,0]];
+      }
+      const angle=(s.rotation||0)*Math.PI/180, c=Math.cos(angle), sn=Math.sin(angle);
+      return local.map(([x,y],i)=>({
+        id:s.id, index:i,
+        x:s.x+x*c-y*sn, y:s.y+x*sn+y*c
+      }));
+    }
+    function terminalOf(anchor) {
+      if (!anchor) return null;
+      const symbol=state.symbols.find(s=>s.id===anchor.id);
+      return symbol ? terminals(symbol)[anchor.index]||null : null;
+    }
+    function nearestTerminal(p, radius=26) {
+      let best=null, distance=radius;
+      for (const s of state.symbols) for (const t of terminals(s)) {
+        const d=Math.hypot(p.x-t.x,p.y-t.y);
+        if(d<distance){distance=d;best=t;}
+      }
+      return best;
+    }
+    function syncAnchors() {
+      for(const stroke of state.strokes) for(const end of ['a','b']) {
+        const t=terminalOf(stroke[end+'Anchor']);
+        if(t)stroke[end]={x:t.x,y:t.y};
+      }
+    }
+    function attachNearbyLooseEnds(symbol) {
+      const ends=terminals(symbol);
+      for(const stroke of state.strokes) for(const end of ['a','b']) {
+        if(stroke[end+'Anchor'])continue;
+        let best=null,dist=18;
+        for(const t of ends){const d=Math.hypot(stroke[end].x-t.x,stroke[end].y-t.y);if(d<dist){best=t;dist=d;}}
+        if(best)stroke[end+'Anchor']={id:best.id,index:best.index};
+      }
+    }
     function constrained(a, b) {
       if (!ortho.checked) return b;
       return Math.abs(b.x - a.x) >= Math.abs(b.y - a.y) ? {x:b.x,y:a.y} : {x:a.x,y:b.y};
@@ -75,6 +125,7 @@
       ctx.globalAlpha = preview ? .5 : 1; ctx.stroke(); ctx.globalAlpha = 1;
     }
     function redraw(preview) {
+      syncAnchors();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       state.strokes.forEach(s => line(s, false));
       if (preview) line(preview, true);
@@ -108,18 +159,23 @@
       s.x = clamp(s.x, SYMBOLS[type].w / 2, canvas.width - SYMBOLS[type].w / 2);
       s.y = clamp(s.y, SYMBOLS[type].h / 2, canvas.height - SYMBOLS[type].h / 2);
       state.symbols.push(s); selected = s.id;
-      persist(); render(); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo.');
+      attachNearbyLooseEnds(s); redraw(); persist(); render(); chooseMode('move'); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo; potom klikněte na Čára.');
     }
     function selectedSymbol() { return state.symbols.find(s => s.id === selected); }
     function removeSelected() {
       if (!selectedSymbol()) { tell('Nejdříve klikněte na součástku.'); return; }
       checkpoint(); state.symbols = state.symbols.filter(s => s.id !== selected);
-      selected = null; persist(); render(); tell('Součástka odstraněna.');
+      selected = null;
+      // Vodiče zůstanou na původní pozici, ale odpojí se od odstraněné značky.
+      for(const stroke of state.strokes)for(const end of ['a','b']){
+        if(stroke[end+'Anchor'] && !state.symbols.some(s=>s.id===stroke[end+'Anchor'].id))delete stroke[end+'Anchor'];
+      }
+      persist(); redraw(); render(); tell('Součástka odstraněna.');
     }
     function rotate() {
       const s = selectedSymbol(); if (!s) { tell('Nejdříve vyberte součástku.'); return; }
       checkpoint(); s.rotation = ((s.rotation || 0) + 90) % 360;
-      persist(); render(); tell('Součástka otočena o 90°.');
+      syncAnchors(); redraw(); persist(); render(); tell('Součástka otočena o 90°.');
     }
     function distance(p, s) {
       const dx = s.b.x-s.a.x, dy = s.b.y-s.a.y;
@@ -128,8 +184,17 @@
     }
     function chooseMode(next) {
       mode = next;
-      tools.querySelectorAll('[data-draw-tool]').forEach(el => el.setAttribute('aria-pressed',String(el.dataset.drawTool===mode)));
-      tell(mode === 'erase' ? 'Guma: klikněte na vodič.' : 'Čára: tažením vytvořte rovný vodič.');
+      // Důležité: při kreslení i gumování musí události vždy přijímat canvas.
+      // Jinak velký průhledný obdélník SVG značky blokuje kreslení vodičů.
+      board.classList.toggle('test3-mode-move', mode === 'move');
+      tools.querySelectorAll('[data-draw-tool]').forEach(el =>
+        el.setAttribute('aria-pressed', String(el.dataset.drawTool === mode))
+      );
+      tell(mode === 'move'
+        ? 'Přesunout součástky: chyťte značku a přetáhněte ji. Pro vodiče klikněte na Čára.'
+        : mode === 'erase'
+          ? 'Guma: klikněte na vodič, třeba i přímo přes značku součástky.'
+          : 'Čára: kreslete vodiče i přes oblast součástky. Pro posun značky zvolte Přesunout součástky.');
     }
     partsTools.querySelectorAll('[data-symbol-add]').forEach(b=>b.addEventListener('click',()=>add(b.dataset.symbolAdd)));
     partsTools.querySelector('[data-symbol-action="rotate"]').addEventListener('click',rotate);
@@ -155,7 +220,11 @@
         if (index>=0) { checkpoint(); state.strokes.splice(index,1); persist(); redraw(); }
         return;
       }
-      selected=null;render();pending={a:p,b:p,color:color.value};
+      selected=null;render();
+      const start=nearestTerminal(p);
+      const a=start?{x:start.x,y:start.y}:p;
+      pending={a,b:a,color:color.value,
+        ...(start?{aAnchor:{id:start.id,index:start.index}}:{})};
       canvas.setPointerCapture(event.pointerId);
     });
     canvas.addEventListener('pointermove',event=>{
@@ -165,11 +234,14 @@
     canvas.addEventListener('pointerup',event=>{
       if (!pending) return;
       pending.b=constrained(pending.a,point(event));
+      const end=nearestTerminal(pending.b);
+      if(end){pending.b={x:end.x,y:end.y};pending.bAnchor={id:end.id,index:end.index};}
       if (Math.hypot(pending.a.x-pending.b.x,pending.a.y-pending.b.y)>2){checkpoint();state.strokes.push(pending);persist();}
       pending=null;redraw();
     });
     canvas.addEventListener('pointercancel',()=>{pending=null;redraw();});
     layer.addEventListener('pointerdown',event=>{
+      if (mode !== 'move') return;
       const el=event.target.closest('.test3-symbol'); if (!el || event.button !== 0) return;
       event.preventDefault();
       const s=state.symbols.find(x=>x.id===el.dataset.symbolId);if(!s)return;
@@ -182,11 +254,14 @@
       const p=point(event),def=SYMBOLS[s.type];
       const x=clamp(snap(p.x-dragging.dx),def.w/2,canvas.width-def.w/2);
       const y=clamp(snap(p.y-dragging.dy),def.h/2,canvas.height-def.h/2);
-      if (x!==s.x || y!==s.y) {s.x=x;s.y=y;dragging.moved=true;render();}
+      if (x!==s.x || y!==s.y) {
+        if(!dragging.moved)attachNearbyLooseEnds(s);
+        s.x=x;s.y=y;dragging.moved=true;syncAnchors();redraw();render();
+      }
     });
     const endDrag=event=>{
       if(!dragging||event.pointerId!==dragging.pointerId)return;
-      if(dragging.moved){history.push(dragging.origin);if(history.length>60)history.shift();persist();tell('Součástka přesunuta.');}
+      if(dragging.moved){syncAnchors();redraw();history.push(dragging.origin);if(history.length>60)history.shift();persist();tell('Součástka přesunuta včetně připojených vodičů.');}
       dragging=null;
     };
     window.addEventListener('pointerup',endDrag);

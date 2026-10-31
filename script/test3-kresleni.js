@@ -8,10 +8,10 @@
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
   const SYMBOLS = {
-    led:      { name: 'LED',          file: 'picture/symboly/led.svg',          w: 380, h: 232 },
-    resistor: { name: 'Rezistor',     file: 'picture/symboly/rezistor.svg',     w: 440, h: 200 },
-    button:   { name: 'Tlačítko',    file: 'picture/symboly/tlacitko.svg',    w: 420, h: 260 },
-    pot:      { name: 'Potenciometr', file: 'picture/symboly/potenciometr.svg', w: 500, h: 288 }
+    led:      { name: 'LED',          file: 'picture/led.svg',          w: 380, h: 232 },
+    resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 440, h: 200 },
+    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 420, h: 260 },
+    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 500, h: 288 }
   };
 
   function getAll() {

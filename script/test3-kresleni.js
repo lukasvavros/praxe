@@ -7,11 +7,14 @@
   const snap = n => Math.round(n / GRID) * GRID;
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
+  // SVG jsou přímo ve složce picture/.
+  // Dokud soubor neexistuje, zobrazí se textová náhradní značka.
+  // GND a VCC záměrně nejsou v nabídce — žák je dokreslí.
   const SYMBOLS = {
-    led:      { name: 'LED',          file: 'picture/led.svg',          w: 380, h: 232 },
-    resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 440, h: 200 },
-    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 420, h: 260 },
-    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 500, h: 288 }
+    led:      { name: 'LED',          file: 'picture/led.svg',          w: 120, h: 148 },
+    resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 300, h: 44 },
+    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 340, h: 100 },
+    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 305, h: 175 }
   };
 
   function getAll() {

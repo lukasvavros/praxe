@@ -11,10 +11,10 @@
   // Dokud soubor neexistuje, zobrazí se textová náhradní značka.
   // GND a VCC záměrně nejsou v nabídce — žák je dokreslí.
   const SYMBOLS = {
-    led:      { name: 'LED',          file: 'picture/symboly/led.svg',          w: 95,  h: 58 },
-    resistor: { name: 'Rezistor',     file: 'picture/symboly/rezistor.svg',     w: 110, h: 50 },
-    button:   { name: 'Tlačítko',    file: 'picture/symboly/tlacitko.svg',    w: 105, h: 65 },
-    pot:      { name: 'Potenciometr', file: 'picture/symboly/potenciometr.svg', w: 125, h: 72 }
+    led:      { name: 'LED',          file: 'picture/led.svg',          w: 95,  h: 58 },
+    resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 110, h: 50 },
+    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 105, h: 65 },
+    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 125, h: 72 }
   };
 
   function getAll() {

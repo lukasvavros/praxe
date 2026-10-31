@@ -161,56 +161,103 @@ html[data-theme="dark"] .pra-chapter-3 .pra-wire-card.signal strong{color:#ffd08
 @media(max-width:850px){.pra-chapter-3 .pra-pulse-grid{grid-template-columns:1fr!important;}}
 
 
-/* ================================================================
-   Kapitola 3 – čitelnost simulací v obou režimech.
-   Simulace používají záměrně světlé panely a SVG s tmavými popisky.
-   Globální .pra-section p/li z jednotného vzhledu nesmí přebarvit
-   texty uvnitř těchto panelů na světlou barvu při dark mode.
-   ================================================================ */
-.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example){
-  color:#20363b !important;
-  background:#f9fbfb !important;
-  border-color:#d5e2e1 !important;
-}
-.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example)
-  :is(p,h3,h4,h5,label,small,span,li,figcaption,output){
-  color:#20363b !important;
-}
-.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example)
-  :is(.sim-eyebrow,.servo-value,.servo-period strong,.servo-ex-values strong,
-      .sim-angle-card strong,.servo-panel h4,.servo-demo h4){
-  color:#006d77 !important;
-}
-.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example)
-  :is(.servo-panel,.servo-ex-values p,.sim-angle-card,
-      .servo-ex-leds>span,.servo-ex-status,.servo-state){
-  color:#20363b !important;
-}
-.pra-chapter-3 .servo-demo .servo-state,
-.pra-chapter-3 .servo-ex .servo-ex-status,
-.pra-chapter-3 .servo-ex .servo-ex-note,
-.pra-chapter-3 .servo-demo .servo-scale,
-.pra-chapter-3 .servo-example .sim-solution-intro{
-  color:#314d53 !important;
-}
-.pra-chapter-3 .servo-example .sim-solution-heading{color:#20363b !important;}
-.pra-chapter-3 .servo-example :is(.sim-solution-intro,[data-example-error]){
-  background:transparent !important;
-}
-.pra-chapter-3 .servo-example [data-example-error]{color:#9b2525 !important;}
-.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button:not([aria-pressed="true"]){
-  color:#006d77 !important;
-}
-.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button:is([data-play],[data-ex-plus],[data-ex-minus],[type="submit"]){
-  color:#fff !important;
-}
-.pra-chapter-3 .servo-demo .servo-readout{color:#20363b !important;}
-.pra-chapter-3 .servo-demo .servo-readout span{color:#ad4b09 !important;}
-.pra-chapter-3 .servo-ex .servo-ex-note{opacity:1 !important;}
-.pra-chapter-3 .servo-example :is(pre,pre code){color:#ecf8f6 !important;}
 
-/* Zápatí – čitelné v obou režimech, bez rozpadlé tabulkové úpravy. */
-.pra-chapter-3 :is(.pra-author,.pra-author-content,.pra-author-item){
-  color:var(--ink) !important;
+/* ===============================================================
+   KAPITOLA 3 – animace ve světlém i tmavém režimu.
+   Používáme stejné proměnné jako společný vzhled kapitol.
+   Diagramy s pevnými barvami SVG zůstávají na bílém podkladu.
+   =============================================================== */
+.pra-chapter-3 {
+  --servo-bg:#f5fafa;
+  --servo-panel:#e9f1f2;
+  --servo-input:#fff;
+  --servo-ink:#193338;
+  --servo-muted:#426267;
+  --servo-accent:#087f83;
+  --servo-border:#cbdedc;
 }
-.pra-chapter-3 .pra-author a{color:var(--teal-dark) !important;}
+html[data-theme="dark"] .pra-chapter-3 {
+  --servo-bg:#182b2e;
+  --servo-panel:#233c40;
+  --servo-input:#16282b;
+  --servo-ink:#e8f5f3;
+  --servo-muted:#bad4d1;
+  --servo-accent:#6ce0d6;
+  --servo-border:#406065;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) {
+  --sim-accent:#087f83;
+  --sim-deep:var(--servo-accent);
+  --sim-panel:var(--servo-panel);
+  --sim-border:var(--servo-border);
+  background:var(--servo-bg)!important;
+  border:1px solid var(--servo-border)!important;
+  color:var(--servo-ink)!important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) :is(
+  h3,h4,h5,p,label,small,span,output,li,figcaption,strong
+){ color:var(--servo-ink)!important; }
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) :is(
+  .sim-eyebrow,.servo-value,.servo-period strong,.servo-ex-values strong,
+  .sim-angle-card strong,.servo-panel h4,.servo-demo h4
+){color:var(--servo-accent)!important;}
+.pra-chapter-3 :is(.servo-demo,.servo-ex) :is(
+  .servo-panel,.servo-ex-values p,.sim-angle-card,.servo-ex-leds>span,
+  .servo-ex-status,.servo-state
+){background:var(--servo-panel)!important;border-color:var(--servo-border)!important;color:var(--servo-ink)!important;}
+.pra-chapter-3 .servo-demo .servo-panel {border:1px solid var(--servo-border)!important;}
+.pra-chapter-3 :is(.servo-demo,.servo-ex) :is(
+  .servo-scale,.servo-ex-note,.servo-ex-status,.servo-state
+),
+.pra-chapter-3 .servo-example .sim-solution-intro {color:var(--servo-muted)!important;}
+.pra-chapter-3 .servo-example {
+  background:var(--servo-panel)!important;
+  border:1px solid var(--servo-border)!important;
+}
+.pra-chapter-3 .servo-example .sim-solution-heading{color:var(--servo-ink)!important;}
+.pra-chapter-3 .servo-example form{background:transparent!important;}
+.pra-chapter-3 .servo-example :is(.sim-solution-intro,[data-example-error]){background:transparent!important;}
+.pra-chapter-3 .servo-example [data-example-error]{color:#ed7e80!important;}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button {
+  color:var(--servo-ink)!important;
+  background:var(--servo-input)!important;
+  border:1px solid var(--servo-border)!important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button:hover {
+  background:var(--servo-panel)!important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button:is(
+  [aria-pressed="true"],[data-play],[data-ex-plus],[data-ex-minus],[type="submit"]
+){background:#087f83!important;border-color:#087f83!important;color:#fff!important;}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) input[type="password"]{
+  background:var(--servo-input)!important;
+  border-color:var(--servo-border)!important;
+  color:var(--servo-ink)!important;
+}
+.pra-chapter-3 .servo-demo .servo-readout{
+  background:var(--servo-input)!important;
+  border:1px solid var(--servo-border)!important;
+  color:var(--servo-ink)!important;
+}
+.pra-chapter-3 .servo-demo .servo-readout span{color:var(--servo-accent)!important;}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) :is(pre,pre code){color:var(--code-ink)!important;}
+/* Pevné tmavé popisky jsou součástí SVG, takže jejich podklad musí být světlý. */
+.pra-chapter-3 :is(.servo-demo,.servo-ex) svg {
+  color:#283c40;
+}
+.pra-chapter-3 .servo-ex svg.servo-board {
+  background:#fff!important;
+  border-radius:12px;
+}
+.pra-chapter-3 .servo-demo .servo-panel svg {
+  background:#fff;
+  border-radius:8px;
+  padding:5px;
+}
+/* Případné textové popisky v SVG animací jsou vždy čitelné. */
+.pra-chapter-3 :is(.servo-demo,.servo-ex) svg text,
+.pra-chapter-3 :is(.servo-demo,.servo-ex) svg tspan {
+  color:#283c40!important;
+}
+.pra-chapter-3 :is(.pra-author,.pra-author-content,.pra-author-item){color:var(--ink)!important;}
+.pra-chapter-3 .pra-author a{color:var(--teal-dark)!important;}

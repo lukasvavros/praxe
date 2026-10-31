@@ -55,6 +55,11 @@ html[data-theme="dark"] .test3-sketch,html[data-theme="dark"] .test3-serial-shot
 html[data-theme="dark"] .test3-serial-file{background:#193237;color:#e7f8f5}
 @media(max-width:600px){.test3-sketch,.test3-serial-shot{padding:12px}.test3-draw-tools{gap:7px}}
 
+
+/* ============================================================
+   TEST 3 · PALETA SCHEMATICKÝCH ZNAČEK
+   Externí SVG vlož do picture/symboly/*.svg
+   ============================================================ */
 .test3-component-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
 .test3-toolbar-title{font-size:.88rem;margin-right:5px}
 .test3-component-tools button{font:inherit;padding:9px 12px;border-radius:9px;border:1px solid #148b89;background:transparent;color:inherit;cursor:pointer}
@@ -73,3 +78,18 @@ html[data-theme="dark"] .test3-serial-file{background:#193237;color:#e7f8f5}
 .test3-canvas-board>.test3-draw-canvas{z-index:3}
 .test3-canvas-board>.test3-symbol-layer{z-index:4}
 @media (max-width:640px){.test3-component-tools{gap:6px}.test3-component-tools button{padding:8px 10px}}
+
+/* Oprava: pouze samotné SVG značky, 4× větší, bez karty, stínu a podkladu. */
+.test3-symbol,
+.test3-symbol:hover,
+.test3-symbol:focus,
+html[data-theme="light"] .test3-symbol,
+html[data-theme="dark"] .test3-symbol {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.test3-symbol.is-selected { outline: 2px dashed #168b8d; outline-offset: 2px; }
+.test3-symbol img { object-fit: fill; background: transparent; }

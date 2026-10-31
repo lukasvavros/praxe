@@ -58,7 +58,7 @@ html[data-theme="dark"] .test3-serial-file{background:#193237;color:#e7f8f5}
 
 /* ============================================================
    TEST 3 · PALETA SCHEMATICKÝCH ZNAČEK
-   Externí SVG vlož do picture/symboly/*.svg
+   SVG značky načítáme přímo z picture/*.svg
    ============================================================ */
 .test3-component-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
 .test3-toolbar-title{font-size:.88rem;margin-right:5px}

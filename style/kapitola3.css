@@ -159,3 +159,58 @@ html[data-theme="dark"] .pra-chapter-3 .pra-wire-card.gnd strong{color:#cbb195!i
 html[data-theme="dark"] .pra-chapter-3 .pra-wire-card.power strong{color:#ff8d98!important;}
 html[data-theme="dark"] .pra-chapter-3 .pra-wire-card.signal strong{color:#ffd08a!important;}
 @media(max-width:850px){.pra-chapter-3 .pra-pulse-grid{grid-template-columns:1fr!important;}}
+
+
+/* ================================================================
+   Kapitola 3 – čitelnost simulací v obou režimech.
+   Simulace používají záměrně světlé panely a SVG s tmavými popisky.
+   Globální .pra-section p/li z jednotného vzhledu nesmí přebarvit
+   texty uvnitř těchto panelů na světlou barvu při dark mode.
+   ================================================================ */
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example){
+  color:#20363b !important;
+  background:#f9fbfb !important;
+  border-color:#d5e2e1 !important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example)
+  :is(p,h3,h4,h5,label,small,span,li,figcaption,output){
+  color:#20363b !important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example)
+  :is(.sim-eyebrow,.servo-value,.servo-period strong,.servo-ex-values strong,
+      .sim-angle-card strong,.servo-panel h4,.servo-demo h4){
+  color:#006d77 !important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example)
+  :is(.servo-panel,.servo-ex-values p,.sim-angle-card,
+      .servo-ex-leds>span,.servo-ex-status,.servo-state){
+  color:#20363b !important;
+}
+.pra-chapter-3 .servo-demo .servo-state,
+.pra-chapter-3 .servo-ex .servo-ex-status,
+.pra-chapter-3 .servo-ex .servo-ex-note,
+.pra-chapter-3 .servo-demo .servo-scale,
+.pra-chapter-3 .servo-example .sim-solution-intro{
+  color:#314d53 !important;
+}
+.pra-chapter-3 .servo-example .sim-solution-heading{color:#20363b !important;}
+.pra-chapter-3 .servo-example :is(.sim-solution-intro,[data-example-error]){
+  background:transparent !important;
+}
+.pra-chapter-3 .servo-example [data-example-error]{color:#9b2525 !important;}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button:not([aria-pressed="true"]){
+  color:#006d77 !important;
+}
+.pra-chapter-3 :is(.servo-demo,.servo-ex,.servo-example) button:is([data-play],[data-ex-plus],[data-ex-minus],[type="submit"]){
+  color:#fff !important;
+}
+.pra-chapter-3 .servo-demo .servo-readout{color:#20363b !important;}
+.pra-chapter-3 .servo-demo .servo-readout span{color:#ad4b09 !important;}
+.pra-chapter-3 .servo-ex .servo-ex-note{opacity:1 !important;}
+.pra-chapter-3 .servo-example :is(pre,pre code){color:#ecf8f6 !important;}
+
+/* Zápatí – čitelné v obou režimech, bez rozpadlé tabulkové úpravy. */
+.pra-chapter-3 :is(.pra-author,.pra-author-content,.pra-author-item){
+  color:var(--ink) !important;
+}
+.pra-chapter-3 .pra-author a{color:var(--teal-dark) !important;}

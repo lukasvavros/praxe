@@ -420,3 +420,21 @@ body{margin:0}.lcd-chapter{width:100%;margin:0}.lcd-chapter [hidden]{display:non
   .lcd-chapter .lcd-gate-phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lcd-chapter .lcd-workbench { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Kapitola 5 – karta přímého stažení knihovny LCD */
+.lcd-chapter .lcd-library-download{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin:24px 0 30px;padding:22px 24px;border:1px solid #bddbdc;border-left:5px solid #007f86;border-radius:14px;background:#f1fafa;box-shadow:0 4px 16px rgba(0,0,0,.045)}
+.lcd-chapter .lcd-library-icon{display:grid;place-items:center;flex:0 0 58px;width:58px;height:58px;border-radius:14px;background:#d7eeed;color:#006e75}
+.lcd-chapter .lcd-library-info{flex:1 1 240px;min-width:0}
+.lcd-chapter .lcd-library-info h3{margin:0 0 5px;font-size:clamp(18px,2vw,22px);line-height:1.35;color:#19383a;font-weight:700}
+.lcd-chapter .lcd-library-info p{margin:0;font-size:14px;line-height:1.6;color:#4a6164}
+.lcd-chapter a.lcd-library-button{display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:49px;padding:12px 20px;border-radius:9px;background:#007f86;border:1px solid #007f86;color:#fff;text-decoration:none;font-size:15px;font-weight:700;line-height:1.4;white-space:normal;text-align:center;transition:background .15s ease,transform .15s ease}
+.lcd-chapter a.lcd-library-button:hover{background:#006970;color:#fff;transform:translateY(-1px)}
+.lcd-chapter a.lcd-library-button:focus-visible{outline:3px solid #ee7203;outline-offset:3px}
+.lcd-chapter a.lcd-library-button span{font-size:23px;line-height:1}
+html[data-theme="dark"] .lcd-chapter .lcd-library-download{background:#173338;border-color:#376467;border-left-color:#55c4c2;box-shadow:none}
+html[data-theme="dark"] .lcd-chapter .lcd-library-icon{background:#294e51;color:#96e6e4}
+html[data-theme="dark"] .lcd-chapter .lcd-library-info h3{color:#f0f7f7}
+html[data-theme="dark"] .lcd-chapter .lcd-library-info p{color:#c5dada}
+html[data-theme="dark"] .lcd-chapter a.lcd-library-button{background:#087d83;border-color:#51b5ba;color:#fff}
+html[data-theme="dark"] .lcd-chapter a.lcd-library-button:hover{background:#12666c;color:#fff}
+@media(max-width:640px){.lcd-chapter .lcd-library-download{padding:18px;gap:14px}.lcd-chapter a.lcd-library-button{width:100%}}

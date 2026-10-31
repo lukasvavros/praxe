@@ -11,10 +11,10 @@
   // Dokud soubor neexistuje, zobrazí se textová náhradní značka.
   // GND a VCC záměrně nejsou v nabídce — žák je dokreslí.
   const SYMBOLS = {
-    led:      { name: 'LED',          file: 'picture/led.svg',          w: 95,  h: 58 },
-    resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 110, h: 50 },
-    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 105, h: 65 },
-    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 125, h: 72 }
+    led:      { name: 'LED',          file: 'picture/symboly/led.svg',          w: 380, h: 232 },
+    resistor: { name: 'Rezistor',     file: 'picture/symboly/rezistor.svg',     w: 440, h: 200 },
+    button:   { name: 'Tlačítko',    file: 'picture/symboly/tlacitko.svg',    w: 420, h: 260 },
+    pot:      { name: 'Potenciometr', file: 'picture/symboly/potenciometr.svg', w: 500, h: 288 }
   };
 
   function getAll() {
@@ -104,7 +104,9 @@
       checkpoint();
       const index = state.symbols.length;
       const s = { id: Date.now().toString(36) + '-' + Math.random().toString(36).slice(2), type,
-        x: snap(530 + (index % 4) * 105), y: snap(110 + Math.floor(index/4) * 95), rotation: 0 };
+        x: snap(640 + (index % 2) * 185), y: snap(180 + Math.floor(index/2) * 195), rotation: 0 };
+      s.x = clamp(s.x, SYMBOLS[type].w / 2, canvas.width - SYMBOLS[type].w / 2);
+      s.y = clamp(s.y, SYMBOLS[type].h / 2, canvas.height - SYMBOLS[type].h / 2);
       state.symbols.push(s); selected = s.id;
       persist(); render(); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo.');
     }

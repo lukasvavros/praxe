@@ -1,35 +1,3 @@
-
-/* Test 3 – pouze doplňky, základní vzhled využívá style/testy.css */
-.test3-variant .question-number {min-width:2.3rem; font-weight:800}
-.test3-variant .question-content > p {line-height:1.7}
-.test3-variant .question-content li {margin-bottom:.45rem}
-.test3-code {display:block;width:100%;min-height:420px;resize:vertical;box-sizing:border-box;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2;white-space:pre;overflow:auto;padding:16px;border:1px solid #88aea9;border-radius:12px;background:var(--surface,#f9fcfb);color:var(--text,#172c30)}
-html[data-theme="dark"] .test3-code {background:#12272c;color:#effbfa;border-color:#48676a}
-.test3-rubric{margin:20px 0;border:1px solid #82bcb4;padding:14px 18px;border-radius:12px;background:rgba(25,153,144,.07)}
-/* Hodnocení: jeden přehledný řádek pro každé kritérium */
-.test3-rubric ul {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0;
-  list-style: decimal;
-  margin: 12px 0 0;
-  padding-left: 28px;
-}
-.test3-rubric li {
-  display: list-item;
-  margin: 0;
-  padding: 9px 4px;
-  line-height: 1.55;
-  overflow-wrap: anywhere;
-}
-.test3-rubric li + li {
-  border-top: 1px solid rgba(130, 188, 180, .28);
-}
-.test3-rubric > strong {
-  display: block;
-  font-size: 1rem;
-  line-height: 1.5;
-}
 .test3-note{margin:16px 0;padding:14px 18px;border-left:4px solid #087f83;border-radius:8px;background:rgba(27,150,143,.08)}
 
 
@@ -55,11 +23,6 @@ html[data-theme="dark"] .test3-sketch,html[data-theme="dark"] .test3-serial-shot
 html[data-theme="dark"] .test3-serial-file{background:#193237;color:#e7f8f5}
 @media(max-width:600px){.test3-sketch,.test3-serial-shot{padding:12px}.test3-draw-tools{gap:7px}}
 
-
-/* ============================================================
-   TEST 3 · PALETA SCHEMATICKÝCH ZNAČEK
-   SVG značky načítáme přímo z picture/*.svg
-   ============================================================ */
 .test3-component-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
 .test3-toolbar-title{font-size:.88rem;margin-right:5px}
 .test3-component-tools button{font:inherit;padding:9px 12px;border-radius:9px;border:1px solid #148b89;background:transparent;color:inherit;cursor:pointer}
@@ -146,7 +109,7 @@ html[data-theme="dark"] .test3-symbol {
    Podklad má souřadnice shodné při kreslení i exportu. */
 .test3-canvas-board > img.test3-board-image {
   position: absolute !important;
-  left: 40px !important;
+  left: 240px !important;
   top: 60px !important;
   width: 300px !important;
   height: 524.006px !important;

@@ -2,9 +2,10 @@
   'use strict';
   const KEY = 'pra-arduino-test3-symboly-v1';
   const GRID = 10;
+  const SYMBOL_GRID = 20;
   const MAX_IMAGE = 5 * 1024 * 1024;
   const instances = new WeakSet();
-  const snap = n => Math.round(n / GRID) * GRID;
+
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
 
@@ -62,11 +63,12 @@
     const checkpoint = () => { history.push(snapshot(state)); if (history.length > 60) history.shift(); };
     const tell = s => { hint.textContent = s; };
 
-    function point(event) {
+    function point(event, step = GRID) {
       const r = canvas.getBoundingClientRect();
+      const quantize = n => step ? Math.round(n / step) * step : n;
       return {
-        x: clamp(snap((event.clientX - r.left) * canvas.width / r.width), 0, canvas.width),
-        y: clamp(snap((event.clientY - r.top) * canvas.height / r.height), 0, canvas.height)
+        x: clamp(quantize((event.clientX - r.left) * canvas.width / r.width), 0, canvas.width),
+        y: clamp(quantize((event.clientY - r.top) * canvas.height / r.height), 0, canvas.height)
       };
     }
     function constrained(a, b) {
@@ -103,14 +105,25 @@
         layer.append(el);
       }
     }
+    function symbolPosition(s, x, y) {
+      const {w, h} = SYMBOLS[s.type];
+      const quarterTurn = (s.rotation || 0) % 180 !== 0;
+      const halfWidth = (quarterTurn ? h : w) / 2;
+      const halfHeight = (quarterTurn ? w : h) / 2;
+      const align = (value, halfSize, limit) => SYMBOL_GRID * clamp(
+        Math.round(value / SYMBOL_GRID),
+        Math.ceil(halfSize / SYMBOL_GRID),
+        Math.floor((limit - halfSize) / SYMBOL_GRID)
+      );
+      return {x: align(x, halfWidth, canvas.width), y: align(y, halfHeight, canvas.height)};
+    }
     function add(type) {
       if (!SYMBOLS[type]) return;
       checkpoint();
       const index = state.symbols.length;
       const s = { id: Date.now().toString(36) + '-' + Math.random().toString(36).slice(2), type,
-        x: snap(640 + (index % 2) * 185), y: snap(180 + Math.floor(index/2) * 195), rotation: 0 };
-      s.x = clamp(s.x, SYMBOLS[type].w / 2, canvas.width - SYMBOLS[type].w / 2);
-      s.y = clamp(s.y, SYMBOLS[type].h / 2, canvas.height - SYMBOLS[type].h / 2);
+        rotation: 0 };
+      Object.assign(s, symbolPosition(s, 640 + (index % 2) * 185, 180 + Math.floor(index / 2) * 195));
       state.symbols.push(s); selected = s.id;
       redraw(); persist(); render(); chooseMode('move'); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo; potom klikněte na Čára.');
     }
@@ -128,6 +141,7 @@
     function rotate() {
       const s = selectedSymbol(); if (!s) { tell('Nejdříve vyberte součástku.'); return; }
       checkpoint(); s.rotation = ((s.rotation || 0) + 90) % 360;
+      Object.assign(s, symbolPosition(s, s.x, s.y));
       redraw(); persist(); render(); tell('Součástka otočena o 90°.');
     }
     function distance(p, s) {
@@ -194,15 +208,14 @@
       const el=event.target.closest('.test3-symbol'); if (!el || event.button !== 0) return;
       event.preventDefault();
       const s=state.symbols.find(x=>x.id===el.dataset.symbolId);if(!s)return;
-      selected=s.id;render();const p=point(event);
+      selected=s.id;render();const p=point(event, 0);
       dragging={id:s.id,pointerId:event.pointerId,dx:p.x-s.x,dy:p.y-s.y,origin:snapshot(state),moved:false};
     });
     window.addEventListener('pointermove',event=>{
       if (!dragging || event.pointerId!==dragging.pointerId) return;
       const s=state.symbols.find(x=>x.id===dragging.id);if(!s)return;
-      const p=point(event),def=SYMBOLS[s.type];
-      const x=clamp(snap(p.x-dragging.dx),def.w/2,canvas.width-def.w/2);
-      const y=clamp(snap(p.y-dragging.dy),def.h/2,canvas.height-def.h/2);
+      const p = point(event, 0);
+      const {x, y} = symbolPosition(s, p.x - dragging.dx, p.y - dragging.dy);
       if (x!==s.x || y!==s.y) {
         // Nepřipojujeme automaticky sousední volné vodiče při přesunu.
         s.x=x;s.y=y;dragging.moved=true;redraw();render();

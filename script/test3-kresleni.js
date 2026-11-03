@@ -10,9 +10,9 @@
 
 
   const SYMBOLS = {
-    led:      { name: 'LED',          file: 'picture/led.svg',          w: 60, h: 74, pins: [[11.088953574, -32.150755839], [11.088953574, 32.156114745]] },
+    led:      { name: 'LED',          file: 'picture/led.svg',          w: 60, h: 74, pins: [[10, -30], [10, 30]] },
     resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 150, h: 22 },
-    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 170, h: 50 },
+    button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 170, h: 50, pins: [[-60, -20], [-60, 20], [60, -20], [60, 20]] },
     pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 152.5, h: 87.5, pins: [[-40, -40], [-40, 40], [0, 0]] }
   };
 
@@ -142,8 +142,8 @@
         Math.ceil((halfSize + offset) / SYMBOL_GRID),
         Math.floor((limit - halfSize + offset) / SYMBOL_GRID)
       ) - offset;
-      // U LED zarovnáme osu obou vývodů a zachováme původní velikost SVG.
-      const axis = rotatedOffset(s, s.type === 'led' ? SYMBOLS.led.pins[0][0] : 0, 0);
+      const [pinX, pinY] = SYMBOLS[s.type].pins?.[0] || [0, 0];
+      const axis = rotatedOffset(s, pinX, pinY);
       return {x: align(x, halfWidth, canvas.width, axis.x),
               y: align(y, halfHeight, canvas.height, axis.y)};
     }

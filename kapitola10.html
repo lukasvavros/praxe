@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="style/navigace.css?v=k10-20261103">
 <link rel="stylesheet" href="style/kapitola-bloky.css?v=1">
 <link rel="stylesheet" href="style/kapitola-jednotny-vzhled.css?v=k10-20261103">
-<link rel="stylesheet" href="style/kapitola10.css?v=20261103">
+<link rel="stylesheet" href="style/kapitola10.css?v=20261103-bez-popisku">
 <script defer src="script/kapitola-navigace.js?v=2"></script><script defer src="script/kapitola-vzhled.js?v=3"></script></head>
 <body>
 <header class="site-topbar" aria-label="Hlavní navigace"><a class="site-brand" href="index.html" aria-label="Praxe Arduino – hlavní stránka"><span class="site-brand-mark" aria-hidden="true">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
@@ -23,19 +23,19 @@
 <section class="pra-section" id="opakovani"><div class="pra-container"><h2>Opakování: stejnosměrný motor</h2><p>Stejnosměrný motor mění elektrickou energii na otáčivý pohyb. Ve školním modelu se setkáš se statorem, rotorem, komutátorem a kartáči. Při změně polarity napájení se změní směr otáčení.</p>
 <div class="ch10-grid"><div class="ch10-card"><h3>Stator</h3><p>Nepohyblivá část vytvářející magnetické pole.</p></div><div class="ch10-card"><h3>Rotor</h3><p>Otáčivá část s vinutím.</p></div><div class="ch10-card"><h3>Komutátor</h3><p>Přepíná proud ve vinutí při otáčení.</p></div><div class="ch10-card"><h3>Kartáče</h3><p>Elektrické kontakty přivádějící proud ke komutátoru.</p></div></div>
 <figure class="ch10-figure" data-image-slot="motor-konstrukce">
-  <div class="ch10-figure-heading"><span class="ch10-figure-tag"></span><strong>Konstrukce stejnosměrného motoru</strong></div>
+  <div class="ch10-figure-heading"><strong>Konstrukce stejnosměrného motoru</strong></div>
   <img src="picture/motor-konstrukce.png" loading="lazy" decoding="async" alt="Schéma konstrukce stejnosměrného motoru s rotorem, magnety a komutátorem.">
   <figcaption><span>Schéma konstrukce stejnosměrného motoru s rotorem, magnety a komutátorem.</span><small class="ch10-image-credit">Zdroj: <a href="https://dronebotworkshop.com/dc-motors-l298n-h-bridge/" target="_blank" rel="noopener noreferrer">https://dronebotworkshop.com/dc-motors-l298n-h-bridge/</a></small></figcaption>
 </figure>
 <div class="ch10-alert"><strong>Opakuj:</strong> Vysvětli, proč změna polarity na vývodech motoru obrátí směr otáčení. Co se stane při odpojení napájení?</div></div></section>
 <section class="pra-section" id="mustek"><div class="pra-container"><h2>H-můstek: změna směru</h2><p>H-můstek tvoří čtyři spínací prvky kolem motoru. Vhodnou kombinací se mění polarita napájení motoru, a tím i směr jeho otáčení. Modul DRV8833 obsahuje dva H-můstky pro dva motory.</p>
 <figure class="ch10-figure" data-image-slot="h-mustek-princip">
-  <div class="ch10-figure-heading"><span class="ch10-figure-tag"></span><strong>Princip H-můstku</strong></div>
+  <div class="ch10-figure-heading"><strong>Princip H-můstku</strong></div>
   <img src="picture/H-Bridge-Working-Motor-Direction-Control-Animation.gif" loading="lazy" decoding="async" alt="Zjednodušené schéma čtyř spínačů tvořících H-můstek.">
   <figcaption><span>Zjednodušené schéma čtyř spínačů tvořících H-můstek.</span><small class="ch10-image-credit">Zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
 </figure>
 <figure class="ch10-figure" data-image-slot="h-mustek-tranzistory">
-  <div class="ch10-figure-heading"><span class="ch10-figure-tag"></span><strong>Elektronické provedení H-můstku</strong></div>
+  <div class="ch10-figure-heading"><strong>Elektronické provedení H-můstku</strong></div>
   <img src="picture/h-bridge-circuit-600w.gif" loading="lazy" decoding="async" alt="Schéma H-můstku s tranzistory a motorem.">
   <figcaption><span>Schéma H-můstku s tranzistory a motorem.</span><small class="ch10-image-credit">Zdroj: <a href="https://learn.sparkfun.com/tutorials/transistors/applications-i-switches" target="_blank" rel="noopener noreferrer">https://learn.sparkfun.com/tutorials/transistors/applications-i-switches</a></small></figcaption>
 </figure>
@@ -57,12 +57,12 @@
   <figcaption>Výukový robot s dvěma stejnosměrnými motory.</figcaption>
 </figure>
 <figure class="ch10-figure" data-image-slot="drv8833-pinout">
-  <div class="ch10-figure-heading"><span class="ch10-figure-tag"></span><strong>Pinout modulu DRV8833</strong></div>
+  <div class="ch10-figure-heading"><strong>Pinout modulu DRV8833</strong></div>
   <img src="picture/drv8833-pinout.png" loading="lazy" decoding="async" alt="Obrázek modulu DRV8833 s označením vývodů a vstupů.">
   <figcaption><span>Obrázek modulu DRV8833 s označením vývodů a vstupů.</span><small class="ch10-image-credit">Zdroj:  <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
 </figure>
 <figure class="ch10-figure" data-image-slot="drv8833-zapojeni">
-  <div class="ch10-figure-heading"><span class="ch10-figure-tag"></span><strong>Ukázkové propojení driveru a motorů</strong></div>
+  <div class="ch10-figure-heading"><strong>Ukázkové propojení driveru a motorů</strong></div>
   <img src="picture/drv8833-zapojeni.png" loading="lazy" decoding="async" alt="Ukázkové zapojení DRV8833 k Arduinu a dvěma stejnosměrným motorům.">
   <figcaption><span>Ukázkové zapojení DRV8833 k Arduinu a dvěma stejnosměrným motorům.</span><small class="ch10-image-credit">Zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
 </figure>

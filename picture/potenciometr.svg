@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="152.5" height="87.5" viewBox="-76.25 -43.75 152.5 87.5">
+  <g fill="none" stroke="#222" stroke-width="2" stroke-linecap="round">
+    <path d="M-40 -40V-24 M-40 24V40 M0 0H-21"/>
+    <rect x="-48" y="-24" width="16" height="48"/>
+  </g>
+  <path d="M-30 0l10 -4v8z" fill="#222"/>
+  <g font-family="sans-serif" font-size="7" fill="#555">
+    <text x="-51" y="36">1</text>
+    <text x="-13" y="-4">2</text>
+    <text x="-51" y="-30">3</text>
+  </g>
+</svg>

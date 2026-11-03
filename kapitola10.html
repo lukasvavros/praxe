@@ -26,7 +26,7 @@
 <figure class="ch10-figure" data-image-slot="motor-konstrukce">
   <div class="ch10-figure-heading"><span class="ch10-figure-tag">Dočasný obrázek · připraveno k nahrazení</span><strong>Konstrukce stejnosměrného motoru</strong></div>
   <img src="picture/motor-konstrukce.png" loading="lazy" decoding="async" alt="Schéma konstrukce stejnosměrného motoru s rotorem, magnety a komutátorem.">
-  <figcaption><span>Schéma konstrukce stejnosměrného motoru s rotorem, magnety a komutátorem.</span><small class="ch10-image-credit">Dočasný obrázek z podkladového PDF · uvedený zdroj: <a href="https://dronebotworkshop.com/dc-motors-l298n-h-bridge/" target="_blank" rel="noopener noreferrer">https://dronebotworkshop.com/dc-motors-l298n-h-bridge/</a></small></figcaption>
+  <figcaption><span>Schéma konstrukce stejnosměrného motoru s rotorem, magnety a komutátorem.</span><small class="ch10-image-credit">Zdroj: <a href="https://dronebotworkshop.com/dc-motors-l298n-h-bridge/" target="_blank" rel="noopener noreferrer">https://dronebotworkshop.com/dc-motors-l298n-h-bridge/</a></small></figcaption>
 </figure>
 <div class="ch10-alert"><strong>Opakuj:</strong> Vysvětli, proč změna polarity na vývodech motoru obrátí směr otáčení. Co se stane při odpojení napájení?</div></div></section>
 <section class="pra-section" id="mustek"><div class="pra-container"><h2>H-můstek: změna směru</h2><p>H-můstek tvoří čtyři spínací prvky kolem motoru. Vhodnou kombinací se mění polarita napájení motoru, a tím i směr jeho otáčení. Modul DRV8833 obsahuje dva H-můstky pro dva motory.</p>
@@ -34,13 +34,13 @@
 <figure class="ch10-figure" data-image-slot="h-mustek-princip">
   <div class="ch10-figure-heading"><span class="ch10-figure-tag">Dočasný obrázek · připraveno k nahrazení</span><strong>Princip H-můstku</strong></div>
   <img src="picture/H-Bridge-Working-Motor-Direction-Control-Animation.gif" loading="lazy" decoding="async" alt="Zjednodušené schéma čtyř spínačů tvořících H-můstek.">
-  <figcaption><span>Zjednodušené schéma čtyř spínačů tvořících H-můstek.</span><small class="ch10-image-credit">Dočasný obrázek z podkladového PDF · uvedený zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
+  <figcaption><span>Zjednodušené schéma čtyř spínačů tvořících H-můstek.</span><small class="ch10-image-credit">Zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
 </figure>
 <!-- AŽ DODÁŠ VLASTNÍ OBRÁZEK: nahraď src a text v .ch10-image-credit. -->
 <figure class="ch10-figure" data-image-slot="h-mustek-tranzistory">
   <div class="ch10-figure-heading"><span class="ch10-figure-tag">Dočasný obrázek · připraveno k nahrazení</span><strong>Elektronické provedení H-můstku</strong></div>
   <img src="picture/h-bridge-circuit-600w.gif" loading="lazy" decoding="async" alt="Schéma H-můstku s tranzistory a motorem.">
-  <figcaption><span>Schéma H-můstku s tranzistory a motorem.</span><small class="ch10-image-credit">Dočasný obrázek z podkladového PDF · uvedený zdroj: <a href="https://learn.sparkfun.com/tutorials/transistors/applications-i-switches" target="_blank" rel="noopener noreferrer">https://learn.sparkfun.com/tutorials/transistors/applications-i-switches</a></small></figcaption>
+  <figcaption><span>Schéma H-můstku s tranzistory a motorem.</span><small class="ch10-image-credit">Zdroj: <a href="https://learn.sparkfun.com/tutorials/transistors/applications-i-switches" target="_blank" rel="noopener noreferrer">https://learn.sparkfun.com/tutorials/transistors/applications-i-switches</a></small></figcaption>
 </figure>
 <h3>Stavová tabulka jednoho motoru (DRV8833)</h3><div class="ch10-table-wrap"><table><thead><tr><th>IN1</th><th>IN2</th><th>Chování motoru</th></tr></thead><tbody><tr><td>LOW</td><td>LOW</td><td>Volný doběh / vypnuté výstupy</td></tr><tr><td>LOW</td><td>HIGH</td><td>Otáčení jedním směrem</td></tr><tr><td>HIGH</td><td>LOW</td><td>Otáčení opačným směrem</td></tr><tr><td>HIGH</td><td>HIGH</td><td>Elektrické brzdění</td></tr></tbody></table></div>
 <p class="ch10-note">V dodaném podkladu jsou oba stavy 00 a 11 označeny jako „Motor OFF“. U DRV8833 se však liší: 00 znamená volný doběh a 11 brzdění. Pro tento přehled je rozdíl upřesněn podle <a href="https://www.ti.com/lit/ds/symlink/drv8833.pdf" target="_blank" rel="noopener noreferrer">katalogového listu TI DRV8833, tabulka H-Bridge Logic</a>. Směry vpřed/vzad se odvíjejí od skutečného připojení motorů.</p>
@@ -51,7 +51,7 @@
 <figure class="ch10-figure" data-image-slot="pwm-prubehy">
   <div class="ch10-figure-heading"><span class="ch10-figure-tag">Dočasný obrázek · připraveno k nahrazení</span><strong>PWM při různých střídách</strong></div>
   <img src="picture/pwm-prubehy.png" loading="lazy" decoding="async" alt="Graf PWM průběhů při 25 %, 50 % a 90 % střídy.">
-  <figcaption><span>Graf PWM průběhů při 25 %, 50 % a 90 % střídy.</span><small class="ch10-image-credit">Dočasný obrázek z podkladového PDF · uvedený zdroj: <a href="https://howtomechatronics.com/tutorials/arduino/arduino-dc-motor-control-tutorial-l298n-pwm-h-bridge/" target="_blank" rel="noopener noreferrer">https://howtomechatronics.com/tutorials/arduino/arduino-dc-motor-control-tutorial-l298n-pwm-h-bridge/</a></small></figcaption>
+  <figcaption><span>Graf PWM průběhů při 25 %, 50 % a 90 % střídy.</span><small class="ch10-image-credit">Zdroj: <a href="https://howtomechatronics.com/tutorials/arduino/arduino-dc-motor-control-tutorial-l298n-pwm-h-bridge/" target="_blank" rel="noopener noreferrer">https://howtomechatronics.com/tutorials/arduino/arduino-dc-motor-control-tutorial-l298n-pwm-h-bridge/</a></small></figcaption>
 </figure>
 <div class="ch10-alert"><strong>Důležité:</strong> Motor nepřipojuj přímo na výstup Arduina. Arduino ovládá vstupy motorového driveru; výkon pro motor zajišťuje vhodné napájení přes driver.</div></div></section>
 <section class="pra-section" id="robot"><div class="pra-container"><h2>Výukový robot a modul DRV8833</h2><p>Výukový robot z podkladu používá Arduino Nano, dvojici stejnosměrných motorů s převodovkou a modul DRV8833. Před programováním si podle skutečného robota ověř, na které piny Arduina jsou připojeny vstupy motorového modulu.</p>
@@ -65,13 +65,13 @@
 <figure class="ch10-figure" data-image-slot="drv8833-pinout">
   <div class="ch10-figure-heading"><span class="ch10-figure-tag">Dočasný obrázek · připraveno k nahrazení</span><strong>Pinout modulu DRV8833</strong></div>
   <img src="picture/drv8833-pinout.png" loading="lazy" decoding="async" alt="Obrázek modulu DRV8833 s označením vývodů a vstupů.">
-  <figcaption><span>Obrázek modulu DRV8833 s označením vývodů a vstupů.</span><small class="ch10-image-credit">Dočasný obrázek z podkladového PDF · uvedený zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
+  <figcaption><span>Obrázek modulu DRV8833 s označením vývodů a vstupů.</span><small class="ch10-image-credit">Zdroj:  <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
 </figure>
 <!-- AŽ DODÁŠ VLASTNÍ OBRÁZEK: nahraď src a text v .ch10-image-credit. -->
 <figure class="ch10-figure" data-image-slot="drv8833-zapojeni">
   <div class="ch10-figure-heading"><span class="ch10-figure-tag">Dočasný obrázek · připraveno k nahrazení</span><strong>Ukázkové propojení driveru a motorů</strong></div>
   <img src="picture/drv8833-zapojeni.png" loading="lazy" decoding="async" alt="Ukázkové zapojení DRV8833 k Arduinu a dvěma stejnosměrným motorům.">
-  <figcaption><span>Ukázkové zapojení DRV8833 k Arduinu a dvěma stejnosměrným motorům.</span><small class="ch10-image-credit">Dočasný obrázek z podkladového PDF · uvedený zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
+  <figcaption><span>Ukázkové zapojení DRV8833 k Arduinu a dvěma stejnosměrným motorům.</span><small class="ch10-image-credit">Zdroj: <a href="https://lastminuteengineers.com/drv8833-arduino-tutorial/" target="_blank" rel="noopener noreferrer">https://lastminuteengineers.com/drv8833-arduino-tutorial/</a></small></figcaption>
 </figure>
 <div class="ch10-small-pins"><strong>Moje skutečné zapojení robota – doplnit před programováním:</strong><p>Levý motor: IN1 → D___, IN2 → D___ · Pravý motor: IN3 → D___, IN4 → D___ · Senzor: TRIG → D___, ECHO → D___ · Tlačítko → D___.</p></div>
 <div class="ch10-alert"><strong>Bezpečnost:</strong> Před zapojením odpoj napájení, ověř polaritu a povolené napájecí napětí driveru. Při samostatném zdroji motorů musí být vhodně propojené GND napájení a GND Arduina. Motor testuj nejprve s koly nad podložkou.</div>

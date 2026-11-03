@@ -10,10 +10,10 @@
 
 
   const SYMBOLS = {
-    led:      { name: 'LED',          file: 'picture/led.svg',          w: 60, h: 74 },
+    led:      { name: 'LED',          file: 'picture/led.svg',          w: 60, h: 74, pins: [[11.088953574, -32.150755839], [11.088953574, 32.156114745]] },
     resistor: { name: 'Rezistor',     file: 'picture/rezistor.svg',     w: 150, h: 22 },
     button:   { name: 'Tlačítko',    file: 'picture/tlacitko.svg',    w: 170, h: 50 },
-    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 152.5, h: 87.5 }
+    pot:      { name: 'Potenciometr', file: 'picture/potenciometr.svg', w: 152.5, h: 87.5, pins: [[-40, -40], [-40, 40], [0, 0]] }
   };
 
   function getAll() {
@@ -71,6 +71,33 @@
         y: clamp(quantize((event.clientY - r.top) * canvas.height / r.height), 0, canvas.height)
       };
     }
+    function rotatedOffset(s, x, y) {
+      switch (s.rotation || 0) {
+        case 90: return {x: -y, y: x};
+        case 180: return {x: -x, y: -y};
+        case 270: return {x: y, y: -x};
+        default: return {x, y};
+      }
+    }
+    function wirePoint(event, start) {
+      const raw = point(event, 0);
+      let best = 10;
+      let target = null;
+      for (const s of state.symbols) {
+        for (const [x, y] of SYMBOLS[s.type]?.pins || []) {
+          const offset = rotatedOffset(s, x, y);
+          const pin = {x: s.x + offset.x, y: s.y + offset.y};
+          if (start && ortho.checked &&
+              Math.abs(pin.x - start.x) > 0.001 && Math.abs(pin.y - start.y) > 0.001) continue;
+          const distance = Math.hypot(raw.x - pin.x, raw.y - pin.y);
+          if (distance < best) {
+            best = distance;
+            target = pin;
+          }
+        }
+      }
+      return target || (start ? constrained(start, point(event)) : point(event));
+    }
     function constrained(a, b) {
       if (!ortho.checked) return b;
       return Math.abs(b.x - a.x) >= Math.abs(b.y - a.y) ? {x:b.x,y:a.y} : {x:a.x,y:b.y};
@@ -110,12 +137,15 @@
       const quarterTurn = (s.rotation || 0) % 180 !== 0;
       const halfWidth = (quarterTurn ? h : w) / 2;
       const halfHeight = (quarterTurn ? w : h) / 2;
-      const align = (value, halfSize, limit) => SYMBOL_GRID * clamp(
-        Math.round(value / SYMBOL_GRID),
-        Math.ceil(halfSize / SYMBOL_GRID),
-        Math.floor((limit - halfSize) / SYMBOL_GRID)
-      );
-      return {x: align(x, halfWidth, canvas.width), y: align(y, halfHeight, canvas.height)};
+      const align = (value, halfSize, limit, offset) => SYMBOL_GRID * clamp(
+        Math.round((value + offset) / SYMBOL_GRID),
+        Math.ceil((halfSize + offset) / SYMBOL_GRID),
+        Math.floor((limit - halfSize + offset) / SYMBOL_GRID)
+      ) - offset;
+      // U LED zarovnáme osu obou vývodů a zachováme původní velikost SVG.
+      const axis = rotatedOffset(s, s.type === 'led' ? SYMBOLS.led.pins[0][0] : 0, 0);
+      return {x: align(x, halfWidth, canvas.width, axis.x),
+              y: align(y, halfHeight, canvas.height, axis.y)};
     }
     function add(type) {
       if (!SYMBOLS[type]) return;
@@ -189,16 +219,17 @@
         return;
       }
       selected=null;render();
-      pending={a:p,b:p,color:color.value};
+      const start = wirePoint(event);
+      pending={a:start,b:start,color:color.value};
       canvas.setPointerCapture(event.pointerId);
     });
     canvas.addEventListener('pointermove',event=>{
       if (!pending || mode !== 'line') return;
-      pending.b=constrained(pending.a,point(event)); redraw(pending);
+      pending.b=wirePoint(event, pending.a); redraw(pending);
     });
     canvas.addEventListener('pointerup',event=>{
       if (!pending || mode !== 'line') return;
-      pending.b=constrained(pending.a,point(event));
+      pending.b=wirePoint(event, pending.a);
       if (Math.hypot(pending.a.x-pending.b.x,pending.a.y-pending.b.y)>2){checkpoint();state.strokes.push(pending);persist();}
       pending=null;redraw();
     });

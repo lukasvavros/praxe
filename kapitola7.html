@@ -138,6 +138,54 @@ html[data-theme="dark"] .ldr-chapter .dht-lab .dht-readouts strong {color:#72ded
 .ldr-chapter .dht-lab :is(.dht-facts,.dht-readouts)>div {color:var(--ch7-ui-text)!important}
 .ldr-chapter .pra-study-icon-pair {flex-shrink:0}
 
+
+/* Kapitola 7: obě přihlašovací karty pro řešení ve světlém i tmavém režimu.
+   První karta je mimo .dht-lab, proto musí být pravidla přímo na .ldr-solutions. */
+.ldr-chapter .ldr-solutions {
+  background:var(--ch7-panel-bg)!important;
+  color:var(--ch7-ui-text)!important;
+  border:1px solid var(--ch7-panel-border)!important;
+  border-radius:14px;
+  box-shadow:none!important;
+}
+.ldr-chapter .ldr-solutions :is(h3,h4,p,label,legend,strong,small),
+.ldr-chapter .ldr-solutions .dht-check {
+  color:var(--ch7-ui-text)!important;
+}
+.ldr-chapter .ldr-solutions form,
+.ldr-chapter .ldr-solutions [data-solution] {
+  background:transparent!important;
+  color:var(--ch7-ui-text)!important;
+}
+.ldr-chapter .ldr-solutions input[type="password"],
+.ldr-chapter .ldr-solutions input[type="text"] {
+  background:var(--ch7-panel-soft)!important;
+  color:var(--ch7-ui-text)!important;
+  border:1px solid var(--ch7-panel-border)!important;
+  border-radius:8px;
+}
+.ldr-chapter .ldr-solutions input[type="checkbox"] {accent-color:var(--ch7-ui-accent)}
+.ldr-chapter .ldr-solutions button[type="submit"] {
+  background:var(--ch7-ui-accent)!important;
+  color:#fff!important;
+  border:1px solid var(--ch7-ui-accent)!important;
+  border-radius:8px;
+}
+.ldr-chapter .ldr-solutions button.secondary,
+.ldr-chapter .ldr-solutions [data-lock] {
+  background:var(--ch7-panel-soft)!important;
+  color:var(--ch7-ui-text)!important;
+  border:1px solid var(--ch7-panel-border)!important;
+}
+.ldr-chapter .ldr-solutions :is(.dht-solution,details) {
+  background:var(--ch7-panel-bg)!important;
+  color:var(--ch7-ui-text)!important;
+  border-color:var(--ch7-panel-border)!important;
+}
+.ldr-chapter .ldr-solutions pre {
+  background:var(--ch7-code-bg)!important;
+  color:var(--ch7-ui-text)!important;
+}
 </style></head><body><header aria-label="Hlavní navigace" class="site-topbar">
 <a aria-label="Praxe Arduino – hlavní stránka" class="site-brand" href="index.html"><span aria-hidden="true" class="site-brand-mark">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
 <nav aria-label="Hlavní odkazy" class="site-links"><a href="index.html">Úvod</a><a href="kapitola1.html">Kapitola 1</a><a href="kapitola2.html">Kapitola 2</a><a href="kapitola3.html">Kapitola 3</a><a href="kapitola4.html">Kapitola 4</a><a href="kapitola5.html">Kapitola 5</a><a href="kapitola6.html">Kapitola 6</a></nav>

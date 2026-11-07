@@ -13,6 +13,116 @@
 .dht-chapter .pra-back{padding:14px 4px}
 html[data-theme="dark"] .dht-chapter :is(.dht-lab,.dht-simulator,.dht-panel,.dht-task,.dht-task-panel){color:var(--ink);border-color:var(--line)}
 @media(max-width:700px){.dht-chapter .parking-layout{overflow-x:auto}.dht-chapter .pra-section{overflow-wrap:anywhere}}
+
+/* Kapitola 6: barevne sjednoceni simulaci; puvodni SVG a obsluha ovladani beze zmen */
+.dht-chapter {
+  --ch6-lab-bg: #f5f9fa;
+  --ch6-panel-bg: #ffffff;
+  --ch6-panel-soft: #eaf3f4;
+  --ch6-panel-border: #c9dce0;
+  --ch6-ui-text: #1b3438;
+  --ch6-ui-muted: #506b72;
+  --ch6-ui-accent: #067f87;
+  --ch6-ui-accent-text: #ffffff;
+  --ch6-code-bg: #eef5f7;
+}
+html[data-theme="dark"] .dht-chapter {
+  --ch6-lab-bg: #152b30;
+  --ch6-panel-bg: #1b353b;
+  --ch6-panel-soft: #234149;
+  --ch6-panel-border: #365860;
+  --ch6-ui-text: #e6f3f3;
+  --ch6-ui-muted: #b3d1d2;
+  --ch6-ui-accent: #159aa2;
+  --ch6-ui-accent-text: #ffffff;
+  --ch6-code-bg: #10252a;
+}
+/* Vsechny tri interaktivni bloky, vcetne dvou panelu s animacemi */
+.dht-chapter .dht-lab {
+  background: var(--ch6-lab-bg)!important;
+  color:var(--ch6-ui-text)!important;
+  border:1px solid var(--ch6-panel-border)!important;
+  border-radius:16px;
+}
+.dht-chapter .dht-lab :is(h3,h4,strong,label,legend,output),
+.dht-chapter .dht-lab p,
+.dht-chapter .dht-lab .dht-note {color:var(--ch6-ui-text)}
+.dht-chapter .dht-lab :is(.dht-controls,.dht-task-picker,.parking-dashboard,.dht-terminal,.dht-flow,.parking-phases,.dht-readouts) {
+  color:var(--ch6-ui-text)!important;
+  border-color:var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-lab :is(.dht-controls,.dht-task-picker,.parking-dashboard,.dht-terminal) {
+  background:var(--ch6-panel-bg)!important;
+}
+.dht-chapter .dht-lab :is(.dht-readouts>div,.parking-phases>li,.dht-flow>li,.dht-status,.dht-note,.dht-terminal>div) {
+  background:var(--ch6-panel-soft)!important;
+  color:var(--ch6-ui-text)!important;
+  border-color:var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-lab :is(.dht-readouts span,.parking-phases small,.dht-terminal>div),
+.dht-chapter .dht-lab .dht-task-picker p {color:var(--ch6-ui-muted)!important}
+.dht-chapter .dht-lab :is(.parking-phases>li.active,.dht-flow>li.active) {
+  background:var(--ch6-ui-accent)!important;
+  color:var(--ch6-ui-accent-text)!important;
+}
+.dht-chapter .dht-lab :is(.parking-phases>li.active small,.dht-flow>li.active small) {color:var(--ch6-ui-accent-text)!important}
+.dht-chapter .dht-lab :is(button:not(.secondary):not([data-glyph-pixel])) {
+  background:var(--ch6-ui-accent);
+  color:var(--ch6-ui-accent-text);
+  border-color:var(--ch6-ui-accent);
+}
+.dht-chapter .dht-lab button.secondary {
+  background:var(--ch6-panel-soft)!important;
+  color:var(--ch6-ui-text)!important;
+  border-color:var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-lab button:disabled {opacity:.55!important}
+.dht-chapter .dht-lab :is(input:not([type="range"]):not([type="checkbox"]),select,textarea) {
+  background:var(--ch6-panel-soft)!important;
+  color:var(--ch6-ui-text)!important;
+  border:1px solid var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-lab input[type="range"] {accent-color:var(--ch6-ui-accent);background:transparent!important}
+.dht-chapter .dht-lab input[type="checkbox"] {accent-color:var(--ch6-ui-accent)}
+.dht-chapter .dht-lab :is(pre,.dht-code,#serial-log) {
+  background:var(--ch6-code-bg)!important;
+  color:var(--ch6-ui-text)!important;
+  border-color:var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-lab :is(.dht-solution,.dht-check,details,fieldset) {border-color:var(--ch6-panel-border)!important;color:var(--ch6-ui-text)!important}
+.dht-chapter .dht-lab :is(.dht-solution,details) {background:var(--ch6-panel-bg)!important}
+/* Karty mimo simulace a tabulky nesmi v tmavem rezimu oslnovat. */
+.dht-chapter .dht-facts>div,
+.dht-chapter .dht-table-wrap :is(td,th),
+.dht-chapter .pra-section table :is(td,th) {
+  background:var(--ch6-panel-bg)!important;
+  color:var(--ch6-ui-text)!important;
+  border-color:var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-facts>div {border:1px solid var(--ch6-panel-border)!important}
+.dht-chapter .pra-section table thead th {background:var(--ch6-panel-soft)!important}
+.dht-chapter .dht-lab .glyph-grid button[data-glyph-pixel] {
+  background:var(--ch6-panel-soft)!important;
+  border:1px solid var(--ch6-panel-border)!important;
+}
+.dht-chapter .dht-lab .glyph-grid button[data-glyph-pixel][aria-pressed="true"] {
+  background:var(--ch6-ui-accent)!important;
+}
+/* Schema ma zamerne svetlou kreslici plochu: zachova verne barvy vodiču i LCD. */
+.dht-chapter .dht-lab :is(.parking-svg,.dht-real-svg) {background:#f8fbfc!important;border-radius:10px}
+.dht-chapter .dht-lab .parking-layout>div:first-child,
+.dht-chapter .dht-lab .dht-columns>div:first-child {
+  min-width:0;
+}
+.dht-chapter .dht-lab .parking-layout,
+.dht-chapter .dht-lab .dht-columns {max-width:100%;min-width:0}
+.dht-chapter .dht-lab .dht-readouts strong {color:var(--ch6-ui-accent)!important}
+html[data-theme="dark"] .dht-chapter .dht-lab .dht-readouts strong {color:#72ded9!important}
+@media (max-width:720px) {
+ .dht-chapter .dht-lab{padding:clamp(12px,3.5vw,22px)}
+ .dht-chapter .dht-lab .parking-layout,.dht-chapter .dht-lab .dht-columns{width:100%}
+}
+
 </style></head><body><header class="site-topbar" aria-label="Hlavní navigace">
 <a class="site-brand" href="index.html" aria-label="Praxe Arduino – hlavní stránka"><span class="site-brand-mark" aria-hidden="true">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
 <nav class="site-links" aria-label="Hlavní odkazy"><a href="index.html">Úvod</a><a href="kapitola1.html">Kapitola 1</a><a href="kapitola2.html">Kapitola 2</a><a href="kapitola3.html">Kapitola 3</a><a href="kapitola4.html">Kapitola 4</a><a href="kapitola5.html">Kapitola 5</a></nav>

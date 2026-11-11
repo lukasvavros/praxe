@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Kapitola 11 – Sériová komunikace Arduina: UART, Serial.available, readString, parseInt, LCD, servo a propojení dvou Arduin.">
+<title>Kapitola 11: Sériová komunikace | Praxe – Arduino</title>
+<script>try{const t=localStorage.getItem("pra-arduino-theme");document.documentElement.dataset.theme=t==="light"||t==="dark"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script>
+<link rel="stylesheet" href="style/kapitola.css">
+<link rel="stylesheet" href="style/navigace.css?v=20261111-k11">
+<link rel="stylesheet" href="style/kapitola-bloky.css?v=1">
+<link rel="stylesheet" href="style/kapitola-jednotny-vzhled.css?v=20261111-k11">
+<link rel="stylesheet" href="style/kapitola11.css?v=20261111-01">
+<script defer src="script/kapitola-navigace.js?v=2"></script>
+<script defer src="script/kapitola-vzhled.js?v=3"></script>
+<script defer src="script/kapitola11.js?v=20261111-01"></script>
+</head><body>
+<header class="site-topbar" aria-label="Hlavní navigace">
+<a class="site-brand" href="index.html" aria-label="Praxe Arduino – úvod"><span class="site-brand-mark" aria-hidden="true">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
+<nav class="site-links" aria-label="Hlavní odkazy"><a href="index.html">Úvod</a><a href="kapitola1.html">Kapitola 1</a><a href="kapitola2.html">Kapitola 2</a><a href="kapitola3.html">Kapitola 3</a><a href="kapitola4.html">Kapitola 4</a><a href="kapitola5.html">Kapitola 5</a></nav>
+<button class="theme-toggle" type="button" aria-label="Přepnout barevný režim" aria-pressed="false"><span aria-hidden="true">☾</span><span class="theme-label">Tmavý režim</span></button>
+</header>
+<button class="pra-nav-toggle" type="button" aria-controls="pra-chapter-menu" aria-expanded="false" aria-label="Otevřít obsah kapitoly"><span aria-hidden="true">☰</span><span>Obsah</span></button>
+<dialog id="pra-chapter-menu" class="pra-nav-dialog" aria-labelledby="pra-menu-title"><div class="pra-nav-top"><strong id="pra-menu-title">Kapitola 11 · Obsah</strong><button type="button" data-nav-close aria-label="Zavřít nabídku">×</button></div><a class="pra-nav-home" href="index.html">⌂ Domů – obsah předmětu</a><nav aria-label="Části kapitoly">
+<a href="#cile">Cíle a klíčová slova</a><a href="#uart">Základy UART</a><a href="#available">Serial.available()</a><a href="#readstring">Serial.readString() a LCD</a><a href="#parseint">Serial.parseInt() a servo</a><a href="#simulator">Vyzkoušej sériový monitor</a><a href="#dve-arduina">UART mezi dvěma Arduiny</a><a href="#rgb">Simulace RGB LED</a><a href="#ulohy">Praktické úlohy</a><a href="#shrnuti">Shrnutí</a><a href="#pruvodce">Průvodce studiem</a><a href="#otazky">Kontrolní otázky</a></nav></dialog>
+<main class="pra-chapter pra-chapter-11">
+<header class="pra-hero" data-chapter="11"><h1>Kapitola 11: Sériová komunikace</h1><p>Praxe – Arduino | 3. ročník · UART, LCD, servo a dvě Arduina</p></header>
+\n<section class="pra-section" id="cile"><div class="pra-container">\n<div class="pra-study-row"><span class="pra-study-icon-pair" aria-hidden="true"><img class="pra-study-icon pra-study-icon--light" src="picture/kapitola11/cile-kapitoly-light.svg" alt=""><img class="pra-study-icon pra-study-icon--dark" src="picture/kapitola11/cile-kapitoly-dark.svg" alt=""></span><div class="pra-study-content"><h2>Po nastudování této kapitoly budete schopni:</h2><ul class="pra-command-list"><li>Vysvětlit základní princip sériové komunikace a význam pinů TX a RX.</li><li>Spustit sériovou linku a zjistit dostupná data pomocí <code>Serial.available()</code>.</li><li>Přijímat text přes <code>Serial.readString()</code> a zobrazovat jej na LCD.</li><li>Načíst číslo přes <code>Serial.parseInt()</code> a řídit polohu serva.</li><li>Správně propojit dvě Arduina přes UART a společnou zem.</li><li>Přenášet hodnoty potenciometrů a ovládat tři barevné složky RGB LED.</li></ul></div></div>\n<div class="pra-study-row"><span class="pra-study-icon-pair" aria-hidden="true"><img class="pra-study-icon pra-study-icon--light" src="picture/kapitola11/keywords-light.svg" alt=""><img class="pra-study-icon pra-study-icon--dark" src="picture/kapitola11/keywords-dark.svg" alt=""></span><div class="pra-study-content"><h2>Klíčová slova kapitoly:</h2><p>UART, sériová komunikace, TX, RX, GND, baud rate, <code>Serial.begin()</code>, <code>Serial.available()</code>, přijímací buffer, <code>Serial.readString()</code>, <code>Serial.parseInt()</code>, timeout, Serial Monitor, LCD I²C, servo, RGB LED, analogRead(), PWM.</p></div></div>\n<p class="ch11-lead">Arduino může přes sériovou linku přijímat pokyny z počítače, odesílat naměřené hodnoty a komunikovat s jinou deskou. V této kapitole si postupně vyzkoušíš text, čísla i přenos tří barevných složek.</p><div class="ch11-outline"><a href="#uart">01 · Jak funguje UART</a><a href="#readstring">02 · LCD a text</a><a href="#parseint">03 · Servo a čísla</a><a href="#dve-arduina">04 · Dvě Arduina</a><a href="#ulohy">05 · Samostatné úlohy</a></div></div></section>\n<section class="pra-section" id="uart"><div class="pra-container"><h2>Co je sériová komunikace a UART?</h2><p><strong>Sériová komunikace</strong> přenáší bity postupně v čase. Rozhraní UART (<em>Universal Asynchronous Receiver-Transmitter</em>) používá pro vysílání pin <strong>TX</strong> a pro příjem pin <strong>RX</strong>. Asynchronní komunikace znamená, že vysílač a přijímač nepotřebují samostatný vodič hodin; musí se však shodnout například na přenosové rychlosti.</p>
+<div class="ch11-grid"><div class="ch11-card"><span class="ch11-mini-number">Vysílání</span><h3>TX</h3><p>Odesílá data z Arduina do druhého zařízení.</p></div><div class="ch11-card"><span class="ch11-mini-number">Příjem</span><h3>RX</h3><p>Přijímá data ze zařízení do Arduina.</p></div><div class="ch11-card"><span class="ch11-mini-number">Společná reference</span><h3>GND</h3><p>Pro propojené UART moduly se společnou signalizací musí mít obě desky společnou zem.</p></div><div class="ch11-card"><span class="ch11-mini-number">Rychlost</span><h3>9600 Bd</h3><p>Obě strany nastav na stejnou rychlost. U běžného UART rámce je 1 symbol = 1 bit.</p></div></div>
+<figure class="ch11-figure"><img src="picture/kapitola11/uart-ramec.svg" alt="Ukázkový rámec 8N1 má start bit, osm datových bitů a stop bit. Příklad doplňuje princip uvedený v podkladu." loading="lazy" decoding="async"><figcaption><strong>Jak se přenáší jeden znak.</strong> Ukázkový rámec 8N1 má start bit, osm datových bitů a stop bit. Příklad doplňuje princip uvedený v podkladu.</figcaption></figure>
+<div class="ch11-tip"><strong>Zapamatuj si:</strong> <code>Serial.begin(9600);</code> nastaví rychlost sériové linky. V sériovém monitoru počítače zvol stejnou hodnotu (9600 baudů). Při neodpovídajícím nastavení mohou být data nečitelná.</div></div></section>\n<section class="pra-section" id="available"><div class="pra-container"><h2>Funkce Serial.available()</h2><p><code>Serial.available()</code> vrací <strong>počet bajtů</strong>, které už dorazily do přijímacího bufferu a čekají na přečtení. Je to způsob, jak nejprve ověřit, zda má smysl číst data pomocí <code>Serial.read()</code>, <code>Serial.readString()</code> nebo <code>Serial.parseInt()</code>.</p>
+<div class="ch11-table-wrap"><table><thead><tr><th>Hodnota</th><th>Co znamená</th><th>Další krok</th></tr></thead><tbody><tr><td><code>0</code></td><td>Žádné čekající bajty</td><td>Pokračuj v běhu programu</td></tr><tr><td><code>&gt; 0</code></td><td>V bufferu jsou přijatá data</td><td>Přečti bajt, text nebo číslo</td></tr></tbody></table></div>
+<div class="ch11-code-wrap"><span class="ch11-code-label">Příklad · dostupné bajty a čtení jednoho znaku</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    char znak = Serial.read();
+    Serial.print("Prijato: ");
+    Serial.println(znak);
+  }
+}</code></pre></div>
+<div class="ch11-warning"><strong>Pozor na rozdíl:</strong> <code>available()</code> počítá <em>bajty</em>, nikoli nutně zobrazované znaky. Například některá česká písmena v UTF-8 zabírají více bajtů. Samotná funkce data z bufferu neodstraní.</div></div></section>\n<section class="pra-section alt" id="readstring"><div class="pra-container"><h2>Serial.readString() – přijímání textu a LCD</h2><p>Funkce <code>Serial.readString()</code> přijme data ze sériové linky jako text (<code>String</code>). Pokud další data nepřicházejí, čtení skončí po nastaveném <strong>časovém limitu (timeout)</strong>. Proto může program krátce čekat. Pro příkazy ukončované znakem nového řádku je často vhodnější <code>Serial.readStringUntil('\n')</code>.</p>
+<div class="ch11-code-wrap"><span class="ch11-code-label">Příklad z podkladu · přijatou zprávu odešli zpět</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>String text_vstup;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    text_vstup = Serial.readString();
+    Serial.print("Vase zprava: ");
+    Serial.println(text_vstup);
+  }
+}</code></pre></div>
+<h3>Úloha: nastav text na LCD ze sériového monitoru</h3><p>Připoj LCD 16 × 2 s I²C převodníkem. U klasického Arduino Uno jde <strong>SDA na A4</strong> a <strong>SCL na A5</strong>; dále připoj 5 V a GND. Zobrazený text se po příchodu nové zprávy aktualizuje.</p>
+<figure class="ch11-figure"><img src="picture/kapitola11/lcd-i2c.svg" alt="Používej napájecí napětí a adresu I²C podle konkrétního modulu. Často se setkáš s adresou 0x27." loading="lazy" decoding="async"><figcaption><strong>Zjednodušené zapojení LCD I²C.</strong> Používej napájecí napětí a adresu I²C podle konkrétního modulu. Často se setkáš s adresou 0x27.</figcaption></figure><div class="ch11-code-wrap"><span class="ch11-code-label">Úloha 1 z PDF · text na prvním řádku</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.setTimeout(400);
+  lcd.init();
+  lcd.backlight();
+  lcd.clear();
+  lcd.print("Cekam na text...");
+}
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    String text = Serial.readStringUntil('\n');
+    text.trim();
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(text.substring(0, 16));
+    Serial.println("Text zobrazen.");
+  }
+}</code></pre></div>
+<h3>Rozšíření: zapisuj na oba řádky displeje</h3><p>Domluv si formát zprávy <code>prvni radek|druhy radek</code>. Oddělovač <code>|</code> určí, co se má zobrazit nahoře a co dole. Ukázka níže patří dovnitř <code>loop()</code> programu, který má vytvořený objekt <code>lcd</code> a provedl inicializaci jako předchozí příklad.</p><div class="ch11-code-wrap"><span class="ch11-code-label">Úloha 2 z PDF · část kódu pro dva řádky LCD</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>// Ve smycce za prijmem celeho radku:
+String zprava = Serial.readStringUntil('\n');
+zprava.trim();
+int oddelovac = zprava.indexOf('|');
+if (oddelovac &gt;= 0) {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(zprava.substring(0, oddelovac).substring(0,16));
+  lcd.setCursor(0, 1);
+  lcd.print(zprava.substring(oddelovac + 1).substring(0,16));
+} else {
+  Serial.println("Pouzij format radek1|radek2");
+}</code></pre></div>
+<div class="ch11-warning"><strong>Praktické upozornění:</strong> Knihovnu <code>LiquidCrystal_I2C</code> je třeba mít nainstalovanou. Některé její varianty používají místo <code>lcd.init()</code> jiný inicializační postup. Adresa modulu může být odlišná.</div></div></section>\n<section class="pra-section" id="parseint"><div class="pra-container"><h2>Serial.parseInt() – přijímání čísel a servo</h2><p><code>Serial.parseInt()</code> hledá v přijatých datech celé číslo a vrací jeho číselnou hodnotu. Může přeskočit počáteční jiné znaky; po uplynutí timeoutu může vrátit <code>0</code>, což není totéž jako správně zadaná nula. Proto je pro spolehlivou kontrolu textového příkazu vhodné doplnit i kontrolu formátu.</p>
+<div class="ch11-code-wrap"><span class="ch11-code-label">Příklad z podkladu · přijetí celého čísla</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>int cislo_vstup;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    cislo_vstup = Serial.parseInt();
+    Serial.print("Vlozene cislo: ");
+    Serial.println(cislo_vstup);
+  }
+}</code></pre></div>
+<h3>Úloha: nastav úhel serva přes Serial Monitor</h3><p>Signál serva připoj na <strong>D9</strong>. Při příkazu <code>90</code> přejde servo přibližně do střední polohy; při <code>-13</code> nebo <code>10000</code> program vypíše chybu. Pro servo použij vhodné napájení, a pokud má samostatný zdroj, nezapomeň na společnou GND.</p>
+<div class="ch11-code-wrap"><span class="ch11-code-label">Úlohy 3–4 z PDF · servo a rozsah 0 až 180°</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>#include &lt;Servo.h&gt;
+Servo mojeServo;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.setTimeout(300);
+  mojeServo.attach(9);
+  mojeServo.write(90);
+}
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    long uhel = Serial.parseInt();
+    while (Serial.available() &gt; 0) Serial.read();
+
+    if (uhel &gt;= 0 &amp;&amp; uhel &lt;= 180) {
+      mojeServo.write((int)uhel);
+      Serial.print("Uhel: ");
+      Serial.println(uhel);
+    } else {
+      Serial.println("Chyba: zadej uhel 0 az 180.");
+    }
+  }
+}</code></pre></div>
+<div class="ch11-tip"><strong>Rozšíření ke kontrole vstupu:</strong> Ukázka hlídá číselný rozsah, ale samotné <code>parseInt()</code> nemusí poznat čistě textový neplatný vstup (může vrátit 0). Pro úplné ověření textu nejdříve načti celý řádek a ověř, zda obsahuje pouze platné celé číslo.</div></div></section>\n<section class="pra-section alt" id="simulator"><div class="pra-container"><h2>Vyzkoušej sériový monitor</h2><p>Vyzkoušej si, co se stane po odeslání textu nebo čísla. Tato simulace napodobuje výukovou práci se sériovým monitorem, není propojena s fyzickým Arduinem.</p>
+<div class="ch11-lab" aria-label="Interaktivní sériový monitor"><div class="ch11-lab-head"><strong>Interaktivní simulace · Serial Monitor</strong><small>9600 Bd · pouze v prohlížeči</small></div><div class="ch11-tabs" role="tablist" aria-label="Vyber typ úlohy"><button type="button" role="tab" aria-selected="true" data-ch11-mode="lcd">Text → LCD</button><button type="button" role="tab" aria-selected="false" data-ch11-mode="servo">Číslo → servo</button></div><div class="ch11-lab-body"><div class="ch11-terminal"><div class="ch11-terminal-bar"><span><span class="ch11-led" aria-hidden="true"></span> SÉRIOVÝ MONITOR</span><button class="ch11-secondary" type="button" id="ch11-serial-clear">Vymazat</button></div><div class="ch11-console" id="ch11-serial-log" role="log" aria-live="polite" aria-label="Výpis sériového monitoru"></div><div class="ch11-entry"><input id="ch11-serial-input" type="text" aria-label="Zpráva pro Arduino" placeholder="Např. Ahoj|Druhy radek" autocomplete="off"><button class="ch11-primary" id="ch11-serial-send" type="button">Odeslat</button></div><label for="ch11-serial-ending">Ukončení zprávy:</label><select id="ch11-serial-ending"><option value="nl">Nový řádek (LF)</option><option value="crlf">CR + LF</option><option value="none">Žádné</option></select></div><div class="ch11-device" id="ch11-demo-lcd"><div class="ch11-lcd" aria-label="LCD displej 16 krát 2"><div class="ch11-lcd-inner"><div id="ch11-lcd-line1">Cekam na text...</div><div id="ch11-lcd-line2">                </div></div></div><div class="ch11-device-status" id="ch11-lcd-note">LCD 16 × 2 · zpráva s | rozdělí řádky</div></div><div class="ch11-device" id="ch11-demo-servo" hidden><div class="ch11-servo-face" role="img" aria-label="Simulovaná poloha serva"><div class="ch11-servo-arm" id="ch11-servo-arm"></div><div class="ch11-servo-hub"></div></div><div class="ch11-device-status">Úhel serva: <output id="ch11-servo-angle">0°</output></div></div></div><div class="ch11-sim-note" id="ch11-demo-status" role="status" aria-live="polite">Režim: zápis textu na LCD</div></div>
+<div class="ch11-tip"><strong>Vyzkoušej:</strong> Zadej <code>Ahoj|Svete</code>, potom přepni na servo a zadej <code>45</code>, <code>180</code>, <code>-13</code> a <code>10000</code>. Všimni si rozdílu mezi textem, číslem a kontrolou rozsahu.</div></div></section>\n<section class="pra-section" id="dve-arduina"><div class="pra-container"><h2>Sériová komunikace mezi dvěma Arduiny</h2><p>Chceš-li propojit dvě desky přes hardwarový UART, spoj <strong>TX jedné desky s RX druhé</strong> a <strong>RX první desky s TX druhé</strong>. Nezapomeň propojit <strong>GND ↔ GND</strong>. Obě desky musí používat shodnou přenosovou rychlost a kompatibilní logické úrovně.</p>
+<figure class="ch11-figure"><img src="picture/kapitola11/uart-dve-arduina.svg" alt="Barevné linky ukazují oba směry přenosu a společnou zem. Obě Arduina Uno komunikují 5V logikou." loading="lazy" decoding="async"><figcaption><strong>Křížené zapojení TX a RX.</strong> Barevné linky ukazují oba směry přenosu a společnou zem. Obě Arduina Uno komunikují 5V logikou.</figcaption></figure>
+<div class="ch11-warning"><strong>Důležité pro Arduino Uno / Nano:</strong> Hardwarový UART používá piny <strong>D0 (RX)</strong> a <strong>D1 (TX)</strong>. Tyto piny mohou být zároveň používány USB převodníkem při nahrávání programu či práci se sériovým monitorem. Před nahráváním kódu může být nutné propojení mezi deskami odpojit. Pokud mají desky samostatné USB napájení, nespojuj bez rozmyslu jejich 5V napájecí vývody; propojení GND je pro UART nutné.</div>
+<h3>Praktická úloha: tři potenciometry řídí RGB LED</h3><p>Na <strong>Arduino A</strong> připoj tři potenciometry na analogové vstupy A0, A1, A2. Na <strong>Arduino B</strong> připoj RGB LED se společnou katodou; každou barvu připoj přes samostatný rezistor (například 220–330 Ω) na PWM piny D9, D10, D11. Po UARTu se odešle trojice intenzit <code>R,G,B</code> v rozsahu 0–255.</p>
+<figure class="ch11-figure"><img src="picture/kapitola11/uart-rgb.svg" alt="Schéma zachycuje signálové propojení. Potenciometry musí být zároveň připojeny mezi 5 V a GND; kresba zjednodušuje napájecí vodiče." loading="lazy" decoding="async"><figcaption><strong>Přehled zapojení závěrečné úlohy.</strong> Schéma zachycuje signálové propojení. Potenciometry musí být zároveň připojeny mezi 5 V a GND; kresba zjednodušuje napájecí vodiče.</figcaption></figure>
+<div class="ch11-tip"><strong>Formát zprávy:</strong> například <code>128,40,255</code> a znak nového řádku. Příjemce zprávu rozdělí na tři čísla a nastaví odpovídající PWM výstupy.</div></div></section>\n<section class="pra-section alt" id="rgb"><div class="pra-container"><h2>RGB LED – programy pro obě Arduina</h2><p>První Arduino přečte tři analogové vstupy a odešle čísla oddělená čárkami. Druhé Arduino přečte celý řádek, ověří rozsahy a nastaví PWM výstupy. Kód je určen pro školní zapojení Uno/Nano s RGB LED se společnou katodou.</p>
+<div class="ch11-code-wrap"><span class="ch11-code-label">Arduino A · odesílač</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>// Arduino A: potenciometry A0, A1 a A2
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int r = map(analogRead(A0), 0, 1023, 0, 255);
+  int g = map(analogRead(A1), 0, 1023, 0, 255);
+  int b = map(analogRead(A2), 0, 1023, 0, 255);
+
+  Serial.print(r);
+  Serial.print(',');
+  Serial.print(g);
+  Serial.print(',');
+  Serial.println(b);
+  delay(100);
+}</code></pre></div><div class="ch11-code-wrap"><span class="ch11-code-label">Arduino B · přijímač</span><button class="ch11-code-copy" type="button" data-ch11-copy aria-label="Zkopírovat ukázku kódu">Kopírovat kód</button><pre class="arduino-code"><code>// Arduino B: RGB LED se spolecnou katodou
+const byte RED = 9, GREEN = 10, BLUE = 11;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.setTimeout(200);
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    String radek = Serial.readStringUntil('\n');
+    int r, g, b;
+    if (sscanf(radek.c_str(), "%d,%d,%d", &amp;r, &amp;g, &amp;b) == 3 &amp;&amp;
+        r &gt;= 0 &amp;&amp; r &lt;= 255 &amp;&amp; g &gt;= 0 &amp;&amp; g &lt;= 255 &amp;&amp;
+        b &gt;= 0 &amp;&amp; b &lt;= 255) {
+      analogWrite(RED, r);
+      analogWrite(GREEN, g);
+      analogWrite(BLUE, b);
+    }
+  }
+}</code></pre></div>
+<h3>Vyzkoušej přenos bez fyzického zapojení</h3><p>Posuvníky představují tři potenciometry. Po kliknutí na „Odeslat přes UART“ uvidíš vzniklou zprávu a její převedení na barvu LED na druhé desce.</p>
+<div class="ch11-rgb-panel"><div class="ch11-rgb-side"><h3>Arduino A · 3 potenciometry</h3><div class="ch11-slider-row"><label for="ch11-pot-r" style="color:#d9575a">R</label><input id="ch11-pot-r" aria-label="Červený potenciometr" type="range" min="0" max="1023" value="600"><output id="ch11-val-r">149</output></div><div class="ch11-slider-row"><label for="ch11-pot-g" style="color:#20a66a">G</label><input id="ch11-pot-g" aria-label="Zelený potenciometr" type="range" min="0" max="1023" value="300"><output id="ch11-val-g">75</output></div><div class="ch11-slider-row"><label for="ch11-pot-b" style="color:#418ce1">B</label><input id="ch11-pot-b" aria-label="Modrý potenciometr" type="range" min="0" max="1023" value="800"><output id="ch11-val-b">199</output></div><div class="ch11-packet" aria-live="polite">UART paket: <span id="ch11-packet">149,75,199␊</span></div><div class="ch11-rgb-actions"><button type="button" class="ch11-primary" id="ch11-rgb-send">Odeslat přes UART</button><button type="button" class="ch11-secondary" id="ch11-rgb-reset">Reset</button></div><div class="ch11-flow-status" id="ch11-flow-status" role="status">Připraveno na další rámec.</div></div><div class="ch11-rgb-side"><h3>Arduino B · RGB LED</h3><div class="ch11-rgb-diodes"><div class="ch11-rgb-led" id="ch11-rgb-led" role="img" aria-label="Barva virtuální RGB LED"></div></div><div class="ch11-rgb-status" id="ch11-rgb-status" aria-live="polite">RGB LED vypnuta · R 0 / G 0 / B 0</div><ul class="ch11-packet-history" id="ch11-packet-history" aria-label="Historie přijatých paketů"></ul></div></div>
+<div class="ch11-warning"><strong>Praktická poznámka:</strong> Náčrty popisují princip. Konkrétní jas i výsledná barva skutečné RGB LED závisí na jejím typu a předřadných odporech. U LED se společnou anodou je nutné hodnoty PWM invertovat.</div></div></section>\n<section class="pra-section" id="ulohy"><div class="pra-container"><h2>Samostatné praktické úlohy</h2><p>Postupuj od textového přenosu až k řízení druhé desky. U každé úlohy nejdříve sestav zapojení, pak nahraj program a nakonec ověř výsledek.</p><div class="ch11-tasks"><article class="ch11-task"><span class="ch11-mini-number">Úloha 1 · Doplňkové rozcvičení</span><h3>Základní přenos textu</h3><p>Nech Arduino přijímat a vypisovat jednotlivé znaky do sériového monitoru. Potom uprav program tak, aby vracel celý řádek.</p><div class="ch11-check"><strong>Kontrola výsledku:</strong> Na monitoru se objeví přesně přijatý text; vysvětlíš rozdíl mezi read() a readString().</div></article><article class="ch11-task"><span class="ch11-mini-number">Úloha 2 · Podle PDF</span><h3>Text na displeji LCD</h3><p>Připoj LCD přes I²C a nastavuj obsah prvního řádku zprávou ze sériového monitoru.</p><div class="ch11-check"><strong>Kontrola výsledku:</strong> Po odeslání zprávy se na prvním řádku LCD zobrazí její začátek.</div></article><article class="ch11-task"><span class="ch11-mini-number">Úloha 3 · Podle PDF</span><h3>První a druhý řádek LCD</h3><p>Doplň do příkazu oddělovací znak | a ovládej oba řádky displeje nezávisle.</p><div class="ch11-check"><strong>Kontrola výsledku:</strong> Zpráva Prvni|Druhy zobrazí dva rozdílné řádky.</div></article><article class="ch11-task"><span class="ch11-mini-number">Úloha 4 · Podle PDF</span><h3>Úhel serva z počítače</h3><p>Servo připoj na D9. Použij Serial.parseInt() a nastav úhel podle zadaného celého čísla.</p><div class="ch11-check"><strong>Kontrola výsledku:</strong> Pro 0, 90 a 180 sleduješ změnu polohy serva.</div></article><article class="ch11-task"><span class="ch11-mini-number">Úloha 5 · Podle PDF</span><h3>Kontrola správnosti úhlu</h3><p>Na předchozím programu odmítni neplatné hodnoty jako −13 nebo 10000 a vypiš chybu do monitoru.</p><div class="ch11-check"><strong>Kontrola výsledku:</strong> Při neplatném úhlu se servo nepřestaví.</div></article><article class="ch11-task"><span class="ch11-mini-number">Úloha 6 · Podle PDF</span><h3>Dvě Arduina: RGB přes UART</h3><p>Na Arduino A připoj tři potenciometry, na Arduino B RGB LED. Propoj TX/RX do kříže a GND. Pošli trojici R,G,B.</p><div class="ch11-check"><strong>Kontrola výsledku:</strong> Při pohybu potenciometrů se mění odpovídající barvy RGB LED.</div></article></div><div class="ch11-warning"><strong>Bezpečnost a zapojení:</strong> Před každou změnou propojení odpoj napájení. Při připojení serva dbej na vhodné napájení a společnou zem. U dvou Arduin ověř TX ↔ RX a GND ↔ GND.</div></div></section>\n<section class="pra-section" id="shrnuti"><div class="pra-container">\n<div class="pra-study-row"><span class="pra-study-icon-pair" aria-hidden="true"><img class="pra-study-icon pra-study-icon--light" src="picture/kapitola11/shrnuti-light.svg" alt=""><img class="pra-study-icon pra-study-icon--dark" src="picture/kapitola11/shrnuti-dark.svg" alt=""></span><div class="pra-study-content"><h2>Shrnutí:</h2><div class="ch11-summary-grid"><div class="ch11-summary-card"><strong>UART</strong><span>Data se přenášejí po bitech. TX vysílá, RX přijímá.</span></div><div class="ch11-summary-card"><strong>available()</strong><span>Oznamuje počet bajtů čekajících v přijímacím bufferu.</span></div><div class="ch11-summary-card"><strong>readString()</strong><span>Načítá text; při čekání může rozhodovat timeout.</span></div><div class="ch11-summary-card"><strong>parseInt()</strong><span>Načítá celé číslo; aplikace musí kontrolovat správný rozsah.</span></div><div class="ch11-summary-card"><strong>Dvě desky</strong><span>Propojit TX ↔ RX, RX ↔ TX a společnou GND.</span></div><div class="ch11-summary-card"><strong>Praxe</strong><span>LCD přijímá text, servo úhel a RGB LED tři intenzity.</span></div></div></div></div>\n</div></section>\n<section class="pra-section" id="pruvodce"><div class="pra-container">\n<div class="pra-study-row"><span class="pra-study-icon-pair" aria-hidden="true"><img class="pra-study-icon pra-study-icon--light" src="picture/kapitola11/pruvodce-light.svg" alt=""><img class="pra-study-icon pra-study-icon--dark" src="picture/kapitola11/pruvodce-dark.svg" alt=""></span><div class="pra-study-content"><h2>Průvodce studiem:</h2><p>Začni jednoduchým programem se <code>Serial.available()</code> a sériovým monitorem. Vyzkoušej text i různá ukončení řádku. Potom připoj LCD a servo, u něhož hlídej hranice 0–180°. Nakonec propoj dvě Arduina a odesílej tři hodnoty RGB. Při potížích kontroluj postupně přenosovou rychlost, piny TX/RX, společnou GND a formát zprávy.</p><p><strong>Praktická rada:</strong> Po každém kroku nejprve otestuj samostatnou funkci, teprve potom přidej další součástku.</p></div></div>\n</div></section>\n<section class="pra-section" id="otazky"><div class="pra-container">\n<div class="pra-study-row"><span class="pra-study-icon-pair" aria-hidden="true"><img class="pra-study-icon pra-study-icon--light" src="picture/kapitola11/kontrolni-otazky-light.svg" alt=""><img class="pra-study-icon pra-study-icon--dark" src="picture/kapitola11/kontrolni-otazky-dark.svg" alt=""></span><div class="pra-study-content"><h2>Kontrolní otázky:</h2><p>Nejprve odpověz vlastními slovy. Rozbalením otázky ověříš správnou odpověď.</p></div></div>\n<div class="pra-question-list"><details class="pra-question"><summary><span class="pra-question-number">1.</span> Co znamená UART?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Universal Asynchronous Receiver-Transmitter – hardwarové rozhraní pro asynchronní sériový přenos.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">2.</span> Jaký je rozdíl mezi TX a RX?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>TX odesílá data; RX přijímá data.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">3.</span> Proč je třeba nastavit stejnou přenosovou rychlost?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Vysílač a přijímač musí správně rozpoznat časování jednotlivých bitů.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">4.</span> Co vrací Serial.available()?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Počet bajtů dostupných v přijímacím bufferu.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">5.</span> Proč se Serial.available() často používá v podmínce if?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Aby se četlo až ve chvíli, kdy jsou k dispozici nějaká data.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">6.</span> K čemu se hodí Serial.readString()?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>K převzetí textové zprávy ze sériové linky do proměnné typu String.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">7.</span> Co znamená timeout u textového čtení?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Maximální čekání na další přicházející data při čtecí operaci.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">8.</span> Jak zobrazíš text na druhém řádku LCD 16 × 2?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Přesuň kurzor voláním lcd.setCursor(0, 1) a vypiš text.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">9.</span> Kdy použiješ Serial.parseInt()?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Při čtení celého čísla ze sériové linky, např. pro nastavení úhlu serva.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">10.</span> Proč musí program kontrolovat rozsah úhlu serva?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Neplatné hodnoty, například −13 a 10000, nemají být předány přímo servu; povolený interval v úloze je 0–180°.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">11.</span> Jak propojíš dvě Arduina přes UART?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>TX prvního na RX druhého, RX prvního na TX druhého a GND na GND.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">12.</span> Jak se přenáší barvy mezi dvěma Arduiny?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>První deska přečte tři potenciometry, převede je na 0–255 a odešle např. 128,40,255; druhá nastaví tři PWM kanály RGB LED.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">13.</span> Na co dát pozor při používání pinů D0 a D1 na Arduino Uno?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Sdílejí hardwarový sériový port s USB převodníkem; při nahrávání programu a práci s monitorem mohou vznikat konflikty.</p></div></details><details class="pra-question"><summary><span class="pra-question-number">14.</span> Proč mají být propojené země obou desek?</summary><div class="pra-answer"><span class="pra-answer-label">Odpověď</span><p>Aby UART signály měly společnou referenční úroveň napětí.</p></div></details></div></div></section>\n<div class="pra-back"><a href="index.html">Zpět na obsah</a></div><footer class="site-footer"><div class="site-footer-inner"><div><strong>Praxe – Arduino</strong><p>Gymnázium a SPŠEI Frenštát pod Radhoštěm</p></div><div class="site-footer-contact"><span>Vytvořil: <strong>Lukáš Vavroš</strong></span><a href="mailto:lukas.vavros@frengp.cz">lukas.vavros@frengp.cz</a></div></div></footer></main></body></html>

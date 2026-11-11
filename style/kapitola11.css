@@ -1,0 +1,93 @@
+/* Kapitola 11: vlastní doplňky ke společnému motivu Arduino (kapitola 10). */
+.pra-chapter-11 .pra-hero::after{content:"11"!important}
+.pra-chapter-11 .ch11-lead{font-size:1.08rem;color:var(--muted);max-width:760px}
+.pra-chapter-11 .ch11-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--teal-dark);font-weight:750;letter-spacing:.075em;font-size:.76rem;text-transform:uppercase;margin-bottom:14px}
+.pra-chapter-11 .ch11-badges{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}
+.pra-chapter-11 .ch11-badges span{display:inline-block;border:1px solid var(--line);background:var(--card-bg);color:var(--teal-dark);font-weight:650;font-size:.86rem;padding:5px 11px;border-radius:999px}
+.pra-chapter-11 .ch11-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:14px;margin:22px 0}
+.pra-chapter-11 .ch11-card{padding:20px;border:1px solid var(--line);border-radius:15px;background:var(--card-bg);min-width:0;color:var(--ink)}
+.pra-chapter-11 .ch11-card h3{margin:0 0 8px!important;color:var(--teal-dark)!important;font-size:1.1rem!important}
+.pra-chapter-11 .ch11-card p{margin:0}
+.pra-chapter-11 .ch11-mini-number{font-size:.76rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-dark);display:block;margin-bottom:10px}
+.pra-chapter-11 .ch11-figure{margin:23px 0;padding:16px;background:var(--card-bg);border:1px solid var(--line);border-radius:16px}
+.pra-chapter-11 .ch11-figure img{display:block;width:100%;height:auto;max-height:450px;object-fit:contain;background:white;border-radius:12px;border:1px solid #dceae9}
+.pra-chapter-11 .ch11-figure figcaption{color:var(--muted);margin:10px 2px 0;line-height:1.6;font-size:.88rem}
+.pra-chapter-11 .ch11-tip,.pra-chapter-11 .ch11-warning{border-left:5px solid var(--teal);background:var(--mint);padding:15px 19px;border-radius:10px;margin:18px 0;line-height:1.7}
+.pra-chapter-11 .ch11-warning{border-left-color:var(--orange);background:var(--callout-bg)}
+.pra-chapter-11 .ch11-table-wrap{overflow-x:auto;margin:18px 0;border-radius:13px;border:1px solid var(--line)}
+.pra-chapter-11 .ch11-table-wrap table{min-width:570px;margin:0}
+.pra-chapter-11 .ch11-table-wrap thead th{background:var(--mint);color:var(--teal-dark)}
+.pra-chapter-11 .ch11-table-wrap tbody tr:nth-child(even){background:var(--card-bg)}
+.pra-chapter-11 .ch11-code-wrap{position:relative;margin:18px 0}
+.pra-chapter-11 .ch11-code-wrap pre{margin:0!important;padding-top:50px!important}
+.pra-chapter-11 .ch11-code-label{position:absolute;left:18px;top:14px;z-index:1;color:#91b8b3;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.pra-chapter-11 .ch11-code-copy{position:absolute;right:12px;top:10px;z-index:2;border:1px solid #537578!important;border-radius:8px!important;padding:5px 12px!important;font-size:.78rem!important;font-weight:700!important;background:#234247!important;color:#e5f5f1!important}
+.pra-chapter-11 .ch11-code-copy:hover{background:#315e61!important}
+.pra-chapter-11 .ch11-tasks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}
+.pra-chapter-11 .ch11-task{background:var(--card-bg);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+.pra-chapter-11 .ch11-task h3{margin:0 0 10px!important;color:var(--teal-dark)!important;font-size:1.13rem!important}
+.pra-chapter-11 .ch11-task p{margin:.5rem 0}
+.pra-chapter-11 .ch11-check{border-left:4px solid var(--teal);background:var(--mint);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:14px;font-size:.91rem}
+.pra-chapter-11 .ch11-outline{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pra-chapter-11 .ch11-outline a{display:inline-block;text-decoration:none;color:var(--teal-dark);font-weight:750;background:var(--card-bg);border:1px solid var(--line);border-radius:9px;padding:7px 13px;font-size:.83rem}
+.pra-chapter-11 .ch11-outline a:hover{border-color:var(--teal)}
+/* Sériový monitor a LCD/servo – vlastní interaktivní demonstrace. */
+.pra-chapter-11 .ch11-lab{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:var(--card-bg);margin:23px 0}
+.pra-chapter-11 .ch11-lab-head{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:17px 20px;background:var(--mint);border-bottom:1px solid var(--line)}
+.pra-chapter-11 .ch11-lab-head strong{color:var(--teal-dark);font-size:1.05rem}
+.pra-chapter-11 .ch11-lab-head small{color:var(--muted);font-size:.79rem}
+.pra-chapter-11 .ch11-tabs{display:flex;gap:6px;padding:15px 18px 4px;flex-wrap:wrap}
+.pra-chapter-11 .ch11-tabs button{background:transparent;color:var(--muted);padding:8px 14px!important;border:1px solid var(--line)!important;border-radius:9px!important;font-weight:750}
+.pra-chapter-11 .ch11-tabs button[aria-selected="true"]{color:#fff!important;background:#0c8589!important;border-color:#0c8589!important}
+.pra-chapter-11 .ch11-lab-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:17px}
+.pra-chapter-11 .ch11-terminal{background:#0d1d23;color:#b9e0da;padding:15px;border:1px solid #2a5054;border-radius:12px;min-width:0}
+.pra-chapter-11 .ch11-terminal-bar{display:flex;align-items:center;justify-content:space-between;gap:7px;color:#90c7c6;font-size:.82rem;font-weight:800;margin-bottom:13px}
+.pra-chapter-11 .ch11-led{display:inline-block;width:9px;height:9px;background:#56d4aa;border-radius:50%;box-shadow:0 0 9px #56d4aa}
+.pra-chapter-11 .ch11-console{min-height:190px;max-height:245px;overflow-y:auto;background:#061219;border-radius:9px;padding:13px;color:#c0ede3;font: .84rem/1.6 ui-monospace,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.pra-chapter-11 .ch11-console p{font:inherit;margin:0 0 6px!important;color:inherit!important}
+.pra-chapter-11 .ch11-console .ch11-sent{color:#73c0fc}
+.pra-chapter-11 .ch11-console .ch11-error{color:#ffb5a4}
+.pra-chapter-11 .ch11-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:12px 0}
+.pra-chapter-11 .ch11-entry input{min-width:0;max-width:100%;border:1px solid #3d6770;border-radius:9px;padding:11px 12px;background:#f3faf9;color:#12343a;font-size:.95rem}
+.pra-chapter-11 .ch11-primary{background:#0a8589!important;border-color:#0a8589!important;color:white!important;font-weight:750!important;padding:10px 15px!important}
+.pra-chapter-11 .ch11-secondary{background:var(--card-bg)!important;color:var(--teal-dark)!important;border-color:var(--line)!important;font-weight:700!important;padding:8px 13px!important}
+.pra-chapter-11 .ch11-terminal label{font-size:.79rem;color:#c3e8e5}
+.pra-chapter-11 .ch11-terminal select{padding:6px 9px;background:#e5f7f4;color:#163a41;border-radius:7px;font-size:.82rem;margin:0 0 0 8px}
+.pra-chapter-11 .ch11-device{padding:14px 10px;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;min-width:0}
+.pra-chapter-11 .ch11-lcd{width:min(100%,365px);border-radius:15px;border:9px solid #0a776d;background:#147c78;box-shadow:inset 0 0 0 3px #055752,0 8px 23px #0b525533;padding:18px}
+.pra-chapter-11 .ch11-lcd-inner{padding:15px 14px;background:#b3c77e;border:4px solid #4d6e44;border-radius:9px;color:#2c4a27;min-width:0;font:750 clamp(.7rem,1.5vw,1.12rem)/1.6 ui-monospace,Consolas,monospace;letter-spacing:.015em;white-space:pre;overflow:hidden}
+.pra-chapter-11 .ch11-lcd-inner div{width:16ch;max-width:100%;overflow:hidden}
+.pra-chapter-11 .ch11-servo-face{width:min(100%,265px);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--card-bg) 60%,var(--mint) 62%,var(--mint) 65%,var(--card-bg) 67%);display:flex;justify-content:center;align-items:center;position:relative}
+.pra-chapter-11 .ch11-servo-face::before{content:"0°";position:absolute;top:48%;left:5%;font-size:.76rem;color:var(--muted)}
+.pra-chapter-11 .ch11-servo-face::after{content:"180°";position:absolute;top:48%;right:3%;font-size:.76rem;color:var(--muted)}
+.pra-chapter-11 .ch11-servo-arm{height:7px;width:40%;background:linear-gradient(90deg,#f3bc77,#de8130);transform-origin:100% 50%;position:absolute;right:50%;top:calc(50% - 3.5px);border-radius:999px;transform:rotate(0deg);transition:transform .55s cubic-bezier(.2,.8,.3,1);box-shadow:0 2px 5px #0002}
+.pra-chapter-11 .ch11-servo-hub{position:absolute;left:calc(50% - 11px);top:calc(50% - 11px);width:22px;height:22px;background:#0b8488;border:4px solid #c8e5e3;border-radius:50%}
+.pra-chapter-11 .ch11-device-status{font-weight:800;color:var(--teal-dark);text-align:center}
+.pra-chapter-11 .ch11-sim-note{border-top:1px solid var(--line);padding:10px 19px;font-size:.85rem;color:var(--muted)}
+/* Dvě desky, propojení a RGB dioda */
+.pra-chapter-11 .ch11-rgb-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.pra-chapter-11 .ch11-rgb-side{border:1px solid var(--line);border-radius:15px;background:var(--card-bg);padding:18px;min-width:0}
+.pra-chapter-11 .ch11-rgb-side h3{margin:0 0 11px!important;color:var(--teal-dark)!important}
+.pra-chapter-11 .ch11-slider-row{display:grid;grid-template-columns:17px minmax(0,1fr) 54px;align-items:center;gap:11px;margin:18px 0}
+.pra-chapter-11 .ch11-slider-row label{font-size:.88rem;font-weight:800}
+.pra-chapter-11 .ch11-slider-row output{color:var(--ink);font:800 .87rem ui-monospace,monospace;text-align:right}
+.pra-chapter-11 .ch11-slider-row input{width:100%;accent-color:#0b969c;cursor:pointer}
+.pra-chapter-11 .ch11-packet{padding:13px;border-radius:9px;background:var(--mint);color:var(--teal-dark);font:750 .92rem ui-monospace,monospace;word-break:break-all;margin:14px 0}
+.pra-chapter-11 .ch11-rgb-diodes{display:flex;align-items:center;justify-content:center;gap:15px;margin:24px 0}
+.pra-chapter-11 .ch11-rgb-led{width:110px;height:110px;border:9px solid #d9e4e3;border-radius:50%;background:#000;box-shadow:inset 0 -10px 22px #0004,0 6px 16px #0002;transition:background-color .35s,box-shadow .35s}
+.pra-chapter-11 .ch11-rgb-status{font-size:.89rem;text-align:center;color:var(--muted)}
+.pra-chapter-11 .ch11-rgb-actions{display:flex;gap:9px;flex-wrap:wrap}
+.pra-chapter-11 .ch11-packet-history{list-style:none;padding:0;margin:14px 0 0;max-height:125px;overflow-y:auto;font:.8rem/1.6 ui-monospace,monospace;color:var(--muted)}
+.pra-chapter-11 .ch11-packet-history li{padding:5px 0;border-bottom:1px solid var(--line)}
+.pra-chapter-11 .ch11-flow-status{min-height:22px;color:var(--teal-dark);font-size:.87rem;font-weight:750}
+.pra-chapter-11 .ch11-rgb-pulse{animation:ch11-pulse .4s ease-out}
+@keyframes ch11-pulse{0%,100%{outline:0 solid transparent}40%{outline:9px solid #17aba640}}
+.pra-chapter-11 .ch11-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin:16px 0}
+.pra-chapter-11 .ch11-summary-card{background:var(--card-bg);border:1px solid var(--line);border-radius:12px;padding:16px}
+.pra-chapter-11 .ch11-summary-card strong{display:block;color:var(--teal-dark);margin-bottom:5px}
+.pra-chapter-11 .ch11-small{font-size:.87rem;color:var(--muted)}
+@media(max-width:830px){.pra-chapter-11 .ch11-tasks,.pra-chapter-11 .ch11-lab-body,.pra-chapter-11 .ch11-rgb-panel{grid-template-columns:1fr}}
+@media(max-width:540px){.pra-chapter-11 .ch11-lab-body{padding:10px}.pra-chapter-11 .ch11-terminal{padding:10px}.pra-chapter-11 .ch11-entry{grid-template-columns:1fr}.pra-chapter-11 .ch11-lcd{padding:12px;border-width:6px}.pra-chapter-11 .ch11-lcd-inner{padding:11px 6px;font-size:clamp(.64rem,3.5vw,1rem)}.pra-chapter-11 .ch11-code-label{max-width:180px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.pra-chapter-11 .ch11-figure{padding:8px}}
+@media(prefers-reduced-motion:reduce){.pra-chapter-11 .ch11-servo-arm,.pra-chapter-11 .ch11-rgb-led{transition:none}.pra-chapter-11 .ch11-rgb-pulse{animation:none}}
+.pra-chapter-11 [hidden]{display:none!important}
+.pra-chapter-11 button:focus-visible,.pra-chapter-11 input:focus-visible,.pra-chapter-11 a:focus-visible,.pra-chapter-11 select:focus-visible{outline:3px solid var(--orange)!important;outline-offset:3px}

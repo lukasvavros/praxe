@@ -1,0 +1,57 @@
+/* Kapitola 13: Multitasking – navazuje na společné styly kapitoly 11 */
+.pra-chapter-13 .pra-hero::after{content:"13"!important}
+.pra-chapter-13 .ch13-lead{font-size:1.08rem;color:var(--muted);max-width:780px}
+.pra-chapter-13 .ch13-outline{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.pra-chapter-13 .ch13-outline a{background:var(--card-bg);border:1px solid var(--line);border-radius:9px;padding:8px 12px;color:var(--teal-dark);font-size:.84rem;font-weight:750;text-decoration:none}
+.pra-chapter-13 .ch13-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:14px;margin:20px 0}
+.pra-chapter-13 .ch13-card{background:var(--card-bg);border:1px solid var(--line);border-radius:14px;padding:19px;color:var(--ink);min-width:0}
+.pra-chapter-13 .ch13-card h3{color:var(--teal-dark)!important;margin:2px 0 8px!important;font-size:1.1rem!important}
+.pra-chapter-13 .ch13-card p{margin:0}
+.pra-chapter-13 .ch13-mini-number{display:block;font-size:.75rem;color:var(--teal-dark);font-weight:850;text-transform:uppercase;letter-spacing:.075em;margin-bottom:9px}
+.pra-chapter-13 .ch13-warning,.pra-chapter-13 .ch13-tip{background:var(--mint);border-left:5px solid var(--teal);padding:15px 19px;border-radius:10px;margin:20px 0;line-height:1.7}
+.pra-chapter-13 .ch13-warning{background:var(--callout-bg);border-left-color:var(--orange)}
+.pra-chapter-13 .ch13-code-wrap{margin:20px 0;border-radius:13px;overflow:hidden;background:#10242b;border:1px solid #284c54}
+.pra-chapter-13 .ch13-code-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 15px;color:#afd6d1;background:#18333a;font-size:.78rem;letter-spacing:.03em;font-weight:800}
+.pra-chapter-13 .ch13-code-wrap pre,.pra-chapter-13 .ch13-code-wrap pre.arduino-code{display:block!important;margin:0!important;padding:16px 19px!important;border:0!important;background:#10242b!important;color:#e3f7f3!important;white-space:pre!important;overflow-x:auto!important;font: .88rem/1.75 ui-monospace,Consolas,Monaco,monospace!important;max-height:none!important;visibility:visible!important;opacity:1!important}
+.pra-chapter-13 .ch13-code-wrap pre code{display:inline!important;color:inherit!important;background:transparent!important;font:inherit!important;white-space:pre!important;-webkit-text-fill-color:currentColor!important}
+.pra-chapter-13 .ch13-copy{padding:6px 10px!important;background:#315961!important;color:#fff!important;border:1px solid #678b91!important;border-radius:8px!important;font-size:.78rem!important;cursor:pointer}
+.pra-chapter-13 .ch13-figure{margin:24px 0;padding:12px;border:1px solid var(--line);border-radius:15px;background:var(--card-bg)}
+.pra-chapter-13 .ch13-figure img{display:block;width:100%;max-height:380px;object-fit:contain;background:white;border-radius:10px}
+.pra-chapter-13 .ch13-figure figcaption{font-size:.88rem;color:var(--muted);line-height:1.6;margin-top:10px}
+.pra-chapter-13 .ch13-lab{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card-bg);margin:23px 0}
+.pra-chapter-13 .ch13-lab-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:17px 20px;background:var(--mint);border-bottom:1px solid var(--line);color:var(--teal-dark)}
+.pra-chapter-13 .ch13-lab-head small{color:var(--muted)}
+.pra-chapter-13 .ch13-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:16px 18px 2px}
+.pra-chapter-13 .ch13-tabs button{background:transparent;color:var(--teal-dark);border:1px solid var(--line);padding:10px 13px;border-radius:9px;font-weight:750;cursor:pointer}
+.pra-chapter-13 .ch13-tabs [aria-pressed="true"]{background:#087f87;color:#fff;border-color:#087f87}
+.pra-chapter-13 .ch13-lab-body{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+.pra-chapter-13 .ch13-device,.pra-chapter-13 .ch13-monitor{border:1px solid var(--line);border-radius:13px;padding:18px;min-width:0}
+.pra-chapter-13 .ch13-led-row{display:flex;align-items:flex-start;justify-content:space-evenly;gap:15px;margin:6px 0 25px}
+.pra-chapter-13 .ch13-led-unit{display:flex;align-items:center;flex-direction:column;gap:11px;text-align:center;font-size:.85rem;color:var(--muted)}
+.pra-chapter-13 .ch13-led{width:74px;height:74px;border-radius:50%;background:#3c4749;border:7px solid #cad9d6;box-shadow:inset 0 -7px 15px #0006;transition:background .12s,box-shadow .12s}
+.pra-chapter-13 .ch13-led.on{background:#ffb83b;box-shadow:0 0 27px #f8ad4799,inset 0 5px 8px #fff7}
+.pra-chapter-13 .ch13-led-unit:nth-child(2) .ch13-led.on{background:#2ccb89;box-shadow:0 0 27px #2ccb8999,inset 0 5px 8px #fff6}
+.pra-chapter-13 .ch13-primary{background:#0a8589!important;border:1px solid #0a8589!important;color:white!important;padding:10px 15px!important;border-radius:9px!important;font-weight:750!important;cursor:pointer}
+.pra-chapter-13 .ch13-secondary{background:var(--card-bg)!important;border:1px solid var(--line)!important;color:var(--teal-dark)!important;padding:10px 15px!important;border-radius:9px!important;font-weight:750!important;cursor:pointer}
+.pra-chapter-13 .ch13-push{width:100%;touch-action:none;user-select:none}
+.pra-chapter-13 .ch13-push.pressed{background:#bd6828!important;border-color:#bd6828!important}
+.pra-chapter-13 .ch13-monitor-title{font-size:.78rem;font-weight:850;color:var(--teal-dark);letter-spacing:.08em}
+.pra-chapter-13 .ch13-clock{font:850 clamp(2rem,6vw,3.4rem) ui-monospace,monospace;color:var(--ink);padding:12px 0}
+.pra-chapter-13 .ch13-monitor p{color:var(--muted);min-height:50px}
+.pra-chapter-13 .ch13-actions{display:flex;gap:9px;flex-wrap:wrap}
+.pra-chapter-13 .ch13-lab-foot{padding:0 19px 17px;color:var(--muted);font-size:.88rem}
+.pra-chapter-13 .ch13-tasks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}
+.pra-chapter-13 .ch13-task,.pra-chapter-13 .ch13-assignment{background:var(--card-bg);border:1px solid var(--line);padding:20px;border-radius:14px;min-width:0}
+.pra-chapter-13 .ch13-task h3{color:var(--teal-dark)!important;font-size:1.1rem!important;margin:0 0 8px!important}
+.pra-chapter-13 .ch13-check{border-left:3px solid var(--teal);background:var(--mint);padding:12px;margin-top:14px;border-radius:0 8px 8px 0;font-size:.9rem}
+.pra-chapter-13 .ch13-video{aspect-ratio:16/9;max-width:960px;overflow:hidden;border-radius:14px;background:#152a30;border:1px solid var(--line);margin:20px 0}
+.pra-chapter-13 .ch13-video iframe{width:100%;height:100%;border:0;display:block}
+.pra-chapter-13 .ch13-small{font-size:.85rem;color:var(--muted)}
+.pra-chapter-13 .ch13-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px;margin:15px 0}
+.pra-chapter-13 .ch13-summary-card{padding:16px;border:1px solid var(--line);background:var(--card-bg);border-radius:12px}
+.pra-chapter-13 .ch13-summary-card strong{display:block;color:var(--teal-dark);margin-bottom:7px}
+.pra-chapter-13 .ch13-summary-card span{display:block;color:var(--ink);font-size:.9rem}
+@media(max-width:820px){.pra-chapter-13 .ch13-lab-body,.pra-chapter-13 .ch13-tasks{grid-template-columns:1fr}}
+@media(max-width:520px){.pra-chapter-13 .ch13-lab-body{padding:10px}.pra-chapter-13 .ch13-device,.pra-chapter-13 .ch13-monitor{padding:12px}.pra-chapter-13 .ch13-code-bar{align-items:start}.pra-chapter-13 .ch13-code-wrap pre{font-size:.78rem!important}}
+@media(prefers-reduced-motion:reduce){.pra-chapter-13 .ch13-led{transition:none}}
+.pra-chapter-13 button:focus-visible,.pra-chapter-13 a:focus-visible{outline:3px solid var(--orange)!important;outline-offset:3px}

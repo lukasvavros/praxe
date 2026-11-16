@@ -1,0 +1,13 @@
+document.addEventListener('DOMContentLoaded',()=>{
+ document.querySelectorAll('.ch13-copy').forEach(btn=>btn.addEventListener('click',async()=>{const str=btn.closest('.ch13-code-wrap').querySelector('code').innerText;try{await navigator.clipboard.writeText(str);btn.textContent='Zkopírováno ✓';setTimeout(()=>btn.textContent='Kopírovat kód',1600)}catch(e){btn.textContent='Označ a zkopíruj';setTimeout(()=>btn.textContent='Kopírovat kód',2000)}}));
+ const modes=[...document.querySelectorAll('.ch13-mode')],led1=document.getElementById('ch13-led1'),led2=document.getElementById('ch13-led2'),status=document.getElementById('ch13-status'),clock=document.getElementById('ch13-timer'),start=document.getElementById('ch13-start'),reset=document.getElementById('ch13-reset'),push=document.getElementById('ch13-push');
+ let mode='delay',elapsed=0,running=false,pressed=false,last=0,frame=null;
+ function render(){let phase=Math.floor(elapsed/2000);led1.classList.toggle('on',phase%2===0&&running);let checked=mode==='millis'?pressed:(pressed&&Math.abs(elapsed%2000)<65);led2.classList.toggle('on',checked&&running);clock.textContent=(elapsed/1000).toFixed(1).replace('.',',')+' s';status.textContent=!running?'Simulace je zastavená.':mode==='delay'?'Hlavní smyčka čeká — tlačítko se kontroluje jen na hranici intervalu.':'Smyčka průběžně kontroluje tlačítko i čas LED.';}
+ function loop(t){if(!running)return;let dt=Math.min(70,t-last);last=t;elapsed+=dt;render();frame=requestAnimationFrame(loop)}
+ function stop(){running=false;if(frame!==null)cancelAnimationFrame(frame);frame=null;start.textContent='Spustit';render()}
+ function clear(){stop();elapsed=0;pressed=false;push.classList.remove('pressed');render()}
+ start.addEventListener('click',()=>{if(running){stop();return}running=true;last=performance.now();start.textContent='Pozastavit';frame=requestAnimationFrame(loop)});reset.addEventListener('click',clear);
+ modes.forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;modes.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));clear()}));
+ function setPush(value){pressed=value;push.classList.toggle('pressed',value);render()}
+ push.addEventListener('pointerdown',e=>{e.preventDefault();push.setPointerCapture(e.pointerId);setPush(true)});['pointerup','pointercancel','lostpointercapture'].forEach(ev=>push.addEventListener(ev,()=>setPush(false)));push.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();setPush(true)}});push.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')setPush(false)});render();
+});

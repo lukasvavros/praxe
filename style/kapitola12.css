@@ -119,7 +119,6 @@
  .pra-chapter-12 .ch12-assignment-grid{grid-template-columns:1fr;gap:10px}
  .pra-chapter-12 .ch12-assignment-grid>div+div{border-left:0;border-top:1px solid var(--line);padding:14px 0 0}
 }
-/* V tištěném/PDF zobrazení nenechávej celé velké bloky přesouvat na další stránku. */
 @media print{
  .pra-chapter-12 .pra-section,
  .pra-chapter-12 .pra-study-row,
@@ -159,3 +158,20 @@
 .pra-chapter-12 #ulohy .pra-container{display:block}
 .pra-chapter-12 [hidden]{display:none!important}
 @media(max-width:650px){.pra-chapter-12 .ch12-grid{grid-template-columns:1fr}.pra-chapter-12 .ch12-lab{padding:14px}.pra-chapter-12 .ch12-robot{gap:12px}}
+
+/* Oprava zobrazeni Arduino kodu: nezavisle na globalnich pravidlech pro <code>. */
+.pra-chapter-12 .ch12-code-wrap pre.arduino-code {
+  display:block !important; visibility:visible !important; opacity:1 !important;
+  background:#102128 !important; color:#d6f1ea !important;
+  padding:18px !important; margin:0 !important; border:0 !important;
+  overflow-x:auto !important; overflow-y:visible;
+  white-space:pre !important; text-align:left !important;
+  font:400 14px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace !important;
+}
+.pra-chapter-12 .ch12-code-wrap pre.arduino-code code {
+  display:inline !important; visibility:visible !important; opacity:1 !important;
+  color:#d6f1ea !important; background:transparent !important;
+  font:inherit !important; -webkit-text-fill-color:#d6f1ea !important;
+  white-space:pre !important; padding:0 !important; border:0 !important;
+}
+.pra-chapter-12 .ch12-code-wrap .ch12-code-head {display:flex !important}

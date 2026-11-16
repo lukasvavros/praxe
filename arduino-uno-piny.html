@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interaktivní pinout Arduino Uno R3 | Praxe – Arduino</title>
+<meta name="description" content="Výukový interaktivní přehled pinů Arduino Uno R3. Klikací nákres, filtry, vyhledávání a funkce každého pinu.">
+<script>try{let t=localStorage.getItem('pra-arduino-theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="style/arduino-uno-piny.css?v=1"><script defer src="script/arduino-uno-piny.js?v=1"></script></head>
+<body><header class="pin-topbar"><a class="pin-brand" href="index.html"><span class="pin-brand-mark">∞</span><span>PRAXE <b>ARDUINO</b></span></a>
+<nav class="pin-toplinks" aria-label="Navigace"><a href="index.html">Úvod</a><a href="kapitola11.html">Kapitola 11</a><a href="#pinout">Pinout</a></nav>
+<button class="pin-theme" id="theme-toggle" type="button" aria-label="Přepnout světlý a tmavý režim"><span id="theme-symbol">☾</span><span id="theme-caption">Tmavý režim</span></button></header>
+<main class="pin-page"><section class="pin-hero"><div class="pin-crumb">INTERAKTIVNÍ POMŮCKA <span>·</span> ARDUINO UNO R3</div><div class="pin-hero-main"><div><h1>Každý pin má svůj <em>účel.</em></h1><p>Prozkoumej desku Arduino Uno. Vyber pin přímo na nákresu, vyhledej jej podle názvu nebo zvýrazni celou skupinu funkcí.</p></div><span class="pin-hero-number" aria-hidden="true">UNO</span></div>
+<div class="pin-metrics"><span><strong>14</strong> digitálních I/O</span><span><strong>6</strong> analogových vstupů</span><span><strong>6</strong> PWM výstupů</span><span><strong>5 V</strong> logika</span></div></section>
+<section id="pinout" class="pin-section"><div class="pin-section-head"><div><span class="pin-eyebrow">01 · KLIKACÍ SCHÉMA</span><h2>Rozložení pinů Arduino Uno R3</h2><p>Pin se zvýrazní i v tabulce. Otevřený odkaz si pamatuje vybraný pin, například <a href="#pin=A0">#pin=A0</a>.</p></div><a class="pin-export" href="picture/arduino-uno-r3-pinout.svg" download>↓ Stáhnout schéma SVG</a></div>
+<div class="pin-toolbar" role="group" aria-label="Filtry funkcí pinů">
+<button class="pin-filter is-active" data-filter="all" aria-pressed="true">Vše</button>
+<button class="pin-filter" data-filter="UART" aria-pressed="false">UART</button>
+<button class="pin-filter" data-filter="I2C" aria-pressed="false">I²C</button>
+<button class="pin-filter" data-filter="SPI" aria-pressed="false">SPI</button>
+<button class="pin-filter" data-filter="ADC" aria-pressed="false">ADC</button>
+<button class="pin-filter" data-filter="PWM" aria-pressed="false">PWM</button>
+<button class="pin-filter" data-filter="POWER" aria-pressed="false">Napájení</button>
+<button class="pin-filter" data-filter="GND" aria-pressed="false">GND</button>
+<button class="pin-filter" data-filter="CONTROL" aria-pressed="false">Řízení</button>
+</div>
+<div class="pin-workspace"><div class="pin-diagram-panel"><div class="pin-diagram-head"><span class="pin-live-dot"></span><span>Pohled na desku shora</span><span class="pin-zoom-hint">Na telefonu můžeš schéma posunout do stran</span></div>
+<div class="pin-diagram-scroll"><svg id="uno-board" class="uno-board" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 745" role="img" aria-labelledby="uno-svg-title uno-svg-desc">
+<title id="uno-svg-title">Interaktivní přehled pinů Arduino Uno R3 – pohled shora</title>
+<desc id="uno-svg-desc">Na levé straně jsou napájecí a analogové piny. Na pravé straně digitální piny D0–D13, SDA, SCL a pomocné piny. Kliknutím vyberte pin.</desc>
+<style>
+.canvas-bg{fill:#f5fbfb}.axis-title{font:800 18px system-ui;fill:#4b8085;letter-spacing:2px}.group-head{font:800 12px system-ui;fill:#4b858b;letter-spacing:2px}.chip-big{font:800 25px system-ui;fill:#e7eef2}.chip-tiny{font:600 14px system-ui;fill:#91aabb}.svg-footnote{font:500 13px system-ui;fill:#638b93}.pin-node{cursor:pointer;outline:none}.pin-line{stroke:#89b8be;stroke-width:2}.pin-pill{fill:#fff;stroke:#d7e8e9;stroke-width:1.2}.pin-name{font:800 13px system-ui;fill:#153c4b}.pin-function{font:500 11px system-ui;fill:#44646e}.socket{fill:#202f3b;stroke:#b7d4d6;stroke-width:2}.pin-edge{fill:#7a9aa0}.type-uart .pin-edge{fill:#e99037}.type-i2c .pin-edge{fill:#06a99d}.type-spi .pin-edge{fill:#a581ec}.type-pwm .pin-edge{fill:#54b567}.type-adc .pin-edge{fill:#32a5a9}.type-power .pin-edge{fill:#d99a31}.type-gnd .pin-edge{fill:#72838d}.type-control .pin-edge{fill:#829aac}.pin-node:hover .pin-pill,.pin-node:focus .pin-pill,.pin-node.is-selected .pin-pill{fill:#d9f7f1;stroke:#00a69c;stroke-width:2.5}.pin-node.is-selected .socket{fill:#ffcc55;stroke:#ffffff;stroke-width:3}.pin-node.is-muted{opacity:.2}.pin-node.is-hover .pin-pill{fill:#e2f9f7;stroke:#009e95;stroke-width:2.4}.pin-node:focus-visible .pin-pill{stroke:#ffb21d;stroke-width:3}
+</style>
+<defs><linearGradient id="pcb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d8490"/><stop offset=".55" stop-color="#006a7a"/><stop offset="1" stop-color="#075563"/></linearGradient>
+<linearGradient id="pcbchip" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#203447"/><stop offset="1" stop-color="#0c1a29"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#778ca2"/><stop offset=".48" stop-color="#ecf3f8"/><stop offset="1" stop-color="#7c8b9d"/></linearGradient>
+<filter id="bs"><feDropShadow dx="0" dy="10" stdDeviation="13" flood-color="#06232a" flood-opacity=".28"/></filter></defs>
+<rect x="0" y="0" width="1140" height="745" rx="24" class="canvas-bg"/>
+<text x="58" y="65" class="axis-title">NAPÁJENÍ / ANALOG</text><text x="818" y="65" class="axis-title">DIGITÁLNÍ / SBĚRNICE</text>
+<g filter="url(#bs)"><path d="M409 95 H742 Q765 95 765 119 V690 L741 713 H402 Q381 713 381 692 V121 Q381 95 409 95 Z" fill="url(#pcb)" stroke="#074f5b" stroke-width="4"/>
+<circle cx="410" cy="133" r="18" fill="#e0f7f7"/><circle cx="410" cy="133" r="11" fill="#1e4251"/><circle cx="735" cy="133" r="18" fill="#e0f7f7"/><circle cx="735" cy="133" r="11" fill="#1e4251"/><circle cx="410" cy="680" r="18" fill="#e0f7f7"/><circle cx="410" cy="680" r="11" fill="#1e4251"/><circle cx="732" cy="678" r="18" fill="#e0f7f7"/><circle cx="732" cy="678" r="11" fill="#1e4251"/>
+<!-- top USB-B connection -->
+<rect x="577" y="69" width="93" height="69" rx="8" fill="url(#metal)" stroke="#496576" stroke-width="4"/><rect x="593" y="72" width="62" height="39" rx="4" fill="#182f40" stroke="#bcd1d6" stroke-width="4"/><rect x="605" y="78" width="37" height="22" rx="3" fill="#9aafb6"/>
+<!-- power jack -->
+<rect x="343" y="180" width="89" height="98" rx="11" fill="#142635" stroke="#0a1d2b" stroke-width="5"/><rect x="337" y="190" width="33" height="74" rx="6" fill="#162c38"/><circle cx="379" cy="229" r="27" fill="#080f18" stroke="#445668" stroke-width="6"/><circle cx="379" cy="229" r="10" fill="#99acb6"/>
+<!-- button -->
+<rect x="693" y="154" width="43" height="44" rx="8" fill="#a5cad1" stroke="#335e6b" stroke-width="3"/><circle cx="715" cy="176" r="13" fill="#dceaf0" stroke="#788d9d" stroke-width="4"/><text x="715" y="210" text-anchor="middle" fill="#f2ffff" font-size="12" font-weight="700">RESET</text>
+<!-- 16u2 USB controller -->
+<rect x="508" y="158" width="82" height="72" rx="7" fill="url(#pcbchip)" stroke="#345263" stroke-width="2"/><text x="549" y="182" text-anchor="middle" fill="#e1eaee" font-size="12" font-weight="800">USB</text><text x="549" y="197" text-anchor="middle" fill="#b2c9d1" font-size="11">16U2</text><text x="549" y="215" text-anchor="middle" fill="#89c9d2" font-size="10">UART</text>
+<!-- main DIP 28 MCU -->
+<rect x="493" y="359" width="143" height="257" rx="10" fill="url(#pcbchip)" stroke="#122436" stroke-width="5"/>
+<path d="M538 360 a26 26 0 0 0 54 0" fill="none" stroke="#647e8a" stroke-width="4"/>
+<g fill="#c4d1d7">
+<rect x="482" y="371" width="14" height="8" rx="2"/><rect x="632" y="371" width="14" height="8" rx="2"/>
+<rect x="482" y="389" width="14" height="8" rx="2"/><rect x="632" y="389" width="14" height="8" rx="2"/>
+<rect x="482" y="407" width="14" height="8" rx="2"/><rect x="632" y="407" width="14" height="8" rx="2"/>
+<rect x="482" y="425" width="14" height="8" rx="2"/><rect x="632" y="425" width="14" height="8" rx="2"/>
+<rect x="482" y="443" width="14" height="8" rx="2"/><rect x="632" y="443" width="14" height="8" rx="2"/>
+<rect x="482" y="461" width="14" height="8" rx="2"/><rect x="632" y="461" width="14" height="8" rx="2"/>
+<rect x="482" y="479" width="14" height="8" rx="2"/><rect x="632" y="479" width="14" height="8" rx="2"/>
+<rect x="482" y="497" width="14" height="8" rx="2"/><rect x="632" y="497" width="14" height="8" rx="2"/>
+<rect x="482" y="515" width="14" height="8" rx="2"/><rect x="632" y="515" width="14" height="8" rx="2"/>
+<rect x="482" y="533" width="14" height="8" rx="2"/><rect x="632" y="533" width="14" height="8" rx="2"/>
+<rect x="482" y="551" width="14" height="8" rx="2"/><rect x="632" y="551" width="14" height="8" rx="2"/>
+<rect x="482" y="569" width="14" height="8" rx="2"/><rect x="632" y="569" width="14" height="8" rx="2"/>
+<rect x="482" y="587" width="14" height="8" rx="2"/><rect x="632" y="587" width="14" height="8" rx="2"/>
+<rect x="482" y="605" width="14" height="8" rx="2"/><rect x="632" y="605" width="14" height="8" rx="2"/>
+</g><text x="565" y="469" text-anchor="middle" class="chip-big">ATmega</text><text x="565" y="502" text-anchor="middle" class="chip-big">328P</text><text x="565" y="531" text-anchor="middle" class="chip-tiny">16 MHz · AVR</text>
+<!-- components / silkscreen -->
+<g stroke="#85bec6" stroke-width="2" opacity=".32" fill="none"><path d="M438 319 H472 V351 H485"/><path d="M661 327 V343 H701"/><path d="M462 642 h63 v-14"/><path d="M651 622 h38 v-45"/><path d="M438 287 V296 H490"/><path d="M682 290 v-30 h44"/></g>
+<rect x="662" y="348" width="50" height="26" rx="4" fill="#163544" stroke="#85b6be" stroke-width="2"/><text x="687" y="366" fill="#c3e6e8" text-anchor="middle" font-size="11">XTAL</text>
+<g><circle cx="680" cy="403" r="8" fill="#30d787"/><circle cx="704" cy="403" r="8" fill="#f4bf5f"/><circle cx="728" cy="403" r="8" fill="#64a7fb"/><text x="707" y="430" text-anchor="middle" fill="#e8f6f9" font-size="10" letter-spacing=".4">PWR · TX · RX</text></g>
+<!-- ICSP -->
+<rect x="674" y="561" width="63" height="77" rx="7" fill="#112e3f" stroke="#648b91" stroke-width="3"/><g fill="#d2bd91"><circle cx="693" cy="581" r="6"/><circle cx="716" cy="581" r="6"/><circle cx="693" cy="601" r="6"/><circle cx="716" cy="601" r="6"/><circle cx="693" cy="621" r="6"/><circle cx="716" cy="621" r="6"/></g><text x="705" y="551" fill="#e8fafb" text-anchor="middle" font-size="12" font-weight="700">ICSP</text>
+<text x="574" y="311" fill="#ecf9f9" text-anchor="middle" font-size="27" font-weight="900" letter-spacing="3">UNO</text><text x="574" y="335" fill="#acdee3" text-anchor="middle" font-size="14" letter-spacing="2">R3 · 5 V</text><text x="574" y="676" fill="#e4fbfa" text-anchor="middle" font-size="15" letter-spacing="2">ATMEGA328P</text>
+<!-- contact strip backs -->
+<rect x="372" y="309" width="32" height="181" rx="5" fill="#102b39"/><rect x="372" y="527" width="32" height="155" rx="5" fill="#102b39"/>
+<rect x="746" y="229" width="30" height="218" rx="5" fill="#102b39"/><rect x="746" y="462" width="30" height="213" rx="5" fill="#102b39"/>
+</g>
+<text x="208" y="291" text-anchor="middle" class="group-head">POWER</text><text x="208" y="511" text-anchor="middle" class="group-head">ANALOG</text><text x="947" y="209" text-anchor="middle" class="group-head">DIGITAL / SPI / I²C</text><text x="947" y="458" text-anchor="middle" class="group-head">DIGITAL / UART</text>
+
+<g class="pin-node type-control" data-pin="NC" data-groups="CONTROL" tabindex="0" role="button" aria-label="Pin NC: Nezapojený kontakt">
+      <path d="M 322 330 H 379" class="pin-line"/><rect x="65" y="320" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="320" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="334" class="pin-name">NC</text>
+      <text x="154" y="333" class="pin-function">Nezapojený kontakt</text>
+      <rect x="382" y="322" width="18" height="16" rx="4" class="socket"/>
+      <title>NC – Nezapojený kontakt</title>
+    </g>
+<g class="pin-node type-power" data-pin="IOREF" data-groups="POWER,CONTROL" tabindex="0" role="button" aria-label="Pin IOREF: Referenční napětí logiky">
+      <path d="M 322 351 H 379" class="pin-line"/><rect x="65" y="341" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="341" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="355" class="pin-name">IOREF</text>
+      <text x="154" y="354" class="pin-function">Referenční napětí logiky</text>
+      <rect x="382" y="343" width="18" height="16" rx="4" class="socket"/>
+      <title>IOREF – Referenční napětí logiky</title>
+    </g>
+<g class="pin-node type-control" data-pin="RESET" data-groups="CONTROL" tabindex="0" role="button" aria-label="Pin RESET: Restart mikrokontroléru">
+      <path d="M 322 372 H 379" class="pin-line"/><rect x="65" y="362" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="362" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="376" class="pin-name">RESET</text>
+      <text x="154" y="375" class="pin-function">Restart mikrokontroléru</text>
+      <rect x="382" y="364" width="18" height="16" rx="4" class="socket"/>
+      <title>RESET – Restart mikrokontroléru</title>
+    </g>
+<g class="pin-node type-power" data-pin="3V3" data-groups="POWER" tabindex="0" role="button" aria-label="Pin 3V3: Výstup 3,3 V">
+      <path d="M 322 393 H 379" class="pin-line"/><rect x="65" y="383" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="383" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="397" class="pin-name">3V3</text>
+      <text x="154" y="396" class="pin-function">Výstup 3,3 V</text>
+      <rect x="382" y="385" width="18" height="16" rx="4" class="socket"/>
+      <title>3V3 – Výstup 3,3 V</title>
+    </g>
+<g class="pin-node type-power" data-pin="5V" data-groups="POWER" tabindex="0" role="button" aria-label="Pin 5V: Napájecí větev 5 V">
+      <path d="M 322 414 H 379" class="pin-line"/><rect x="65" y="404" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="404" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="418" class="pin-name">5V</text>
+      <text x="154" y="417" class="pin-function">Napájecí větev 5 V</text>
+      <rect x="382" y="406" width="18" height="16" rx="4" class="socket"/>
+      <title>5V – Napájecí větev 5 V</title>
+    </g>
+<g class="pin-node type-gnd" data-pin="GND1" data-groups="GND,POWER" tabindex="0" role="button" aria-label="Pin GND: Zem / společný referenční bod">
+      <path d="M 322 435 H 379" class="pin-line"/><rect x="65" y="425" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="425" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="439" class="pin-name">GND</text>
+      <text x="154" y="438" class="pin-function">Zem / společný referenční bod</text>
+      <rect x="382" y="427" width="18" height="16" rx="4" class="socket"/>
+      <title>GND – Zem / společný referenční bod</title>
+    </g>
+<g class="pin-node type-gnd" data-pin="GND2" data-groups="GND,POWER" tabindex="0" role="button" aria-label="Pin GND: Zem / společný referenční bod">
+      <path d="M 322 456 H 379" class="pin-line"/><rect x="65" y="446" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="446" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="460" class="pin-name">GND</text>
+      <text x="154" y="459" class="pin-function">Zem / společný referenční bod</text>
+      <rect x="382" y="448" width="18" height="16" rx="4" class="socket"/>
+      <title>GND – Zem / společný referenční bod</title>
+    </g>
+<g class="pin-node type-power" data-pin="VIN" data-groups="POWER" tabindex="0" role="button" aria-label="Pin VIN: Vstup externího napájení">
+      <path d="M 322 477 H 379" class="pin-line"/><rect x="65" y="467" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="467" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="481" class="pin-name">VIN</text>
+      <text x="154" y="480" class="pin-function">Vstup externího napájení</text>
+      <rect x="382" y="469" width="18" height="16" rx="4" class="socket"/>
+      <title>VIN – Vstup externího napájení</title>
+    </g>
+<g class="pin-node type-adc" data-pin="A0" data-groups="ADC" tabindex="0" role="button" aria-label="Pin A0: Analogový vstup ADC / digitální GPIO">
+      <path d="M 322 548 H 379" class="pin-line"/><rect x="65" y="538" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="538" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="552" class="pin-name">A0</text>
+      <text x="154" y="551" class="pin-function">ADC · analogový vstup</text>
+      <rect x="382" y="540" width="18" height="16" rx="4" class="socket"/>
+      <title>A0 – Analogový vstup ADC / digitální GPIO</title>
+    </g>
+<g class="pin-node type-adc" data-pin="A1" data-groups="ADC" tabindex="0" role="button" aria-label="Pin A1: Analogový vstup ADC / digitální GPIO">
+      <path d="M 322 572 H 379" class="pin-line"/><rect x="65" y="562" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="562" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="576" class="pin-name">A1</text>
+      <text x="154" y="575" class="pin-function">ADC · analogový vstup</text>
+      <rect x="382" y="564" width="18" height="16" rx="4" class="socket"/>
+      <title>A1 – Analogový vstup ADC / digitální GPIO</title>
+    </g>
+<g class="pin-node type-adc" data-pin="A2" data-groups="ADC" tabindex="0" role="button" aria-label="Pin A2: Analogový vstup ADC / digitální GPIO">
+      <path d="M 322 596 H 379" class="pin-line"/><rect x="65" y="586" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="586" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="600" class="pin-name">A2</text>
+      <text x="154" y="599" class="pin-function">ADC · analogový vstup</text>
+      <rect x="382" y="588" width="18" height="16" rx="4" class="socket"/>
+      <title>A2 – Analogový vstup ADC / digitální GPIO</title>
+    </g>
+<g class="pin-node type-adc" data-pin="A3" data-groups="ADC" tabindex="0" role="button" aria-label="Pin A3: Analogový vstup ADC / digitální GPIO">
+      <path d="M 322 620 H 379" class="pin-line"/><rect x="65" y="610" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="610" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="624" class="pin-name">A3</text>
+      <text x="154" y="623" class="pin-function">ADC · analogový vstup</text>
+      <rect x="382" y="612" width="18" height="16" rx="4" class="socket"/>
+      <title>A3 – Analogový vstup ADC / digitální GPIO</title>
+    </g>
+<g class="pin-node type-i2c" data-pin="A4" data-groups="ADC,I2C" tabindex="0" role="button" aria-label="Pin A4: Analogový vstup ADC / digitální GPIO">
+      <path d="M 322 644 H 379" class="pin-line"/><rect x="65" y="634" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="634" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="648" class="pin-name">A4</text>
+      <text x="154" y="647" class="pin-function">SDA · datová linka I²C</text>
+      <rect x="382" y="636" width="18" height="16" rx="4" class="socket"/>
+      <title>A4 – Analogový vstup ADC / digitální GPIO</title>
+    </g>
+<g class="pin-node type-i2c" data-pin="A5" data-groups="ADC,I2C" tabindex="0" role="button" aria-label="Pin A5: Analogový vstup ADC / digitální GPIO">
+      <path d="M 322 668 H 379" class="pin-line"/><rect x="65" y="658" width="257" height="20" rx="9" class="pin-pill"/>
+      <rect x="65" y="658" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="97" y="672" class="pin-name">A5</text>
+      <text x="154" y="671" class="pin-function">SCL · hodinová linka I²C</text>
+      <rect x="382" y="660" width="18" height="16" rx="4" class="socket"/>
+      <title>A5 – Analogový vstup ADC / digitální GPIO</title>
+    </g>
+<g class="pin-node type-i2c" data-pin="SCL" data-groups="I2C" tabindex="0" role="button" aria-label="Pin SCL: Hodinový signál I²C">
+      <path d="M 771 248 H 825" class="pin-line"/><rect x="825" y="238" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="238" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="252" class="pin-name">SCL</text>
+      <text x="916" y="251" class="pin-function">I²C · stejný signál jako A5</text>
+      <rect x="751" y="240" width="18" height="16" rx="4" class="socket"/>
+      <title>SCL – Hodinový signál I²C</title>
+    </g>
+<g class="pin-node type-i2c" data-pin="SDA" data-groups="I2C" tabindex="0" role="button" aria-label="Pin SDA: Datový signál I²C">
+      <path d="M 771 269 H 825" class="pin-line"/><rect x="825" y="259" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="259" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="273" class="pin-name">SDA</text>
+      <text x="916" y="272" class="pin-function">I²C · stejný signál jako A4</text>
+      <rect x="751" y="261" width="18" height="16" rx="4" class="socket"/>
+      <title>SDA – Datový signál I²C</title>
+    </g>
+<g class="pin-node type-adc" data-pin="AREF" data-groups="CONTROL,ADC" tabindex="0" role="button" aria-label="Pin AREF: Referenční napětí ADC">
+      <path d="M 771 290 H 825" class="pin-line"/><rect x="825" y="280" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="280" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="294" class="pin-name">AREF</text>
+      <text x="916" y="293" class="pin-function">Referenční napětí ADC</text>
+      <rect x="751" y="282" width="18" height="16" rx="4" class="socket"/>
+      <title>AREF – Referenční napětí ADC</title>
+    </g>
+<g class="pin-node type-gnd" data-pin="GND3" data-groups="GND,POWER" tabindex="0" role="button" aria-label="Pin GND: Zem / referenční potenciál">
+      <path d="M 771 311 H 825" class="pin-line"/><rect x="825" y="301" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="301" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="315" class="pin-name">GND</text>
+      <text x="916" y="314" class="pin-function">Zem / referenční potenciál</text>
+      <rect x="751" y="303" width="18" height="16" rx="4" class="socket"/>
+      <title>GND – Zem / referenční potenciál</title>
+    </g>
+<g class="pin-node type-spi" data-pin="D13" data-groups="DIGITAL,SPI" tabindex="0" role="button" aria-label="Pin D13: Digitální GPIO · SPI SCK · LED">
+      <path d="M 771 332 H 825" class="pin-line"/><rect x="825" y="322" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="322" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="336" class="pin-name">D13</text>
+      <text x="916" y="335" class="pin-function">SPI</text>
+      <rect x="751" y="324" width="18" height="16" rx="4" class="socket"/>
+      <title>D13 – Digitální GPIO · SPI SCK · LED</title>
+    </g>
+<g class="pin-node type-spi" data-pin="D12" data-groups="DIGITAL,SPI" tabindex="0" role="button" aria-label="Pin D12: Digitální GPIO · SPI MISO/CIPO">
+      <path d="M 771 353 H 825" class="pin-line"/><rect x="825" y="343" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="343" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="357" class="pin-name">D12</text>
+      <text x="916" y="356" class="pin-function">SPI</text>
+      <rect x="751" y="345" width="18" height="16" rx="4" class="socket"/>
+      <title>D12 – Digitální GPIO · SPI MISO/CIPO</title>
+    </g>
+<g class="pin-node type-spi" data-pin="D11" data-groups="DIGITAL,PWM,SPI" tabindex="0" role="button" aria-label="Pin D11: Digitální GPIO · PWM · SPI MOSI/COPI">
+      <path d="M 771 374 H 825" class="pin-line"/><rect x="825" y="364" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="364" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="378" class="pin-name">D11</text>
+      <text x="916" y="377" class="pin-function">PWM + SPI</text>
+      <rect x="751" y="366" width="18" height="16" rx="4" class="socket"/>
+      <title>D11 – Digitální GPIO · PWM · SPI MOSI/COPI</title>
+    </g>
+<g class="pin-node type-spi" data-pin="D10" data-groups="DIGITAL,PWM,SPI" tabindex="0" role="button" aria-label="Pin D10: Digitální GPIO · PWM · SPI SS">
+      <path d="M 771 395 H 825" class="pin-line"/><rect x="825" y="385" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="385" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="399" class="pin-name">D10</text>
+      <text x="916" y="398" class="pin-function">PWM + SPI</text>
+      <rect x="751" y="387" width="18" height="16" rx="4" class="socket"/>
+      <title>D10 – Digitální GPIO · PWM · SPI SS</title>
+    </g>
+<g class="pin-node type-pwm" data-pin="D9" data-groups="DIGITAL,PWM" tabindex="0" role="button" aria-label="Pin D9: Digitální GPIO · PWM">
+      <path d="M 771 416 H 825" class="pin-line"/><rect x="825" y="406" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="406" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="420" class="pin-name">D9</text>
+      <text x="916" y="419" class="pin-function">PWM</text>
+      <rect x="751" y="408" width="18" height="16" rx="4" class="socket"/>
+      <title>D9 – Digitální GPIO · PWM</title>
+    </g>
+<g class="pin-node type-digital" data-pin="D8" data-groups="DIGITAL" tabindex="0" role="button" aria-label="Pin D8: Digitální GPIO">
+      <path d="M 771 437 H 825" class="pin-line"/><rect x="825" y="427" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="427" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="441" class="pin-name">D8</text>
+      <text x="916" y="440" class="pin-function">digitální I/O</text>
+      <rect x="751" y="429" width="18" height="16" rx="4" class="socket"/>
+      <title>D8 – Digitální GPIO</title>
+    </g>
+<g class="pin-node type-digital" data-pin="D7" data-groups="DIGITAL" tabindex="0" role="button" aria-label="Pin D7: Digitální GPIO">
+      <path d="M 771 482 H 825" class="pin-line"/><rect x="825" y="472" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="472" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="486" class="pin-name">D7</text>
+      <text x="916" y="485" class="pin-function">digitální I/O</text>
+      <rect x="751" y="474" width="18" height="16" rx="4" class="socket"/>
+      <title>D7 – Digitální GPIO</title>
+    </g>
+<g class="pin-node type-pwm" data-pin="D6" data-groups="DIGITAL,PWM" tabindex="0" role="button" aria-label="Pin D6: Digitální GPIO · PWM">
+      <path d="M 771 507 H 825" class="pin-line"/><rect x="825" y="497" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="497" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="511" class="pin-name">D6</text>
+      <text x="916" y="510" class="pin-function">PWM</text>
+      <rect x="751" y="499" width="18" height="16" rx="4" class="socket"/>
+      <title>D6 – Digitální GPIO · PWM</title>
+    </g>
+<g class="pin-node type-pwm" data-pin="D5" data-groups="DIGITAL,PWM" tabindex="0" role="button" aria-label="Pin D5: Digitální GPIO · PWM">
+      <path d="M 771 532 H 825" class="pin-line"/><rect x="825" y="522" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="522" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="536" class="pin-name">D5</text>
+      <text x="916" y="535" class="pin-function">PWM</text>
+      <rect x="751" y="524" width="18" height="16" rx="4" class="socket"/>
+      <title>D5 – Digitální GPIO · PWM</title>
+    </g>
+<g class="pin-node type-digital" data-pin="D4" data-groups="DIGITAL" tabindex="0" role="button" aria-label="Pin D4: Digitální GPIO">
+      <path d="M 771 557 H 825" class="pin-line"/><rect x="825" y="547" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="547" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="561" class="pin-name">D4</text>
+      <text x="916" y="560" class="pin-function">digitální I/O</text>
+      <rect x="751" y="549" width="18" height="16" rx="4" class="socket"/>
+      <title>D4 – Digitální GPIO</title>
+    </g>
+<g class="pin-node type-pwm" data-pin="D3" data-groups="DIGITAL,PWM" tabindex="0" role="button" aria-label="Pin D3: Digitální GPIO · PWM · INT1">
+      <path d="M 771 582 H 825" class="pin-line"/><rect x="825" y="572" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="572" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="586" class="pin-name">D3</text>
+      <text x="916" y="585" class="pin-function">PWM</text>
+      <rect x="751" y="574" width="18" height="16" rx="4" class="socket"/>
+      <title>D3 – Digitální GPIO · PWM · INT1</title>
+    </g>
+<g class="pin-node type-digital" data-pin="D2" data-groups="DIGITAL" tabindex="0" role="button" aria-label="Pin D2: Digitální GPIO · externí přerušení INT0">
+      <path d="M 771 607 H 825" class="pin-line"/><rect x="825" y="597" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="597" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="611" class="pin-name">D2</text>
+      <text x="916" y="610" class="pin-function">digitální I/O</text>
+      <rect x="751" y="599" width="18" height="16" rx="4" class="socket"/>
+      <title>D2 – Digitální GPIO · externí přerušení INT0</title>
+    </g>
+<g class="pin-node type-uart" data-pin="D1" data-groups="DIGITAL,UART" tabindex="0" role="button" aria-label="Pin D1: UART TX – sériové vysílání">
+      <path d="M 771 632 H 825" class="pin-line"/><rect x="825" y="622" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="622" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="636" class="pin-name">D1</text>
+      <text x="916" y="635" class="pin-function">UART · TX</text>
+      <rect x="751" y="624" width="18" height="16" rx="4" class="socket"/>
+      <title>D1 – UART TX – sériové vysílání</title>
+    </g>
+<g class="pin-node type-uart" data-pin="D0" data-groups="DIGITAL,UART" tabindex="0" role="button" aria-label="Pin D0: UART RX – sériový příjem">
+      <path d="M 771 657 H 825" class="pin-line"/><rect x="825" y="647" width="253" height="20" rx="9" class="pin-pill"/>
+      <rect x="825" y="647" width="7" height="20" rx="3" class="pin-edge"/>
+      <text x="859" y="661" class="pin-name">D0</text>
+      <text x="916" y="660" class="pin-function">UART · RX</text>
+      <rect x="751" y="649" width="18" height="16" rx="4" class="socket"/>
+      <title>D0 – UART RX – sériový příjem</title>
+    </g>
+<text x="565" y="733" text-anchor="middle" class="svg-footnote">Výukový nákres · pohled shora · Arduino Uno R3</text>
+</svg></div><div class="pin-diagram-foot">Obrázek je vlastní výuková ilustrace. Umístění a funkce kontaktů odpovídají Uno R3, rozměry součástek jsou schematické.</div></div>
+<aside id="pin-details" class="pin-details" aria-live="polite" aria-atomic="true"><div class="pin-details-head"><span class="pin-eyebrow">VYBRANÝ PIN</span><span id="selected-class" class="pin-status">ADC</span></div>
+<div class="pin-big-name" id="selected-name">A0</div><div class="pin-port" id="selected-port">ATmega328P · PC0</div>
+<h3 id="selected-kind">Analogový vstup ADC / digitální GPIO</h3><p id="selected-desc">10bitový analogový vstup.</p>
+<div class="pin-data-box"><b>Použití ve výuce</b><span id="selected-practice">Potenciometr nebo senzor.</span></div>
+<div id="selected-warning" class="pin-warning" hidden></div>
+<div id="selected-tags" class="pin-tags"></div>
+<button id="copy-pin-link" class="pin-copy-link" type="button">Zkopírovat odkaz na pin</button>
+<div class="pin-detail-tip">Tip: kliknutím na jiný pin změníš kartu. Filtry zvýrazňují příslušné vývody.</div></aside></div>
+<div class="pin-bottom-tools"><label for="pin-search">Najít pin nebo funkci</label><input id="pin-search" type="search" placeholder="Např. A0, TX, PWM, PC4…" autocomplete="off"><button id="clear-search" type="button">Vymazat hledání</button><div class="pin-view"><span>Popisky:</span><button type="button" data-view="arduino" class="is-on" aria-pressed="true">Arduino</button><button type="button" data-view="chip" aria-pressed="false">ATmega328P</button></div></div>
+</section>
+<section class="pin-section" id="seznam"><div class="pin-section-head"><div><span class="pin-eyebrow">02 · VŠECHNY PINY</span><h2>Přehled kontaktů</h2><p>Klikni na řádek a zobrazí se podrobnosti. Vyhledávání a filtry fungují i v tabulce.</p></div><span class="pin-result-count" id="pin-count">32 kontaktů</span></div>
+<div class="pin-table-scroll"><table class="pin-table"><thead><tr><th>Pin</th><th>Čip</th><th>Funkce</th><th>Skupiny</th></tr></thead><tbody id="pin-rows"></tbody></table></div>
+</section>
+<section class="pin-section pin-notes"><div class="pin-section-head"><div><span class="pin-eyebrow">03 · POZOR PŘI ZAPOJOVÁNÍ</span><h2>Důležité pro praxi</h2></div></div><div class="pin-note-grid">
+<article><strong>D0 a D1</strong><p>RX a TX používá také sériová komunikace s počítačem. Připojená zařízení mohou komplikovat nahrávání programu.</p></article>
+<article><strong>A4 a A5</strong><p>Analogové vstupy A4 a A5 sdílejí signály I²C (SDA a SCL). Duplicitní konektory SDA/SCL nejsou nové nezávislé piny.</p></article>
+<article><strong>Zatížení I/O</strong><p>Pro návrh nepřekračuj doporučený proud okolo 20 mA na pin; LED potřebuje předřadný odpor.</p></article>
+<article><strong>Napájení</strong><p>Logika Uno R3 pracuje s 5 V; výstup 3V3 je omezený přibližně na 50 mA. VIN není totéž co pin 5V.</p></article>
+</div></section>
+<footer class="pin-footer"><div><strong>PRAXE · ARDUINO</strong><p>Interaktivní výuková pomůcka pro práci s Arduino Uno R3.</p></div><div><span>Podklady pro technické údaje:</span><a href="https://docs.arduino.cc/hardware/uno-rev3/" target="_blank" rel="noopener">Arduino UNO R3 · oficiální dokumentace</a><a href="https://content.arduino.cc/assets/A000066-full-pinout.pdf" target="_blank" rel="noopener">Oficiální pinout PDF</a></div><a class="pin-back" href="kapitola11.html">← Zpět na Kapitolu 11</a></footer></main>
+</body></html>

@@ -1,0 +1,39 @@
+/* Obecné informace – vlastní funkce v C; doplněk ke společnému motivu. */
+.pra-functions .pra-hero::after {content:"ƒ"!important}
+.pra-functions .fn-lead{font-size:1.09rem;color:var(--muted);max-width:780px}
+.pra-functions .fn-outline{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}
+.pra-functions .fn-outline a{background:var(--card-bg);color:var(--teal-dark);border:1px solid var(--line);border-radius:9px;padding:8px 13px;text-decoration:none;font-weight:750;font-size:.85rem}
+.pra-functions .fn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px;margin:20px 0}
+.pra-functions .fn-card,.pra-functions .fn-task{background:var(--card-bg);border:1px solid var(--line);border-radius:15px;padding:19px;color:var(--ink)}
+.pra-functions .fn-card h3,.pra-functions .fn-task h3{margin:0 0 9px!important;color:var(--teal-dark)!important;font-size:1.12rem!important}
+.pra-functions .fn-card p{margin:0}
+.pra-functions .fn-tip,.pra-functions .fn-warn{border-left:5px solid var(--teal);background:var(--mint);padding:15px 18px;border-radius:9px;margin:19px 0}
+.pra-functions .fn-warn{border-left-color:var(--orange);background:var(--callout-bg)}
+.pra-functions .fn-code{position:relative;margin:18px 0;border-radius:12px;overflow:hidden;background:#11262c!important}
+.pra-functions .fn-code pre,.pra-functions .fn-code pre.arduino-code{background:#11262c!important;color:#e3f5f2!important;padding:53px 18px 18px!important;margin:0!important;overflow-x:auto!important;white-space:pre!important;font:500 .91rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace!important}
+.pra-functions .fn-code code,.pra-functions .fn-code pre code{background:transparent!important;color:inherit!important;font:inherit!important;white-space:inherit!important}
+.pra-functions .fn-code-title{position:absolute;left:18px;top:15px;color:#a4d6ce;font-size:.79rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.pra-functions .fn-copy{position:absolute;right:12px;top:10px;border:1px solid #537578!important;border-radius:8px!important;background:#234247!important;color:#e5f5f1!important;padding:5px 11px!important;font-weight:700!important;cursor:pointer}
+.pra-functions .fn-flow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px;margin:22px 0}
+.pra-functions .fn-flowbox{padding:17px 12px;text-align:center;border:1px solid var(--line);border-radius:13px;background:var(--card-bg);min-width:0}
+.pra-functions .fn-flowbox strong{display:block;color:var(--teal-dark);margin-bottom:7px}
+.pra-functions .fn-flowbox code{overflow-wrap:anywhere}
+.pra-functions .fn-arrow{text-align:center;font-weight:800;color:var(--teal-dark);font-size:1.5rem}
+.pra-functions .fn-lab{border:1px solid var(--line);background:var(--card-bg);border-radius:16px;overflow:hidden;margin:24px 0}
+.pra-functions .fn-lab-head{background:var(--mint);padding:16px 18px;color:var(--teal-dark);font-weight:800}
+.pra-functions .fn-lab-body{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pra-functions .fn-inputs{display:grid;gap:10px}
+.pra-functions .fn-inputs label{display:grid;gap:5px;font-weight:700;color:var(--ink)}
+.pra-functions .fn-inputs input{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px;color:var(--ink);background:var(--card-bg);font:inherit}
+.pra-functions .fn-button{background:#0a8589!important;color:white!important;border:0!important;border-radius:9px;padding:10px 15px!important;font-weight:800!important;cursor:pointer}
+.pra-functions .fn-result{background:#10252b;border:1px solid #24515b;border-radius:12px;color:#ddf4ec;padding:16px;min-height:136px;font: .9rem/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.pra-functions .fn-result strong{color:#80dbbe}
+.pra-functions .fn-task{margin:12px 0}
+.pra-functions .fn-task-label{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark);font-weight:850}
+.pra-functions .fn-task .fn-check{background:var(--mint);border-left:4px solid var(--teal);padding:10px 13px;border-radius:4px 8px 8px 4px;margin-top:13px}
+.pra-functions .fn-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.pra-functions .fn-summary>div{background:var(--card-bg);border:1px solid var(--line);border-radius:12px;padding:17px}
+.pra-functions .fn-summary strong{color:var(--teal-dark);display:block;margin-bottom:6px}
+.pra-functions button:focus-visible,.pra-functions a:focus-visible,.pra-functions input:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+@media(max-width:720px){.pra-functions .fn-lab-body{grid-template-columns:1fr}.pra-functions .fn-flow{grid-template-columns:1fr}.pra-functions .fn-arrow{transform:rotate(90deg)}.pra-functions .fn-code-title{max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media print{.pra-functions .fn-code{break-inside:avoid}}

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   // Po nasazení kompatibilního Workeru uprav jen tuto adresu. Nikdy sem nevkládej heslo ani GitHub token.
-  const WORKER_URL = 'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';  
+  const WORKER_URL = 'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
   const PREVIEW = window.TEST1_PREVIEW === true;
   const STORAGE_KEY = 'praxe-test1-cloudflare-v2';
   const TOKEN_KEY = 'praxe-test1-session-v2';

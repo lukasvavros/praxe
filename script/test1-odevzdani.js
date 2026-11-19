@@ -1,7 +1,6 @@
 (() => {
   'use strict';
   // Test 1: ponecháváme kreslení a přihlašování beze změn.
-  // Rozhraní odevzdání nového Workeru je POST /api/submit (NE /submit z Testu 3).
   const app = window.Test1Core;
   if (!app) throw Error('Chybí test1-osobni.js.');
   const { $, WORKER_URL, TOKEN_KEY, PREVIEW } = app;

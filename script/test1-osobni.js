@@ -63,9 +63,18 @@
       body=`<textarea class="free-answer" data-free rows="6" placeholder="Napiš svoji odpověď…">${esc(a.text||'')}</textarea>`;
     } else if(q.type==='draw') {
       const needed=q.required||{};
-      body=`<p class="hint">Vlož součástky a vodiči nakresli obvod. <strong>Potřebuješ ${needed.led}× LED a ${needed.resistor}× rezistor.</strong> Každá externí LED má vlastní rezistor. Schéma ručně zkontroluje učitel (max. 5 bodů).</p>
-      <div class="draw-controls" data-role="tools"><button type="button" data-add="led">＋ LED</button><button type="button" data-add="resistor">＋ Rezistor</button><button type="button" data-mode="move">Přesouvat</button><button type="button" data-mode="wire">Kreslit vodiče</button><button type="button" data-mode="erase">Guma</button><button type="button" data-action="rotate">↻ Otočit</button><button type="button" data-action="remove">Smazat součástku</button><button type="button" data-action="undo">↶ Zpět</button><button type="button" data-action="clear">Vymazat vše</button><label class="wire-color">Barva <input type="color" data-color value="#d94638"></label></div>
-      <div class="draw-scroller"><canvas data-diagram width="1080" height="620" aria-label="Zapojení Arduino Uno. Interaktivní kreslicí plocha."></canvas></div><p class="hint" data-draw-hint>Čára: táhni vodič od vývodu Arduina k rezistoru nebo LED. Přesouvat: klikni a táhni součástku. Vývody se přichytávají.</p>`;
+      body=`<p class="hint">Dokresli zapojení na stejném podkladu Arduino UNO jako v Testu 3. Potřebuješ <strong>${needed.led}× LED a ${needed.resistor}× rezistor</strong>. Každá externí LED má vlastní sériový rezistor. Za schéma lze získat 5 bodů.</p>
+      <section class="test3-sketch" aria-label="Kreslení zapojení">
+        <div class="test3-component-tools"><strong>Vložit součástku:</strong> <button type="button" data-symbol-add="led">LED</button> <button type="button" data-symbol-add="resistor">Rezistor</button> <button type="button" data-symbol-action="rotate">↻ Otočit</button> <button type="button" data-symbol-action="delete">Smazat součástku</button></div>
+        <div class="test3-draw-tools"><button type="button" data-draw-tool="move">Přesunout součástky</button><button type="button" data-draw-tool="line" aria-pressed="true">Čára</button><button type="button" data-draw-tool="erase">Guma</button><button type="button" data-draw-action="undo">↶ Zpět</button><button type="button" data-draw-action="clear">Vymazat</button>
+          <label>Barva vodiče <input type="color" data-draw-color value="#e55345"></label><label><input type="checkbox" data-draw-orthogonal> Jen vodorovně / svisle</label>
+        </div>
+        <div class="test3-canvas-scroller"><div class="test3-canvas-board" data-draw-board>
+          <img class="test3-board-image" src="picture/arduino-uno-mrizka.svg" alt="Arduino UNO s označenými piny" draggable="false">
+          <div class="test3-symbol-layer" data-symbol-layer></div><canvas class="test3-draw-canvas" width="1080" height="660" aria-label="Kreslení vodičů Arduino UNO"></canvas>
+        </div></div>
+        <p class="hint" data-draw-status role="status">Nástroj Čára: táhni vodič přesně k vývodu značky. Značky nejprve vlož a přesuň.</p>
+      </section>`;
     }
     const names={mc:'Znalosti',error:'Najdi chybu',fill:'Doplň kód',open:'Vysvětli',draw:'Nakresli zapojení'};
     return `<article class="question-card" data-qid="${q.id}" data-type="${q.type}"><div class="qhead"><span class="qnumber">${n}</span><div><div class="qmeta">${names[q.type]} · ${q.max} ${q.max===1?'bod':'bodů'} · ${esc(q.id)}</div><h3>${esc(q.prompt)}</h3></div></div>${body}</article>`;
@@ -81,7 +90,7 @@
     $('generation').hidden=true;
     $('submit').disabled=!!state.submitted || PREVIEW;
     if(state.submitted){$('sent-result').hidden=false;$('sent-result').textContent='Tento test již byl odevzdán: '+(state.savedPath||'');}
-    document.querySelectorAll('[data-type="draw"]').forEach(card=>initDrawing(card));
+    document.querySelectorAll('[data-type="draw"]').forEach(card=>init(card));
     mark();
     status('Osobní varianta je připravena. Odpovědi se ukládají do tohoto prohlížeče.');
   }
@@ -106,135 +115,299 @@
       card.querySelectorAll('button[data-line]').forEach(b=>b.classList.toggle('selected',b===line));save();mark();
     });
   }
-  // Interaktivní kreslení: součástky + vodiče a jediný canvas, který se také exportuje do PNG.
-  const BOARD_PINS=['D2','D3','D4','D5','D6','D7','D8','D9','D10','D11','D12','D13','5V','GND'];
-  const terminals=BOARD_PINS.map((name,i)=>({x:330,y:136+i*29,name}));
-  const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-  function initDrawing(card){
-    const canvas=card.querySelector('canvas[data-diagram]'),ctx=canvas.getContext('2d'),id=card.dataset.qid;
-    const ans=answer(id);ans.components ||= [];ans.wires ||= [];
-    let mode='wire',selected=null,active=null,preview=null,history=[];
-    let color=card.querySelector('[data-color]').value;
-    const hint=card.querySelector('[data-draw-hint]');
-    const snapshot=()=>{history.push(clone({components:ans.components,wires:ans.wires}));if(history.length>40)history.shift();};
-    const point=ev=>{const b=canvas.getBoundingClientRect();return {x:clamp((ev.clientX-b.left)*canvas.width/b.width,0,1080),y:clamp((ev.clientY-b.top)*canvas.height/b.height,0,620)};};
-    const rotatePoint=(x,y,r)=>r===90?{x:-y,y:x}:r===180?{x:-x,y:-y}:r===270?{x:y,y:-x}:{x,y};
-    const pins=s=>[-58,58].map(dx=>{const p=rotatePoint(dx,0,s.rot||0);return {x:s.x+p.x,y:s.y+p.y};});
-    const snap=p=>{
-      let result={x:Math.round(p.x/10)*10,y:Math.round(p.y/10)*10},best=17;
-      const all=[...terminals,...ans.components.flatMap(s=>pins(s))];
-      for(const t of all){const d=distance(p,t);if(d<best){best=d;result={x:t.x,y:t.y};}}
-      return result;
+  // Přímá úprava ověřeného kreslicího nástroje Testu 3:
+  // stejné nástroje, SVG značky, samostatná vrstva vodičů, 1080 × 660 px.
+  const GRID = 10;
+  const SYMBOL_GRID = 20;
+  const instances = new WeakSet();
+  const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+  const snapshot = value => JSON.parse(JSON.stringify(value));
+  const SYMBOLS = {
+    led: { name:'LED', file:'picture/led.svg', w:60, h:74, pins:[[10,-30],[10,30]] },
+    resistor: { name:'Rezistor', file:'picture/rezistor.svg', w:150, h:22, pins:[[-60,0],[60,0]] }
+  };
+  function init(card) {
+    if (instances.has(card)) return;
+    const canvas = card.querySelector('.test3-draw-canvas');
+    const board = card.querySelector('.test3-canvas-board');
+    const layer = card.querySelector('[data-symbol-layer]');
+    const tools = card.querySelector('.test3-draw-tools');
+    const partsTools = card.querySelector('.test3-component-tools');
+    if (!canvas || !board || !layer || !tools || !partsTools) return;
+    instances.add(card);
+    const locked = () => !!current()?.submitted;
+    const id = card.dataset.qid;
+    const ctx = canvas.getContext('2d');
+    const hint = card.querySelector('[data-draw-status]');
+    const color = tools.querySelector('[data-draw-color]');
+    const ortho = tools.querySelector('[data-draw-orthogonal]');
+    const ans = answer(id);
+    // Dřívější verze Testu 1 měla jiné názvy vlastností.
+    // Žákovi ponecháme nakreslené vodiče i součástky při aktualizaci.
+    const state = {
+      symbols: (ans.components || []).map(s => ({...s, type: s.type || s.kind, rotation: s.rotation ?? s.rot ?? 0})),
+      strokes: (ans.wires || []).map(w => ({...w}))
     };
-    const nearestComp=p=>{let found=null,best=48;for(const s of ans.components){const d=distance(p,s);if(d<best){found=s;best=d;}}return found;};
-    const wireDist=(p,w)=>{const dx=w.b.x-w.a.x,dy=w.b.y-w.a.y;const t=clamp(((p.x-w.a.x)*dx+(p.y-w.a.y)*dy)/(dx*dx+dy*dy||1),0,1);return distance(p,{x:w.a.x+t*dx,y:w.a.y+t*dy});};
-    function paint(){
-      ctx.fillStyle='#ffffff';ctx.fillRect(0,0,1080,620);
-      ctx.strokeStyle='#e9f1f0';ctx.lineWidth=1;
-      for(let x=0;x<=1080;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,620);ctx.stroke();}
-      for(let y=0;y<=620;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1080,y);ctx.stroke();}
-      ctx.fillStyle='#124f57';ctx.fillRect(38,55,300,524);
-      ctx.strokeStyle='#80d5c1';ctx.lineWidth=4;ctx.strokeRect(47,64,282,506);
-      ctx.fillStyle='#e9f9f5';ctx.font='bold 26px system-ui';ctx.fillText('ARDUINO UNO',66,103);
-      ctx.font='15px system-ui';ctx.fillStyle='#c8e9e3';ctx.fillText('Doplň schéma pomocí značek a vodičů',67,540);
-      ctx.fillStyle='#203b43';ctx.fillRect(74,190,118,165);
-      ctx.fillStyle='#99d7c7';ctx.font='bold 13px monospace';ctx.fillText('ATmega328P',82,274);
-      ctx.fillStyle='#e4f2f0';ctx.font='bold 13px monospace';
-      terminals.forEach(t=>{ctx.fillStyle='#e2a864';ctx.fillRect(t.x-12,t.y-7,18,14);ctx.fillStyle='#ffffff';ctx.fillText(t.name,t.x-69,t.y+4);ctx.fillStyle='#ffcf8f';ctx.beginPath();ctx.arc(t.x,t.y,4,0,Math.PI*2);ctx.fill();});
-      ctx.fillStyle='#133841';ctx.font='bold 16px system-ui';ctx.fillText('Plocha pro součástky a vodiče',420,48);
-      function stroke(w,ghost=false){ctx.save();ctx.strokeStyle=w.color||'#d94638';ctx.lineWidth=ghost?3:5;ctx.lineCap='round';ctx.globalAlpha=ghost?.58:1;ctx.beginPath();ctx.moveTo(w.a.x,w.a.y);ctx.lineTo(w.b.x,w.b.y);ctx.stroke();ctx.restore();}
-      ans.wires.forEach(w=>stroke(w));if(preview)stroke(preview,true);
-      ans.components.forEach((s,i)=>{
-        ctx.save();ctx.translate(s.x,s.y);ctx.rotate((s.rot||0)*Math.PI/180);
-        if(s.id===selected){ctx.strokeStyle='#19ad94';ctx.lineWidth=2;ctx.setLineDash([5,5]);ctx.strokeRect(-75,-37,150,74);ctx.setLineDash([]);}
-        ctx.strokeStyle='#172e35';ctx.lineCap='round';ctx.lineWidth=4;
-        ctx.beginPath();ctx.moveTo(-58,0);ctx.lineTo(-35,0);ctx.moveTo(35,0);ctx.lineTo(58,0);ctx.stroke();
-        if(s.kind==='resistor'){
-          ctx.fillStyle='#f9e2b1';ctx.strokeStyle='#a15b25';ctx.fillRect(-35,-12,70,24);ctx.strokeRect(-35,-12,70,24);
-          for(const x of [-22,-8,6,21]){ctx.beginPath();ctx.moveTo(x,-12);ctx.lineTo(x,12);ctx.stroke();}
-        } else {
-          ctx.strokeStyle='#18333c';ctx.fillStyle='#e9f4fa';ctx.lineWidth=3;
-          ctx.beginPath();ctx.moveTo(-25,-23);ctx.lineTo(13,0);ctx.lineTo(-25,23);ctx.closePath();ctx.fill();ctx.stroke();
-          ctx.beginPath();ctx.moveTo(15,-24);ctx.lineTo(15,24);ctx.stroke();
-          ctx.fillStyle='#eab846';ctx.strokeStyle='#eab846';
-          for(const y of [-24,-8]){ctx.beginPath();ctx.moveTo(3,y);ctx.lineTo(23,y-18);ctx.moveTo(23,y-18);ctx.lineTo(14,y-17);ctx.moveTo(23,y-18);ctx.lineTo(24,y-9);ctx.stroke();}
-          ctx.font='bold 11px sans-serif';ctx.fillStyle='#12343b';ctx.fillText('A',-47,28);ctx.fillText('K',29,28);
-        }
-        ctx.fillStyle='#293a43';ctx.beginPath();ctx.arc(-58,0,5,0,Math.PI*2);ctx.arc(58,0,5,0,Math.PI*2);ctx.fill();
-        ctx.restore();ctx.font='bold 14px system-ui';ctx.fillStyle='#2b525b';ctx.fillText((s.kind==='led'?'LED ':'R ')+(i+1),s.x-28,s.y+53);
-      });
-      ctx.fillStyle='#57777c';ctx.font='12px system-ui';ctx.fillText('GND a 5 V najdeš na spodních dvou vývodech desky vlevo.',420,600);
+    // Staré automatické vazby se vypnou: polohy vodičů zůstávají
+    // přesně tak, jak je žák nakreslil. Neodhadujeme kontakty SVG.
+    for (const stroke of state.strokes) {
+      delete stroke.aAnchor;
+      delete stroke.bAnchor;
     }
-    function update(){paint();save();mark();}
-    function add(kind){snapshot();const j=ans.components.length;const p={id:'p'+Date.now()+'-'+Math.random().toString(36).slice(2,6),kind,x:490+(j%4)*140,y:145+Math.floor(j/4)*125,rot:0};ans.components.push(p);selected=p.id;mode='move';update();setButtons();hint.textContent='Součástka vložena. Přetáhni ji na požadované místo, potom přepni na kreslení vodičů.';}
-    function setButtons(){card.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('is-active',b.dataset.mode===mode));canvas.style.cursor=mode==='move'?'move':mode==='erase'?'not-allowed':'crosshair';}
-    card.querySelector('[data-role="tools"]').addEventListener('click',ev=>{
-      if(state.submitted)return;
-      const b=ev.target.closest('button');if(!b)return;
-      if(b.dataset.add){add(b.dataset.add);return;}
-      if(b.dataset.mode){mode=b.dataset.mode;setButtons();hint.textContent=mode==='wire'?'Kresli tažením od pinu k pinu.':mode==='erase'?'Klikni na vodič, který chceš smazat.':'Klikni na součástku a přetáhni ji.';return;}
-      const action=b.dataset.action;
-      if(action==='undo'){
-        const old=history.pop();if(!old)return;
-        ans.components=old.components;ans.wires=old.wires;selected=null;update();
-      } else if(action==='clear') {
-        if(!confirm('Opravdu smazat celé nakreslené zapojení?'))return;
-        snapshot();ans.components=[];ans.wires=[];selected=null;update();
-      } else if(action==='rotate') {
-        const s=ans.components.find(s=>s.id===selected);if(!s){hint.textContent='Nejdřív vyber součástku nástrojem Přesouvat.';return;}
-        snapshot();s.rot=((s.rot||0)+90)%360;update();
-      } else if(action==='remove'){
-        if(!selected)return;snapshot();ans.components=ans.components.filter(s=>s.id!==selected);selected=null;update();
+    const history = [];
+    let mode = 'line', selected = null, pending = null, dragging = null;
+    const persist = () => {
+      ans.components = state.symbols;
+      ans.wires = state.strokes;
+      save(); mark();
+    };
+    const checkpoint = () => { history.push(snapshot(state)); if (history.length > 60) history.shift(); };
+    const tell = s => { hint.textContent = s; };
+
+    function point(event, step = GRID) {
+      const r = canvas.getBoundingClientRect();
+      const quantize = n => step ? Math.round(n / step) * step : n;
+      return {
+        x: clamp(quantize((event.clientX - r.left) * canvas.width / r.width), 0, canvas.width),
+        y: clamp(quantize((event.clientY - r.top) * canvas.height / r.height), 0, canvas.height)
+      };
+    }
+    function rotatedOffset(s, x, y) {
+      switch (s.rotation || 0) {
+        case 90: return {x: -y, y: x};
+        case 180: return {x: -x, y: -y};
+        case 270: return {x: y, y: -x};
+        default: return {x, y};
       }
-    });
-    card.querySelector('[data-color]').addEventListener('input',ev=>color=ev.target.value);
-    canvas.addEventListener('pointerdown',ev=>{
-      if(state.submitted || ev.button!==0)return;
-      const p=point(ev);canvas.setPointerCapture(ev.pointerId);
-      if(mode==='move'){
-        const s=nearestComp(p);selected=s?.id||null;active=s?{kind:'move',id:s.id,origin:clone(s),dx:p.x-s.x,dy:p.y-s.y}:null;paint();
-      } else if(mode==='erase') {
-        const i=ans.wires.findIndex(w=>wireDist(p,w)<15);if(i>=0){snapshot();ans.wires.splice(i,1);update();}
-      } else {
-        const a=snap(p);active={kind:'wire',a,color};preview={a,b:a,color};paint();
-      }
-    });
-    canvas.addEventListener('pointermove',ev=>{
-      if(!active||state.submitted)return;
-      const p=point(ev);
-      if(active.kind==='move'){
-        const s=ans.components.find(s=>s.id===active.id);if(!s)return;
-        s.x=clamp(Math.round((p.x-active.dx)/10)*10,395,1020);s.y=clamp(Math.round((p.y-active.dy)/10)*10,65,530);
-        paint();
-      } else {preview={a:active.a,b:snap(p),color:active.color};paint();}
-    });
-    function release(ev){
-      if(!active||state.submitted)return;
-      if(active.kind==='wire'){
-        const end=snap(point(ev));if(distance(active.a,end)>3){snapshot();ans.wires.push({a:active.a,b:end,color:active.color});}
-      } else {
-        const s=ans.components.find(s=>s.id===active.id);
-        if(s && (s.x!==active.origin.x||s.y!==active.origin.y)){
-          // Původní poloha patří do historie pro funkční "Zpět".
-          const latest=clone({components:ans.components,wires:ans.wires});
-          latest.components=latest.components.map(c=>c.id===s.id?active.origin:c);
-          history.push(latest);
+    }
+    function wirePoint(event, start) {
+      const raw = point(event, 0);
+      let best = 10;
+      let target = null;
+      for (const s of state.symbols) {
+        for (const [x, y] of SYMBOLS[s.type]?.pins || []) {
+          const offset = rotatedOffset(s, x, y);
+          const pin = {x: s.x + offset.x, y: s.y + offset.y};
+          if (start && ortho.checked &&
+              Math.abs(pin.x - start.x) > 0.001 && Math.abs(pin.y - start.y) > 0.001) continue;
+          const distance = Math.hypot(raw.x - pin.x, raw.y - pin.y);
+          if (distance < best) {
+            best = distance;
+            target = pin;
+          }
         }
       }
-      active=null;preview=null;update();
+      return target || (start ? constrained(start, point(event)) : point(event));
     }
-    canvas.addEventListener('pointerup',release);
-    canvas.addEventListener('pointercancel',()=>{active=null;preview=null;paint();});
-    setButtons();paint();
-    canvas._getSnapshot=()=>canvas.toDataURL('image/png');
+    function constrained(a, b) {
+      if (!ortho.checked) return b;
+      return Math.abs(b.x - a.x) >= Math.abs(b.y - a.y) ? {x:b.x,y:a.y} : {x:a.x,y:b.y};
+    }
+    function line(s, preview) {
+      ctx.beginPath(); ctx.moveTo(s.a.x,s.a.y); ctx.lineTo(s.b.x,s.b.y);
+      ctx.strokeStyle = s.color || '#df493d'; ctx.lineWidth = 4; ctx.lineCap = 'round';
+      ctx.globalAlpha = preview ? .5 : 1; ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    function redraw(preview) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      state.strokes.forEach(s => line(s, false));
+      if (preview) line(preview, true);
+    }
+    function render() {
+      layer.replaceChildren();
+      for (const s of state.symbols) {
+        const def = SYMBOLS[s.type]; if (!def) continue;
+        const el = document.createElement('button');
+        el.type = 'button'; el.className = 'test3-symbol' + (selected === s.id ? ' is-selected' : '');
+        el.dataset.symbolId = s.id;
+        el.style.width = def.w + 'px'; el.style.height = def.h + 'px';
+        el.style.left = s.x + 'px'; el.style.top = s.y + 'px';
+        el.style.setProperty('--symbol-rotation', (s.rotation || 0) + 'deg');
+        el.setAttribute('aria-label', def.name + ' – přetáhněte pro posunutí');
+        const placeholder = document.createElement('span');
+        placeholder.className = 'test3-svg-placeholder'; placeholder.textContent = def.name;
+        const img = document.createElement('img');
+        img.alt = def.name; img.draggable = false; img.src = def.file;
+        img.onload = () => { if (el.isConnected) el.replaceChildren(img); };
+        el.append(placeholder);
+        layer.append(el);
+      }
+    }
+    function symbolPosition(s, x, y) {
+      const {w, h} = SYMBOLS[s.type];
+      const quarterTurn = (s.rotation || 0) % 180 !== 0;
+      const halfWidth = (quarterTurn ? h : w) / 2;
+      const halfHeight = (quarterTurn ? w : h) / 2;
+      const align = (value, halfSize, limit, offset) => SYMBOL_GRID * clamp(
+        Math.round((value + offset) / SYMBOL_GRID),
+        Math.ceil((halfSize + offset) / SYMBOL_GRID),
+        Math.floor((limit - halfSize + offset) / SYMBOL_GRID)
+      ) - offset;
+      const [pinX, pinY] = SYMBOLS[s.type].pins?.[0] || [0, 0];
+      const axis = rotatedOffset(s, pinX, pinY);
+      return {x: align(x, halfWidth, canvas.width, axis.x),
+              y: align(y, halfHeight, canvas.height, axis.y)};
+    }
+    function add(type) {
+      if (locked()) return;
+      if (!SYMBOLS[type]) return;
+      checkpoint();
+      const index = state.symbols.length;
+      const s = { id: Date.now().toString(36) + '-' + Math.random().toString(36).slice(2), type,
+        rotation: 0 };
+      Object.assign(s, symbolPosition(s, 640 + (index % 2) * 185, 180 + Math.floor(index / 2) * 195));
+      state.symbols.push(s); selected = s.id;
+      redraw(); persist(); render(); chooseMode('move'); tell('Značka ' + SYMBOLS[type].name + ' vložena. Přetáhněte ji na místo; potom klikněte na Čára.');
+    }
+    function selectedSymbol() { return state.symbols.find(s => s.id === selected); }
+    function removeSelected() {
+      if (locked()) return;
+      if (!selectedSymbol()) { tell('Nejdříve klikněte na součástku.'); return; }
+      checkpoint(); state.symbols = state.symbols.filter(s => s.id !== selected);
+      selected = null;
+      // Vodiče zůstanou na původní pozici, ale odpojí se od odstraněné značky.
+      for(const stroke of state.strokes)for(const end of ['a','b']){
+        if(stroke[end+'Anchor'] && !state.symbols.some(s=>s.id===stroke[end+'Anchor'].id))delete stroke[end+'Anchor'];
+      }
+      persist(); redraw(); render(); tell('Součástka odstraněna.');
+    }
+    function rotate() {
+      if (locked()) return;
+      const s = selectedSymbol(); if (!s) { tell('Nejdříve vyberte součástku.'); return; }
+      checkpoint(); s.rotation = ((s.rotation || 0) + 90) % 360;
+      Object.assign(s, symbolPosition(s, s.x, s.y));
+      redraw(); persist(); render(); tell('Součástka otočena o 90°.');
+    }
+    function distance(p, s) {
+      const dx = s.b.x-s.a.x, dy = s.b.y-s.a.y;
+      const t = clamp(((p.x-s.a.x)*dx + (p.y-s.a.y)*dy) / (dx*dx+dy*dy || 1),0,1);
+      return Math.hypot(p.x-(s.a.x+t*dx),p.y-(s.a.y+t*dy));
+    }
+    function chooseMode(next) {
+      if (locked()) return;
+      mode = next;
+      // Důležité: při kreslení i gumování musí události vždy přijímat canvas.
+      // Jinak velký průhledný obdélník SVG značky blokuje kreslení vodičů.
+      board.classList.toggle('test3-mode-move', mode === 'move');
+      layer.setAttribute('aria-label', mode === 'move' ? 'Přesouvání součástek zapnuto' : 'Součástky uzamčené pro kreslení vodičů');
+      tools.querySelectorAll('[data-draw-tool]').forEach(el =>
+        el.setAttribute('aria-pressed', String(el.dataset.drawTool === mode))
+      );
+      tell(mode === 'move'
+        ? 'Přesuňte a otočte součástky. Teprve potom nakreslete vodiče nástrojem Čára.'
+        : mode === 'erase'
+          ? 'Guma: klikněte na vodič, třeba i přímo přes značku součástky.'
+          : 'Čára: kreslete vodiče přesně k vývodům značek. Nástroj je nebude sám přepojovat.');
+    }
+    partsTools.querySelectorAll('[data-symbol-add]').forEach(b=>b.addEventListener('click',()=>add(b.dataset.symbolAdd)));
+    partsTools.querySelector('[data-symbol-action="rotate"]').addEventListener('click',rotate);
+    partsTools.querySelector('[data-symbol-action="delete"]').addEventListener('click',removeSelected);
+    tools.querySelectorAll('[data-draw-tool]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.drawTool)));
+    tools.querySelector('[data-draw-action="undo"]').addEventListener('click',()=>{
+      if (locked()) return;
+      if (!history.length) { tell('Není co vrátit.'); return; }
+      const prev = history.pop(); state.strokes = prev.strokes; state.symbols = prev.symbols;
+      selected = null; persist(); redraw(); render(); tell('Poslední krok vrácen.');
+    });
+    tools.querySelector('[data-draw-action="clear"]').addEventListener('click',()=>{
+      if (locked() || (!state.symbols.length && !state.strokes.length)) return;
+      if (!confirm('Vymazat všechny vodiče i součástky?')) return;
+      checkpoint(); state.strokes=[]; state.symbols=[]; selected=null;
+      persist(); redraw(); render(); tell('Plocha vymazána.');
+    });
+    canvas.addEventListener('pointerdown',event=>{
+      if (locked() || event.button !== 0 || mode === 'move') return;
+      const p = point(event);
+      if (mode === 'erase') {
+        let index=-1, best=16;
+        state.strokes.forEach((s,i)=>{const d=distance(p,s);if(d<best){best=d;index=i;}});
+        if (index>=0) { checkpoint(); state.strokes.splice(index,1); persist(); redraw(); }
+        return;
+      }
+      selected=null;render();
+      const start = wirePoint(event);
+      pending={a:start,b:start,color:color.value};
+      canvas.setPointerCapture(event.pointerId);
+    });
+    canvas.addEventListener('pointermove',event=>{
+      if (locked() || !pending || mode !== 'line') return;
+      pending.b=wirePoint(event, pending.a); redraw(pending);
+    });
+    canvas.addEventListener('pointerup',event=>{
+      if (locked() || !pending || mode !== 'line') return;
+      pending.b=wirePoint(event, pending.a);
+      if (Math.hypot(pending.a.x-pending.b.x,pending.a.y-pending.b.y)>2){checkpoint();state.strokes.push(pending);persist();}
+      pending=null;redraw();
+    });
+    canvas.addEventListener('pointercancel',()=>{pending=null;redraw();});
+    layer.addEventListener('pointerdown',event=>{
+      if (locked() || mode !== 'move') return;
+      const el=event.target.closest('.test3-symbol'); if (!el || event.button !== 0) return;
+      event.preventDefault();
+      const s=state.symbols.find(x=>x.id===el.dataset.symbolId);if(!s)return;
+      selected=s.id;render();const p=point(event, 0);
+      dragging={id:s.id,pointerId:event.pointerId,dx:p.x-s.x,dy:p.y-s.y,origin:snapshot(state),moved:false};
+    });
+    window.addEventListener('pointermove',event=>{
+      if (locked() || !dragging || event.pointerId!==dragging.pointerId) return;
+      const s=state.symbols.find(x=>x.id===dragging.id);if(!s)return;
+      const p = point(event, 0);
+      const {x, y} = symbolPosition(s, p.x - dragging.dx, p.y - dragging.dy);
+      if (x!==s.x || y!==s.y) {
+        // Nepřipojujeme automaticky sousední volné vodiče při přesunu.
+        s.x=x;s.y=y;dragging.moved=true;redraw();render();
+      }
+    });
+    const endDrag=event=>{
+      if(locked() || !dragging||event.pointerId!==dragging.pointerId)return;
+      if(dragging.moved){redraw();history.push(dragging.origin);if(history.length>60)history.shift();persist();tell('Součástka přesunuta. Případné vodiče upravte až po umístění značek.');}
+      dragging=null;
+    };
+    window.addEventListener('pointerup',endDrag);
+    window.addEventListener('pointercancel',endDrag);
+    redraw();render();chooseMode('line');
+    persist();
+
   }
-  function buildPayload(){
+
+  async function drawingPng(card) {
+    const id=card.dataset.qid;
+    const ans=answer(id);
+    const symbols=ans.components||[];
+    const canvas=card.querySelector('.test3-draw-canvas');
+    const base=card.querySelector('.test3-board-image');
+    if(!canvas||!base)throw Error('Schéma '+id+' nemá podklad nebo vodiče. Obnov stránku.');
+    const ready=async(img,label)=>{
+      if(!img.complete||!img.naturalWidth){try{await img.decode();}catch(_){}}
+      if(!img.naturalWidth)throw Error('Nepodařilo se načíst '+label+'. Zkontroluj soubory ve složce picture/ na GitHubu.');
+    };
+    await ready(base,'podklad Arduino UNO');
+    const output=document.createElement('canvas');output.width=1080;output.height=660;
+    const c=output.getContext('2d',{alpha:false});
+    c.fillStyle='#fff';c.fillRect(0,0,1080,660);
+    c.strokeStyle='rgba(27,92,95,.11)';c.lineWidth=1;
+    for(let x=.5;x<1080;x+=20){c.beginPath();c.moveTo(x,0);c.lineTo(x,660);c.stroke();}
+    for(let y=.5;y<660;y+=20){c.beginPath();c.moveTo(0,y);c.lineTo(1080,y);c.stroke();}
+    c.drawImage(base,0,0,1080,660);
+    c.drawImage(canvas,0,0,1080,660);
+    for(const s of symbols){
+      const def=SYMBOLS[s.type||s.kind];if(!def)throw Error('Neznámá součástka u '+id+'.');
+      let img=card.querySelector('.test3-symbol[data-symbol-id="'+CSS.escape(s.id)+'"] img');
+      if(!img){img=new Image();img.src=def.file;}
+      await ready(img,def.name);
+      c.save();c.translate(s.x,s.y);c.rotate(((s.rotation??s.rot??0)%360)*Math.PI/180);
+      c.drawImage(img,-def.w/2,-def.h/2,def.w,def.h);c.restore();
+    }
+    const result=output.toDataURL('image/png');
+    if(result.length>1500000)throw Error('Schéma '+id+' je pro odevzdání příliš velké ('+Math.ceil(result.length/1024)+' kB).');
+    return result;
+  }
+  async function buildPayload(){
     if(!state)throw Error('Nejdřív vygeneruj test.');
     const drawings={};
-    document.querySelectorAll('[data-type="draw"]').forEach(card=>{
-      const canvas=card.querySelector('canvas[data-diagram]');drawings[card.dataset.qid]=canvas.toDataURL('image/png');
-    });
+    for(const card of document.querySelectorAll('[data-type="draw"]')){
+      drawings[card.dataset.qid]=await drawingPng(card);
+    }
     return {testId:'test1',examId:state.examId,name:state.name,date:state.date,questions:state.ids.map(id=>{
       const q=byId.get(id);return {id,type:q.type,prompt:q.prompt,options:q.options,code:q.code};
     }),answers:state.answers,drawings};

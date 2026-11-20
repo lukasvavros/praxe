@@ -1,6 +1,5 @@
 (() => {
   'use strict';
-  // Po nasazení kompatibilního Workeru uprav jen tuto adresu. Nikdy sem nevkládej heslo ani GitHub token.
   const WORKER_URL = 'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
   const PREVIEW = window.TEST1_PREVIEW === true;
   const STORAGE_KEY = 'praxe-test1-cloudflare-v2';
@@ -370,36 +369,100 @@
 
   }
 
+  // Export je shodný s postupem z funkčního Testu 3:
+  // rozměry a pozice vrstev odečítáme z reálných DOM obdélníků,
+  // nikoli jen z předpokládané velikosti SVG a uložených souřadnic.
   async function drawingPng(card) {
-    const id=card.dataset.qid;
-    const ans=answer(id);
-    const symbols=ans.components||[];
-    const canvas=card.querySelector('.test3-draw-canvas');
-    const base=card.querySelector('.test3-board-image');
-    if(!canvas||!base)throw Error('Schéma '+id+' nemá podklad nebo vodiče. Obnov stránku.');
-    const ready=async(img,label)=>{
-      if(!img.complete||!img.naturalWidth){try{await img.decode();}catch(_){}}
-      if(!img.naturalWidth)throw Error('Nepodařilo se načíst '+label+'. Zkontroluj soubory ve složce picture/ na GitHubu.');
-    };
-    await ready(base,'podklad Arduino UNO');
-    const output=document.createElement('canvas');output.width=1080;output.height=660;
-    const c=output.getContext('2d',{alpha:false});
-    c.fillStyle='#fff';c.fillRect(0,0,1080,660);
-    c.strokeStyle='rgba(27,92,95,.11)';c.lineWidth=1;
-    for(let x=.5;x<1080;x+=20){c.beginPath();c.moveTo(x,0);c.lineTo(x,660);c.stroke();}
-    for(let y=.5;y<660;y+=20){c.beginPath();c.moveTo(0,y);c.lineTo(1080,y);c.stroke();}
-    c.drawImage(base,0,0,1080,660);
-    c.drawImage(canvas,0,0,1080,660);
-    for(const s of symbols){
-      const def=SYMBOLS[s.type||s.kind];if(!def)throw Error('Neznámá součástka u '+id+'.');
-      let img=card.querySelector('.test3-symbol[data-symbol-id="'+CSS.escape(s.id)+'"] img');
-      if(!img){img=new Image();img.src=def.file;}
-      await ready(img,def.name);
-      c.save();c.translate(s.x,s.y);c.rotate(((s.rotation??s.rot??0)%360)*Math.PI/180);
-      c.drawImage(img,-def.w/2,-def.h/2,def.w,def.h);c.restore();
+    const id = card.dataset.qid;
+    const board = card.querySelector('.test3-canvas-board');
+    const wires = board?.querySelector('.test3-draw-canvas');
+    const uno = board?.querySelector('.test3-board-image');
+    if (!board || !wires || !uno) {
+      throw Error('Schéma ' + id + ' nemá podklad Arduino nebo plochu s vodiči.');
     }
-    const result=output.toDataURL('image/png');
-    if(result.length>1500000)throw Error('Schéma '+id+' je pro odevzdání příliš velké ('+Math.ceil(result.length/1024)+' kB).');
+
+    const ready = async (img, label) => {
+      if (!img.complete || !img.naturalWidth) {
+        try { await img.decode(); } catch (_) { /* zkontrolujeme níže */ }
+      }
+      if (!img.naturalWidth) {
+        throw Error('Nepodařilo se načíst ' + label + ' u schématu ' + id + '. Ověř soubory picture/ na GitHubu.');
+      }
+    };
+    await ready(uno, 'podklad Arduino UNO');
+
+    const W = wires.width;
+    const H = wires.height;
+    const output = document.createElement('canvas');
+    output.width = W;
+    output.height = H;
+    const ctx = output.getContext('2d', {alpha:false});
+    if (!ctx) throw Error('Prohlížeč nedokáže vytvořit obrázek schématu.');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(27,92,95,.11)';
+    ctx.lineWidth = 1;
+    for (let x = .5; x < W; x += 20) {
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
+    }
+    for (let y = .5; y < H; y += 20) {
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    }
+
+    const canvasRect = wires.getBoundingClientRect();
+    if (!canvasRect.width || !canvasRect.height) {
+      throw Error('Schéma ' + id + ' není viditelné. Rozbal test a zkus odevzdání znovu.');
+    }
+    const sx = W / canvasRect.width;
+    const sy = H / canvasRect.height;
+    const position = el => {
+      const rect = el.getBoundingClientRect();
+      return {
+        x:(rect.left - canvasRect.left) * sx,
+        y:(rect.top - canvasRect.top) * sy,
+        w:rect.width * sx,
+        h:rect.height * sy
+      };
+    };
+
+    // Přesná velikost a umístění SVG podle obrazovky, jako v Testu 3.
+    const base = position(uno);
+    ctx.drawImage(uno, base.x, base.y, base.w, base.h);
+
+    // Canvas obsahuje vodiče nakreslené žákem ve stejných souřadnicích.
+    ctx.drawImage(wires, 0, 0, W, H);
+
+    // Exportujeme skutečně vykreslené obrázky součástek včetně otočení.
+    const symbolsOnScreen = [...board.querySelectorAll('.test3-symbol')];
+    const savedSymbols = answer(id).components || [];
+    if (symbolsOnScreen.length !== savedSymbols.length) {
+      throw Error('Schéma ' + id + ' obsahuje nenačtenou součástku. Obnov stránku a zkus to znovu.');
+    }
+    for (const symbol of symbolsOnScreen) {
+      const img = symbol.querySelector('img');
+      if (!img) throw Error('Schéma ' + id + ': značka součástky ještě není načtená.');
+      await ready(img, img.alt || 'součástku');
+      const rect = img.getBoundingClientRect();
+      const rotation = parseFloat(getComputedStyle(symbol).getPropertyValue('--symbol-rotation')) || 0;
+      const quarterTurn = Math.abs(rotation % 180) === 90;
+      const width = quarterTurn ? rect.height : rect.width;
+      const height = quarterTurn ? rect.width : rect.height;
+      if (!width || !height) throw Error('Schéma ' + id + ': součástka nemá platnou velikost.');
+      ctx.save();
+      ctx.scale(sx, sy);
+      ctx.translate(rect.left + rect.width / 2 - canvasRect.left,
+                    rect.top + rect.height / 2 - canvasRect.top);
+      ctx.rotate(rotation * Math.PI / 180);
+      ctx.drawImage(img, -width / 2, -height / 2, width, height);
+      ctx.restore();
+    }
+
+    let result;
+    try { result = output.toDataURL('image/png'); }
+    catch (_) { throw Error('Schéma ' + id + ' nelze převést na obrázek PNG. Zkontroluj SVG soubory.'); }
+    if (result.length > 1_500_000) {
+      throw Error('Schéma ' + id + ' je příliš velké (' + Math.ceil(result.length / 1024) + ' kB).');
+    }
     return result;
   }
   async function buildPayload(){

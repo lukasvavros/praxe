@@ -1,6 +1,5 @@
 (() => {
   'use strict';
-  // Po nasazení kompatibilního Workeru uprav jen tuto adresu. Nikdy sem nevkládej heslo ani GitHub token.
   const WORKER_URL = 'https://arduino-testy-odevzdani.lukasvavros519.workers.dev';
   const PREVIEW = window.TEST1_PREVIEW === true;
   const STORAGE_KEY = 'praxe-test1-cloudflare-v2';
@@ -115,8 +114,6 @@
       card.querySelectorAll('button[data-line]').forEach(b=>b.classList.toggle('selected',b===line));save();mark();
     });
   }
-  // Přímá úprava ověřeného kreslicího nástroje Testu 3:
-  // stejné nástroje, SVG značky, samostatná vrstva vodičů, 1080 × 660 px.
   const GRID = 10;
   const SYMBOL_GRID = 20;
   const instances = new WeakSet();
@@ -148,8 +145,6 @@
       symbols: (ans.components || []).map(s => ({...s, type: s.type || s.kind, rotation: s.rotation ?? s.rot ?? 0})),
       strokes: (ans.wires || []).map(w => ({...w}))
     };
-    // Staré automatické vazby se vypnou: polohy vodičů zůstávají
-    // přesně tak, jak je žák nakreslil. Neodhadujeme kontakty SVG.
     for (const stroke of state.strokes) {
       delete stroke.aAnchor;
       delete stroke.bAnchor;
@@ -265,7 +260,6 @@
       if (!selectedSymbol()) { tell('Nejdříve klikněte na součástku.'); return; }
       checkpoint(); state.symbols = state.symbols.filter(s => s.id !== selected);
       selected = null;
-      // Vodiče zůstanou na původní pozici, ale odpojí se od odstraněné značky.
       for(const stroke of state.strokes)for(const end of ['a','b']){
         if(stroke[end+'Anchor'] && !state.symbols.some(s=>s.id===stroke[end+'Anchor'].id))delete stroke[end+'Anchor'];
       }
@@ -286,8 +280,6 @@
     function chooseMode(next) {
       if (locked()) return;
       mode = next;
-      // Důležité: při kreslení i gumování musí události vždy přijímat canvas.
-      // Jinak velký průhledný obdélník SVG značky blokuje kreslení vodičů.
       board.classList.toggle('test3-mode-move', mode === 'move');
       layer.setAttribute('aria-label', mode === 'move' ? 'Přesouvání součástek zapnuto' : 'Součástky uzamčené pro kreslení vodičů');
       tools.querySelectorAll('[data-draw-tool]').forEach(el =>
@@ -370,9 +362,7 @@
 
   }
 
-  // Export je shodný s postupem z funkčního Testu 3:
-  // rozměry a pozice vrstev odečítáme z reálných DOM obdélníků,
-  // nikoli jen z předpokládané velikosti SVG a uložených souřadnic.
+
   async function drawingPng(card) {
     const id = card.dataset.qid;
     const board = card.querySelector('.test3-canvas-board');
@@ -426,7 +416,7 @@
       };
     };
 
-    // Přesná velikost a umístění SVG podle obrazovky, jako v Testu 3.
+    // Přesná velikost a umístění SVG podle obrazovky.
     const base = position(uno);
     ctx.drawImage(uno, base.x, base.y, base.w, base.h);
 
